@@ -1,0 +1,116 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #c-phone { position: absolute; left: 190px; top: 196px; transform-origin: 50% 0; width: 700px; height: 1300px; border-radius: 70px; background: #0b0d12;
+      border: 10px solid #23262e; box-shadow: 0 40px 90px rgba(0,0,0,0.75), inset 0 0 0 2px #3a3e48; }
+    #c-screen { position: absolute; left: 18px; top: 18px; right: 18px; bottom: 18px; border-radius: 54px; overflow: hidden;
+      background: linear-gradient(180deg, #11151d, #0a0c11); }
+    #c-head { position: absolute; left: 36px; right: 36px; top: 56px; display: flex; justify-content: space-between; align-items: center;
+      font-family: Montserrat, sans-serif; font-weight: 800; font-size: 30px; color: #fff; }
+    #c-head small { font-family: "JetBrains Mono", monospace; font-size: 20px; color: rgba(255,255,255,0.5); font-weight: 700; }
+    #c-feed { position: absolute; left: 24px; right: 24px; top: 140px; height: 420px; border-radius: 22px; overflow: hidden; background: #000; }
+    #c-feedsvg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #c-ts { position: absolute; left: 18px; top: 14px; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 700; color: #e9f1e6;
+      text-shadow: 0 0 4px #000; }
+    #c-rec { position: absolute; right: 18px; top: 14px; display: flex; gap: 8px; align-items: center; font-family: "JetBrains Mono", monospace;
+      font-size: 22px; font-weight: 800; color: #fff; }
+    #c-recdot { width: 16px; height: 16px; border-radius: 50%; background: #ff2e3e; box-shadow: 0 0 10px #ff2e3e; }
+    #c-nosig { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, #0a0a0a 0 3px, #141414 3px 6px); opacity: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: "JetBrains Mono", monospace; }
+    #c-nosig b { font-size: 40px; color: #ff2e3e; letter-spacing: 0.06em; }
+    #c-nosig span { font-size: 26px; color: rgba(255,255,255,0.7); font-weight: 700; }
+    #c-zero { position: absolute; left: 0; right: 0; bottom: 18px; display: flex; justify-content: center; }
+    #c-list { position: absolute; left: 24px; right: 24px; top: 590px; font-family: "JetBrains Mono", monospace; }
+    #c-list h5 { font-size: 22px; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin: 0 6px 10px; font-weight: 800; }
+    .c-row { display: flex; align-items: center; justify-content: space-between; height: 66px; padding: 0 20px; margin-bottom: 8px;
+      border-radius: 14px; background: rgba(255,255,255,0.06); font-size: 28px; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .c-row .t { color: #fff; font-weight: 800; }
+    .c-row .m { font-size: 22px; color: rgba(255,255,255,0.45); }
+    #c-gap { position: absolute; left: 24px; right: 24px; top: 1000px; height: 120px; border-radius: 16px; background: rgba(255,210,63,0.08);
+      border: 2px solid rgba(255,210,63,0.6); opacity: 0; font-family: "JetBrains Mono", monospace; }
+    #c-gap-bar { position: absolute; left: 30px; right: 30px; top: 58px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; }
+    .c-pin { position: absolute; top: 18px; font-size: 22px; font-weight: 800; transform: translateX(-50%); white-space: nowrap; }
+    .c-tickm { position: absolute; top: 50px; width: 4px; height: 22px; transform: translateX(-50%); border-radius: 2px; }
+    #c-gap-fill { position: absolute; left: 30px; top: 58px; height: 6px; width: 0; background: #ffd23f; box-shadow: 0 0 10px #ffd23f; }
+    #c-gap-l { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-size: 24px; font-weight: 800; color: #ffd23f; }
+  </style>
+  <div id="root" data-composition-id="camera" data-width="1080" data-height="1920">
+    <div class="scene-bg"></div>
+    <div id="c-phone">
+      <div id="c-screen">
+        <div id="c-head"><span>Прихожая · CAM 1</span><small>Wi-Fi ●</small></div>
+        <div id="c-feed">
+          <svg id="c-feedsvg" viewBox="0 0 612 420" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="c-nv" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#b9c7b4" /><stop offset="0.6" stop-color="#55634f" /><stop offset="1" stop-color="#161b14" /></radialGradient>
+            </defs>
+            <rect width="612" height="420" fill="url(#c-nv)" />
+            <!-- коридор сверху от входной двери: пол, стены, дверь в комнату -->
+            <polygon points="120,420 250,170 362,170 492,420" fill="#6f7c69" />
+            <polygon points="0,0 250,170 250,170 120,420 0,420" fill="#3c4638" />
+            <polygon points="612,0 362,170 492,420 612,420" fill="#465142" />
+            <rect x="250" y="40" width="112" height="130" fill="#262d23" />
+            <rect x="262" y="52" width="88" height="118" fill="#a8b5a2" opacity="0.35" />
+            <rect x="40" y="120" width="70" height="170" rx="6" fill="#2d352a" />
+            <line x1="40" y1="130" x2="110" y2="130" stroke="#8f9c89" stroke-width="5" />
+            <rect x="520" y="230" width="60" height="120" fill="#323b2f" />
+            <rect width="612" height="420" fill="none" stroke="#000" stroke-opacity="0.5" stroke-width="40" />
+          </svg>
+          <div id="c-ts">СР 23.10 · 21:14:<span id="c-sec">07</span></div>
+          <div id="c-rec"><div id="c-recdot"></div>REC</div>
+          <div id="c-zero"><div id="c-zchip" class="chip red">движений: 0 · 7 дней</div></div>
+          <div id="c-nosig"><b>НЕТ СИГНАЛА</b><span id="c-ns-l">камера отключена · 08:33</span></div>
+        </div>
+        <div id="c-list">
+          <h5>ЗАПИСИ · ПОСЛЕДНИЕ 5 ДНЕЙ</h5>
+          <div class="c-row" id="c-r0"><span>ПН</span><span class="t">18:40</span><span class="m">→ 08:33</span></div>
+          <div class="c-row" id="c-r1"><span>ВТ</span><span class="t">18:40</span><span class="m">→ 08:31</span></div>
+          <div class="c-row" id="c-r2"><span>СР</span><span class="t">18:40</span><span class="m">→ 08:35</span></div>
+          <div class="c-row" id="c-r3"><span>ЧТ</span><span class="t">18:40</span><span class="m">→ 08:30</span></div>
+          <div class="c-row" id="c-r4"><span>ПТ</span><span class="t">18:40</span><span class="m">→ 08:32</span></div>
+        </div>
+        <div id="c-gap">
+          <div id="c-gap-bar"></div>
+          <div id="c-gap-fill"></div>
+          <div class="c-tickm" style="left:30px;background:#ffd23f"></div>
+          <div class="c-tickm" style="left:calc(100% - 30px);background:#3ddc84"></div>
+          <div class="c-pin" style="left:30px;color:#ffd23f">18:40 ВКЛ</div>
+          <div class="c-pin" style="left:calc(100% - 30px);color:#3ddc84">19:00 АНЯ</div>
+          <div id="c-gap-l">ЗА 20 МИНУТ ДО НЕЁ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.camera;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.home - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#c-phone", { y: 260, rotation: -4, opacity: 0, scale: 0.86 }, { y: 0, rotation: 0, opacity: 1, scale: 0.86, duration: 0.55, ease: "power3.out" }, 0);
+      tl.fromTo("#c-feed", { opacity: 0 }, { opacity: 1, duration: 0.3 }, at("cam"));
+      // секунды на таймкоде идут по-настоящему
+      for (let i = 1; i < Math.ceil(D); i++) tl.set("#c-sec", { textContent: String((7 + i) % 60).padStart(2, "0") }, i);
+      tl.fromTo("#c-recdot", { opacity: 1 }, { opacity: 0.15, duration: 0.5, ease: "steps(1)", yoyo: true, repeat: Math.ceil(D * 2) }, 0);
+      tl.fromTo("#c-zchip", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2.4)" }, at("zero"));
+      // список записей — все с 18:40
+      tl.fromTo(".c-row", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.25, stagger: 0.12, ease: "power3.out" }, at("rec") - 0.1);
+      tl.to(".c-row .t", { color: "#ffd23f", textShadow: "0 0 14px rgba(255,210,63,0.7)", duration: 0.15, stagger: 0.08 }, at("t1840"));
+      tl.to(".c-row", { background: "rgba(255,210,63,0.12)", duration: 0.2, stagger: 0.08 }, at("t1840"));
+      tl.to("#c-phone", { y: -330, duration: 0.6, ease: "power3.inOut" }, at("gap") - 0.2);
+      tl.fromTo("#c-gap", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("gap"));
+      tl.fromTo("#c-gap-fill", { width: 0 }, { width: 562, duration: 0.9, ease: "power2.inOut" }, at("gap") + 0.2);
+      // кто-то выключал: нет сигнала утром, включение вечером
+      tl.to("#c-phone", { y: 0, duration: 0.5, ease: "power3.inOut" }, at("off") - 0.25);
+      tl.to("#c-gap", { opacity: 0, duration: 0.2 }, at("off") - 0.25);
+      tl.set("#c-nosig", { opacity: 1 }, at("off") + 0.1);
+      tl.fromTo("#c-feed", { x: 0 }, { x: 8, duration: 0.04, yoyo: true, repeat: 5 }, at("off") + 0.1);
+      tl.set("#c-nosig", { opacity: 0 }, at("on") + 0.15);
+      tl.set("#c-ns-l", { textContent: "" }, at("on") + 0.15);
+      tl.set("#c-zchip", { textContent: "подключено · 18:40" }, at("on") + 0.15);
+      tl.set("#c-zchip", { className: "chip green" }, at("on") + 0.15);
+      tl.fromTo("#c-feed", { scale: 1 }, { scale: 1.03, duration: 0.12, yoyo: true, repeat: 1 }, at("on") + 0.15);
+      window.__timelines["camera"] = tl;
+    })();
+  </script>
+</template>

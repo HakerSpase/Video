@@ -1,0 +1,12 @@
+secrets/
+node_modules/
+.hyperframes/
+__pycache__/
+*.pyc
+# служебные копии библиотек — build.py кладёт их в каждый эпизод заново
+episodes/*/assets/lib/
+episodes/*/assets/sfx/
+episodes/*/assets/bed.wav
+episodes/*/out/draft*.mp4
+episodes/*/out/work-*/
+episodes/*/out/.*

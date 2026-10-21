@@ -1,0 +1,166 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #m-wall { position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(0,0,0,0.0) 0 0),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 150px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 150px),
+        radial-gradient(70% 45% at 50% 36%, #22324d 0%, #121b2c 55%, #06080d 100%); }
+    #m-cam { position: absolute; inset: 0; transform-origin: 540px 730px; }
+    #m-pipe { position: absolute; left: -40px; top: 680px; width: 1160px; height: 96px; border-radius: 48px;
+      background: linear-gradient(180deg, #5c4a2c 0%, #c9a463 22%, #f3d79a 38%, #a17a3c 62%, #3a2c16 100%);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.6); }
+    .m-nut { position: absolute; top: 652px; width: 86px; height: 152px; border-radius: 10px;
+      background: linear-gradient(90deg, #4a3a20, #d8b46c 35%, #fbe3a8 50%, #b48a45 70%, #3d2f17); }
+    #m-svg { position: absolute; left: 190px; top: 380px; width: 700px; height: 700px; overflow: visible; }
+    .m-strip { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 58px; }
+    #m-light { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 0.0;
+      background: radial-gradient(38% 22% at 50% 34%, rgba(160,190,240,0.30), rgba(0,0,0,0) 70%); }
+    #m-hud { top: 196px; justify-content: flex-end; padding-right: 70px; }
+    #m-chart { position: absolute; left: 90px; top: 790px; width: 900px; height: 270px; opacity: 0; }
+    .m-bar { position: absolute; bottom: 40px; width: 30px; border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, #7fc3ff, #2c6fd6); box-shadow: 0 0 22px rgba(90,170,255,0.55); transform-origin: 50% 100%; }
+    .m-tick { position: absolute; bottom: 0; font-family: "JetBrains Mono", monospace; font-size: 24px; font-weight: 700;
+      color: rgba(255,255,255,0.55); transform: translateX(-50%); }
+    .m-tag { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 22px; font-weight: 800;
+      color: #bfe0ff; white-space: nowrap; transform: translateX(-50%); letter-spacing: 0.05em; }
+    #m-base { position: absolute; left: 0; right: 0; bottom: 38px; height: 2px; background: rgba(159,180,214,0.4); }
+    #m-away { position: absolute; left: 60px; width: 640px; bottom: 38px; height: 228px; border-radius: 8px;
+      background: repeating-linear-gradient(135deg, rgba(255,46,62,0.10) 0 14px, rgba(255,46,62,0.02) 14px 28px);
+      border: 2px dashed rgba(255,46,62,0.55); }
+    #m-away-l { position: absolute; left: 76px; bottom: 236px; font-family: "JetBrains Mono", monospace; font-size: 22px;
+      font-weight: 800; color: #ff6b77; letter-spacing: 0.08em; }
+    #m-big { position: absolute; left: 0; width: 100%; top: 820px; text-align: center; font-family: Montserrat, sans-serif;
+      font-weight: 900; font-size: 150px; color: #ff2e3e; letter-spacing: -0.03em; opacity: 0;
+      text-shadow: 0 0 60px rgba(255,46,62,0.55), 0 8px 0 rgba(0,0,0,0.5); }
+  </style>
+  <div id="root" data-composition-id="meter" data-width="1080" data-height="1920">
+    <div id="m-wall"></div>
+    <div id="m-cam">
+      <div id="m-pipe"></div>
+      <div class="m-nut" style="left:120px"></div>
+      <div class="m-nut" style="left:874px"></div>
+      <svg id="m-svg" viewBox="0 0 700 700">
+        <defs>
+          <radialGradient id="m-brass" cx="40%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#fff0c4" /><stop offset="0.35" stop-color="#d9b062" />
+            <stop offset="0.75" stop-color="#8a6326" /><stop offset="1" stop-color="#3b2a0f" />
+          </radialGradient>
+          <radialGradient id="m-face" cx="45%" cy="35%" r="75%">
+            <stop offset="0" stop-color="#f4f8ff" /><stop offset="0.7" stop-color="#d6e2f2" /><stop offset="1" stop-color="#9fb2cc" />
+          </radialGradient>
+          <linearGradient id="m-glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity="0.55" /><stop offset="0.35" stop-color="#fff" stop-opacity="0.06" />
+            <stop offset="1" stop-color="#fff" stop-opacity="0" />
+          </linearGradient>
+          <clipPath id="m-win1"><rect x="172" y="268" width="232" height="84" rx="6" /></clipPath>
+          <clipPath id="m-win2"><rect x="404" y="268" width="124" height="84" rx="6" /></clipPath>
+          <filter id="m-sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-opacity="0.65" /></filter>
+        </defs>
+        <circle cx="350" cy="350" r="330" fill="url(#m-brass)" filter="url(#m-sh)" />
+        <circle cx="350" cy="350" r="292" fill="#2a1d08" opacity="0.55" />
+        <circle cx="350" cy="350" r="280" fill="url(#m-face)" />
+        <text x="350" y="200" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="30" fill="#1f3354" letter-spacing="4">ХОЛОДНАЯ ВОДА</text>
+        <text x="350" y="236" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="22" fill="#4a5f80">м³ · кл. С · DN15</text>
+        <rect x="164" y="260" width="372" height="100" rx="10" fill="#0c1220" />
+        <g clip-path="url(#m-win1)">
+          <rect x="172" y="268" width="232" height="84" fill="#f2f2ee" />
+          <g class="m-strip" fill="#111">
+            <text x="182" y="333">0</text><text x="226" y="333">0</text><text x="270" y="333">3</text>
+            <g id="m-d4"><text x="314" y="333">4</text><text x="314" y="417">5</text><text x="314" y="501">6</text></g>
+            <g id="m-d5"><text x="358" y="333">7</text><text x="358" y="417">8</text><text x="358" y="501">9</text><text x="358" y="585">0</text><text x="358" y="669">1</text><text x="358" y="753">2</text></g>
+          </g>
+        </g>
+        <g clip-path="url(#m-win2)">
+          <rect x="404" y="268" width="124" height="84" fill="#c8202c" />
+          <g class="m-strip" fill="#fff">
+            <text x="414" y="333">2</text>
+            <g id="m-d7">
+              <text x="462" y="333">0</text><text x="462" y="417">1</text><text x="462" y="501">2</text><text x="462" y="585">3</text>
+              <text x="462" y="669">4</text><text x="462" y="753">5</text><text x="462" y="837">6</text><text x="462" y="921">7</text>
+              <text x="462" y="1005">8</text><text x="462" y="1089">9</text><text x="462" y="1173">0</text><text x="462" y="1257">1</text>
+              <text x="462" y="1341">2</text><text x="462" y="1425">3</text><text x="462" y="1509">4</text><text x="462" y="1593">5</text>
+              <text x="462" y="1677">6</text><text x="462" y="1761">7</text><text x="462" y="1845">8</text><text x="462" y="1929">9</text>
+              <text x="462" y="2013">0</text>
+            </g>
+          </g>
+        </g>
+        <rect x="164" y="260" width="372" height="100" rx="10" fill="none" stroke="#000" stroke-opacity="0.5" stroke-width="4" />
+        <g transform="translate(350 470)">
+          <circle r="62" fill="#e9eef6" stroke="#9fb2cc" stroke-width="4" />
+          <g id="m-star">
+            <path d="M0 -50 L12 -12 L50 0 L12 12 L0 50 L-12 12 L-50 0 L-12 -12 Z" fill="#d81f2d" />
+            <circle r="10" fill="#7a0d15" />
+          </g>
+        </g>
+        <g transform="translate(220 470)"><circle r="34" fill="#e9eef6" stroke="#9fb2cc" stroke-width="3" /><line id="m-n1" x1="0" y1="0" x2="0" y2="-26" stroke="#c8202c" stroke-width="5" stroke-linecap="round" /></g>
+        <g transform="translate(480 470)"><circle r="34" fill="#e9eef6" stroke="#9fb2cc" stroke-width="3" /><line id="m-n2" x1="0" y1="0" x2="0" y2="-26" stroke="#c8202c" stroke-width="5" stroke-linecap="round" /></g>
+        <ellipse cx="300" cy="240" rx="250" ry="170" fill="url(#m-glass)" />
+      </svg>
+    </div>
+    <div id="m-light"></div>
+    <div id="m-hud" class="hud">
+      <div id="m-stamp" class="stamp"><b id="m-time">13:42</b><small>ВТОРНИК</small></div>
+    </div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px">
+      <div id="m-chip-home" class="chip green">кв. 47 · дома: 0 чел.</div>
+    </div>
+    <div class="hud" style="top: 1030px">
+      <div id="m-chip-spin" class="chip red">счётчик крутится</div>
+    </div>
+    <div id="m-chart">
+      <div id="m-away"></div>
+      <div id="m-away-l">АНИ НЕТ ДОМА · 08:31–19:02</div>
+      <div id="m-base"></div>
+      <div class="m-bar" id="m-b1" style="left:150px;height:120px"></div>
+      <div class="m-bar" id="m-b2" style="left:300px;height:60px"></div>
+      <div class="m-bar" id="m-b3" style="left:420px;height:170px"></div>
+      <div class="m-bar" id="m-b4" style="left:560px;height:90px"></div>
+      <div class="m-tag" id="m-t1" style="left:165px;bottom:170px">ДУШ</div>
+      <div class="m-tag" id="m-t2" style="left:315px;bottom:110px">ЧАЙНИК</div>
+      <div class="m-tag" id="m-t3" style="left:435px;bottom:220px">ДУШ</div>
+      <div class="m-tag" id="m-t4" style="left:575px;bottom:140px">СМЫВ</div>
+      <div class="m-tick" style="left:70px">08:00</div>
+      <div class="m-tick" style="left:380px">13:00</div>
+      <div class="m-tick" style="left:700px">19:00</div>
+    </div>
+    <div id="m-big">+40 Л</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.meter;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.plan - S;
+      const tl = gsap.timeline({ paused: true });
+      // счётчик живёт всю сцену: красная звёздочка, литры, стрелки
+      tl.fromTo("#m-star", { rotation: 0, svgOrigin: "0 0" }, { rotation: 360 * D * 0.9, svgOrigin: "0 0", duration: D, ease: "none" }, 0);
+      tl.fromTo("#m-d7", { y: 0 }, { y: -84 * 20, duration: D, ease: "none" }, 0);
+      tl.fromTo("#m-d5", { y: 0 }, { y: -84 * 2, duration: D, ease: "power1.in" }, 0);
+      tl.fromTo("#m-n1", { rotation: 0, svgOrigin: "0 0" }, { rotation: 720, svgOrigin: "0 0", duration: D, ease: "none" }, 0);
+      tl.fromTo("#m-n2", { rotation: 40, svgOrigin: "0 0" }, { rotation: 300, svgOrigin: "0 0", duration: D, ease: "none" }, 0);
+      // кадр 0 — уже хук: счётчик крутится, штамп и «дома 0» на экране
+      tl.fromTo("#m-cam", { scale: 1.12 }, { scale: 1.0, duration: at("water"), ease: "power2.out" }, 0);
+      tl.fromTo("#m-light", { opacity: 0.35 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, 0);
+      tl.fromTo("#m-stamp", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 0.05);
+      tl.fromTo("#m-chip-home", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2.4)" }, at("one") - 0.05);
+      tl.to("#m-chip-home", { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1, ease: "power1.inOut" }, at("one") + 0.3);
+      // «счётчик с ней не соглашался» — наезд на окошко литров
+      tl.to("#m-cam", { scale: 1.55, x: -60, y: 120, duration: 1.6, ease: "power3.inOut" }, at("water") - 0.1);
+      tl.fromTo("#m-chip-spin", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, at("water") + 0.4);
+      // «пока она была на работе» — отъезд, счётчик уходит вверх, график дня
+      tl.to("#m-cam", { scale: 0.55, x: 0, y: -250, duration: 0.7, ease: "power3.inOut" }, at("work") - 0.25);
+      tl.to(["#m-chip-spin", "#m-chip-home"], { opacity: 0, duration: 0.2 }, at("work") - 0.25);
+      tl.set("#m-time", { textContent: "19:02" }, at("work"));
+      tl.fromTo("#m-chart", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at("work"));
+      ["#m-b1", "#m-b2", "#m-b3", "#m-b4"].forEach((b, i) => {
+        tl.fromTo(b, { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "back.out(1.8)" }, at("work") + 0.3 + i * 0.22);
+        tl.fromTo(b.replace("b", "t"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2 }, at("work") + 0.42 + i * 0.22);
+      });
+      tl.to("#m-chart", { opacity: 0.3, duration: 0.25 }, at("liters"));
+      tl.fromTo("#m-big", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power4.out" }, at("liters"));
+      tl.fromTo("#m-cam", { x: 0 }, { x: 10, duration: 0.05, yoyo: true, repeat: 5, ease: "none" }, at("liters"));
+      window.__timelines["meter"] = tl;
+    })();
+  </script>
+</template>

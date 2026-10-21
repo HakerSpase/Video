@@ -1,0 +1,129 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07090e; }
+    #k-cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+    #k-svg { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #k-warm { position: absolute; inset: 0; mix-blend-mode: multiply; opacity: 0;
+      background: radial-gradient(70% 50% at 30% 20%, #ffcf8a 0%, #d27a35 55%, #3a1a08 100%); }
+    #k-cold { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 1;
+      background: radial-gradient(50% 30% at 50% 40%, rgba(110,150,220,0.22), rgba(0,0,0,0) 70%); }
+    #k-card { position: absolute; left: 70px; top: 196px; width: 600px; padding: 22px 26px 18px; border-radius: 14px;
+      background: rgba(8,12,20,0.9); border: 2px solid rgba(255,210,63,0.75); box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      font-family: "JetBrains Mono", monospace; color: #fff; }
+    #k-card h4 { font-size: 24px; letter-spacing: 0.14em; color: #ffd23f; font-weight: 800; margin-bottom: 12px; }
+    .k-row { position: relative; display: flex; justify-content: space-between; font-size: 28px; font-weight: 800; padding: 8px 0;
+      border-top: 1px solid rgba(255,255,255,0.12); }
+    .k-row .v { position: relative; width: 200px; text-align: right; }
+    .k-row .v span { position: absolute; right: 0; top: 0; white-space: nowrap; }
+    .k-row .v .bad { color: #ff2e3e; opacity: 0; }
+    #k-stamp { position: absolute; right: 70px; top: 196px; }
+    #k-mark { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; pointer-events: none; }
+    .k-ring { position: absolute; border-radius: 50%; border: 6px solid #ff2e3e; box-shadow: 0 0 30px rgba(255,46,62,0.8); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="kitchen" data-width="1080" data-height="1920">
+    <div id="k-cam">
+      <svg id="k-svg" viewBox="0 0 1080 1920">
+        <defs>
+          <pattern id="k-tile" width="90" height="60" patternUnits="userSpaceOnUse">
+            <rect width="90" height="60" fill="#1b2638" /><rect x="2" y="2" width="86" height="56" rx="3" fill="#22314a" />
+          </pattern>
+          <linearGradient id="k-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b6440" /><stop offset="1" stop-color="#4b321c" /></linearGradient>
+          <linearGradient id="k-cab" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa7a0" /><stop offset="1" stop-color="#7c8983" /></linearGradient>
+          <linearGradient id="k-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d4c8" /><stop offset="1" stop-color="#9c968a" /></linearGradient>
+          <radialGradient id="k-cookie" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#e9b977" /><stop offset="1" stop-color="#9a6630" /></radialGradient>
+          <filter id="k-sh"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-opacity="0.55" /></filter>
+        </defs>
+        <rect width="1080" height="1920" fill="url(#k-tile)" />
+        <rect y="1080" width="1080" height="840" fill="#5d4c3b" /><rect y="1080" width="1080" height="14" fill="#2a2119" />
+        <!-- полка с кружками -->
+        <rect x="110" y="430" width="860" height="24" fill="url(#k-wood)" filter="url(#k-sh)" />
+        <g id="k-mug0" filter="url(#k-sh)"><path d="M150 330 q-48 0 -48 45 q0 45 48 45" fill="none" stroke="#e8e4da" stroke-width="16" /><rect x="150" y="310" width="110" height="120" rx="14" fill="#e8e4da" /></g>
+        <g id="k-mug1" filter="url(#k-sh)"><path d="M340 330 q-48 0 -48 45 q0 45 48 45" fill="none" stroke="#2f8f8a" stroke-width="16" /><rect x="340" y="310" width="110" height="120" rx="14" fill="#2f8f8a" /></g>
+        <g id="k-mug2" filter="url(#k-sh)"><g id="k-mug2f"><path d="M530 330 q-48 0 -48 45 q0 45 48 45" fill="none" stroke="#d6a43a" stroke-width="16" /><rect x="530" y="310" width="110" height="120" rx="14" fill="#d6a43a" /></g></g>
+        <g id="k-mug3" filter="url(#k-sh)"><path d="M720 330 q-48 0 -48 45 q0 45 48 45" fill="none" stroke="#a5493a" stroke-width="16" /><rect x="720" y="310" width="110" height="120" rx="14" fill="#a5493a" /></g>
+        <g id="k-arrows" fill="#ffd23f" opacity="0">
+          <path d="M150 285 l-30 -14 l0 28 z" /><path d="M340 285 l-30 -14 l0 28 z" /><path id="k-arr2" d="M530 285 l-30 -14 l0 28 z" /><path d="M720 285 l-30 -14 l0 28 z" />
+        </g>
+        <!-- навесной шкаф: волос поперёк щели между дверцами -->
+        <rect x="90" y="530" width="390" height="370" rx="6" fill="#56635d" filter="url(#k-sh)" />
+        <rect x="98" y="538" width="184" height="354" rx="4" fill="url(#k-cab)" />
+        <rect x="288" y="538" width="184" height="354" rx="4" fill="url(#k-cab)" />
+        <rect x="262" y="690" width="10" height="60" rx="5" fill="#2b302d" /><rect x="298" y="690" width="10" height="60" rx="5" fill="#2b302d" />
+        <path id="k-hair" d="M240 640 C 262 628, 280 660, 300 646 S 330 650, 340 660" fill="none" stroke="#0b0806" stroke-width="3" stroke-linecap="round" />
+        <!-- столешница, печенье -->
+        <rect x="0" y="900" width="1080" height="34" fill="url(#k-top)" />
+        <rect x="0" y="934" width="1080" height="146" fill="#2a3240" />
+        <rect x="40" y="950" width="300" height="120" rx="4" fill="#323b4b" /><rect x="360" y="950" width="300" height="120" rx="4" fill="#323b4b" /><rect x="680" y="950" width="360" height="120" rx="4" fill="#323b4b" />
+        <rect x="560" y="808" width="420" height="92" rx="10" fill="rgba(220,235,255,0.18)" stroke="rgba(220,235,255,0.5)" stroke-width="3" filter="url(#k-sh)" />
+        <g id="k-cookies">
+          <circle cx="595" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="630" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="665" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="700" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="735" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="770" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="805" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="840" cy="836" r="16" fill="url(#k-cookie)" /><circle cx="875" cy="836" r="16" fill="url(#k-cookie)" /><circle id="k-ck1" cx="910" cy="836" r="16" fill="url(#k-cookie)" /><circle id="k-ck2" cx="945" cy="836" r="16" fill="url(#k-cookie)" />
+          <circle cx="595" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="630" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="665" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="700" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="735" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="770" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="805" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="840" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="875" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="910" cy="872" r="16" fill="url(#k-cookie)" /><circle cx="945" cy="872" r="16" fill="url(#k-cookie)" />
+        </g>
+      </svg>
+      <div id="k-mark">
+        <div id="k-r-hair" class="k-ring" style="left:235px;top:1060px;width:140px;height:140px"></div>
+        <div id="k-r-ck" class="k-ring" style="left:880px;top:800px;width:100px;height:72px;border-radius:40px"></div>
+        <div id="k-r-mug" class="k-ring" style="left:470px;top:280px;width:200px;height:180px"></div>
+      </div>
+    </div>
+    <div id="k-cold"></div>
+    <div id="k-warm"></div>
+    <div id="k-card">
+      <h4>ЛОВУШКИ · АНЯ</h4>
+      <div class="k-row" id="k-row1"><span>1 · волос</span><span class="v"><span class="ok">на дверце</span><span class="bad">на полу</span></span></div>
+      <div class="k-row" id="k-row2"><span>2 · печенье</span><span class="v"><span class="ok">22 шт.</span><span class="bad">20 шт.</span></span></div>
+      <div class="k-row" id="k-row3"><span>3 · кружки</span><span class="v"><span class="ok">← влево</span><span class="bad">одна →</span></span></div>
+    </div>
+    <div id="k-stamp" class="stamp"><b id="k-time">08:29</b><small>СРЕДА</small></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.kitchen;
+      const at = (k) => window.CUES[k] - S;
+      // камера: точку (px,py) кадра ставим в (540,700) экрана с масштабом s
+      const look = (px, py, s) => ({ x: 540 - px * s, y: 700 - py * s, scale: s });
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#k-cam", { x: 0, y: -60, scale: 1.04 }, { x: 0, y: 0, scale: 1, duration: at("count"), ease: "sine.out" }, 0);
+      tl.fromTo("#k-card", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at("count"));
+      // 1 — волос
+      tl.to("#k-cam", Object.assign(look(290, 650, 2.3), { duration: 0.6, ease: "power3.inOut" }), at("hair") - 0.2);
+      tl.fromTo("#k-hair", { strokeDasharray: 140, strokeDashoffset: 140 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, at("hair") + 0.2);
+      tl.fromTo("#k-row1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("hair"));
+      // 2 — печенье
+      tl.to("#k-cam", Object.assign(look(770, 850, 1.9), { duration: 0.6, ease: "power3.inOut" }), at("cookie") - 0.2);
+      tl.fromTo("#k-cookies circle", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.18, stagger: 0.03, ease: "back.out(2)" }, at("cookie"));
+      tl.fromTo("#k-row2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("cookie"));
+      // 3 — кружки
+      tl.to("#k-cam", Object.assign(look(490, 380, 1.45), { duration: 0.6, ease: "power3.inOut" }), at("mugs") - 0.2);
+      tl.fromTo("#k-arrows", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("mugs") + 0.3);
+      tl.fromTo("#k-row3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("mugs"));
+      // вечер: тёплый свет, общий план
+      tl.to("#k-cam", Object.assign(look(540, 700, 1), { duration: 0.5, ease: "power3.inOut" }), at("eve") - 0.15);
+      tl.to("#k-warm", { opacity: 0.85, duration: 0.5 }, at("eve") - 0.15);
+      tl.to("#k-cold", { opacity: 0, duration: 0.5 }, at("eve") - 0.15);
+      tl.set("#k-time", { textContent: "19:04" }, at("eve"));
+      tl.to("#k-arrows", { opacity: 0, duration: 0.2 }, at("eve"));
+      // волос на полу
+      tl.to("#k-hair", { y: 475, x: 10, rotation: 12, transformOrigin: "50% 50%", duration: 0.01 }, at("hair2") - 0.3);
+      tl.to("#k-cam", Object.assign(look(300, 1110, 2.1), { duration: 0.55, ease: "power3.inOut" }), at("hair2") - 0.15);
+      tl.fromTo("#k-r-hair", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("hair2") + 0.25);
+      tl.to("#k-row1 .ok", { opacity: 0, duration: 0.1 }, at("hair2") + 0.25);
+      tl.to("#k-row1 .bad", { opacity: 1, duration: 0.1 }, at("hair2") + 0.25);
+      // двух печений нет
+      tl.to("#k-cam", Object.assign(look(800, 850, 1.9), { duration: 0.55, ease: "power3.inOut" }), at("cookie2") - 0.2);
+      tl.to(["#k-ck1", "#k-ck2"], { opacity: 0, scale: 0.2, transformOrigin: "50% 50%", duration: 0.2, stagger: 0.12 }, at("cookie2") + 0.2);
+      tl.fromTo("#k-r-ck", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("cookie2") + 0.45);
+      tl.to("#k-row2 .ok", { opacity: 0, duration: 0.1 }, at("cookie2") + 0.45);
+      tl.to("#k-row2 .bad", { opacity: 1, duration: 0.1 }, at("cookie2") + 0.45);
+      // одна кружка развёрнута
+      tl.to("#k-cam", Object.assign(look(560, 400, 1.6), { duration: 0.55, ease: "power3.inOut" }), at("mug2") - 0.2);
+      tl.to("#k-mug2f", { scaleX: -1, svgOrigin: "585 370", duration: 0.01 }, at("mug2") - 0.25);
+      tl.fromTo("#k-r-mug", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("mug2") + 0.6);
+      tl.to("#k-row3 .ok", { opacity: 0, duration: 0.1 }, at("mug2") + 0.6);
+      tl.to("#k-row3 .bad", { opacity: 1, duration: 0.1 }, at("mug2") + 0.6);
+      tl.to("#k-card", { borderColor: "rgba(255,46,62,0.9)", duration: 0.2 }, at("mug2") + 0.6);
+      tl.fromTo("#k-cam", { rotation: 0 }, { rotation: 0.6, duration: 0.06, yoyo: true, repeat: 3 }, at("mug2") + 0.6);
+      window.__timelines["kitchen"] = tl;
+    })();
+  </script>
+</template>

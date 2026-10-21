@@ -1,0 +1,61 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060a; }
+    #h-stage { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 540px 460px; }
+    #h-world { position: absolute; left: 540px; top: 690px; width: 0; height: 0; transform-style: preserve-3d; }
+    #h-floor { position: absolute; left: -320px; top: -410px; width: 640px; height: 820px; transform-style: preserve-3d;
+      transform: rotateX(56deg) rotateZ(-34deg); }
+    .h-glow { position: absolute; border-radius: 50%; }
+    #h-night { position: absolute; inset: 0; background: radial-gradient(70% 50% at 50% 38%, rgba(10,20,45,0.35), rgba(2,4,8,0.8) 100%); }
+    #h-heat-l { position: absolute; left: 0; width: 100%; top: 900px; display: flex; justify-content: center; }
+  </style>
+  <div id="root" data-composition-id="home" data-width="1080" data-height="1920">
+    <div id="h-stage">
+      <div id="h-world">
+        <div id="h-floor">
+          <div id="h-ana-glow" class="h-glow" style="left:430px;top:60px;width:150px;height:150px;opacity:0;background:radial-gradient(circle,rgba(255,180,90,0.75),rgba(255,180,90,0) 70%)"></div>
+          <div id="h-heat-glow" class="h-glow" style="left:20px;top:690px;width:190px;height:190px;opacity:0;background:radial-gradient(circle,rgba(255,40,50,0.8),rgba(255,40,50,0) 70%)"></div>
+        </div>
+      </div>
+    </div>
+    <div id="h-night"></div>
+    <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px">
+      <div class="stamp"><b id="h-time">19:00</b><small>КАЖДЫЙ ДЕНЬ</small></div>
+    </div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px">
+      <div id="h-chip-ana" class="chip yellow">аня · дома</div>
+    </div>
+    <div id="h-heat-l"><div id="h-chip-heat" class="chip solid-red">+1 · над дверью</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.home;
+      const at = (k) => window.CUES[k] - S;
+      const floor = document.querySelector("#h-floor");
+      const apt = ISO.flat47(floor, { p: "h", wall: "#9aa6bb" });
+      // Аня — тёплая фигурка, идёт от двери к кровати
+      const ana = ISO.el(floor, "", { left: "0px", top: "0px", width: "0px", height: "0px", transformStyle: "preserve-3d" }, "h-ana");
+      ISO.box(ana, { x: -14, y: -14, w: 28, d: 28, h: 64, color: "#ffb45a" });
+      ISO.box(ana, { x: -10, y: -10, w: 20, d: 20, h: 18, z: 66, color: "#ffd9a8" });
+      // он — красное тепло внутри антресоли
+      const heat = ISO.box(floor, { x: 50, y: 752, w: 120, d: 56, h: 20, z: 76, color: "#ff2e3e", id: "h-heat" });
+      heat.querySelectorAll("div").forEach((d) => (d.style.opacity = 0));
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#h-world", { scale: 0.95, rotation: -3 }, { scale: 1.12, rotation: 0, duration: at("him") + 1.5, ease: "sine.inOut" }, 0);
+      // «он знал, когда она приходит»: дверь, путь Ани
+      tl.fromTo("#h-ana", { x: 105, y: 900 }, { x: 105, y: 760, duration: 0.5, ease: "power2.out" }, 0.1);
+      tl.to("#h-ana", { x: 260, y: 560, duration: 1.0, ease: "sine.inOut" }, 0.7);
+      tl.to("#h-ana", { x: 470, y: 280, duration: 1.0, ease: "sine.inOut" }, 1.7);
+      tl.fromTo("#h-ana-glow", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at("athome") - 0.2);
+      tl.fromTo("#h-chip-ana", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.25 }, at("athome"));
+      tl.set("#h-time", { textContent: "02:14" }, at("athome"));
+      // «он тоже был дома»
+      tl.to("#h-world", { scale: 1.45, x: 140, y: -60, duration: 0.9, ease: "power3.inOut" }, at("him") - 0.3);
+      tl.to("#h-heat > div", { opacity: 1, duration: 0.08 }, at("him"));
+      tl.fromTo("#h-heat-glow", { opacity: 0 }, { opacity: 1, duration: 0.15 }, at("him"));
+      tl.to(["#h-heat > div", "#h-heat-glow"], { opacity: 0.45, duration: 0.45, yoyo: true, repeat: 5, ease: "sine.inOut" }, at("him") + 0.2);
+      tl.fromTo("#h-chip-heat", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "back.out(2.6)" }, at("him") + 0.15);
+      window.__timelines["home"] = tl;
+    })();
+  </script>
+</template>

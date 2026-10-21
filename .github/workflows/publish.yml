@@ -1,0 +1,70 @@
+name: Публикация эпизода
+
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: "Папка эпизода, например episodes/001-antresol"
+        required: true
+      render:
+        description: "Отрендерить заново (иначе берётся закоммиченный out/final.mp4)"
+        type: boolean
+        default: false
+      youtube:
+        description: "YouTube-каналы: all, список через запятую или пусто"
+        default: "all"
+      tiktok:
+        description: "TikTok-аккаунты через запятую (пусто — не публиковать)"
+        default: ""
+      publish_at:
+        description: "Отложенная публикация на YouTube, ISO 8601 (пусто — сразу)"
+        default: ""
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Зависимости
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji
+          pip install -q numpy google-api-python-client google-auth-oauthlib requests
+      - name: Рендер
+        if: ${{ inputs.render }}
+        run: |
+          npx -y hyperframes@0.8.185 browser ensure
+          tools/render.sh "${{ inputs.episode }}"
+      - name: YouTube
+        if: ${{ inputs.youtube != '' }}
+        env:
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_TOKENS: ${{ secrets.YT_TOKENS }}
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.publish_at }}" ] && ARGS="--publish-at ${{ inputs.publish_at }}"
+          if [ "${{ inputs.youtube }}" = "all" ]; then
+            python3 tools/youtube_upload.py upload --episode "${{ inputs.episode }}" --all $ARGS
+          else
+            for ch in $(echo "${{ inputs.youtube }}" | tr ',' ' '); do
+              python3 tools/youtube_upload.py upload --episode "${{ inputs.episode }}" --channel "$ch" $ARGS
+            done
+          fi
+      - name: TikTok
+        if: ${{ inputs.tiktok != '' }}
+        env:
+          TIKTOK_TOKENS: ${{ secrets.TIKTOK_TOKENS }}
+        run: |
+          for acc in $(echo "${{ inputs.tiktok }}" | tr ',' ' '); do
+            python3 tools/tiktok_upload.py --episode "${{ inputs.episode }}" --account "$acc"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video
+          path: ${{ inputs.episode }}/out/

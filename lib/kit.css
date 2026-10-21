@@ -1,0 +1,118 @@
+/* Общий визуальный набор канала: палитра, HUD-чипы, зерно, виньетка.
+   Копируется в episodes/<ep>/assets/lib/ при каждом tools/build.py. */
+:root {
+  --ground: #07090e;
+  --navy: #0f1726;
+  --navy-2: #172238;
+  --steel: #2a3a57;
+  --cold: #9fb4d6;
+  --warm: #ffb45a;
+  --red: #ff2e3e;
+  --yellow: #ffd23f;
+  --green: #3ddc84;
+  --ink: #ffffff;
+  --ink-dim: rgba(255, 255, 255, 0.55);
+  --mono: "JetBrains Mono", monospace;
+  --display: Montserrat, sans-serif;
+}
+
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 70% at 50% 32%, var(--navy-2) 0%, var(--navy) 45%, var(--ground) 100%);
+}
+
+/* HUD: всё текстовое живёт в полосе 168–1100 px, ниже — субтитры */
+.hud {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-family: var(--mono);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px 12px 18px;
+  border: 2px solid rgba(159, 180, 214, 0.55);
+  border-radius: 12px;
+  background: rgba(8, 12, 20, 0.86);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+.chip::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cold);
+  box-shadow: 0 0 12px var(--cold);
+}
+.chip.red { border-color: rgba(255, 46, 62, 0.85); background: rgba(40, 6, 10, 0.88); }
+.chip.red::before { background: var(--red); box-shadow: 0 0 14px var(--red); }
+.chip.yellow { border-color: rgba(255, 210, 63, 0.8); }
+.chip.yellow::before { background: var(--yellow); box-shadow: 0 0 14px var(--yellow); }
+.chip.green { border-color: rgba(61, 220, 132, 0.8); }
+.chip.green::before { background: var(--green); box-shadow: 0 0 14px var(--green); }
+.chip.solid-red { background: var(--red); border-color: var(--red); }
+.chip.solid-red::before { background: #fff; box-shadow: none; }
+
+/* штамп времени/дня в духе «ДЕНЬ 4 · 02:10» */
+.stamp {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 26px 12px;
+  background: #e9e3d3;
+  color: #14161b;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+.stamp b { font-size: 40px; letter-spacing: 0.02em; line-height: 1; }
+.stamp small { font-size: 20px; letter-spacing: 0.18em; opacity: 0.7; margin-top: 4px; }
+
+.label {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* зерно и виньетка поверх всего видео */
+.fx-grain {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+}
+.fx-grain-tex {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1600px;
+  height: 2400px;
+  background: url(grain.png) repeat;
+}
+.fx-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(95% 62% at 50% 42%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.72) 100%);
+}

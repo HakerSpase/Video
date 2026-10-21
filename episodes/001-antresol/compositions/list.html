@@ -1,0 +1,96 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07090e; }
+    #l-page { position: absolute; left: 110px; top: 230px; width: 860px; height: 880px; border-radius: 10px; transform-origin: 50% 40%;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px),
+        #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); }
+    .l-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 48px;
+      color: #23305e; white-space: nowrap; }
+    .l-ln b { font-family: "JetBrains Mono", monospace; font-style: normal; font-size: 36px; margin-right: 16px; }
+    #l-head { position: absolute; left: 120px; top: 26px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 28px;
+      letter-spacing: 0.12em; color: #8a2a2a; }
+    #l-svg { position: absolute; left: 0; top: 0; width: 860px; height: 880px; overflow: visible; }
+    #l-police { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; }
+    #l-red { position: absolute; inset: 0; background: radial-gradient(60% 50% at 0% 50%, rgba(255,30,50,0.55), rgba(0,0,0,0) 70%); opacity: 0; }
+    #l-blue { position: absolute; inset: 0; background: radial-gradient(60% 50% at 100% 50%, rgba(40,110,255,0.6), rgba(0,0,0,0) 70%); opacity: 0; }
+    #l-end { position: absolute; inset: 0; background: #050608; opacity: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding-bottom: 520px; }
+    #l-end-p { font-family: "EB Garamond", serif; font-style: italic; font-size: 52px; color: rgba(255,255,255,0.75); }
+    #l-end-t { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 150px; line-height: 0.95; color: #fff; text-align: center;
+      letter-spacing: -0.02em; }
+    #l-end-t span { color: #ff2e3e; text-shadow: 0 0 40px rgba(255,46,62,0.5); }
+    #l-end-s { margin-top: 30px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.5); }
+    #l-glitch { position: absolute; left: 0; width: 100%; height: 26px; top: 600px; background: rgba(255,46,62,0.7); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="list" data-width="1080" data-height="1920">
+    <div class="scene-bg"></div>
+    <div id="l-page">
+      <div id="l-head">ПОСЛЕДНЯЯ СТРАНИЦА</div>
+      <div class="l-ln" id="l-a1" style="top:110px"><b>1.</b>Строителей 12 — кв. 9</div>
+      <div class="l-ln" id="l-a2" style="top:190px"><b>2.</b>пр. Мира 41 — кв. 118</div>
+      <div class="l-ln" id="l-a3" style="top:270px"><b>3.</b>Лесная 7 — кв. 47</div>
+      <div class="l-ln" id="l-a4" style="top:350px"><b>4.</b>Садовая 3 — кв. 22</div>
+      <div class="l-ln" id="l-a5" style="top:430px"><b>5.</b>Заречная 15 — кв. 64</div>
+      <div class="l-ln" id="l-a6" style="top:510px"><b>6.</b>Победы 30 — кв. 7</div>
+      <div class="l-ln" id="l-a7" style="top:590px"><b>7.</b>Школьная 2 — кв. 51</div>
+      <svg id="l-svg" viewBox="0 0 860 880">
+        <ellipse id="l-circ" cx="400" cy="300" rx="330" ry="52" fill="none" stroke="#e0202f" stroke-width="7" stroke-linecap="round"
+          stroke-dasharray="2200" stroke-dashoffset="2200" transform="rotate(-2 400 300)" />
+        <path id="l-q1" d="M650 150 l40 -10" stroke="#e0202f" stroke-width="7" stroke-linecap="round" stroke-dasharray="60" stroke-dashoffset="60" />
+        <path id="l-q2" d="M690 230 l40 -10" stroke="#e0202f" stroke-width="7" stroke-linecap="round" stroke-dasharray="60" stroke-dashoffset="60" />
+      </svg>
+    </div>
+    <div class="hud" style="top: 1000px; gap: 14px">
+      <div id="l-c1" class="chip solid-red">№1 · проверка</div>
+      <div id="l-c2" class="chip solid-red">№2 · проверка</div>
+    </div>
+    <div id="l-police"><div id="l-red"></div><div id="l-blue"></div></div>
+    <div id="l-glitch"></div>
+    <div id="l-end">
+      <div id="l-end-p">часть 2</div>
+      <div id="l-end-t">СЕМЬ<br /><span>АДРЕСОВ</span></div>
+      <div id="l-end-s">ПОДПИШИСЬ, ЧТОБЫ НЕ ПРОПУСТИТЬ</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.list;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#l-page", { rotationY: -70, x: 300, opacity: 0.3 }, { rotationY: 0, x: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0);
+      ["#l-a1", "#l-a2", "#l-a3", "#l-a4", "#l-a5", "#l-a6", "#l-a7"].forEach((l, i) => {
+        tl.fromTo(l, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.2 }, at("seven") + i * 0.1);
+      });
+      tl.fromTo("#l-page", { scale: 1 }, { scale: 1.08, duration: at("first") - at("addr"), ease: "sine.inOut" }, at("addr"));
+      // «Анин — третий»
+      tl.to("#l-circ", { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }, at("third"));
+      tl.to("#l-a3", { color: "#a3121f", duration: 0.2 }, at("third") + 0.2);
+      tl.to(["#l-a4", "#l-a5", "#l-a6", "#l-a7"], { opacity: 0.45, duration: 0.3 }, at("third") + 0.3);
+      // «первые два проверили той же ночью» — мигалки
+      tl.to("#l-q1", { strokeDashoffset: 0, duration: 0.2 }, at("first") + 0.2);
+      tl.to("#l-q2", { strokeDashoffset: 0, duration: 0.2 }, at("first") + 0.4);
+      tl.fromTo("#l-c1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, at("first") + 0.2);
+      tl.fromTo("#l-c2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2 }, at("first") + 0.4);
+      tl.set("#l-police", { opacity: 1 }, at("first"));
+      const n = Math.max(2, Math.floor((at("part") - at("first")) / 0.36));
+      for (let i = 0; i < n; i++) {
+        const p = at("first") + i * 0.36;
+        tl.fromTo(i % 2 ? "#l-blue" : "#l-red", { opacity: 1 }, { opacity: 0, duration: 0.32, ease: "power2.in" }, p);
+      }
+      tl.to("#l-page", { scale: 1.35, y: 120, duration: at("part") - at("first"), ease: "power2.in" }, at("first"));
+      // глитч и финальная карточка
+      tl.set("#l-glitch", { opacity: 0 }, 0);
+      tl.fromTo("#l-glitch", { opacity: 1, y: -300 }, { opacity: 1, y: 500, duration: 0.18, ease: "steps(4)", immediateRender: false }, at("part") - 0.2);
+      tl.set("#l-glitch", { opacity: 0 }, at("part") - 0.02);
+      tl.set("#l-end", { opacity: 1 }, at("part"));
+      tl.fromTo("#l-end-t", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power4.out" }, at("part"));
+      tl.fromTo("#l-end-p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 }, at("part") + 0.2);
+      tl.fromTo("#l-end-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at("part") + 0.6);
+      window.__timelines["list"] = tl;
+    })();
+  </script>
+</template>
