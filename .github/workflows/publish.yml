@@ -9,7 +9,7 @@ on:
       render:
         description: "Отрендерить заново (иначе берётся закоммиченный out/final.mp4)"
         type: boolean
-        default: false
+        default: true
       youtube:
         description: "YouTube-каналы: all, список через запятую или пусто"
         default: "all"

@@ -7,6 +7,6 @@ __pycache__/
 episodes/*/assets/lib/
 episodes/*/assets/sfx/
 episodes/*/assets/bed.wav
-episodes/*/out/draft*.mp4
+episodes/*/out/*.mp4
 episodes/*/out/work-*/
 episodes/*/out/.*
