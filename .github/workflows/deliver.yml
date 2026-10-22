@@ -1,0 +1,27 @@
+name: Готовый ролик в ветку renders
+
+# Забирает final.mp4 из завершённого запуска «Рендер эпизода (параллельно)» и кладёт
+# в ветку renders (одна свежая версия на эпизод) — оттуда ролик скачивается обычным git.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID запуска рендера (из адреса страницы запуска)"
+        required: true
+      name:
+        description: "Имя файла, например 005-galochka"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: final, path: /tmp/final, run-id: "${{ inputs.run_id }}", github-token: "${{ github.token }}" }
+      - name: В ветку renders
+        run: bash tools/push-render.sh /tmp/final/final.mp4 "${{ inputs.name }}"

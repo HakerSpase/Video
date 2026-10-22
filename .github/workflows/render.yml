@@ -88,6 +88,8 @@ jobs:
   assemble:
     needs: chunk
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -112,3 +114,5 @@ jobs:
             -profile:v high -level 4.1 -g 60 -keyint_min 30 -af "loudnorm=I=-16:TP=-1.5:LRA=11" -c:a aac -b:a 192k -ar 48000 -movflags +faststart final.mp4
       - uses: actions/upload-artifact@v4
         with: { name: final, path: final.mp4, retention-days: 7 }
+      - name: Ролик в ветку renders
+        run: bash tools/push-render.sh final.mp4 "$(basename "${{ inputs.episode }}")"
