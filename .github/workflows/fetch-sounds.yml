@@ -1,0 +1,37 @@
+name: Реальные звуки (Openverse) в ветку renders
+
+# Ищет звуки и музыку с открытыми коммерческими лицензиями по списку запросов
+# и кладёт их в ветку renders, папка sfx/<набор>/ — оттуда их забирает сборка эпизода.
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: "Файл с запросами в репозитории (JSON)"
+        required: true
+      name:
+        description: "Имя набора, например war"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Зависимости
+        timeout-minutes: 8
+        run: bash tools/ci-deps.sh none || true
+      - name: Поиск и загрузка
+        run: python3 tools/fetch_sounds.py "${{ inputs.queries }}" "/tmp/sfx/${{ inputs.name }}"
+      - name: В ветку renders
+        run: |
+          git config user.name "render-bot"
+          git config user.email "render-bot@users.noreply.github.com"
+          if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
+          rm -rf "sfx/${{ inputs.name }}" && mkdir -p sfx && cp -r "/tmp/sfx/${{ inputs.name }}" sfx/
+          git add -f sfx
+          git commit -qm "sfx: ${{ inputs.name }}"
+          git push -q origin HEAD:refs/heads/renders

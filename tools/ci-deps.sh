@@ -22,4 +22,5 @@ if ! command -v ffmpeg >/dev/null; then
 fi
 ffmpeg -version | head -1
 retry 180 npx -y "$HF" --version || exit 1
+if [ "${1:-}" = none ]; then exit 0; fi
 if [ "${1:-}" = browser ]; then retry 240 npx -y "$HF" browser ensure || exit 1; fi
