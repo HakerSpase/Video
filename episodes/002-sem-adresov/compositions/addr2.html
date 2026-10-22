@@ -1,0 +1,117 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #05070a; }
+    #e-cam { position: absolute; left: 0; top: 0; width: 2160px; height: 1920px; transform-origin: 0 0; }
+    #e-dark { position: absolute; inset: 0; background: rgba(2,3,6,0.78); }
+    #e-torch { position: absolute; left: 0; top: 0; width: 1400px; height: 1400px; margin: -700px 0 0 -700px; border-radius: 50%; opacity: 0;
+      background: radial-gradient(circle, rgba(255,248,225,0.5) 0%, rgba(255,248,225,0.18) 30%, rgba(0,0,0,0) 62%); mix-blend-mode: screen; }
+    .e-ring { position: absolute; border-radius: 50%; border: 6px solid #ff2e3e; box-shadow: 0 0 30px rgba(255,46,62,0.8); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="addr2" data-width="1080" data-height="1920">
+    <div id="e-cam">
+      <svg width="2160" height="1920" viewBox="0 0 2160 1920">
+        <defs>
+          <pattern id="e-tile" width="80" height="80" patternUnits="userSpaceOnUse"><rect width="80" height="80" fill="#1e2a36" /><rect x="2" y="2" width="76" height="76" rx="3" fill="#263646" /></pattern>
+          <linearGradient id="e-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfe6ee" /><stop offset="0.5" stop-color="#8d99a8" /><stop offset="1" stop-color="#4a5562" /></linearGradient>
+          <linearGradient id="e-fr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9dde2" /><stop offset="1" stop-color="#a6adb6" /></linearGradient>
+          <radialGradient id="e-frl" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#fffbe8" /><stop offset="1" stop-color="#cfd9e6" /></radialGradient>
+          <linearGradient id="e-wd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a4430" /><stop offset="1" stop-color="#3d2d1f" /></linearGradient>
+          <linearGradient id="e-bag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b7a4c" /><stop offset="1" stop-color="#344026" /></linearGradient>
+          <filter id="e-sh"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-opacity="0.6" /></filter>
+          <filter id="e-blur"><feGaussianBlur stdDeviation="8" /></filter>
+        </defs>
+        <rect width="1100" height="1920" fill="url(#e-tile)" />
+        <rect x="1100" width="1060" height="1920" fill="#2b3446" />
+        <rect y="1080" width="2160" height="840" fill="#2a241e" />
+        <!-- плита и чайник -->
+        <rect x="100" y="780" width="360" height="300" fill="#cfd5dc" filter="url(#e-sh)" /><rect x="100" y="770" width="360" height="24" fill="#2b2f36" />
+        <rect x="140" y="830" width="280" height="200" rx="8" fill="#1a1d22" />
+        <g id="e-kettle" filter="url(#e-sh)"><path d="M190 770 L210 650 L350 650 L370 770 Z" fill="url(#e-steel)" /><rect x="250" y="626" width="60" height="26" rx="10" fill="#2b2f36" />
+          <path d="M370 700 Q430 690 420 640" stroke="#8d99a8" stroke-width="14" fill="none" /></g>
+        <g id="e-steam" fill="#e9eef5" filter="url(#e-blur)" opacity="0">
+          <ellipse cx="420" cy="590" rx="26" ry="40" /><ellipse cx="440" cy="520" rx="34" ry="46" /><ellipse cx="420" cy="440" rx="40" ry="50" />
+        </g>
+        <!-- мойка и кружка -->
+        <rect x="520" y="780" width="360" height="300" fill="#3b4656" filter="url(#e-sh)" /><rect x="510" y="766" width="380" height="20" fill="#bfc6ce" />
+        <rect x="570" y="790" width="260" height="60" rx="10" fill="#141920" />
+        <g id="e-mug"><rect x="660" y="740" width="70" height="66" rx="10" fill="#e8e4da" /><path d="M660 755 q-30 0 -30 22 q0 22 30 22" stroke="#e8e4da" stroke-width="10" fill="none" /></g>
+        <rect x="720" y="600" width="12" height="140" fill="#9aa4b0" /><rect x="680" y="600" width="80" height="12" rx="6" fill="#9aa4b0" />
+        <!-- холодильник -->
+        <rect x="910" y="360" width="190" height="720" rx="10" fill="#141920" />
+        <g id="e-frin">
+          <rect x="918" y="368" width="174" height="704" rx="6" fill="url(#e-frl)" />
+          <rect x="918" y="600" width="174" height="8" fill="#9fb0c4" /><rect x="918" y="820" width="174" height="8" fill="#9fb0c4" />
+          <ellipse cx="1000" cy="575" rx="70" ry="28" fill="#c8893f" /><ellipse cx="1000" cy="565" rx="62" ry="18" fill="#e0a65a" />
+          <rect id="e-receipt" x="935" y="490" width="70" height="62" fill="#fbfbf6" transform="rotate(-8 970 520)" />
+          <rect x="960" y="760" width="40" height="60" rx="6" fill="#d23b3b" /><rect x="1020" y="770" width="50" height="50" rx="6" fill="#4b7bd1" />
+        </g>
+        <g id="e-frdoor"><rect x="910" y="360" width="190" height="720" rx="10" fill="url(#e-fr)" filter="url(#e-sh)" /><rect x="1070" y="480" width="12" height="160" rx="6" fill="#7d8792" /></g>
+        <!-- шкаф в прихожей -->
+        <rect x="1300" y="340" width="640" height="740" fill="#2a2018" filter="url(#e-sh)" />
+        <rect x="1316" y="356" width="608" height="708" fill="#120e0b" />
+        <rect x="1330" y="400" width="580" height="10" rx="5" fill="#8d8d8d" />
+        <g id="e-bagg"><rect x="1500" y="760" width="240" height="300" rx="90" fill="url(#e-bag)" />
+          <path d="M1520 820 Q1620 850 1720 820 M1515 930 Q1620 960 1725 930" stroke="#232a19" stroke-width="6" fill="none" opacity="0.6" /></g>
+        <g id="e-jl"><path d="M1380 410 L1520 410 L1560 1000 L1350 1000 Z" fill="#20293b" /><path d="M1400 470 L1500 470" stroke="#151b28" stroke-width="10" /></g>
+        <g id="e-jr"><path d="M1620 410 L1760 410 L1800 1000 L1590 1000 Z" fill="#3b2228" /><path d="M1640 520 L1740 520 M1640 640 L1740 640" stroke="#24151a" stroke-width="10" /></g>
+        <g id="e-wdl"><rect x="1316" y="356" width="304" height="708" fill="url(#e-wd)" /><rect x="1590" y="660" width="12" height="90" rx="6" fill="#c9b07a" /></g>
+        <g id="e-wdr"><rect x="1620" y="356" width="304" height="708" fill="url(#e-wd)" /><rect x="1638" y="660" width="12" height="90" rx="6" fill="#c9b07a" /></g>
+      </svg>
+      <div id="e-r-mug" class="e-ring" style="left:600px;top:700px;width:160px;height:150px"></div>
+      <div id="e-r-bag" class="e-ring" style="left:1460px;top:730px;width:320px;height:360px"></div>
+      <div id="e-r-rec" class="e-ring" style="left:910px;top:470px;width:120px;height:110px"></div>
+    </div>
+    <div id="e-dark"></div>
+    <div id="e-torch"></div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="e-c1" class="chip">пр. мира 41 · кв. 118</div></div>
+    <div class="hud" style="top: 280px; justify-content: flex-start; padding-left: 70px"><div id="e-c2" class="chip yellow">хозяева · отпуск 12 дней</div></div>
+    <div class="hud" style="top: 364px; justify-content: flex-start; padding-left: 70px"><div id="e-c3" class="chip green">заперто · ключ у соседки</div></div>
+    <div class="hud" style="top: 990px"><div id="e-c4" class="chip red">чайник · 46 °C</div></div>
+    <div class="hud" style="top: 990px"><div id="e-c5" class="chip red">чек · 21.10 · 19:47</div></div>
+    <div class="hud" style="top: 990px"><div id="e-c6" class="chip solid-red">спальник №2</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.addr2;
+      const at = (k) => window.CUES[k] - S;
+      const look = (px, py, s) => ({ x: 540 - px * s, y: 700 - py * s, scale: s });
+      const tl = gsap.timeline({ paused: true });
+      tl.set("#e-torch", { x: 540, y: 700 }, 0);
+      tl.fromTo("#e-cam", look(600, 760, 0.95), Object.assign(look(560, 760, 1.0), { duration: at("kettle") - 0.3, ease: "sine.inOut" }), 0);
+      tl.fromTo("#e-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#e-c2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("away"));
+      tl.fromTo("#e-c3", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("locked"));
+      // вошли: фонарь
+      tl.to("#e-dark", { opacity: 0.45, duration: 0.4 }, at("enter"));
+      tl.fromTo("#e-torch", { opacity: 0 }, { opacity: 1, duration: 0.3 }, at("enter"));
+      tl.to(["#e-c2", "#e-c3"], { opacity: 0, duration: 0.2 }, at("kettle") - 0.3);
+      // тёплый чайник
+      tl.to("#e-cam", Object.assign(look(300, 700, 1.7), { duration: 0.6, ease: "power3.inOut" }), at("kettle") - 0.3);
+      tl.fromTo("#e-steam", { opacity: 0, y: 30 }, { opacity: 0.55, y: -40, duration: 2.0, ease: "sine.out" }, at("kettle"));
+      tl.fromTo("#e-c4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.4)" }, at("kettle") + 0.4);
+      // одна кружка
+      tl.to("#e-cam", Object.assign(look(690, 780, 1.7), { duration: 0.55, ease: "power3.inOut" }), at("cup") - 0.25);
+      tl.to("#e-c4", { opacity: 0, duration: 0.15 }, at("cup") - 0.25);
+      tl.fromTo("#e-r-mug", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("cup") + 0.35);
+      // холодильник, хлеб, чек
+      tl.to("#e-cam", Object.assign(look(1000, 600, 1.5), { duration: 0.55, ease: "power3.inOut" }), at("bread") - 0.25);
+      tl.to("#e-frdoor", { scaleX: 0.06, svgOrigin: "910 720", duration: 0.45, ease: "power2.inOut" }, at("bread"));
+      tl.to("#e-dark", { opacity: 0.2, duration: 0.3 }, at("bread") + 0.2);
+      tl.fromTo("#e-r-rec", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("yday"));
+      tl.fromTo("#e-c5", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.4)" }, at("yday") + 0.1);
+      // шкаф в прихожей
+      tl.to("#e-dark", { opacity: 0.5, duration: 0.3 }, at("closet") - 0.3);
+      tl.to("#e-c5", { opacity: 0, duration: 0.15 }, at("closet") - 0.3);
+      tl.to("#e-cam", Object.assign(look(1620, 720, 1.05), { duration: 0.7, ease: "power3.inOut" }), at("closet") - 0.3);
+      tl.to("#e-wdl", { scaleX: 0.1, svgOrigin: "1316 700", duration: 0.45, ease: "power2.inOut" }, at("closet") + 0.3);
+      tl.to("#e-wdr", { scaleX: 0.1, svgOrigin: "1924 700", duration: 0.45, ease: "power2.inOut" }, at("closet") + 0.35);
+      tl.to("#e-jl", { x: -120, duration: 0.5, ease: "power2.inOut" }, at("bag") - 0.4);
+      tl.to("#e-jr", { x: 130, duration: 0.5, ease: "power2.inOut" }, at("bag") - 0.4);
+      tl.to("#e-cam", Object.assign(look(1620, 880, 1.45), { duration: 0.6, ease: "power3.inOut" }), at("bag") - 0.1);
+      tl.fromTo("#e-r-bag", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("bag") + 0.3);
+      tl.fromTo("#e-c6", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("bag") + 0.3);
+      tl.fromTo("#e-cam", { rotation: 0 }, { rotation: 0.5, duration: 0.05, yoyo: true, repeat: 3 }, at("bag") + 0.3);
+      window.__timelines["addr2"] = tl;
+    })();
+  </script>
+</template>

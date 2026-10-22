@@ -1,0 +1,115 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #06080c; }
+    .b-layer { position: absolute; inset: 0; }
+    #b-door-cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 700px; }
+    #b-iso-stage { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 540px 460px; }
+    #b-world { position: absolute; left: 540px; top: 690px; width: 0; height: 0; transform-style: preserve-3d; }
+    #b-floor { position: absolute; left: -320px; top: -410px; width: 640px; height: 820px; transform-style: preserve-3d;
+      transform: rotateX(56deg) rotateZ(-40deg); }
+    .b-beam { position: absolute; width: 900px; height: 260px; transform-origin: 0 50%;
+      background: linear-gradient(90deg, rgba(255,250,220,0.55), rgba(255,250,220,0)); clip-path: polygon(0 45%, 100% 0, 100% 100%, 0 55%);
+      mix-blend-mode: screen; }
+    #b-iso-dark { position: absolute; inset: 0; background: radial-gradient(70% 50% at 50% 40%, rgba(5,8,14,0.2), rgba(3,5,8,0.85)); }
+    .b-checks { position: absolute; left: 0; width: 100%; top: 960px; display: flex; justify-content: center; gap: 12px; }
+    #b-page { position: absolute; left: 110px; top: 300px; width: 860px; height: 700px; border-radius: 10px;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px), #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); }
+    .b-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 52px;
+      color: #23305e; white-space: nowrap; }
+    #b-word { color: #a3121f; font-size: 76px; }
+  </style>
+  <div id="root" data-composition-id="addr1" data-width="1080" data-height="1920">
+    <!-- A. лестничная площадка, дверь кв. 9 -->
+    <div id="b-a" class="b-layer">
+      <div id="b-door-cam">
+        <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+          <defs>
+            <linearGradient id="b-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3a4f" /><stop offset="0.55" stop-color="#3a5168" /><stop offset="0.56" stop-color="#1d2a3a" /><stop offset="1" stop-color="#16202c" /></linearGradient>
+            <linearGradient id="b-dr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2a1d" /><stop offset="0.5" stop-color="#5a4029" /><stop offset="1" stop-color="#33241a" /></linearGradient>
+            <radialGradient id="b-warm" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#ffcf8a" /><stop offset="1" stop-color="#b8642a" /></radialGradient>
+            <radialGradient id="b-spill" cx="50%" cy="0%" r="80%"><stop offset="0" stop-color="#ffb45a" stop-opacity="0.55" /><stop offset="1" stop-color="#ffb45a" stop-opacity="0" /></radialGradient>
+            <filter id="b-sh"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-opacity="0.6" /></filter>
+          </defs>
+          <rect width="1080" height="1920" fill="url(#b-wall)" />
+          <rect y="1060" width="1080" height="860" fill="#1e1a16" />
+          <rect x="300" y="420" width="480" height="640" fill="#0b0d11" />
+          <rect id="b-glow" x="316" y="436" width="448" height="624" fill="url(#b-warm)" opacity="0" />
+          <!-- пенсионер в проёме -->
+          <g id="b-man" opacity="0" fill="#120e0b">
+            <circle cx="560" cy="590" r="54" />
+            <path d="M488 650 Q560 620 632 650 L668 1060 L452 1060 Z" />
+            <path d="M470 700 L440 900 L466 905 L500 720 Z" />
+          </g>
+          <g id="b-doorg" filter="url(#b-sh)"><rect x="316" y="436" width="448" height="624" fill="url(#b-dr)" />
+            <rect x="500" y="500" width="80" height="54" rx="6" fill="#c9b07a" /><text x="540" y="542" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="40" fill="#2a1d10">9</text>
+            <circle cx="540" cy="600" r="9" fill="#c9b07a" /><rect x="700" y="760" width="40" height="14" rx="7" fill="#d3bb85" /></g>
+          <polygon id="b-floorlight" points="316,1060 764,1060 980,1500 100,1500" fill="url(#b-spill)" opacity="0" />
+          <rect x="840" y="560" width="120" height="70" rx="6" fill="#26303f" /><circle cx="900" cy="595" r="14" fill="#ff2e3e" opacity="0.8" />
+        </svg>
+      </div>
+      <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="b-c1" class="chip">строителей 12 · кв. 9</div></div>
+      <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>02:40</b><small>ТА ЖЕ НОЧЬ</small></div></div>
+      <div class="hud" style="top: 990px"><div id="b-c2" class="chip yellow">живёт один · 9 лет</div></div>
+    </div>
+    <!-- B. обыск: квартира в 3D, фонари -->
+    <div id="b-b" class="b-layer" style="opacity:0">
+      <div class="scene-bg"></div>
+      <div id="b-iso-stage"><div id="b-world"><div id="b-floor"></div></div></div>
+      <div id="b-iso-dark"></div>
+      <div id="b-beam1" class="b-beam" style="left:120px;top:560px"></div>
+      <div id="b-beam2" class="b-beam" style="left:900px;top:760px"></div>
+      <div class="b-checks">
+        <div id="b-k1" class="chip green">антресоль</div><div id="b-k2" class="chip green">шкафы</div><div id="b-k3" class="chip green">балкон</div>
+      </div>
+      <div class="hud" style="top: 196px"><div id="b-empty" class="chip solid-red">пусто</div></div>
+    </div>
+    <!-- C. тетрадь: дата и «съехал» -->
+    <div id="b-c" class="b-layer" style="opacity:0">
+      <div class="scene-bg"></div>
+      <div id="b-page">
+        <div class="b-ln" style="top:110px"><b style="font-family:'JetBrains Mono';font-style:normal;font-size:38px;margin-right:16px">1.</b>Строителей 12 — кв. 9</div>
+        <div class="b-ln" id="b-date" style="top:270px;color:#7a5a12">14 марта — два года назад</div>
+        <div class="b-ln" id="b-word" style="top:400px">съехал</div>
+        <svg style="position:absolute;left:0;top:0;overflow:visible" width="860" height="700">
+          <path id="b-under" d="M120 510 C 260 495, 380 520, 470 500" stroke="#e0202f" stroke-width="7" fill="none" stroke-linecap="round" stroke-dasharray="400" stroke-dashoffset="400" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.addr1;
+      const at = (k) => window.CUES[k] - S;
+      const floor = document.querySelector("#b-floor");
+      ISO.flat47(floor, { p: "b", wall: "#8f9bb0" });
+      const tl = gsap.timeline({ paused: true });
+      // A: дверь открывается, тёплый свет, силуэт
+      tl.fromTo("#b-door-cam", { scale: 1.1 }, { scale: 1.0, duration: at("search"), ease: "sine.out" }, 0);
+      tl.fromTo("#b-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.to("#b-doorg", { scaleX: 0.12, svgOrigin: "316 750", duration: 0.5, ease: "power2.inOut" }, at("door"));
+      tl.to(["#b-glow", "#b-floorlight"], { opacity: 1, duration: 0.4 }, at("door") + 0.1);
+      tl.to("#b-man", { opacity: 1, duration: 0.3 }, at("door") + 0.3);
+      tl.fromTo("#b-c2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25 }, at("alone"));
+      // B: обыск
+      tl.set("#b-a", { opacity: 0 }, at("search") - 0.05);
+      tl.set("#b-b", { opacity: 1 }, at("search") - 0.05);
+      tl.fromTo("#b-world", { scale: 1.2, rotation: 4 }, { scale: 1.0, rotation: 0, duration: at("diary") - at("search"), ease: "sine.out" }, at("search"));
+      tl.fromTo("#b-beam1", { rotation: -20 }, { rotation: 25, duration: 2.2, ease: "sine.inOut" }, at("search"));
+      tl.fromTo("#b-beam2", { rotation: 200 }, { rotation: 160, duration: 2.2, ease: "sine.inOut" }, at("search"));
+      ["#b-k1", "#b-k2", "#b-k3"].forEach((k, i) => tl.fromTo(k, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2.5)" }, at("search") + 0.15 + i * 0.45));
+      tl.fromTo("#b-empty", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("empty"));
+      // C: тетрадь
+      tl.set("#b-b", { opacity: 0 }, at("diary") - 0.05);
+      tl.set("#b-c", { opacity: 1 }, at("diary") - 0.05);
+      tl.fromTo("#b-page", { y: 140, rotation: -5 }, { y: 0, rotation: -1, duration: 0.4, ease: "power3.out" }, at("diary") - 0.05);
+      tl.fromTo("#b-date", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "none" }, at("date"));
+      tl.fromTo("#b-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none" }, at("word") + 0.25);
+      tl.to("#b-under", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, at("word") + 0.75);
+      tl.fromTo("#b-page", { scale: 1 }, { scale: 1.12, transformOrigin: "30% 60%", duration: 1.6, ease: "sine.inOut" }, at("word"));
+      window.__timelines["addr1"] = tl;
+    })();
+  </script>
+</template>

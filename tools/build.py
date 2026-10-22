@@ -158,7 +158,9 @@ def speech_segments(audio):
         else:
             merged.append(s)
     merged = [s for s in merged if s[1] - s[0] >= 6]
-    return [(a / 100.0, b / 100.0) for a, b in merged], n / 100.0
+    # громкость сегмента относительно речи: 1 — как обычная речь, 0 — на 20 дБ тише (вдох, шум)
+    level = [float(np.clip((np.median(db[a:b]) - (loud - 26)) / 20, 0, 1)) for a, b in merged]
+    return [(a / 100.0, b / 100.0, lv) for (a, b), lv in zip(merged, level)], n / 100.0
 
 
 def align_to_audio(words, audio):
@@ -170,18 +172,18 @@ def align_to_audio(words, audio):
     pref = [0.0]
     for x in weights:
         pref.append(pref[-1] + x)
-    rate = pref[-1] / sum(b - a for a, b in segs)
+    rate = pref[-1] / sum(b - a for a, b, _ in segs)
     INF = float("inf")
     # f[j][i]: первые j сегментов покрывают первые i слов
     f = [[INF] * (n + 1) for _ in range(s + 1)]
     back = [[None] * (n + 1) for _ in range(s + 1)]
     f[0][0] = 0.0
     for j in range(1, s + 1):
-        a, b = segs[j - 1]
+        a, b, lv = segs[j - 1]
         dur = b - a
         for i in range(n + 1):
-            # сегмент-шум (вдох, щелчок): не покрывает слов
-            c = f[j - 1][i] + 0.8 + dur * 4
+            # сегмент-шум (вдох, щелчок): не покрывает слов; громкий «шум» — скорее всего речь
+            c = f[j - 1][i] + 0.8 + dur * (4 + 10 * lv)
             if c < f[j][i]:
                 f[j][i], back[j][i] = c, i
             lo = max(0, i - 40)
@@ -190,8 +192,15 @@ def align_to_audio(words, audio):
                     continue
                 exp = (pref[i] - pref[k]) / rate
                 cost = ((dur - exp) / max(exp, 0.35)) ** 2 * 3
-                if not words[i - 1]["punct"] and i < n:
-                    cost += 1.2  # пауза посреди фразы — бывает, но реже
+                if i < n:
+                    gap = segs[j][0] - b if j < s else 1.0  # тишина после этого сегмента
+                    w = words[i - 1]
+                    if w["sentence_end"]:
+                        cost += 0.0 if gap >= 0.35 else 0.8
+                    elif w["punct"]:
+                        cost += 0.0 if gap >= 0.15 else 0.3
+                    else:  # пауза посреди фразы — бывает, но реже, а длинная — совсем редко
+                        cost += 1.2 + (2.0 if gap >= 0.35 else 0.0)
                 c = f[j - 1][k] + cost
                 if c < f[j][i]:
                     f[j][i], back[j][i] = c, k
@@ -204,7 +213,7 @@ def align_to_audio(words, audio):
     for seg, k, i in assign:
         if k == i:
             continue
-        a, b = segs[seg]
+        a, b, _ = segs[seg]
         tot = pref[i] - pref[k]
         t = a
         for w in words[k:i]:

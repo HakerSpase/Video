@@ -1,0 +1,85 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #06080c; }
+    .k-layer { position: absolute; inset: 0; }
+    #k-dcam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 700px; }
+    #k-tcam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; }
+    #k-dawn { position: absolute; inset: 0; mix-blend-mode: screen;
+      background: linear-gradient(200deg, rgba(120,150,210,0.28) 0%, rgba(0,0,0,0) 55%); }
+    #k-count { position: absolute; left: 0; width: 100%; top: 240px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 900;
+      font-size: 220px; line-height: 1; color: #fff; letter-spacing: -0.04em; text-shadow: 0 10px 0 rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.8); }
+    #k-count span { position: absolute; left: 0; width: 100%; }
+    #k-n19 { color: #ff2e3e; opacity: 0; text-shadow: 0 0 80px rgba(255,46,62,0.6), 0 10px 0 rgba(0,0,0,0.5) !important; }
+  </style>
+  <div id="root" data-composition-id="back" data-width="1080" data-height="1920">
+    <!-- дверь кв. 47 на рассвете -->
+    <div id="k-d" class="k-layer">
+      <div id="k-dcam">
+        <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+          <defs>
+            <linearGradient id="k-w" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#26324a" /><stop offset="1" stop-color="#3d5275" /></linearGradient>
+            <linearGradient id="k-dr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a3322" /><stop offset="0.5" stop-color="#6b4a30" /><stop offset="1" stop-color="#3d2a1b" /></linearGradient>
+            <filter id="k-sh"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-opacity="0.6" /></filter>
+          </defs>
+          <rect width="1080" height="1920" fill="url(#k-w)" />
+          <rect y="1060" width="1080" height="860" fill="#221d18" />
+          <rect x="300" y="420" width="480" height="640" fill="#0b0d11" />
+          <rect x="316" y="436" width="448" height="624" fill="url(#k-dr)" filter="url(#k-sh)" />
+          <rect x="500" y="500" width="80" height="54" rx="6" fill="#c9b07a" /><text x="540" y="542" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="38" fill="#2a1d10">47</text>
+          <g id="k-lock"><circle cx="700" cy="790" r="34" fill="#c9a764" /><circle cx="700" cy="790" r="26" fill="#a78445" /><rect x="694" y="770" width="12" height="40" rx="5" fill="#2a1d10" /></g>
+          <g opacity="0.92"><rect x="200" y="640" width="700" height="56" fill="#ffd23f" transform="rotate(-9 540 668)" />
+            <text x="540" y="682" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="34" fill="#111" letter-spacing="6" transform="rotate(-9 540 668)">ОПЕЧАТАНО · ПОЛИЦИЯ</text></g>
+        </svg>
+      </div>
+      <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>05:52</b><small>УТРО</small></div></div>
+      <div class="hud" style="top: 990px"><div id="k-c1" class="chip green">замок цел · следов нет</div></div>
+    </div>
+    <!-- печенье -->
+    <div id="k-t" class="k-layer" style="opacity:0">
+      <div id="k-tcam">
+        <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+          <defs>
+            <radialGradient id="k-ck" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#e9b977" /><stop offset="1" stop-color="#9a6630" /></radialGradient>
+            <linearGradient id="k-top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfc9bd" /><stop offset="1" stop-color="#8f897d" /></linearGradient>
+            <filter id="k-sh2"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-opacity="0.6" /></filter>
+          </defs>
+          <rect width="1080" height="1920" fill="#1b2433" />
+          <rect y="900" width="1080" height="50" fill="url(#k-top)" /><rect y="950" width="1080" height="970" fill="#232b38" />
+          <g transform="translate(-30 40) scale(1.1)">
+            <rect x="120" y="720" width="860" height="170" rx="16" fill="rgba(220,235,255,0.16)" stroke="rgba(220,235,255,0.5)" stroke-width="4" filter="url(#k-sh2)" />
+            <g id="k-cks">
+              <circle cx="190" cy="765" r="32" fill="url(#k-ck)" /><circle cx="262" cy="765" r="32" fill="url(#k-ck)" /><circle cx="334" cy="765" r="32" fill="url(#k-ck)" /><circle cx="406" cy="765" r="32" fill="url(#k-ck)" /><circle cx="478" cy="765" r="32" fill="url(#k-ck)" /><circle cx="550" cy="765" r="32" fill="url(#k-ck)" /><circle cx="622" cy="765" r="32" fill="url(#k-ck)" /><circle cx="694" cy="765" r="32" fill="url(#k-ck)" /><circle cx="766" cy="765" r="32" fill="url(#k-ck)" /><circle cx="838" cy="765" r="32" fill="url(#k-ck)" />
+              <circle cx="190" cy="840" r="32" fill="url(#k-ck)" /><circle cx="262" cy="840" r="32" fill="url(#k-ck)" /><circle cx="334" cy="840" r="32" fill="url(#k-ck)" /><circle cx="406" cy="840" r="32" fill="url(#k-ck)" /><circle cx="478" cy="840" r="32" fill="url(#k-ck)" /><circle cx="550" cy="840" r="32" fill="url(#k-ck)" /><circle cx="622" cy="840" r="32" fill="url(#k-ck)" /><circle cx="694" cy="840" r="32" fill="url(#k-ck)" /><circle cx="766" cy="840" r="32" fill="url(#k-ck)" /><circle id="k-last" cx="838" cy="840" r="32" fill="url(#k-ck)" />
+            </g>
+            <circle id="k-ring" cx="838" cy="840" r="52" fill="none" stroke="#ff2e3e" stroke-width="7" opacity="0" />
+          </g>
+        </svg>
+      </div>
+      <div id="k-count"><span id="k-n20">20</span><span id="k-n19">19</span></div>
+    </div>
+    <div id="k-dawn"></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.back;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.outro - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#k-dcam", { scale: 1.0 }, { scale: 1.12, duration: at("lockok") - 0.3, ease: "sine.inOut" }, 0);
+      tl.to("#k-dcam", { scale: 2.4, x: -360, y: -220, duration: 0.6, ease: "power3.inOut" }, at("lockok") - 0.3);
+      tl.fromTo("#k-c1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("lockok") + 0.2);
+      // печенье
+      tl.set("#k-d", { opacity: 0 }, at("open") + 0.3);
+      tl.set("#k-t", { opacity: 1 }, at("open") + 0.3);
+      tl.fromTo("#k-tcam", { scale: 1.0, x: 0, y: 0 }, { scale: 1.08, x: -40, y: -60, duration: D - at("open"), ease: "sine.inOut" }, at("open") + 0.3);
+      tl.fromTo("#k-count", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, at("was"));
+      // «сейчас — девятнадцать»: последнее печенье исчезает, цифра краснеет
+      tl.to("#k-last", { opacity: 0, duration: 0.08 }, at("now") + 0.25);
+      tl.fromTo("#k-ring", { opacity: 0, scale: 0.6, svgOrigin: "838 840" }, { opacity: 1, scale: 1, svgOrigin: "838 840", duration: 0.25, ease: "back.out(2)" }, at("now") + 0.3);
+      tl.set("#k-n20", { opacity: 0 }, at("now") + 0.3);
+      tl.set("#k-n19", { opacity: 1 }, at("now") + 0.3);
+      tl.fromTo("#k-tcam", { rotation: 0 }, { rotation: 0.6, duration: 0.05, yoyo: true, repeat: 3 }, at("now") + 0.3);
+      window.__timelines["back"] = tl;
+    })();
+  </script>
+</template>

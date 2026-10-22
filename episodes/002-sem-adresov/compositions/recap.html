@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07090e; }
+    #r-page { position: absolute; left: 110px; top: 250px; width: 860px; height: 800px; border-radius: 10px; transform-origin: 50% 35%;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px), #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); }
+    .r-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 48px;
+      color: #23305e; white-space: nowrap; }
+    .r-ln b { font-family: "JetBrains Mono", monospace; font-style: normal; font-size: 36px; margin-right: 16px; }
+    #r-head { position: absolute; left: 120px; top: 26px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 28px;
+      letter-spacing: 0.12em; color: #8a2a2a; }
+    #r-svg { position: absolute; left: 0; top: 0; width: 860px; height: 800px; overflow: visible; }
+    #r-dim { position: absolute; inset: 0; background: rgba(5,7,10,0.0); }
+  </style>
+  <div id="root" data-composition-id="recap" data-width="1080" data-height="1920">
+    <div class="scene-bg"></div>
+    <div id="r-page">
+      <div id="r-head">СПИСОК · ТЕТРАДЬ ИЗ АНТРЕСОЛИ</div>
+      <div class="r-ln" id="r-a1" style="top:110px"><b>1.</b>Строителей 12 — кв. 9</div>
+      <div class="r-ln" id="r-a2" style="top:190px"><b>2.</b>пр. Мира 41 — кв. 118</div>
+      <div class="r-ln" id="r-a3" style="top:270px;color:#a3121f"><b>3.</b>Лесная 7 — кв. 47</div>
+      <div class="r-ln" id="r-a4" style="top:350px"><b>4.</b>Садовая 3 — кв. 22</div>
+      <div class="r-ln" id="r-a5" style="top:430px"><b>5.</b>Заречная 15 — кв. 64</div>
+      <div class="r-ln" id="r-a6" style="top:510px"><b>6.</b>Победы 30 — кв. 7</div>
+      <div class="r-ln" id="r-a7" style="top:590px"><b>7.</b>Школьная 2 — кв. 51</div>
+      <svg id="r-svg" viewBox="0 0 860 800">
+        <ellipse cx="400" cy="300" rx="330" ry="52" fill="none" stroke="#e0202f" stroke-width="7" transform="rotate(-2 400 300)" />
+        <path id="r-arr1" d="M30 150 l50 0 m-18 -16 l18 16 l-18 16" stroke="#ffd23f" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="r-arr2" d="M30 230 l50 0 m-18 -16 l18 16 l-18 16" stroke="#ffd23f" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px">
+      <div id="r-chip" class="chip red">часть 2</div>
+    </div>
+    <div class="hud" style="top: 1000px">
+      <div id="r-chip2" class="chip yellow">проверка · адреса 1 и 2</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.recap;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.addr1 - S;
+      const tl = gsap.timeline({ paused: true });
+      // кадр 0: лист уже в кадре, красный круг на «Лесная 7» — хук
+      tl.fromTo("#r-page", { scale: 1.18, rotation: -3, y: 40 }, { scale: 1.0, rotation: -1, y: 0, duration: D, ease: "sine.out" }, 0);
+      tl.fromTo("#r-chip", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#r-a3", { scale: 1 }, { scale: 1.06, transformOrigin: "0% 50%", duration: 0.2, yoyo: true, repeat: 1 }, at("third"));
+      tl.to(["#r-a3", "#r-a4", "#r-a5", "#r-a6", "#r-a7"], { opacity: 0.3, duration: 0.3 }, at("two"));
+      tl.fromTo(["#r-arr1", "#r-arr2"], { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.25, stagger: 0.12, ease: "back.out(2)" }, at("two") + 0.1);
+      tl.fromTo("#r-chip2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25 }, at("two") + 0.3);
+      tl.to("#r-page", { scale: 1.5, y: 260, x: 120, duration: 0.6, ease: "power3.in" }, D - 0.6);
+      window.__timelines["recap"] = tl;
+    })();
+  </script>
+</template>
