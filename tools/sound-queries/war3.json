@@ -1,0 +1,22 @@
+[
+ {"q": "chopin nocturne", "n": 8, "max": 300, "bytes": 30000000},
+ {"q": "chopin prelude", "n": 8, "max": 300, "bytes": 30000000},
+ {"q": "satie gymnopedie", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "satie gnossienne", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "funeral march", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "requiem lacrimosa", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "elegy cello", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "cello suite", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "sad cello", "n": 8, "max": 300, "bytes": 30000000},
+ {"q": "sad strings", "n": 8, "max": 300, "bytes": 30000000},
+ {"q": "lament", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "melancholy piano solo", "n": 8, "max": 300, "bytes": 30000000},
+ {"q": "sorrow", "n": 6, "max": 300, "bytes": 30000000},
+ {"q": "fpv drone", "n": 8, "length": "short"},
+ {"q": "drone buzz", "n": 6, "length": "short"},
+ {"q": "heartbeat", "n": 6, "length": "short"},
+ {"q": "radio static", "n": 4, "length": "short"},
+ {"q": "water drip", "n": 4, "length": "short"},
+ {"q": "paper fold", "n": 4, "length": "short"},
+ {"q": "incoming missile", "n": 6, "length": "short"}
+]
