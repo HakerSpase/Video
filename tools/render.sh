@@ -27,6 +27,6 @@ OUT=out/final.mp4; [[ "$MODE" == "--draft" ]] && OUT=out/draft.mp4
 $HF render -o "$OUT.raw.mp4"
 # финальная упаковка под телефоны: H.264 High 4.1, опорный кадр каждые 2 с, faststart, битрейт до 9 Мбит/с
 ffmpeg -v error -y -i "$OUT.raw.mp4" -c:v libx264 -preset slow -crf 20 -maxrate 9M -bufsize 18M -pix_fmt yuv420p \
-  -profile:v high -level 4.1 -g 60 -keyint_min 30 -c:a aac -b:a 192k -ar 48000 -movflags +faststart "$OUT"
+  -profile:v high -level 4.1 -g 60 -keyint_min 30 -af "loudnorm=I=-16:TP=-1.5:LRA=11" -c:a aac -b:a 192k -ar 48000 -movflags +faststart "$OUT"
 rm -f "$OUT.raw.mp4"
 echo "Готово: $EP/$OUT"
