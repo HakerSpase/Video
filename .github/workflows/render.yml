@@ -30,8 +30,9 @@ jobs:
         with:
           path: |
             ~/.npm
+            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
-          key: hf-${{ env.HF }}-npm
+          key: hf-${{ env.HF }}-npm-v2
       - name: Зависимости
         timeout-minutes: 10
         run: |
@@ -70,8 +71,9 @@ jobs:
         with:
           path: |
             ~/.npm
+            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
-          key: hf-${{ env.HF }}-browser
+          key: hf-${{ env.HF }}-browser-v2
       - name: Зависимости
         timeout-minutes: 10
         run: bash tools/ci-deps.sh browser
@@ -95,8 +97,9 @@ jobs:
         with:
           path: |
             ~/.npm
+            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
-          key: hf-${{ env.HF }}-npm
+          key: hf-${{ env.HF }}-npm-v2
       - name: Зависимости
         timeout-minutes: 10
         run: bash tools/ci-deps.sh 
