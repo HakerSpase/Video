@@ -15,6 +15,8 @@ if [[ "$MODE" != "--draft" ]] && [[ ! -f assets/transcript.json ]] && command -v
   $HF transcribe assets/voice.* --model small --language ru --json >/dev/null || true
 fi
 python3 "$ROOT/tools/build.py" .
+# звуковой дизайн по битам (foley.json): шумы, фоли, «телефонный» голос
+if [[ -f foley.json ]]; then python3 "$ROOT/tools/foley.py" . && python3 "$ROOT/tools/build.py" .; fi
 # своя музыка — assets/music.(mp3|wav…); если её нет, генерируем нагнетающий фон под тайминги эпизода
 if ! ls assets/music.* >/dev/null 2>&1; then
   python3 "$ROOT/tools/score.py" . && python3 "$ROOT/tools/build.py" .

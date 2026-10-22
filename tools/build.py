@@ -351,6 +351,11 @@ def write_index(ep, scenes, words, beats, duration, voice):
             cut_js.append(f'      tl.fromTo("#cut{k}i", {{ opacity: 0.8 }}, {{ opacity: 0, duration: 0.32, ease: "power2.out" }}, {max(0, st - 0.02):.3f});')
 
     audio = []
+    if voice and (ep / "assets" / "voice_fx.wav").exists():
+        voice = ep / "assets" / "voice_fx.wav"  # голос после обработки (tools/foley.py: «телефонные» реплики)
+    if (ep / "assets" / "foley.wav").exists():
+        audio.append(f'      <audio id="foley" class="clip" src="assets/foley.wav" data-start="0" '
+                     f'data-duration="{duration:.3f}" data-track-index="9" data-volume="1"></audio>')
     if voice:
         audio.append(f'      <audio id="voice" class="clip" src="assets/{voice.name}" data-start="0" '
                      f'data-duration="{duration:.3f}" data-track-index="10" data-volume="1"></audio>')

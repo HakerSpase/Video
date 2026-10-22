@@ -1,0 +1,14 @@
+[
+  {"type": "room", "vol": 1.0},
+  {"type": "powerdown", "at": "dark"},
+  {"type": "doors", "at": "doors", "offset": 0.2, "open": true},
+  {"type": "steps", "from": "torches", "to": "look", "people": 40, "dir": "away", "rate": 1.9, "vol": 0.6},
+  {"type": "zap", "at": "volt", "dur": 2.6, "vol": 0.9},
+  {"type": "doors", "at": "shut", "open": false, "vol": 0.9},
+  {"type": "walk", "from": "wall", "to": "hiss", "vol": 0.9},
+  {"type": "phone", "at": "hiss", "to": "look", "vol": 1.0},
+  {"type": "phone_voice", "from": "quote", "to": "look", "offset": -0.1, "end_offset": -0.9},
+  {"type": "clicks", "from": "out", "to": "minute", "n": 40, "vol": 1.0},
+  {"type": "steps", "from": "minute", "to": "counting", "people": 41, "dir": "toward", "sync": true, "rate": 1.7, "offset": 0.8, "vol": 1.2},
+  {"type": "silence", "at": "came", "offset": 0.55, "pre": 0.9}
+]
