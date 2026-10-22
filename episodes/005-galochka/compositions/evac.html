@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    #e-need { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    #e-hud { position: absolute; inset: 0; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 700; color: rgba(255,255,255,0.9); }
+    #e-hud .c { position: absolute; width: 90px; height: 90px; border: 4px solid rgba(255,255,255,0.8); }
+    #e-hud .tl { left: 80px; top: 230px; border-right: 0; border-bottom: 0; }
+    #e-hud .tr { right: 80px; top: 230px; border-left: 0; border-bottom: 0; }
+    #e-hud .bl { left: 80px; bottom: 900px; border-right: 0; border-top: 0; }
+    #e-hud .br { right: 80px; bottom: 900px; border-left: 0; border-top: 0; }
+    #e-rec { position: absolute; left: 110px; top: 250px; font-size: 30px; }
+    #e-rec::before { content: ""; display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #ff2e3e; margin-right: 12px; vertical-align: 1px; }
+    #e-alt { position: absolute; right: 110px; top: 250px; font-size: 30px; text-align: right; line-height: 1.5; }
+    #e-tag { position: absolute; left: 50%; top: 560px; transform: translateX(-50%); }
+    #e-wait { position: absolute; left: 0; right: 0; top: 230px; display: flex; justify-content: center; opacity: 0; }
+    #e-clock { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    #e-nine { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; opacity: 0; font-family: "JetBrains Mono", monospace; }
+    #e-nine b { font-size: 160px; font-weight: 800; color: #fff; text-shadow: 0 8px 40px rgba(0,0,0,0.8); letter-spacing: 0.02em; }
+    #e-nine small { font-size: 28px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,210,63,0.9); }
+  </style>
+  <div id="root" data-composition-id="evac" data-width="1080" data-height="1920">
+    <div id="e-need"><span class="chip red">НУЖНА БОЛЬНИЦА · СЕЙЧАС</span></div>
+    <div id="e-hud">
+      <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+      <div id="e-rec">REC 13:02:51</div>
+      <div id="e-alt">ALT 40 м<br />BAT 63%<br />WHT</div>
+      <div id="e-tag"><span class="chip red">ЭВАКУАЦИЯ · СГОРЕЛА ВЧЕРА</span></div>
+    </div>
+    <div id="e-wait"><span class="chip red">FPV · ВИСИТ НАД ДОРОГОЙ</span></div>
+    <div id="e-clock" class="stamp"><b>13:04</b><small>ДО ТЕМНОТЫ — 9 ЧАСОВ</small></div>
+    <div id="e-nine"><b id="e-n">09:00:00</b><small>ДО ЭВАКУАЦИИ</small></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.evac;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#e-need", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, 0.4);
+      tl.to("#e-need", { opacity: 0, duration: 0.2 }, at("road") - 0.15);
+      tl.set("#e-hud", { opacity: 1 }, at("road"));
+      tl.set("#e-hud", { opacity: 0 }, 101.37 - window.CUES.evac);
+      tl.fromTo("#e-wait", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.25 }, 101.37 - window.CUES.evac + 0.2);
+      tl.to("#e-wait", { opacity: 0, duration: 0.2 }, at("night") - 0.15);
+      tl.fromTo("#e-clock", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at("night") + 0.2);
+      tl.to("#e-clock", { opacity: 0, duration: 0.2 }, at("nine") - 0.15);
+      // девять часов: таймер начинает отсчёт
+      const N0 = at("nine");
+      tl.fromTo("#e-nine", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, N0);
+      const c = { s: 9 * 3600 };
+      tl.to(c, { s: 9 * 3600 - 5, duration: 5, ease: "none", onUpdate: () => {
+        const v = Math.ceil(c.s), h = Math.floor(v / 3600), m = Math.floor((v % 3600) / 60), x = v % 60;
+        document.getElementById("e-n").textContent = [h, m, x].map((u) => String(u).padStart(2, "0")).join(":");
+      } }, N0 + 0.4);
+      tl.to("#e-nine", { opacity: 0, duration: 0.6 }, window.CUES.outro - S - 0.4);
+      window.__timelines["evac"] = tl;
+    })();
+  </script>
+</template>

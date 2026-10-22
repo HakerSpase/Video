@@ -1,0 +1,95 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    /* фото Барсика в телефоне Дениса */
+    #r-photo { position: absolute; left: 230px; top: 190px; width: 620px; padding: 22px 22px 26px; border-radius: 44px; background: #0c0c0e; border: 8px solid #1d1e22;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6); opacity: 0; }
+    #r-photo svg { display: block; width: 100%; border-radius: 26px; }
+    #r-photo b { display: block; text-align: center; font-size: 30px; margin-top: 14px; color: rgba(255,255,255,0.85); }
+    /* детский рисунок на листке в клетку */
+    #r-paper { position: absolute; left: 70px; top: 150px; width: 940px; height: 960px; opacity: 0; transform: rotate(-2.5deg);
+      background-color: #f4f1ea; background-image: linear-gradient(rgba(70,120,200,0.22) 2px, transparent 2px), linear-gradient(90deg, rgba(70,120,200,0.22) 2px, transparent 2px);
+      background-size: 46px 46px; box-shadow: 0 30px 90px rgba(0,0,0,0.7); }
+    #r-paper::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 26px; background: repeating-linear-gradient(#f4f1ea 0 18px, transparent 18px 34px); }
+    #r-paper svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .mk { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <div id="root" data-composition-id="drawing" data-width="1080" data-height="1920">
+    <div id="r-photo">
+      <svg viewBox="0 0 560 560">
+        <defs><radialGradient id="r-bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#6b5a4a" /><stop offset="1" stop-color="#2a221c" /></radialGradient></defs>
+        <rect width="560" height="560" fill="url(#r-bg)" />
+        <rect y="360" width="560" height="200" fill="#8a3e3e" opacity="0.8" />
+        <path d="M0 400 Q140 380 280 405 T560 395 V560 H0Z" fill="#a24a4a" opacity="0.7" />
+        <ellipse cx="300" cy="380" rx="200" ry="110" fill="#d68a40" />
+        <path d="M150 330 Q120 420 200 450" stroke="#a8622a" stroke-width="12" fill="none" />
+        <circle cx="200" cy="300" r="105" fill="#df9446" />
+        <path d="M118 238 L130 150 L188 212Z M282 238 L270 150 L212 212Z" fill="#df9446" />
+        <path d="M128 230 L136 172 L172 214Z M272 230 L264 172 L228 214Z" fill="#f2b8a0" />
+        <path d="M150 300 Q166 318 182 300 M218 300 Q234 318 250 300" stroke="#3a2a1e" stroke-width="6" fill="none" stroke-linecap="round" />
+        <path d="M193 330 L207 330 L200 340Z" fill="#c26a6a" />
+        <path d="M200 340 Q190 356 178 350 M200 340 Q210 356 222 350" stroke="#3a2a1e" stroke-width="4" fill="none" />
+        <path d="M120 330 L60 320 M120 342 L58 350 M280 330 L340 320 M280 342 L342 350" stroke="#f6e6d0" stroke-width="3" />
+        <path d="M330 300 Q350 330 330 360 M380 300 Q400 330 380 360 M430 310 Q450 335 430 365" stroke="#b86a2c" stroke-width="14" fill="none" stroke-linecap="round" />
+        <path d="M480 400 Q560 360 520 300" stroke="#d68a40" stroke-width="34" fill="none" stroke-linecap="round" />
+      </svg>
+      <b>Барсик · дома 🏠</b>
+    </div>
+    <div id="r-paper">
+      <svg viewBox="0 0 940 960">
+        <!-- тело, голова, уши, хвост, лапы — оранжевым почти высохшим фломастером -->
+        <g class="mk" stroke="#f08a24" stroke-width="15">
+          <path class="r-s" d="M300 640 C 260 520, 360 460, 470 470 C 600 480, 660 560, 640 650 C 620 740, 380 760, 320 700 C 300 680, 296 660, 300 640" />
+          <path class="r-s" d="M470 470 C 380 470, 340 380, 380 310 C 420 240, 540 240, 580 310 C 620 380, 570 470, 470 470" />
+          <path class="r-s" d="M392 300 L 380 200 L 450 262" />
+          <path class="r-s" d="M548 300 L 566 200 L 494 262" />
+          <path class="r-s" d="M640 640 C 760 640, 800 520, 720 470" />
+          <path class="r-s" d="M380 720 L 370 780 M 560 730 L 570 785" />
+        </g>
+        <g class="mk" stroke="#2a2a2a" stroke-width="10">
+          <path class="r-s" d="M430 350 L 432 362 M 512 350 L 514 362" />
+          <path class="r-s" d="M440 400 C 455 420, 485 420, 500 400" />
+          <path class="r-s" d="M400 390 L 320 375 M 400 405 L 322 420 M 540 390 L 620 372 M 540 405 L 622 420" />
+        </g>
+        <g class="mk" stroke="#e8463c" stroke-width="12">
+          <path class="r-s" d="M720 250 C 690 210, 640 240, 680 290 L 720 330 L 760 290 C 800 240, 750 210, 720 250" />
+        </g>
+        <!-- «ДЕНИСУ» детской рукой, «И» зеркально -->
+        <g fill="#3a5fb0" font-family="Comic Sans MS, Marker Felt, sans-serif" font-size="96" font-weight="700">
+          <text class="r-t" x="190" y="900">Д</text>
+          <text class="r-t" x="270" y="905">Е</text>
+          <text class="r-t" x="345" y="898">Н</text>
+          <text class="r-t" x="-500" y="904" transform="scale(-1,1)">И</text>
+          <text class="r-t" x="510" y="900">С</text>
+          <text class="r-t" x="585" y="906">У</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.drawing;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#r-photo", { opacity: 0, y: 30, rotation: -2 }, { opacity: 1, y: 0, rotation: 0, duration: 0.35, ease: "power3.out" }, at("tells") + 0.2);
+      tl.to("#r-photo", { opacity: 0, duration: 0.25 }, at("draws") - 0.2);
+
+      // рисунок появляется штрих за штрихом; фломастер то пишет, то нет
+      const P0 = at("marker");
+      tl.fromTo("#r-paper", { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" }, P0 - 0.1);
+      const strokes = document.querySelectorAll("#r-paper .r-s");
+      const span = window.CUES.pocket - window.CUES.marker - 0.9;
+      strokes.forEach((p, i) => {
+        const L = p.getTotalLength();
+        // «сухой» фломастер: в штрихе случайные пропуски
+        const dry = i % 3 === 1;
+        p.style.strokeDasharray = dry ? "38 9 60 14 22 7 " + L : L + " " + L;
+        p.style.opacity = dry ? 0.55 : 0.85;
+        tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: span / strokes.length * 1.4, ease: "none" }, P0 + (i * span) / strokes.length);
+      });
+      document.querySelectorAll("#r-paper .r-t").forEach((t, i) => tl.fromTo(t, { opacity: 0 }, { opacity: 0.9, duration: 0.08 }, P0 + span * 0.6 + i * 0.12));
+      tl.to("#r-paper", { opacity: 0, duration: 0.25 }, window.CUES.pocket - S - 0.15);
+      window.__timelines["drawing"] = tl;
+    })();
+  </script>
+</template>

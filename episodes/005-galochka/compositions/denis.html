@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    #d-card { position: absolute; left: 80px; right: 80px; top: 190px; border-radius: 40px; background: rgba(14,22,33,0.94); border: 2px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6); overflow: hidden; opacity: 0; }
+    #d-top { height: 130px; background: #17212b; display: flex; align-items: center; gap: 22px; padding: 0 34px; }
+    #d-ava { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(#c79a80, #8a6050); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; }
+    #d-top b { display: block; font-size: 36px; }
+    #d-top small { font-size: 24px; color: rgba(255,255,255,0.5); }
+    #d-body { padding: 26px 30px 34px; min-height: 330px; }
+    .d-in { max-width: 640px; width: max-content; padding: 18px 24px 12px; border-radius: 26px 26px 26px 8px; background: #182533; font-size: 31px; line-height: 1.3; margin-bottom: 14px; }
+    .d-out { margin-left: auto; max-width: 640px; width: max-content; padding: 18px 24px 12px; border-radius: 26px 26px 8px 26px; background: #2b5278; font-size: 33px; line-height: 1.3; margin-bottom: 14px; opacity: 0; }
+    .d-in em, .d-out em { display: block; text-align: right; font-style: normal; font-size: 21px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+    .d-out em i { font-style: normal; color: #5fb3ff; font-weight: 800; }
+    #d-typing { font-size: 26px; color: #5fb3ff; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="denis" data-width="1080" data-height="1920">
+    <div id="d-card">
+      <div id="d-top"><div id="d-ava">М</div><div><b>Мама</b><small id="d-st">в сети</small></div></div>
+      <div id="d-body">
+        <div class="d-in">Сынок, ты поел?<em>22:58</em></div>
+        <div class="d-out" id="d-m1">Мам, связи не будет пару дней.<em>23:14 <i id="d-t1">✓</i></em></div>
+        <div class="d-out" id="d-m2">Покорми Барсика 🐈<em>23:14 <i id="d-t2">✓</i></em></div>
+        <div id="d-typing">Мама печатает…</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.denis;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#d-card", { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at("last") + 0.3);
+      tl.fromTo("#d-m1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, at("quote"));
+      tl.fromTo("#d-m2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, at("cat"));
+      // мама прочитала сразу: две синие галочки — последний раз
+      tl.set(["#d-t1", "#d-t2"], { textContent: "✓✓" }, at("cat") + 0.9);
+      tl.to("#d-typing", { opacity: 1, duration: 0.2 }, at("cat") + 1.2);
+      tl.to("#d-card", { opacity: 0, duration: 0.3 }, window.CUES.village - S - 0.35);
+      window.__timelines["denis"] = tl;
+    })();
+  </script>
+</template>

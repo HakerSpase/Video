@@ -1,0 +1,54 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .v-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    /* HUD тепловизора дрона */
+    #v-hud { position: absolute; inset: 0; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 700; color: rgba(255,255,255,0.9); }
+    #v-hud .c { position: absolute; width: 90px; height: 90px; border: 4px solid rgba(255,255,255,0.8); }
+    #v-hud .tl { left: 80px; top: 230px; border-right: 0; border-bottom: 0; }
+    #v-hud .tr { right: 80px; top: 230px; border-left: 0; border-bottom: 0; }
+    #v-hud .bl { left: 80px; bottom: 900px; border-right: 0; border-top: 0; }
+    #v-hud .br { right: 80px; bottom: 900px; border-left: 0; border-top: 0; }
+    #v-x { position: absolute; left: 50%; top: 610px; width: 140px; height: 140px; transform: translate(-50%, -50%); }
+    #v-x::before, #v-x::after { content: ""; position: absolute; background: rgba(255,255,255,0.9); }
+    #v-x::before { left: 0; right: 0; top: 68px; height: 4px; }
+    #v-x::after { top: 0; bottom: 0; left: 68px; width: 4px; }
+    #v-rec { position: absolute; left: 110px; top: 250px; font-size: 30px; }
+    #v-rec::before { content: ""; display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #ff2e3e; margin-right: 12px; vertical-align: 1px; }
+    #v-alt { position: absolute; right: 110px; top: 250px; font-size: 30px; text-align: right; line-height: 1.5; }
+    #v-mode { position: absolute; left: 110px; top: 930px; font-size: 26px; }
+  </style>
+  <div id="root" data-composition-id="village" data-width="1080" data-height="1920">
+    <div class="v-pos stamp" id="v-p1"><b>ПОСЁЛОК</b><small>3 КМ ДО ЛИНИИ</small></div>
+    <div class="v-pos" id="v-p2"><span class="chip red">ЛЭП ОБОРВАНА · 4 МЕС.</span></div>
+    <div class="v-pos" id="v-p3"><span class="chip">КОЛОДЕЦ ПЕРЕСОХ</span></div>
+    <div id="v-hud">
+      <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+      <div id="v-x"></div>
+      <div id="v-rec">REC 00:14:37</div>
+      <div id="v-alt">ALT 28 м<br />BAT 41%<br />WHT</div>
+      <div id="v-mode">ТЕПЛОВИЗОР · ×4</div>
+    </div>
+    <div class="v-pos" id="v-p4"><span class="chip yellow">ДЫМ ИЗ ТРУБЫ — ЗДЕСЬ ЖИВУТ</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.village;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, duration: 0.2 }, b);
+      };
+      show("#v-p1", 0.3, at("nolight") - 0.2);
+      show("#v-p2", at("nolight") + 0.1, at("nowater") - 0.1);
+      show("#v-p3", at("nowater") + 0.1, at("roofs") - 0.1);
+      const H = at("roofs") + 0.95;
+      tl.set("#v-hud", { opacity: 1 }, H);
+      tl.set("#v-hud", { opacity: 0 }, at("people"));
+      tl.fromTo("#v-x", { scale: 1.3 }, { scale: 1, duration: 0.4, ease: "power2.out" }, H);
+      show("#v-p4", at("people") + 0.3, window.CUES.sonya - S - 0.15);
+      window.__timelines["village"] = tl;
+    })();
+  </script>
+</template>

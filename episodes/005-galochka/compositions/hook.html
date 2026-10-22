@@ -1,0 +1,123 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    #h-stamp { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    /* телефон крупно */
+    #h-phone { position: absolute; left: 255px; top: 150px; width: 570px; height: 1060px; border-radius: 72px; background: #050506;
+      border: 10px solid #1d1e22; box-shadow: 0 40px 90px rgba(0,0,0,0.7), inset 0 0 0 2px #2c2d33; overflow: hidden; opacity: 0; }
+    #h-scr { position: absolute; inset: 0; background: radial-gradient(120% 80% at 50% 20%, #1a2233 0%, #07090f 70%); opacity: 0; }
+    #h-crack { position: absolute; inset: 0; }
+    #h-bat { position: absolute; left: 50%; top: 360px; transform: translateX(-50%); width: 150px; height: 260px; border: 8px solid #e8e8e8; border-radius: 26px; opacity: 0; }
+    #h-bat::before { content: ""; position: absolute; left: 45px; top: -26px; width: 44px; height: 16px; background: #e8e8e8; border-radius: 6px 6px 0 0; }
+    #h-bat i { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 8px; background: #ff3b30; border-radius: 6px; }
+    #h-bat b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 90px; color: #fff; }
+    #h-pct { position: absolute; left: 0; right: 0; top: 660px; text-align: center; font-size: 40px; font-weight: 800; opacity: 0; }
+    #h-time { position: absolute; left: 0; right: 0; top: 120px; text-align: center; font-size: 120px; font-weight: 300; letter-spacing: -2px; opacity: 0; }
+    #h-date { position: absolute; left: 0; right: 0; top: 270px; text-align: center; font-size: 30px; font-weight: 600; opacity: 0; color: rgba(255,255,255,0.75); }
+    #h-notes { position: absolute; left: 22px; right: 22px; top: 340px; height: 700px; overflow: hidden; }
+    .h-n { position: absolute; left: 0; right: 0; height: 128px; border-radius: 30px; background: rgba(60,64,74,0.82); backdrop-filter: blur(8px);
+      padding: 18px 24px; box-sizing: border-box; opacity: 0; }
+    .h-n .ap { font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 0.05em; }
+    .h-n .ap::before { content: ""; display: inline-block; width: 26px; height: 26px; border-radius: 7px; background: #2aabee; vertical-align: -6px; margin-right: 10px; }
+    .h-n b { display: block; font-size: 27px; margin-top: 6px; }
+    .h-n span { display: block; font-size: 25px; color: rgba(255,255,255,0.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #h-count { position: absolute; left: 50%; top: 190px; transform: translateX(-50%); opacity: 0; }
+    #h-count .chip { font-size: 40px; }
+    /* чат мамы */
+    #h-chat { position: absolute; left: 0; right: 0; top: 0; height: 1920px; background: #0e1621; opacity: 0; }
+    #h-chat-top { position: absolute; left: 0; right: 0; top: 0; height: 330px; background: #17212b; display: flex; align-items: flex-end; padding: 0 46px 34px; gap: 26px; box-sizing: border-box; z-index: 2; }
+    #h-ava { width: 108px; height: 108px; border-radius: 50%; background: linear-gradient(#6f8f5a, #3f5a37); display: flex; align-items: center; justify-content: center; font-size: 50px; font-weight: 800; }
+    #h-chat-top b { display: block; font-size: 44px; }
+    #h-chat-top small { font-size: 28px; color: rgba(255,255,255,0.5); }
+    #h-feed { position: absolute; left: 0; right: 0; top: 330px; }
+    .h-day { margin: 34px auto 18px; width: max-content; padding: 8px 22px; border-radius: 20px; background: rgba(255,255,255,0.1); font-size: 24px; font-weight: 700; color: rgba(255,255,255,0.75); }
+    .h-msg { margin: 10px 40px 10px auto; max-width: 760px; width: max-content; padding: 22px 28px 16px; border-radius: 30px 30px 8px 30px; background: #2b5278; font-size: 34px; line-height: 1.3; }
+    .h-msg em { display: block; text-align: right; font-style: normal; font-size: 22px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+    .h-msg em::after { content: " ✓"; color: rgba(255,255,255,0.55); font-weight: 800; }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <div id="h-stamp" class="stamp"><b>8 МЕСЯЦЕВ СПУСТЯ</b><small>КУХНЯ · 23:47</small></div>
+    <div id="h-phone">
+      <div id="h-scr"></div>
+      <div id="h-time">23:51</div>
+      <div id="h-date">вторник, 14 октября</div>
+      <div id="h-bat"><i></i><b>⚡</b></div>
+      <div id="h-pct">1%</div>
+      <div id="h-notes"></div>
+      <svg id="h-crack" viewBox="0 0 570 1060"><g stroke="rgba(255,255,255,0.55)" stroke-width="2" fill="none">
+        <path d="M420 0 L380 140 L410 230 L330 380 L360 470"/><path d="M380 140 L470 210 L570 190"/><path d="M330 380 L230 420 L120 400"/><path d="M410 230 L520 300"/></g></svg>
+    </div>
+    <div id="h-count"><span class="chip red" id="h-count-t">НЕПРОЧИТАННЫХ: 0</span></div>
+    <div id="h-chat">
+      <div id="h-chat-top"><div id="h-ava">Д</div><div><b>Денис 💙</b><small>был(а) давно</small></div></div>
+      <div id="h-feed"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.hook;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (id) => document.getElementById(id);
+
+      tl.fromTo("#h-stamp", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.25);
+      tl.to("#h-stamp", { opacity: 0, duration: 0.25 }, at("charge") - 0.3);
+
+      // телефон: чёрный экран → зарядка → экран блокировки
+      const P0 = at("charge");
+      tl.fromTo("#h-phone", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, P0);
+      tl.to("#h-bat", { opacity: 1, duration: 0.2 }, P0 + 0.45);
+      tl.to("#h-pct", { opacity: 1, duration: 0.2 }, P0 + 0.6);
+      tl.to(["#h-bat", "#h-pct"], { opacity: 0, duration: 0.2 }, at("vibe") - 0.25);
+      tl.to("#h-scr", { opacity: 1, duration: 0.3 }, at("vibe") - 0.3);
+      tl.to(["#h-time", "#h-date"], { opacity: 1, duration: 0.3 }, at("vibe") - 0.2);
+
+      // уведомления сыплются, телефон вибрирует
+      const texts = [
+        "Сынок, ты где? Ответь, как сможешь", "Барсик опять спит у двери", "Денис, хоть точку поставь", "Позвони маме",
+        "Мне звонили. Сказали — без вести. Я не верю", "С днём рождения, сынок. Я испекла пирог", "Я каждый день пишу. Вдруг прочитаешь",
+        "Сегодня снег выпал", "Спокойной ночи, мой хороший", "Ответь мне", "Я жду", "Сынок",
+      ];
+      const notes = $("h-notes");
+      const N = 12, V = at("vibe"), V1 = at("vibe") + 1.85;
+      for (let i = 0; i < N; i++) {
+        const el = document.createElement("div");
+        el.className = "h-n";
+        el.innerHTML = '<div class="ap">TELEGRAM · СЕЙЧАС</div><b>Мама</b><span>' + texts[i % texts.length] + "</span>";
+        notes.appendChild(el);
+        const t = V + i * ((V1 - V) / N);
+        // новые сверху, старые съезжают вниз
+        tl.fromTo(el, { opacity: 0, y: -60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.12, ease: "power2.out" }, t);
+        for (let k = i + 1; k < N; k++) tl.to(el, { y: (k - i) * 140, duration: 0.1, ease: "power2.out" }, V + k * ((V1 - V) / N));
+      }
+      for (let k = 0; k < 26; k++) tl.to("#h-phone", { x: k % 2 ? -7 : 7, rotation: k % 2 ? -0.6 : 0.6, duration: 0.035, ease: "none" }, V + k * 0.07);
+      tl.to("#h-phone", { x: 0, rotation: 0, duration: 0.05 }, V + 26 * 0.07);
+      tl.to("#h-phone", { opacity: 0, scale: 1.04, duration: 0.2 }, V1);
+      // счётчик непрочитанных до 214
+      const cnt = { n: 0 };
+      tl.to("#h-count", { opacity: 1, duration: 0.2 }, V + 0.1);
+      tl.to(cnt, { n: 214, duration: at("hers") - V - 0.2, ease: "power1.in", onUpdate: () => ($("h-count-t").textContent = "ДОСТАВЛЕНО: " + Math.round(cnt.n)) }, V + 0.1);
+      tl.to("#h-count", { opacity: 0, duration: 0.2 }, at("hers") + 0.6);
+
+      // её чат: всё с одной серой галочкой
+      const feed = $("h-feed");
+      const msgs = [
+        ["ДЕНЬ 3", "Сынок, ты как? Позвони, как сможешь", "21:04"],
+        ["ДЕНЬ 12", "Барсик спит у двери. Ждёт тебя", "22:31"],
+        ["ДЕНЬ 37", "Денис, ответь. Хоть точку поставь", "23:58"],
+        ["ДЕНЬ 61", "Мне звонили из части. Сказали — без вести. Я не верю", "03:12"],
+        ["ДЕНЬ 118", "С днём рождения, сынок. Тебе 23. Я испекла пирог", "20:15"],
+        ["ДЕНЬ 190", "Я каждый день пишу. Вдруг ты прочитаешь", "23:40"],
+        ["ДЕНЬ 214", "Спокойной ночи, мой хороший", "23:46"],
+      ];
+      msgs.forEach(([d, m, tm]) => {
+        feed.insertAdjacentHTML("beforeend", '<div class="h-day">' + d + '</div><div class="h-msg">' + m + "<em>" + tm + "</em></div>");
+      });
+      const C0 = at("none");
+      tl.to("#h-chat", { opacity: 1, duration: 0.25 }, C0);
+      tl.fromTo("#h-feed", { y: 40 }, { y: -560, duration: window.CUES.denis - window.CUES.hook - C0, ease: "sine.inOut" }, C0);
+
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

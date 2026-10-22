@@ -1,0 +1,27 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    #s-mem { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .s-bar { position: absolute; left: 0; right: 0; height: 150px; background: #000; opacity: 0; }
+    #s-b1 { top: 0; }
+    #s-b2 { bottom: 0; }
+  </style>
+  <div id="root" data-composition-id="sonya" data-width="1080" data-height="1920">
+    <div class="s-bar" id="s-b1"></div>
+    <div class="s-bar" id="s-b2"></div>
+    <div id="s-mem" class="stamp"><b>ВЕСНА</b><small>ОСТАНОВКА «ШКОЛА»</small></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.sonya;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      // воспоминание: кинорамка и штамп
+      tl.set(".s-bar", { opacity: 1 }, at("mother"));
+      tl.set(".s-bar", { opacity: 0 }, at("nowhere"));
+      tl.fromTo("#s-mem", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at("mother") + 0.15);
+      tl.to("#s-mem", { opacity: 0, duration: 0.2 }, at("nowhere") - 0.2);
+      window.__timelines["sonya"] = tl;
+    })();
+  </script>
+</template>

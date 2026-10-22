@@ -406,6 +406,8 @@ def write_index(ep, scenes, words, beats, duration, voice):
     <script src="assets/lib/three.min.js"></script>
     <script src="assets/lib/hall3d.js"></script>
     <script src="assets/lib/tunnel3d.js"></script>
+    <script src="assets/lib/people3d.js"></script>
+    <script src="assets/lib/war3d.js"></script>
     <link rel="stylesheet" href="assets/lib/kit.css" />
     <style>
       * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -463,7 +465,7 @@ def main():
     ep = Path(sys.argv[1]).resolve()
     (ep / "assets" / "lib").mkdir(parents=True, exist_ok=True)
     (ep / "compositions").mkdir(exist_ok=True)
-    for f in ("gsap.min.js", "kit.css", "grain.png", "iso.js", "fx.js", "grunge.png", "three.min.js", "hall3d.js", "tunnel3d.js"):
+    for f in ("gsap.min.js", "kit.css", "grain.png", "iso.js", "fx.js", "grunge.png", "three.min.js", "hall3d.js", "tunnel3d.js", "people3d.js", "war3d.js"):
         shutil.copyfile(ROOT / "lib" / f, ep / "assets" / "lib" / f)
 
     words, scenes, beats = parse_script(ep / "script.txt")
