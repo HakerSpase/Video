@@ -693,7 +693,11 @@ def main():
         mus = mus + np.stack([tb.L * duck, tb.R * duck], axis=1)
     if muf.any():
         mus *= (1 - 0.95 * muf)[:, None]
-    norm(ep, "music", mus, -19)
+    if "music_gain" in spec:
+        # фиксированный уровень: громкость кусков задаётся в партитуре и не перенормируется
+        write_wav(ep / "assets" / "music.wav", mus * spec["music_gain"])
+    else:
+        norm(ep, "music", mus, spec.get("music_lufs", -19))
     print(f"warsound: {dur:.1f} c, событий: {len(spec['events'])}")
 
 

@@ -27,3 +27,8 @@ bricks_scrape cc0 freesound https://freesound.org/people/Alexbuk/sounds/391764 |
 rubble_steps cc0 freesound https://freesound.org/people/martian/sounds/207372 | rubble walk rocky grit cave footsteps.wav | martian
 breathing cc0 freesound https://freesound.org/people/casiba842/sounds/554307 | Scared Male Heavy Breathing | casiba842
 impacts cc0 freesound https://freesound.org/people/bruno.auzet/sounds/525024 | impacts.wav | bruno.auzet
+music_piano cc0 freesound https://freesound.org/people/guitarman213/sounds/707899 | Sad Sorrowful Piano | guitarman213
+music_strings cc0 freesound https://freesound.org/people/BuytheField/sounds/414442 | Sweeping Sad Strings.wav | BuytheField
+heartbeat cc0 freesound https://freesound.org/people/loudernoises/sounds/332820 | heartbeat-80bpm.wav | loudernoises
+drip cc0 freesound https://freesound.org/people/mlsprovideos/sounds/135150 | WATER DRIPPING ECHO.wav | mlsprovideos
+paper cc0 freesound https://freesound.org/people/allcaps99/sounds/97974 | folding paper.wav | allcaps99
