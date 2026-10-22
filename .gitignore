@@ -10,3 +10,4 @@ episodes/*/assets/bed.wav
 episodes/*/out/*.mp4
 episodes/*/out/work-*/
 episodes/*/out/.*
+episodes/*/assets/music.wav

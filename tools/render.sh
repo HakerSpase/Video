@@ -15,6 +15,10 @@ if [[ "$MODE" != "--draft" ]] && [[ ! -f assets/transcript.json ]] && command -v
   $HF transcribe assets/voice.* --model small --language ru --json >/dev/null || true
 fi
 python3 "$ROOT/tools/build.py" .
+# своя музыка — assets/music.(mp3|wav…); если её нет, генерируем нагнетающий фон под тайминги эпизода
+if ! ls assets/music.* >/dev/null 2>&1; then
+  python3 "$ROOT/tools/score.py" . && python3 "$ROOT/tools/build.py" .
+fi
 $HF check --json > .hyperframes/check.json 2>/dev/null || true
 mkdir -p out
 OUT=out/final.mp4; [[ "$MODE" == "--draft" ]] && OUT=out/draft.mp4

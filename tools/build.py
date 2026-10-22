@@ -357,7 +357,7 @@ def write_index(ep, scenes, words, beats, duration, voice):
     music = next((ep / "assets" / f"music{e}" for e in VOICE_EXT if (ep / "assets" / f"music{e}").exists()), None)
     if music:
         audio.append(f'      <audio id="music" class="clip" src="assets/{music.name}" data-start="0" '
-                     f'data-duration="{duration:.3f}" data-track-index="11" data-volume="0.14" '
+                     f'data-duration="{duration:.3f}" data-track-index="11" data-volume="{0.55 if music.name == "music.wav" else 0.14}" '
                      f'data-fade-in="1" data-fade-out="2"></audio>')
     else:
         make_bed(ep, duration)
