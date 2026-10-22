@@ -1,68 +1,797 @@
 {
-  "ambience": [
-    ["kitchen", 0, "denis"],
-    ["dusk", "denis", "cat"],
-    ["kitchen", "cat", "village"],
-    ["village", "village", "mother"],
-    ["flashback", "mother", "nowhere"],
-    ["village", "nowhere", 95.62],
-    ["kitchen", 95.62, "evac"],
-    ["basement", "evac", "road"],
-    ["village", "road", "night"],
-    ["basement", "night", "_duration"]
+ "ambience": [],
+ "beds": [
+  [
+   0,
+   "denis",
+   "assets/sfx/clock.mp3",
+   0.55,
+   {
+    "fade": 0.05
+   }
   ],
-  "events": [
-    ["plug", "charge"],
-    ["phone_vibes", "vibe", 16.08],
-    ["rustle", "call", 0.9],
-    ["typing", 24.24, 25.97],
-    ["send", "quote"],
-    ["send", "cat"],
-    ["bell", 28.97],
-    ["steps", "village", 38.17, 1.7, 5],
-    ["wire", "nolight+0.2"],
-    ["well", "nowater+0.3"],
-    ["drone_pass", "roofs", 37.40],
-    ["thermal", 37.28, "people"],
-    ["drone_hover", 37.28, "people", 0.45],
-    ["gate", 39.34],
-    ["birds", "drawing", 68.31],
-    ["steps", "drawing", "choco", 2.6, 1, 1],
-    ["wrapper", "choco+0.25"],
-    ["scribble", "draws", 61.79],
-    ["scribble", "marker", 64.50],
-    ["rustle", "pocket", 0.8],
-    ["velcro", "pocket+0.95"],
-    ["incoming", 69.66, 71.98],
-    ["impact", 71.98],
-    ["collapse", 70.6],
-    ["dig", "hands", "hears"],
-    ["breath", "hands", "hears", 0.62],
-    ["beam", "beam+0.15"],
-    ["drone_hover", "road", 101.62, 0.5],
-    ["thermal", "road", 101.62],
-    ["drone_hover", 101.62, "night", 1.0],
-    ["countdown", "nine+0.4", "outro"],
-    ["last_vibe", 111.23]
+  [
+   0,
+   "denis",
+   "assets/sfx/kitchen_tone.mp3",
+   0.3,
+   {
+    "fade": 0.05
+   }
   ],
-  "muffle": [72.02, 77.21],
-  "music": [
-    ["sad", 0.6, 17.38, {"vel": 0.9}],
-    ["sad", "denis", 30.58, {"vel": 0.75, "beat": 1.05}],
-    ["drone", "village", "mother", {"notes": ["D2", "A2"], "vol": 0.9}],
-    ["sad", 33.62, "mother", {"vel": 0.55, "sparse": true, "pad": false, "beat": 1.1}],
-    ["note", "mother", "mother", {"n": "F3", "n2": "C4", "vel": 0.7}],
-    ["swell", "mother", "nowhere", {"notes": ["F3", "C4", "A4"], "vol": 0.5}],
-    ["sad", "nowhere", "drawing", {"vel": 0.6, "pad": false}],
-    ["warm", "drawing", 68.20, {"vel": 0.85, "beat": 0.9}],
-    ["drone", 68.60, 71.84, {"notes": ["D2"], "vol": 0.7}],
-    ["drone", "hands", "found", {"notes": ["D2", "A2"], "vol": 0.9}],
-    ["pulse", "hears", "found", {"period": 1.0}],
-    ["note", "granny", "granny", {"n": "D2", "n2": "A2", "vel": 1.0}],
-    ["swell", "found", "evac", {"notes": ["D3", "A3", "F4", "D5"], "vol": 1.0}],
-    ["note", "waits", "waits", {"n": "A4", "n2": "D5", "vel": 0.55}],
-    ["sad", "evac", "outro", {"vel": 0.85, "beat": 1.05}],
-    ["swell", "night", "outro", {"notes": ["Bb2", "F3", "D4", "A4"], "vol": 0.8}],
-    ["note", "outro", "outro", {"n": "D3", "n2": "F3", "vel": 0.8}]
+  [
+   "denis",
+   "cat",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "fade": 0.1
+   }
+  ],
+  [
+   "denis",
+   "cat",
+   "assets/sfx/distant_booms.mp3",
+   0.4,
+   {
+    "lp": 900,
+    "fade": 0.1,
+    "wet": 0.3
+   }
+  ],
+  [
+   "cat",
+   "village",
+   "assets/sfx/clock.mp3",
+   0.5,
+   {
+    "start": 10,
+    "fade": 0.05
+   }
+  ],
+  [
+   "cat",
+   "village",
+   "assets/sfx/kitchen_tone.mp3",
+   0.25,
+   {
+    "fade": 0.05
+   }
+  ],
+  [
+   "village",
+   "mother",
+   "assets/sfx/wind.mp3",
+   0.5,
+   {
+    "start": 12,
+    "fade": 0.1
+   }
+  ],
+  [
+   "village",
+   "mother",
+   "assets/sfx/wind_low.mp3",
+   0.45,
+   {
+    "fade": 0.1
+   }
+  ],
+  [
+   "village",
+   "mother",
+   "assets/sfx/distant_booms.mp3",
+   0.45,
+   {
+    "start": 20,
+    "lp": 1200,
+    "fade": 0.1,
+    "wet": 0.3
+   }
+  ],
+  [
+   "mother",
+   "nowhere",
+   "assets/sfx/wind_low.mp3",
+   0.35,
+   {
+    "start": 20,
+    "lp": 300,
+    "fade": 0.3,
+    "wet": 0.5
+   }
+  ],
+  [
+   "nowhere",
+   71.98,
+   "assets/sfx/wind.mp3",
+   0.42,
+   {
+    "start": 30,
+    "fade": 0.1
+   }
+  ],
+  [
+   "nowhere",
+   71.98,
+   "assets/sfx/distant_booms.mp3",
+   0.32,
+   {
+    "start": 5,
+    "lp": 900,
+    "fade": 0.2,
+    "wet": 0.3
+   }
+  ],
+  [
+   "drawing",
+   68.3,
+   "assets/sfx/birds_morning.mp3",
+   0.22,
+   {
+    "fade": 0.6
+   }
+  ],
+  [
+   77.2,
+   96.06,
+   "assets/sfx/wind.mp3",
+   0.4,
+   {
+    "start": 40,
+    "fade": 0.8
+   }
+  ],
+  [
+   77.2,
+   96.06,
+   "assets/sfx/distant_booms.mp3",
+   0.35,
+   {
+    "start": 30,
+    "lp": 900,
+    "fade": 0.8,
+    "wet": 0.3
+   }
+  ],
+  [
+   96.06,
+   "evac",
+   "assets/sfx/clock.mp3",
+   0.5,
+   {
+    "start": 30,
+    "fade": 0.05
+   }
+  ],
+  [
+   "evac",
+   "road",
+   "assets/sfx/basement_tone.mp3",
+   0.5,
+   {
+    "fade": 0.1
+   }
+  ],
+  [
+   "evac",
+   "road",
+   "assets/sfx/distant_booms.mp3",
+   0.5,
+   {
+    "start": 10,
+    "lp": 220,
+    "fade": 0.1
+   }
+  ],
+  [
+   "road",
+   "night",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "start": 50,
+    "fade": 0.1
+   }
+  ],
+  [
+   "night",
+   "_duration",
+   "assets/sfx/basement_tone.mp3",
+   0.5,
+   {
+    "start": 10,
+    "fade": 0.1
+   }
+  ],
+  [
+   "night",
+   "_duration",
+   "assets/sfx/distant_booms.mp3",
+   0.45,
+   {
+    "start": 40,
+    "lp": 220,
+    "fade": 0.3
+   }
+  ],
+  [
+   "nine",
+   "outro",
+   "assets/sfx/clock.mp3",
+   0.75,
+   {
+    "start": 40,
+    "fade": 0.05
+   }
   ]
+ ],
+ "samples": [
+  [
+   "vibe",
+   "assets/sfx/vibrate.mp3",
+   0.75,
+   {
+    "start": 21.2,
+    "dur": 3.1
+   }
+  ],
+  [
+   "vibe+3.0",
+   "assets/sfx/vibrate.mp3",
+   0.75,
+   {
+    "start": 28.3,
+    "dur": 4.4
+   }
+  ],
+  [
+   "vibe+7.2",
+   "assets/sfx/vibrate.mp3",
+   0.6,
+   {
+    "start": 37.0,
+    "dur": 0.8
+   }
+  ],
+  [
+   "village",
+   "assets/sfx/steps_soldiers.mp3",
+   0.45,
+   {
+    "start": 2.5,
+    "dur": 7.5,
+    "fade_in": 0.3,
+    "fade_out": 1.0
+   }
+  ],
+  [
+   "line+3.5",
+   "assets/sfx/steps_soldiers.mp3",
+   0.35,
+   {
+    "start": 2.5,
+    "dur": 3.5,
+    "fade_in": 0.3,
+    "fade_out": 1.0
+   }
+  ],
+  [
+   "village+0.6",
+   "assets/sfx/crows.mp3",
+   0.28,
+   {
+    "start": 7.4,
+    "dur": 5.0,
+    "fade_out": 1.0,
+    "wet": 0.5
+   }
+  ],
+  [
+   "nolight+0.15",
+   "assets/sfx/wire_creak.mp3",
+   0.4,
+   {
+    "start": 12.8,
+    "dur": 2.4,
+    "lp": 3500,
+    "wet": 0.4
+   }
+  ],
+  [
+   "nowater+0.3",
+   "assets/sfx/wire_creak.mp3",
+   0.2,
+   {
+    "start": 0.4,
+    "dur": 1.6,
+    "hp": 400,
+    "wet": 0.5
+   }
+  ],
+  [
+   "roofs-0.2",
+   "assets/sfx/drone.mp3",
+   0.7,
+   {
+    "start": 19.5,
+    "dur": 3.0,
+    "fade_in": 0.4,
+    "fade_out": 0.5
+   }
+  ],
+  [
+   37.28,
+   "assets/sfx/drone.mp3",
+   0.4,
+   {
+    "start": 4.0,
+    "dur": 1.0,
+    "fade_in": 0.1,
+    "fade_out": 0.3,
+    "hp": 300
+   }
+  ],
+  [
+   "people+1.2",
+   "assets/sfx/crows.mp3",
+   0.2,
+   {
+    "start": 28.1,
+    "dur": 2.4,
+    "wet": 0.6
+   }
+  ],
+  [
+   "gates+0.55",
+   "assets/sfx/gate.mp3",
+   0.6,
+   {
+    "start": 0.2,
+    "dur": 3.4,
+    "wet": 0.3
+   }
+  ],
+  [
+   "drawing",
+   "assets/sfx/steps_light.mp3",
+   0.5,
+   {
+    "start": 4.1,
+    "dur": 2.6,
+    "fade_out": 0.4
+   }
+  ],
+  [
+   "choco+0.2",
+   "assets/sfx/wrapper.mp3",
+   0.55,
+   {
+    "start": 3.5,
+    "dur": 0.7
+   }
+  ],
+  [
+   "choco+1.0",
+   "assets/sfx/wrapper.mp3",
+   0.45,
+   {
+    "start": 7.5,
+    "dur": 0.5
+   }
+  ],
+  [
+   "draws",
+   "assets/sfx/marker.mp3",
+   0.55,
+   {
+    "start": 6.2,
+    "dur": 2.0
+   }
+  ],
+  [
+   "marker",
+   "assets/sfx/marker.mp3",
+   0.55,
+   {
+    "start": 8.3,
+    "dur": 2.3
+   }
+  ],
+  [
+   "pocket+0.95",
+   "assets/sfx/velcro.mp3",
+   0.4,
+   {
+    "start": 2.6,
+    "dur": 0.7
+   }
+  ],
+  [
+   68.23,
+   "assets/sfx/incoming.mp3",
+   0.8,
+   {
+    "start": 21.4,
+    "dur": 3.0,
+    "rate": 0.8,
+    "lp": 2500,
+    "fade_in": 1.6,
+    "fade_out": 0.05,
+    "wet": 0.3
+   }
+  ],
+  [
+   71.98,
+   "assets/sfx/blast_main.mp3",
+   1.0,
+   {
+    "start": 0.1,
+    "dur": 7.5,
+    "fade_out": 2.0,
+    "wet": 0.4
+   }
+  ],
+  [
+   71.95,
+   "assets/sfx/blast_cine.mp3",
+   0.75,
+   {
+    "start": 5.95,
+    "dur": 5.0,
+    "fade_out": 2.0,
+    "wet": 0.4
+   }
+  ],
+  [
+   71.98,
+   "assets/sfx/blast_low.mp3",
+   0.9,
+   {
+    "start": 0.0,
+    "dur": 9.0,
+    "lp": 260,
+    "fade_out": 3.0
+   }
+  ],
+  [
+   72.3,
+   "assets/sfx/debris.mp3",
+   0.5,
+   {
+    "start": 13.15,
+    "dur": 6.5,
+    "fade_out": 2.0,
+    "wet": 0.3
+   }
+  ],
+  [
+   72.8,
+   "assets/sfx/collapse.mp3",
+   0.7,
+   {
+    "start": 15.0,
+    "dur": 8.0,
+    "fade_in": 0.3,
+    "fade_out": 2.5,
+    "wet": 0.3
+   }
+  ],
+  [
+   72.05,
+   "assets/sfx/ringing.mp3",
+   0.4,
+   {
+    "start": 2.0,
+    "dur": 7.5,
+    "fade_in": 0.05,
+    "fade_out": 3.0
+   }
+  ],
+  [
+   "hands",
+   "assets/sfx/bricks_scrape.mp3",
+   0.65,
+   {
+    "start": 0.45,
+    "dur": 3.7,
+    "fade_out": 0.5
+   }
+  ],
+  [
+   "hands",
+   "assets/sfx/rubble_steps.mp3",
+   0.45,
+   {
+    "start": 9.5,
+    "dur": 3.7,
+    "fade_out": 0.5
+   }
+  ],
+  [
+   "hands",
+   "assets/sfx/breathing.mp3",
+   0.35,
+   {
+    "start": 0.8,
+    "dur": 3.7,
+    "fade_out": 0.6
+   }
+  ],
+  [
+   "beam+0.15",
+   "assets/sfx/impacts.mp3",
+   0.4,
+   {
+    "start": 11.5,
+    "dur": 1.2
+   }
+  ],
+  [
+   "beam+0.2",
+   "assets/sfx/debris.mp3",
+   0.35,
+   {
+    "start": 2.9,
+    "dur": 0.8
+   }
+  ],
+  [
+   "road",
+   "assets/sfx/drone.mp3",
+   0.35,
+   {
+    "start": 24.0,
+    "dur": 1.3,
+    "fade_in": 0.3,
+    "hp": 300
+   }
+  ],
+  [
+   101.62,
+   "assets/sfx/drone.mp3",
+   0.6,
+   {
+    "start": 20.5,
+    "dur": 1.2,
+    "fade_in": 0.2,
+    "fade_out": 0.3
+   }
+  ],
+  [
+   111.23,
+   "assets/sfx/vibrate.mp3",
+   0.45,
+   {
+    "start": 3.0,
+    "dur": 1.0
+   }
+  ]
+ ],
+ "events": [
+  [
+   "plug",
+   "charge"
+  ],
+  [
+   "typing",
+   24.24,
+   25.97
+  ],
+  [
+   "send",
+   "quote"
+  ],
+  [
+   "send",
+   "cat"
+  ],
+  [
+   "bell",
+   28.97
+  ],
+  [
+   "thermal",
+   37.28,
+   "people"
+  ],
+  [
+   "rustle",
+   "pocket",
+   0.8
+  ]
+ ],
+ "duck": [
+  [
+   "hears",
+   "found",
+   0.25
+  ],
+  [
+   84.91,
+   87.0,
+   0.15
+  ],
+  [
+   "waits",
+   "waits+1.7",
+   0.35
+  ]
+ ],
+ "muffle": [
+  72.02,
+  77.21
+ ],
+ "ring_synth": 0.3,
+ "music": [
+  [
+   "sad",
+   0.6,
+   17.38,
+   {
+    "vel": 0.85
+   }
+  ],
+  [
+   "sad",
+   "denis",
+   30.58,
+   {
+    "vel": 0.7,
+    "beat": 1.1
+   }
+  ],
+  [
+   "drone",
+   "village",
+   "mother",
+   {
+    "notes": [
+     "D2",
+     "A2"
+    ],
+    "vol": 0.8
+   }
+  ],
+  [
+   "note",
+   "mother",
+   "mother",
+   {
+    "n": "D3",
+    "n2": "F3",
+    "vel": 0.6
+   }
+  ],
+  [
+   "swell",
+   "mother",
+   "nowhere",
+   {
+    "notes": [
+     "D3",
+     "F3",
+     "A3"
+    ],
+    "vol": 0.45
+   }
+  ],
+  [
+   "sad",
+   "nowhere",
+   68.2,
+   {
+    "vel": 0.6,
+    "beat": 1.2,
+    "pad_vol": 0.8
+   }
+  ],
+  [
+   "drone",
+   68.6,
+   71.84,
+   {
+    "notes": [
+     "D2"
+    ],
+    "vol": 0.6
+   }
+  ],
+  [
+   "drone",
+   "hands",
+   "found",
+   {
+    "notes": [
+     "D2",
+     "A2"
+    ],
+    "vol": 0.8
+   }
+  ],
+  [
+   "pulse",
+   "hears",
+   "found",
+   {
+    "period": 1.0
+   }
+  ],
+  [
+   "note",
+   "granny",
+   "granny",
+   {
+    "n": "D2",
+    "n2": "A2",
+    "vel": 1.0
+   }
+  ],
+  [
+   "swell",
+   "found",
+   "evac",
+   {
+    "notes": [
+     "D3",
+     "A3",
+     "F4",
+     "D5"
+    ],
+    "vol": 0.9
+   }
+  ],
+  [
+   "note",
+   "waits",
+   "waits",
+   {
+    "n": "A4",
+    "n2": "D5",
+    "vel": 0.5
+   }
+  ],
+  [
+   "sad",
+   "evac",
+   "outro",
+   {
+    "vel": 0.8,
+    "beat": 1.1
+   }
+  ],
+  [
+   "swell",
+   "night",
+   "outro",
+   {
+    "notes": [
+     "Bb2",
+     "F3",
+     "D4",
+     "A4"
+    ],
+    "vol": 0.75
+   }
+  ],
+  [
+   "note",
+   "outro",
+   "outro",
+   {
+    "n": "D3",
+    "n2": "F3",
+    "vel": 0.8
+   }
+  ]
+ ],
+ "foley_duck": 0.6,
+ "duck_protect": [
+  [
+   71.8,
+   73.3
+  ]
+ ],
+ "foley_lufs": -25,
+ "muffle_gain": 0.5
 }

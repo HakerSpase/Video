@@ -114,7 +114,10 @@ def load_sample(ep, rel, start=0.0, dur=None, rate=1.0):
         cmd += ["-af", f"asetrate={int(SR * rate)},aresample={SR}"]
     cmd += ["-ac", "2", "-ar", str(SR), "-f", "f32le", "-"]
     raw = subprocess.run(cmd, capture_output=True, check=True).stdout
-    return np.frombuffer(raw, dtype=np.float32).reshape(-1, 2).astype(np.float64)
+    x = np.frombuffer(raw, dtype=np.float32).reshape(-1, 2).astype(np.float64)
+    if len(x) < SR // 10 and start > 0:
+        return load_sample(ep, rel, 0.0, dur, rate)  # начало за концом файла — берём с нуля
+    return x
 
 
 def shape(x, o):
@@ -635,6 +638,15 @@ def main():
         o = e[3] if len(e) > 3 else {}
         x = shape(load_sample(ep, f, o.get("start", 0), o.get("dur"), o.get("rate", 1.0)), o)
         put_st(fx, x, t + o.get("offset", 0), g, o.get("pan", 0.0), o.get("wet", 0.2))
+    # провалы фона (тишина перед важной фразой): [от, до, уровень]
+    for a0, b0, lev in spec.get("duck", []):
+        i, j = int(at(a0) * SR), int(at(b0) * SR)
+        g = np.ones(fx.n)
+        g[i:j] = lev
+        g = smooth(g, 0.5)
+        fx.L *= g
+        fx.R *= g
+        fx.wet *= g
     # мир глохнет после удара: НЧ-фильтр по огибающей + звон в ушах
     L, R = fx.L, fx.R
     ir = reverb_ir(2.2, 0.55, 3)
@@ -648,17 +660,23 @@ def main():
         muf = smooth(muf, 0.6)
         muf[i:i + int(0.05 * SR)] = np.linspace(0, 1, int(0.05 * SR))
         Lm, Rm = lowpass(L, 180), lowpass(R, 180)
-        L = L * (1 - muf) + Lm * muf * 1.4
-        R = R * (1 - muf) + Rm * muf * 1.4
+        L = L * (1 - muf) + Lm * muf * spec.get("muffle_gain", 1.4)
+        R = R * (1 - muf) + Rm * muf * spec.get("muffle_gain", 1.4)
         n = j - i + int(2 * SR)
         tt = np.arange(n) / SR
-        ring = np.sin(2 * np.pi * 6400 * tt) * 0.06 * np.exp(-tt / 3.0) + np.sin(2 * np.pi * 3100 * tt) * 0.02 * np.exp(-tt / 2.0)
+        ring = (np.sin(2 * np.pi * 6400 * tt) * 0.06 * np.exp(-tt / 3.0) + np.sin(2 * np.pi * 3100 * tt) * 0.02 * np.exp(-tt / 2.0)) * spec.get("ring_synth", 1.0)
         e = min(fx.n, i + n)
         L[i:e] += ring[: e - i]
         R[i:e] += ring[: e - i] * 0.9
-    norm(ep, "foley", np.stack([L, R], axis=1), -21)
-
     venv = voice_envelope(ep, int(dur * SR))
+    # эффекты уступают голосу (как дакинг в кино), кроме защищённых моментов — удара
+    fd = 1 - spec.get("foley_duck", 0.0) * venv
+    for a0, b0 in spec.get("duck_protect", []):
+        i, j = int(at(a0) * SR), int(at(b0) * SR)
+        fd[i:j] = 1
+    fd = smooth(fd, 0.08)
+    norm(ep, "foley", np.stack([L * fd, R * fd], axis=1), spec.get("foley_lufs", -21))
+
     mus = music(cues, [[p[0], at(p[1]), at(p[2])] + p[3:] for p in spec.get("music", [])], dur, venv)
     # музыка из записей: куски треков с фейдами, тоже приглушаются под голосом
     tb = Bus(dur)

@@ -1,0 +1,29 @@
+clock cc0 freesound https://freesound.org/people/janbezouska/sounds/517682 | Clock ticking, natural room verb | janbezouska
+kitchen_tone cc0 freesound https://freesound.org/people/vovere/sounds/513568 | Kitchen room tone day.wav | vovere
+wind cc0 freesound https://freesound.org/people/klangfabrik/sounds/117513 | winter wind 01c.aiff | klangfabrik
+wind_low cc0 freesound https://freesound.org/people/haniebal/sounds/423314 | Wind ambience | haniebal
+distant_booms cc0 freesound https://freesound.org/people/craigsmith/sounds/438693 | G43-14-25 Distant Explosions.wav | craigsmith
+artillery cc0 freesound https://freesound.org/people/craigsmith/sounds/486020 | R12-11-Artillery Explosion Sequence.wav | craigsmith
+crows cc0 freesound https://freesound.org/people/blimp66/sounds/353432 | Crows | blimp66
+birds_morning cc0 freesound https://freesound.org/people/Bansemer/sounds/117293 | Birds-Crow & Song Birds.wav | Bansemer
+basement_tone cc0 freesound https://freesound.org/people/Yuval/sounds/210063 | room-tone WC | Yuval
+vibrate cc0 freesound https://freesound.org/people/HarryPeeks/sounds/242173 | Phone Vibrate On Surface | HarryPeeks
+steps_soldiers cc0 freesound https://freesound.org/people/TRP/sounds/577492 | 120621 Footsteps, gravel, walking, outside, windy BLYTH.flac | TRP
+steps_light cc0 freesound https://freesound.org/people/PotatokingXII/sounds/352870 | Footsteps Dirt Gravel | PotatokingXII
+wire_creak cc0 freesound https://freesound.org/people/whalesofjupiter/sounds/322249 | metallic creak with reverb.wav | whalesofjupiter
+drone cc0 freesound https://freesound.org/people/Sadiquecat/sounds/683296 | Dji Mavic Mini 2 Take-off flyby landing LR XY Zoom H5 mic.wav | Sadiquecat
+gate cc0 freesound https://freesound.org/people/unfa/sounds/207993 | Rusty Metal Creaking | unfa
+wrapper cc0 freesound https://freesound.org/people/jarlathmc/sounds/676257 | RustlingCandyWrappers.wav | jarlathmc
+marker cc0 freesound https://freesound.org/people/khenshom/sounds/565206 | Pen or marker writing on paper - close up | khenshom
+velcro cc0 freesound https://freesound.org/people/SMuntsinger/sounds/449610 | Velcro Rips.wav | SMuntsinger
+incoming cc0 freesound https://freesound.org/people/FreqMan/sounds/135495 | F-18 hornet pass 01.wav | FreqMan
+blast_main cc0 freesound https://freesound.org/people/felix.blume/sounds/475780 | Big dynamite explosion in an open mine (Chile) | felix.blume
+blast_cine cc0 freesound https://freesound.org/people/musicace17/sounds/486551 | Huge Cinematic Explosion.wav | musicace17
+blast_low cc0 freesound https://freesound.org/people/Hard3eat/sounds/388945 | Atomic Bomb 2 | Hard3eat
+collapse cc0 freesound https://freesound.org/people/7778/sounds/196619 | Roaring House Fire Wall Fall In.wav | 7778
+debris cc0 freesound https://freesound.org/people/craigsmith/sounds/438528 | G33-22-Falling Debris and Explosion.wav | craigsmith
+ringing cc0 freesound https://freesound.org/people/Sclolex/sounds/210533 | tinnitus.wav | Sclolex
+bricks_scrape cc0 freesound https://freesound.org/people/Alexbuk/sounds/391764 | Brick scrapes.wav | Alexbuk
+rubble_steps cc0 freesound https://freesound.org/people/martian/sounds/207372 | rubble walk rocky grit cave footsteps.wav | martian
+breathing cc0 freesound https://freesound.org/people/casiba842/sounds/554307 | Scared Male Heavy Breathing | casiba842
+impacts cc0 freesound https://freesound.org/people/bruno.auzet/sounds/525024 | impacts.wav | bruno.auzet
