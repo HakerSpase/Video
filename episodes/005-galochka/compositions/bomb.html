@@ -15,7 +15,7 @@
       const at = (k) => window.CUES[k] - S;
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#b-day", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.15);
-      tl.to("#b-day", { opacity: 0, duration: 0.15 }, 69.42 - window.CUES.bomb);
+      tl.to("#b-day", { opacity: 0, duration: 0.15 }, 71.98 - window.CUES.bomb);
       tl.fromTo("#b-kg", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, at("ton"));
       tl.to("#b-kg", { opacity: 0, duration: 0.25 }, at("folds") + 0.3);
       window.__timelines["bomb"] = tl;
