@@ -1,0 +1,35 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #y-card { position: absolute; left: 70px; top: 196px; width: 620px; padding: 22px 26px 16px; border-radius: 14px; background: rgba(8,12,20,0.9);
+      border: 2px solid rgba(61,220,132,0.75); font-family: "JetBrains Mono", monospace; color: #fff; }
+    #y-card h4 { font-size: 24px; letter-spacing: 0.14em; color: #3ddc84; font-weight: 800; margin-bottom: 10px; }
+    .y-row { display: flex; justify-content: space-between; font-size: 28px; font-weight: 800; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.12); }
+    #y-steps { position: absolute; left: 0; width: 100%; top: 1000px; display: flex; justify-content: center; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="stay" data-width="1080" data-height="1920">
+    <div id="y-card"><h4>ПЛАН · ВЫЖИТЬ</h4>
+      <div class="y-row" id="y-r1"><span>1 · первый вагон</span><span>✓</span></div>
+      <div class="y-row" id="y-r2"><span>2 · двери закрыты</span><span>✓</span></div>
+      <div class="y-row" id="y-r3"><span>3 · заряд</span><span>34%</span></div>
+      <div class="y-row" id="y-r4"><span>4 · аварийный телефон</span><span>?</span></div>
+    </div>
+    <div id="y-steps"><div class="chip yellow">до телефона: <span id="y-n">30</span> шагов</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.stay;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#y-card", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 }, at("youstay"));
+      tl.fromTo("#y-r1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("youstay") + 0.3);
+      tl.fromTo("#y-r2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("shut"));
+      tl.fromTo("#y-r3", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("charge"));
+      tl.fromTo("#y-r4", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("phone"));
+      tl.fromTo("#y-steps", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25 }, at("steps"));
+      const n = { v: 30 };
+      tl.to(n, { v: 0, duration: window.CUES.call - window.CUES.wall, ease: "none", onUpdate: () => (document.getElementById("y-n").textContent = Math.round(n.v)) }, at("wall"));
+      window.__timelines["stay"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,26 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #k-n { position: absolute; left: 0; width: 100%; top: 300px; text-align: center; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 260px; line-height: 1;
+      color: #fff; text-shadow: 0 10px 0 rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.8); }
+    #k-l { position: absolute; left: 0; width: 100%; top: 580px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 800; color: rgba(255,255,255,0.7); letter-spacing: 0.12em; }
+  </style>
+  <div id="root" data-composition-id="count" data-width="1080" data-height="1920">
+    <div id="k-n">0</div><div id="k-l">ВЕРНУЛОСЬ · УШЛО 40</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.count;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const n = { v: 0 };
+      const el = document.getElementById("k-n");
+      tl.fromTo("#k-n", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.1);
+      tl.to(n, { v: 40, duration: at("came") - 0.3, ease: "power1.inOut", onUpdate: () => (el.textContent = Math.round(n.v)) }, 0.1);
+      tl.set(el, { textContent: "41", color: "#ff2e3e", textShadow: "0 0 80px rgba(255,46,62,0.8), 0 10px 0 rgba(0,0,0,0.5)" }, at("came") + 0.55);
+      tl.fromTo("#k-n", { scale: 1.6 }, { scale: 1, duration: 0.25, ease: "power4.out" }, at("came") + 0.55);
+      tl.fromTo("#k-n", { x: 0 }, { x: 10, duration: 0.04, yoyo: true, repeat: 7 }, at("came") + 0.8);
+      window.__timelines["count"] = tl;
+    })();
+  </script>
+</template>

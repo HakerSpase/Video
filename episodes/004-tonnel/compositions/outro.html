@@ -1,0 +1,22 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #o-end { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 520px; }
+    #o-t { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 116px; line-height: 0.98; color: #fff; text-align: center; }
+    #o-t span { color: #ff2e3e; text-shadow: 0 0 40px rgba(255,46,62,0.5); }
+    #o-s { margin-top: 30px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); text-align: center; line-height: 1.6; }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div id="o-end"><div id="o-t">ЧТО СДЕЛАЕТЕ<br /><span>ВЫ?</span></div><div id="o-s">ПИШИТЕ В КОММЕНТАРИЯХ<br />ЧАСТЬ 2 — СКОРО</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.outro;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#o-t", { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power4.out" }, 0.1);
+      tl.fromTo("#o-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at("comment"));
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

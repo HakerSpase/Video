@@ -1,0 +1,100 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #010204; }
+    #w-hand { position: absolute; inset: 0; }
+    #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #w-clock { position: absolute; right: 70px; top: 196px; }
+    #w-lit { position: absolute; left: 0; width: 100%; top: 1000px; display: flex; justify-content: center; opacity: 0; }
+    #w-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
+    <div id="w-hand">
+      <canvas id="w-3d" width="1080" height="1920"></canvas>
+      <div id="w-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge" style="opacity:0.18"></div>
+      <div class="fx-grade"></div>
+    </div>
+    <div id="w-black"></div>
+    <div id="w-clock" class="stamp"><b id="w-time">23:40</b><small>ПЕРЕГОН</small></div>
+    <div id="w-lit"><div class="chip yellow"><span id="w-litn">фонарики: 40</span></div></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES;
+      const at = (k) => C[k];
+      const D = C._duration;
+      const W = TUNNEL3D.create(document.getElementById("w-3d"), { seed: 44 });
+      const s = W.state;
+      const tl = gsap.timeline({ paused: true });
+      const cam = (p, t, d, e) => tl.to(s, Object.assign({}, p, { duration: d || 0.8, ease: e || "power2.inOut" }), t);
+
+      // 1. Хук: свет в тоннеле, камера у рельсов перед кабиной
+      Object.assign(s, { camX: -0.7, camY: 1.1, camZ: -10, tgtX: 0, tgtY: 1.6, tgtZ: 3, head: 1, tunnelLamps: 1, emerg: 0, doors: 0, fov: 55 });
+      cam({ camZ: -6.5, camY: 1.3 }, 0, at("dark"), "sine.out");
+      // «погас свет»: два мигания и темнота, включается аварийный
+      [0, 0.12, 0.22, 0.34].forEach((d, i) => tl.set(s, { head: i % 2, tunnelLamps: i % 2 }, at("dark") + d));
+      tl.set(s, { head: 0, tunnelLamps: 0 }, at("dark") + 0.45);
+      tl.to(s, { emerg: 1, duration: 0.4 }, at("dark") + 0.6);
+      // «двери открылись»: вид вдоль борта
+      cam({ camX: -2.1, camY: 1.6, camZ: -2.5, tgtX: -1.3, tgtY: 1.5, tgtZ: 6 }, at("doors") - 0.2, 0.7);
+      tl.to(s, { doors: 1, duration: 0.6, ease: "power2.inOut" }, at("doors") + 0.2);
+      // «не идите за толпой»: разворот в тёмный тоннель
+      cam({ camX: 0.4, camY: 2.6, camZ: -0.7, tgtX: 0, tgtY: 1.2, tgtZ: -30 }, at("dont") - 0.2, 0.9);
+
+      // 2. Завязка: вид из кабины; толпа уходит с фонариками
+      tl.set("#w-time", { textContent: "23:40" }, 0);
+      tl.set("#w-time", { textContent: "23:50" }, at("ten"));
+      tl.set(s, { crowd: 1, walked: 0, lit: 40 }, at("torches") - 0.3);
+      tl.to(s, { walked: 30, duration: at("look") + 1 - at("torches"), ease: "none" }, at("torches") - 0.3);
+
+      // 3. Контактный рельс: низко над путём, свет фонаря, искрит
+      cam({ camX: 0.9, camY: 0.95, camZ: -3.5, tgtX: 1.55, tgtY: 0.35, tgtZ: -13, aimX: 1.55, aimY: 0.3, aimZ: -9 }, at("side") - 0.3, 0.8);
+      tl.to(s, { hand: 0.45, duration: 0.3 }, at("side") - 0.2);
+      tl.to(s, { rail: 1, duration: 0.2 }, at("volt"));
+      tl.to(s, { rail: 0.25, duration: 0.6 }, at("nowarn"));
+
+      // 4. Остаться: обратно к кабине, двери закрываются; потом к телефону вдоль стены
+      cam({ camX: -1.7, camY: 1.7, camZ: -1.8, tgtX: -1.2, tgtY: 1.5, tgtZ: 6, rail: 0, hand: 0 }, at("youstay") - 0.3, 0.8);
+      tl.to(s, { doors: 0, duration: 0.6 }, at("shut"));
+      cam({ camX: -1.6, camY: 1.65, camZ: -2.5, tgtX: -2.55, tgtY: 1.45, tgtZ: -18, aimX: -2.55, aimY: 1.45, aimZ: -18 }, at("phone") - 0.3, 0.8);
+      tl.to(s, { phone: 1, hand: 0.7, duration: 0.3 }, at("phone"));
+      cam({ camX: -1.75, camZ: -14.8, tgtZ: -19 }, at("wall"), at("hiss") - at("wall"), "sine.inOut");
+
+      // 5. Звонок: крупно телефон
+      cam({ camX: -1.95, camY: 1.55, camZ: -16.6, tgtX: -2.55, tgtY: 1.45, tgtZ: -18, fov: 45, hand: 0.3 }, at("hiss") - 0.2, 0.7);
+      tl.to(s, { roll: 0.04, duration: 0.25, yoyo: true, repeat: 1 }, at("closed"));
+
+      // 6. Фонарики гаснут; потом шаги — возвращаются без света, все в ногу
+      cam({ camX: -1.4, camY: 1.7, camZ: -15.5, tgtX: 0, tgtY: 1.4, tgtZ: -70, fov: 55, roll: 0, hand: 0.35, aimX: 0, aimY: 1, aimZ: -40 }, at("look") - 0.3, 0.8);
+      tl.to("#w-lit", { opacity: 1, duration: 0.2 }, at("fortyl"));
+      const litProxy = { v: 40 };
+      tl.to(litProxy, { v: 0, duration: at("minute") - at("out"), ease: "power1.in", onUpdate: () => {
+        s.lit = Math.round(litProxy.v);
+        document.getElementById("w-litn").textContent = "фонарики: " + s.lit;
+      } }, at("out"));
+      tl.to("#w-lit", { opacity: 0, duration: 0.3 }, at("minute") + 0.4);
+      tl.set(s, { crowd: 0 }, at("return") - 0.1);
+      tl.to(s, { hand: 0, duration: 0.4 }, at("minute"));
+      cam({ camX: 0.4, camY: 2.4, camZ: -0.7, tgtX: 0, tgtY: 1.2, tgtZ: -25 }, at("return") - 0.3, 0.6);
+      tl.set(s, { ret: 1, retDist: 45, retStep: 0 }, at("return") - 0.3);
+      tl.to(s, { retDist: 3.5, retStep: (at("counting") - at("return")) * 1.7, duration: at("counting") - at("return") + 0.3, ease: "none" }, at("return") - 0.3);
+
+      // 7. Счёт у дверей: колонна стоит перед кабиной
+      cam({ camX: 0.2, camY: 2.1, camZ: -0.5, tgtX: 0, tgtY: 1.5, tgtZ: -8, fov: 48 }, at("counting"), at("came") - at("counting") + 0.6, "sine.inOut");
+      cam({ camY: 1.9, tgtY: 1.6, tgtZ: -4, fov: 36 }, at("came") + 0.2, 1.2, "power2.in");
+      tl.to(s, { emerg: 0.55, duration: 0.15, yoyo: true, repeat: 3 }, at("came") + 0.6);
+
+      // 8. Финал: в темноту
+      tl.to("#w-black", { opacity: 1, duration: 0.6 }, at("you") - 0.2);
+
+      // ручная камера, пыль в аварийном свете
+      tl.set("#w-hand", { scale: 1.04 }, 0);
+      FX.handheld(tl, "#w-hand", 0, D, { amp: 5, rot: 0.25, seed: 4 });
+      FX.dust(tl, FX.canvas("#w-fxl", "w-dust"), 0, D, { count: 120, mask: { x: 540, y: 820, r: 700 }, color: "255,226,190", alpha: 0.5, seed: 7 });
+
+      tl.eventCallback("onUpdate", () => W.render(tl.time()));
+      W.render(0);
+      window.__timelines["world"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #s-bar { position: absolute; left: 90px; right: 90px; top: 330px; height: 120px; font-family: "JetBrains Mono", monospace; opacity: 0; }
+    #s-line { position: absolute; left: 0; right: 0; top: 58px; height: 6px; background: rgba(255,255,255,0.25); border-radius: 3px; }
+    .s-pt { position: absolute; top: 46px; width: 30px; height: 30px; border-radius: 50%; transform: translateX(-50%); }
+    .s-l { position: absolute; top: 0; font-size: 26px; font-weight: 800; transform: translateX(-50%); white-space: nowrap; color: #fff; }
+    .s-d { position: absolute; top: 88px; font-size: 24px; font-weight: 800; transform: translateX(-50%); white-space: nowrap; }
+    #s-forty { position: absolute; left: 0; width: 100%; top: 1000px; display: flex; justify-content: center; }
+  </style>
+  <div id="root" data-composition-id="setup" data-width="1080" data-height="1920">
+    <div id="s-bar">
+      <div id="s-line"></div>
+      <div class="s-pt" style="left:0;background:#9fb4d6"></div><div class="s-l" style="left:0">назад</div>
+      <div class="s-pt" style="left:64%;background:#ff2e3e;box-shadow:0 0 16px #ff2e3e"></div><div class="s-l" style="left:64%">поезд</div>
+      <div class="s-pt" style="left:100%;background:#ffd23f"></div><div class="s-l" style="left:100%">станция</div>
+      <div id="s-db" class="s-d" style="left:32%;color:#9fb4d6">1200 м</div>
+      <div id="s-df" class="s-d" style="left:82%;color:#ffd23f">600 м</div>
+    </div>
+    <div id="s-forty"><div class="chip red">ушли к станции: <span id="s-n">0</span></div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.setup;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s-bar", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 }, at("fwd") - 0.3);
+      tl.fromTo("#s-df", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("fwd"));
+      tl.fromTo("#s-db", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("back"));
+      tl.to("#s-bar", { opacity: 0, duration: 0.3 }, at("ten"));
+      tl.fromTo("#s-forty", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.25 }, at("torches"));
+      const n = { v: 0 };
+      tl.to(n, { v: 40, duration: at("forty") - at("torches") + 0.3, ease: "power1.out", onUpdate: () => (document.getElementById("s-n").textContent = Math.round(n.v)) }, at("torches"));
+      window.__timelines["setup"] = tl;
+    })();
+  </script>
+</template>

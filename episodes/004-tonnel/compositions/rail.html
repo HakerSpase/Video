@@ -1,0 +1,23 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #r-sign { position: absolute; left: 0; width: 100%; top: 300px; display: flex; flex-direction: column; align-items: center; gap: 18px; opacity: 0; }
+    #r-tri { width: 220px; height: 196px; background: #ffd23f; clip-path: polygon(50% 0, 100% 100%, 0 100%); display: flex; align-items: flex-end; justify-content: center;
+      font-family: Montserrat, sans-serif; font-weight: 900; font-size: 120px; color: #111; padding-bottom: 6px; }
+    #r-v { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 120px; color: #fff; text-shadow: 0 0 40px rgba(102,179,255,0.8), 0 6px 0 rgba(0,0,0,0.5); }
+  </style>
+  <div id="root" data-composition-id="rail" data-width="1080" data-height="1920">
+    <div id="r-sign"><div id="r-tri">⚡</div><div id="r-v">825 В</div><div class="chip red">контактный рельс · может включиться</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.rail;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#r-sign", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power4.out" }, at("volt"));
+      tl.fromTo("#r-v", { x: 0 }, { x: 8, duration: 0.04, yoyo: true, repeat: 7 }, at("volt") + 0.2);
+      tl.to("#r-sign", { opacity: 0, duration: 0.3 }, at("nowarn") + 1.2);
+      window.__timelines["rail"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,17 @@
+[
+  {"at": "dark", "file": "glitch-1.mp3", "vol": 0.45},
+  {"at": "doors", "file": "whoosh-short.mp3", "vol": 0.35, "offset": 0.2},
+  {"at": "dont", "file": "impact-bass-2.mp3", "vol": 0.55},
+  {"at": "fwd", "file": "pop.mp3", "vol": 0.3},
+  {"at": "torches", "file": "click-soft.mp3", "vol": 0.4},
+  {"at": "mistake", "file": "impact-bass-1.mp3", "vol": 0.6},
+  {"at": "volt", "file": "glitch-2.mp3", "vol": 0.4},
+  {"at": "shut", "file": "click.mp3", "vol": 0.45},
+  {"at": "phone", "file": "ping.mp3", "vol": 0.3},
+  {"at": "hiss", "file": "glitch-3.mp3", "vol": 0.4},
+  {"at": "closed", "file": "impact-bass-2.mp3", "vol": 0.6, "offset": 0.3},
+  {"at": "out", "file": "riser.mp3", "vol": 0.3, "offset": -0.3},
+  {"at": "instep", "file": "impact-bass-2.mp3", "vol": 0.5},
+  {"at": "came", "file": "impact-bass-1.mp3", "vol": 0.8, "offset": 0.55},
+  {"at": "you", "file": "whoosh-cinematic.mp3", "vol": 0.3, "offset": -0.2}
+]
