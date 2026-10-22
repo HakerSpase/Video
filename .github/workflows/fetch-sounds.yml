@@ -34,7 +34,7 @@ jobs:
           git config user.name "render-bot"
           git config user.email "render-bot@users.noreply.github.com"
           if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
-          rm -rf "sfx/${{ inputs.name }}" && mkdir -p sfx && cp -r "/tmp/sfx/${{ inputs.name }}" sfx/
+          mkdir -p sfx && cp -r "/tmp/sfx/${{ inputs.name }}" sfx/
           git add -f sfx
           git commit -qm "sfx: ${{ inputs.name }}"
           git push -q origin HEAD:refs/heads/renders

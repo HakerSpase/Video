@@ -20,10 +20,28 @@ from pathlib import Path
 UA = {"User-Agent": "video-factory/1.0 (sound search for CC-licensed audio)"}
 
 
-def get(url, timeout=60):
+def get(url, timeout=60, limit=None):
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read()
+        return r.read(limit) if limit else r.read()
+
+
+def fetch_one(d, i, r, item):
+    """Скачать начало файла (хватает на нужные секунды) и перекодировать в mp3."""
+    src = r.get("url")
+    if not src:
+        return None
+    raw = d / f"{i}.src"
+    try:
+        raw.write_bytes(get(src, 45, int(item.get("bytes", 14_000_000))))
+    except Exception as e:
+        print(f"  ! {src}: {e}")
+        return None
+    mp3 = d / f"{i}.mp3"
+    cmd = ["ffmpeg", "-v", "error", "-y", "-i", str(raw), "-t", str(item.get("max", 40)), "-ac", "2", "-ar", "44100", "-c:a", "libmp3lame", "-q:a", "2", str(mp3)]
+    ok = subprocess.run(cmd).returncode == 0 and mp3.exists() and mp3.stat().st_size > 2000
+    raw.unlink()
+    return mp3 if ok else None
 
 
 def main():
@@ -49,21 +67,12 @@ def main():
             continue
         d = out / slug
         d.mkdir(exist_ok=True)
-        for i, r in enumerate(data.get("results", [])):
-            src = r.get("url")
-            if not src:
-                continue
-            raw = d / f"{i}.src"
-            try:
-                raw.write_bytes(get(src, 45))
-            except Exception as e:
-                print(f"  ! {src}: {e}")
-                continue
-            mp3 = d / f"{i}.mp3"
-            cmd = ["ffmpeg", "-v", "error", "-y", "-i", str(raw), "-t", str(item.get("max", 40)), "-ac", "2", "-ar", "44100", "-c:a", "libmp3lame", "-q:a", "2", str(mp3)]
-            ok = subprocess.run(cmd).returncode == 0
-            raw.unlink()
-            if not ok:
+        res = data.get("results", [])
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(6) as ex:
+            files = list(ex.map(lambda ir: fetch_one(d, ir[0], ir[1], item), enumerate(res)))
+        for i, (r, mp3) in enumerate(zip(res, files)):
+            if not mp3:
                 continue
             meta = {k: r.get(k) for k in ("id", "title", "creator", "license", "license_version", "license_url", "foreign_landing_url", "provider", "source", "duration", "tags")}
             meta["tags"] = [t.get("name") for t in (meta.get("tags") or [])][:12]
