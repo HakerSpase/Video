@@ -30,7 +30,6 @@ jobs:
         with:
           path: |
             ~/.npm
-            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
           key: hf-${{ env.HF }}-npm-v2
       - name: Зависимости
@@ -71,7 +70,6 @@ jobs:
         with:
           path: |
             ~/.npm
-            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
           key: hf-${{ env.HF }}-browser-v2
       - name: Зависимости
@@ -97,7 +95,6 @@ jobs:
         with:
           path: |
             ~/.npm
-            ~/.cache/ffmpeg-static
             ~/.cache/hyperframes/chrome
           key: hf-${{ env.HF }}-npm-v2
       - name: Зависимости
