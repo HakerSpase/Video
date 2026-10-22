@@ -116,3 +116,20 @@
   pointer-events: none;
   background: radial-gradient(95% 62% at 50% 42%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.72) 100%);
 }
+
+/* --- кинослой (lib/fx.js, tools/build.py) --- */
+.fx-grunge { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: 0.3;
+  background: url(grunge.png) center / 1080px 1920px no-repeat; }
+.fx-grade { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+  background: linear-gradient(180deg, rgba(40,90,140,0.55) 0%, rgba(0,0,0,0) 45%, rgba(255,150,70,0.35) 100%); }
+.fx-fog { position: absolute; left: -10%; width: 120%; height: 700px; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(170,190,230,0.22), rgba(0,0,0,0) 70%); }
+.fx-beam { position: absolute; pointer-events: none; mix-blend-mode: screen; transform-origin: 50% 0;
+  background: linear-gradient(180deg, rgba(255,246,220,0.42), rgba(255,246,220,0.0));
+  clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%); filter: blur(6px); }
+.fx-hand { position: absolute; inset: 0; }
+.fx-cut { position: absolute; inset: 0; pointer-events: none; }
+.fx-cut-in { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,60,80,0.0) 0 40px, rgba(255,60,80,0.35) 40px 44px, rgba(0,0,0,0) 44px 97px),
+    radial-gradient(80% 60% at 50% 45%, rgba(255,255,255,0.9), rgba(255,255,255,0.15) 70%); }

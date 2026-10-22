@@ -9,6 +9,7 @@
     #f-fin-q { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 160px; color: #ff2e3e; text-shadow: 0 0 40px rgba(255,46,62,0.5); }
   </style>
   <div id="root" data-composition-id="end" data-width="1080" data-height="1920">
+    <div id="end-hand" class="fx-hand">
     <div id="f-cam">
       <svg width="1080" height="1920" viewBox="0 0 1080 1920">
         <defs>
@@ -43,6 +44,11 @@
       <div id="f-fin-q">?</div>
       <div id="f-fin-s">ПРОВЕРЬ СВОЮ АНТРЕСОЛЬ<br />И ПОДПИШИСЬ</div>
     </div>
+      <div id="end-fog" class="fx-fog" style="top:860px"></div>
+      <div id="end-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -65,6 +71,13 @@
       tl.fromTo("#f-fin-q", { opacity: 0 }, { opacity: 1, duration: 0.06, yoyo: true, repeat: 3, ease: "steps(1)" }, E + 0.5);
       tl.set("#f-fin-q", { opacity: 1 }, E + 0.8);
       tl.fromTo("#f-fin-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, E + 0.8);
+      const D = window.CUES._duration - window.CUES.end;
+      const L = "#end-fxl";
+      tl.set("#end-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#end-hand", 0, D, { amp: 6, rot: 0.3, seed: 8 });
+      FX.rain(tl, FX.canvas(L, "end-rain"), 0, D, { count: 340, seed: 19, alpha: 0.32 });
+      FX.bokeh(tl, FX.canvas(L, "end-bok"), 0, D, { count: 10, colors: ["255,190,110", "170,200,255"], seed: 20 });
+      tl.fromTo("#end-fog", { x: -100 }, { x: 100, duration: D, ease: "sine.inOut" }, 0);
       window.__timelines["end"] = tl;
     })();
   </script>

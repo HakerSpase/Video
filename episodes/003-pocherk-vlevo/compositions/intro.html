@@ -16,28 +16,10 @@
     .i-ln.done { color: rgba(35,48,94,0.35); text-decoration: line-through; text-decoration-color: rgba(163,18,31,0.6); }
   </style>
   <div id="root" data-composition-id="intro" data-width="1080" data-height="1920">
+    <div id="intro-hand" class="fx-hand">
     <!-- флешфорвард: открытая антресоль в квартире следователя -->
     <div id="i-a" class="i-layer">
-      <div id="i-cam">
-        <svg width="1080" height="1920" viewBox="0 0 1080 1920">
-          <defs>
-            <linearGradient id="i-w" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#151c29" /><stop offset="1" stop-color="#22304a" /></linearGradient>
-            <linearGradient id="i-bag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b7a4c" /><stop offset="1" stop-color="#344026" /></linearGradient>
-            <linearGradient id="i-dr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2a1d" /><stop offset="1" stop-color="#5a4029" /></linearGradient>
-          </defs>
-          <rect width="1080" height="1920" fill="url(#i-w)" />
-          <rect y="1060" width="1080" height="860" fill="#1d1813" />
-          <rect x="300" y="300" width="480" height="230" fill="#0a0806" />
-          <path d="M330 520 Q340 400 420 380 L700 380 Q760 400 760 520 Z" fill="url(#i-bag)" />
-          <path d="M360 470 Q540 500 730 470" stroke="#232a19" stroke-width="7" fill="none" opacity="0.6" />
-          <path d="M520 520 Q560 640 540 720 L600 720 Q620 640 600 520 Z" fill="url(#i-bag)" />
-          <rect x="296" y="296" width="488" height="8" fill="#3a3226" />
-          <rect x="270" y="300" width="30" height="230" fill="#5d5444" /><rect x="780" y="300" width="30" height="230" fill="#5d5444" />
-          <rect x="340" y="560" width="400" height="500" fill="url(#i-dr)" />
-          <rect x="420" y="980" width="240" height="40" rx="6" fill="#6a4a2c" /><rect x="440" y="1020" width="18" height="40" fill="#4a321e" /><rect x="622" y="1020" width="18" height="40" fill="#4a321e" />
-        </svg>
-      </div>
-      <div id="i-torch"></div>
+      <canvas id="i-3d" width="1080" height="1920" style="position:absolute;left:0;top:0;width:1080px;height:1920px"></canvas>
       <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="i-c1" class="chip red">через неделю</div></div>
       <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>ЕРШОВ</b><small>СЛЕДОВАТЕЛЬ</small></div></div>
       <div class="hud" style="top: 990px"><div id="i-c2" class="chip yellow">его квартира · антресоль</div></div>
@@ -57,6 +39,10 @@
       <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div class="chip yellow">неделей раньше · адреса 4–7</div></div>
     </div>
     <div id="i-glitch"></div>
+      <div id="intro-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -64,8 +50,12 @@
       const at = (k) => window.CUES[k] - S;
       const D = window.CUES.sad - S;
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#i-cam", { scale: 1.0 }, { scale: 1.35, duration: at("first"), ease: "power1.in" }, 0);
-      tl.fromTo("#i-torch", { x: -60, y: 40 }, { x: 30, y: -10, duration: at("first"), ease: "sine.inOut" }, 0);
+      // 3D: квартира Ершова через неделю — антресоль открыта, из неё свисает спальник
+      const H = HALL3D.create(document.getElementById("i-3d"), { seed: 21 });
+      Object.assign(H.state, { open: 1, hang: 1, stool: 1, camZ: 3.7, camY: 1.55, camX: -0.15, tgtX: 0, tgtY: 2.1, tgtZ: 0.4, aimX: -0.1, aimY: 2.2, aimZ: 0.7, fov: 50 });
+      tl.to(H.state, { camZ: 2.3, camY: 1.7, camX: 0.05, tgtY: 2.15, duration: at("first"), ease: "power1.in" }, 0);
+      tl.to(H.state, { aimX: 0.1, aimY: 2.15, aimZ: 0.9, duration: at("first"), ease: "sine.inOut" }, 0);
+      tl.to(H.state, { roll: 0.02, duration: at("first"), ease: "sine.inOut" }, 0);
       tl.fromTo("#i-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
       tl.fromTo("#i-c2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("home0"));
       // перемотка назад
@@ -74,6 +64,14 @@
       tl.set("#i-b", { opacity: 1 }, at("first") + 0.1);
       tl.fromTo("#i-page", { scale: 1.08, rotation: 2 }, { scale: 1.0, rotation: -1, duration: D - at("first"), ease: "sine.out" }, at("first") + 0.1);
       tl.fromTo(".i-n", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.2, stagger: 0.12 }, at("first") + 0.4);
+      const L = "#intro-fxl";
+      tl.set("#intro-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#intro-hand", 0, D, { amp: 6, rot: 0.3, seed: 1 });
+      FX.dust(tl, FX.canvas(L, "intro-dust"), 0, D, { count: 160, mask: { x: 540, y: 470, r: 560 }, seed: 3 });
+      FX.bokeh(tl, FX.canvas(L, "intro-bok"), 0, D, { count: 7, seed: 4 });
+      const end3d = at("first") + 0.2;
+      tl.eventCallback("onUpdate", () => { if (tl.time() <= end3d) H.render(tl.time()); });
+      H.render(0);
       window.__timelines["intro"] = tl;
     })();
   </script>

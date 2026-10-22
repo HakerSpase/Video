@@ -22,6 +22,7 @@
     #p-dark { position: absolute; inset: 0; background: radial-gradient(50% 35% at 50% 38%, rgba(0,0,0,0), rgba(0,0,0,0.8)); opacity: 0; }
   </style>
   <div id="root" data-composition-id="pob" data-width="1080" data-height="1920">
+    <div id="pob-hand" class="fx-hand">
     <div class="scene-bg"></div>
     <div id="p-ad"><div id="p-ad-img"></div><h3>Сдаётся 1-к · 22 м²</h3><p>Победы 30, кв. 7 · без посредников</p></div>
     <div id="p-poster"><h2>ПРОПАЛ</h2><div id="p-face"></div><p>ушёл из дома в декабре<br />не вернулся</p></div>
@@ -29,6 +30,10 @@
     <div id="p-pass"><b>ПАСПОРТ</b><i></i><b style="font-size:26px">РОССИЯ</b></div>
     <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="p-c1" class="chip">победы 30 · кв. 7</div></div>
     <div class="hud" style="top: 1010px"><div id="p-c2" class="chip solid-red">найден в антресоли</div></div>
+      <div id="pob-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -44,6 +49,12 @@
       tl.to("#p-dark", { opacity: 1, duration: 0.3 }, at("pass") - 0.1);
       tl.fromTo("#p-pass", { opacity: 0, y: 140, rotation: -12 }, { opacity: 1, y: 0, rotation: -4, duration: 0.4, ease: "back.out(1.6)" }, at("pass"));
       tl.fromTo("#p-c2", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("pass") + 0.5);
+      const D = window.CUES.tally - window.CUES.pob;
+      const L = "#pob-fxl";
+      tl.set("#pob-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#pob-hand", 0, D, { amp: 6, rot: 0.3, seed: 4 });
+      FX.dust(tl, FX.canvas(L, "pob-dust"), 0, D, { count: 110, mask: { x: 540, y: 620, r: 700 }, seed: 12 });
+      FX.bokeh(tl, FX.canvas(L, "pob-bok"), 0, D, { count: 8, colors: ["255,90,90", "160,190,255"], seed: 13 });
       window.__timelines["pob"] = tl;
     })();
   </script>

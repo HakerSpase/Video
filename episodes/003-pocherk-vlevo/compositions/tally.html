@@ -12,12 +12,18 @@
       font-weight: 900; font-size: 22px; text-align: center; }
   </style>
   <div id="root" data-composition-id="tally" data-width="1080" data-height="1920">
+    <div id="tally-hand" class="fx-hand">
     <div class="scene-bg"></div>
     <div class="t-col" id="t1" style="left:45px"><div class="t-x"></div><div class="t-addr">САДОВАЯ 3<br />кв. 22</div><div class="t-st">«САНАТОРИЙ»</div></div>
     <div class="t-col" id="t2" style="left:390px"><div class="t-x"></div><div class="t-addr">ЗАРЕЧНАЯ 15<br />кв. 64</div><div class="t-st">«БАЛКОН»</div></div>
     <div class="t-col" id="t3" style="left:735px"><div class="t-x"></div><div class="t-addr">ПОБЕДЫ 30<br />кв. 7</div><div class="t-st">«ПРОПАЛ»</div></div>
     <div class="hud" style="top: 196px"><div id="t-c" class="chip solid-red">3 адреса · 3 смерти</div></div>
     <div class="hud" style="top: 1000px"><div id="t-c2" class="chip">каждая — «несчастный случай»</div></div>
+      <div id="tally-fog" class="fx-fog" style="top:700px"></div>
+      <div id="tally-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -29,6 +35,12 @@
       tl.fromTo("#t-c", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("deaths") + 0.5);
       tl.fromTo(".t-st", { opacity: 0, scale: 1.6, rotation: -8 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.2, stagger: 0.15, ease: "power4.in" }, at("accident"));
       tl.fromTo("#t-c2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("accident") + 0.3);
+      const D = window.CUES.seventh - window.CUES.tally;
+      const L = "#tally-fxl";
+      tl.set("#tally-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#tally-hand", 0, D, { amp: 4, rot: 0.2, seed: 5 });
+      FX.bokeh(tl, FX.canvas(L, "tally-bok"), 0, D, { count: 10, colors: ["255,60,70", "120,140,200"], seed: 14 });
+      tl.fromTo("#tally-fog", { x: 140 }, { x: -140, duration: D, ease: "sine.inOut" }, 0);
       window.__timelines["tally"] = tl;
     })();
   </script>

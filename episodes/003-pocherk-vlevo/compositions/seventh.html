@@ -19,6 +19,7 @@
     #v-dark { position: absolute; inset: 0; background: rgba(0,0,0,0.0); }
   </style>
   <div id="root" data-composition-id="seventh" data-width="1080" data-height="1920">
+    <div id="seventh-hand" class="fx-hand">
     <div class="scene-bg"></div>
     <div id="v-page">
       <div class="v-ln" style="top:110px"><b>1.</b>Строителей 12 — кв. 9</div>
@@ -37,6 +38,10 @@
     <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="v-c1" class="chip">школьная 2 · кв. 51 · пусто</div></div>
     <div class="hud" style="top: 1130px"></div>
     <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div id="v-c2" class="chip yellow">строка 8 · карандаш</div></div>
+      <div id="seventh-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -61,6 +66,11 @@
       tl.to("#v-page", { scale: 1.4, duration: at("his") - at("read") + 0.6, ease: "sine.in" }, at("read"));
       tl.fromTo("#v-circ", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("his") + 0.4);
       tl.fromTo("#v-page", { rotation: 0 }, { rotation: 0.8, duration: 0.05, yoyo: true, repeat: 3 }, at("his") + 0.4);
+      const L = "#seventh-fxl";
+      tl.set("#seventh-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#seventh-hand", 0, D, { amp: 5, rot: 0.25, seed: 6 });
+      FX.dust(tl, FX.canvas(L, "seventh-dust"), 0, D, { count: 150, mask: { x: 540, y: 700, r: 760 }, color: "255,240,210", seed: 15 });
+      FX.bokeh(tl, FX.canvas(L, "seventh-bok"), 0, D, { count: 6, seed: 16 });
       window.__timelines["seventh"] = tl;
     })();
   </script>

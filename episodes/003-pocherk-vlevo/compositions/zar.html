@@ -17,6 +17,7 @@
     #z-word span { display: inline-block; transform: skewX(24deg); transform-origin: 0 0; }
   </style>
   <div id="root" data-composition-id="zar" data-width="1080" data-height="1920">
+    <div id="zar-hand" class="fx-hand">
     <div id="z-cam">
       <svg width="1080" height="1920" viewBox="0 0 1080 1920">
         <defs>
@@ -49,6 +50,11 @@
     </div>
     <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="z-c1" class="chip">заречная 15 · кв. 64</div></div>
     <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>ГОД</b><small>НАЗАД</small></div></div>
+      <div id="zar-fog" class="fx-fog" style="top:900px"></div>
+      <div id="zar-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge"></div>
+      <div class="fx-grade"></div>
+    </div>
   </div>
   <script>
     (function () {
@@ -69,6 +75,12 @@
       tl.fromTo("#z-note", { opacity: 0, y: 160 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at("note") - 0.1);
       tl.fromTo("#z-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "none" }, at("word") + 0.1);
       tl.fromTo("#z-note", { scale: 1 }, { scale: 1.12, duration: D - at("word"), ease: "sine.in" }, at("word"));
+      const L = "#zar-fxl";
+      tl.set("#zar-hand", { scale: 1.05 }, 0);
+      FX.handheld(tl, "#zar-hand", 0, D, { amp: 6, rot: 0.3, seed: 3 });
+      FX.rain(tl, FX.canvas(L, "zar-rain"), 0, D, { count: 300, seed: 9 });
+      FX.bokeh(tl, FX.canvas(L, "zar-bok"), 0, D, { count: 8, colors: ["255,200,120", "170,200,255"], seed: 10 });
+      tl.fromTo("#zar-fog", { x: -120 }, { x: 120, duration: D, ease: "sine.inOut" }, 0);
       window.__timelines["zar"] = tl;
     })();
   </script>
