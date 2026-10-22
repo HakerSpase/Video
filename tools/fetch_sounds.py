@@ -27,18 +27,23 @@ def get(url, timeout=60):
 
 
 def main():
+    t0 = time.time()
+    limit = float(__import__("os").environ.get("FETCH_MINUTES", "25")) * 60
     queries = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     out = Path(sys.argv[2])
     out.mkdir(parents=True, exist_ok=True)
     index = []
     for item in queries:
+        if time.time() - t0 > limit:
+            print("! время вышло — сохраняю найденное")
+            break
         q = item["q"]
         slug = re.sub(r"[^a-z0-9]+", "-", q.lower()).strip("-")
         params = {"q": q, "license_type": "commercial", "page_size": item.get("n", 6)}
         if item.get("length"):
             params["length"] = item["length"]
         try:
-            data = json.loads(get("https://api.openverse.org/v1/audio/?" + urllib.parse.urlencode(params)))
+            data = json.loads(get("https://api.openverse.org/v1/audio/?" + urllib.parse.urlencode(params), 30))
         except Exception as e:
             print(f"! {q}: {e}")
             continue
@@ -50,7 +55,7 @@ def main():
                 continue
             raw = d / f"{i}.src"
             try:
-                raw.write_bytes(get(src, 120))
+                raw.write_bytes(get(src, 45))
             except Exception as e:
                 print(f"  ! {src}: {e}")
                 continue
@@ -66,6 +71,7 @@ def main():
             (d / f"{i}.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
             index.append({"file": f"{slug}/{i}.mp3", **{k: meta[k] for k in ("title", "creator", "license", "provider", "duration")}})
             print(f"  {slug}/{i}.mp3  {meta['license']}  {meta['title']!r}")
+        (out / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
         time.sleep(1.0)
     (out / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"всего: {len(index)}")

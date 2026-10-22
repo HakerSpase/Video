@@ -25,8 +25,11 @@ jobs:
         timeout-minutes: 8
         run: bash tools/ci-deps.sh none || true
       - name: Поиск и загрузка
+        timeout-minutes: 32
+        continue-on-error: true
         run: python3 tools/fetch_sounds.py "${{ inputs.queries }}" "/tmp/sfx/${{ inputs.name }}"
       - name: В ветку renders
+        if: always()
         run: |
           git config user.name "render-bot"
           git config user.email "render-bot@users.noreply.github.com"

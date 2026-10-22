@@ -102,6 +102,61 @@ class Bus:
         self.put(s * adsr(n, fade, fade), a, gain, pan, wet)
 
 
+# ---------------- реальные записи ----------------
+
+def load_sample(ep, rel, start=0.0, dur=None, rate=1.0):
+    """Файл → стерео float64 44.1 кГц (ffmpeg); rate < 1 — ниже и медленнее."""
+    path = Path(rel) if rel.startswith("/") else ep / rel
+    cmd = ["ffmpeg", "-v", "error", "-ss", str(start), "-i", str(path)]
+    if dur:
+        cmd += ["-t", str(dur / rate)]
+    if rate != 1.0:
+        cmd += ["-af", f"asetrate={int(SR * rate)},aresample={SR}"]
+    cmd += ["-ac", "2", "-ar", str(SR), "-f", "f32le", "-"]
+    raw = subprocess.run(cmd, capture_output=True, check=True).stdout
+    return np.frombuffer(raw, dtype=np.float32).reshape(-1, 2).astype(np.float64)
+
+
+def shape(x, o):
+    """Обработка сэмпла: нормировка по пику, фильтры, фейды."""
+    x = x / (np.max(np.abs(x)) + 1e-9)
+    if o.get("lp"):
+        x = np.stack([lowpass(x[:, 0], o["lp"]), lowpass(x[:, 1], o["lp"])], axis=1)
+    if o.get("hp"):
+        x = x - np.stack([lowpass(x[:, 0], o["hp"]), lowpass(x[:, 1], o["hp"])], axis=1)
+    n = len(x)
+    e = adsr(n, o.get("fade_in", 0.01), o.get("fade_out", 0.05))
+    if o.get("reverse"):
+        x = x[::-1]
+    return x * e[:, None]
+
+
+def put_st(bus, x, t, gain, pan=0.0, wet=0.2):
+    i = int(t * SR)
+    if i >= bus.n:
+        return
+    if i < 0:
+        x, i = x[-i:], 0
+    e = min(bus.n, i + len(x))
+    seg = x[: e - i] * gain
+    bus.L[i:e] += seg[:, 0] * min(1, 1 - pan)
+    bus.R[i:e] += seg[:, 1] * min(1, 1 + pan)
+    bus.wet[i:e] += seg.mean(axis=1) * wet
+
+
+def loop_to(x, n, xf=1.0):
+    """Зациклить запись до n сэмплов со склейкой-кроссфейдом."""
+    k = int(xf * SR)
+    if len(x) >= n:
+        return x[:n]
+    out = x.copy()
+    while len(out) < n:
+        f = np.linspace(0, 1, k)[:, None]
+        head = out[-k:] * (1 - f) + x[:k] * f
+        out = np.concatenate([out[:-k], head, x[k:]])
+    return out[:n]
+
+
 # ---------------- источники ----------------
 
 def noise(rng, sec):
@@ -567,6 +622,19 @@ def main():
                 tt += 1.0
         elif k == "last_vibe":
             fx.put(vibe_burst(rng, 0.35), t, 0.5, wet=0.3)
+    # реальные записи: фоны-петли и точечные события
+    for b in spec.get("beds", []):
+        a0, b0, f, g = at(b[0]), at(b[1]), b[2], b[3]
+        o = b[4] if len(b) > 4 else {}
+        x = shape(load_sample(ep, f, o.get("start", 0), o.get("dur"), o.get("rate", 1.0)), {**o, "fade_in": 0, "fade_out": 0})
+        n = int((b0 - a0) * SR)
+        x = loop_to(x, n) * adsr(n, o.get("fade", 0.4), o.get("fade", 0.4))[:, None]
+        put_st(fx, x, a0, g, o.get("pan", 0.0), o.get("wet", 0.05))
+    for e in spec.get("samples", []):
+        t, f, g = at(e[0]), e[1], e[2]
+        o = e[3] if len(e) > 3 else {}
+        x = shape(load_sample(ep, f, o.get("start", 0), o.get("dur"), o.get("rate", 1.0)), o)
+        put_st(fx, x, t + o.get("offset", 0), g, o.get("pan", 0.0), o.get("wet", 0.2))
     # мир глохнет после удара: НЧ-фильтр по огибающей + звон в ушах
     L, R = fx.L, fx.R
     ir = reverb_ir(2.2, 0.55, 3)
@@ -591,7 +659,20 @@ def main():
     norm(ep, "foley", np.stack([L, R], axis=1), -21)
 
     venv = voice_envelope(ep, int(dur * SR))
-    mus = music(cues, [[p[0], at(p[1]), at(p[2])] + p[3:] for p in spec["music"]], dur, venv)
+    mus = music(cues, [[p[0], at(p[1]), at(p[2])] + p[3:] for p in spec.get("music", [])], dur, venv)
+    # музыка из записей: куски треков с фейдами, тоже приглушаются под голосом
+    tb = Bus(dur)
+    for tr in spec.get("tracks", []):
+        a0, b0, f, g = at(tr[0]), at(tr[1]), tr[2], tr[3]
+        o = tr[4] if len(tr) > 4 else {}
+        x = load_sample(ep, f, o.get("start", 0), b0 - a0, o.get("rate", 1.0))
+        x = x / (np.sqrt(np.mean(x ** 2)) * 8 + 1e-9)
+        n = len(x)
+        x = x * adsr(n, o.get("fade_in", 1.5), o.get("fade_out", 2.0))[:, None]
+        put_st(tb, x, a0, g, 0.0, 0.0)
+    if spec.get("tracks"):
+        duck = 1 - o.get("duck", 0.35) * venv
+        mus = mus + np.stack([tb.L * duck, tb.R * duck], axis=1)
     if muf.any():
         mus *= (1 - 0.95 * muf)[:, None]
     norm(ep, "music", mus, -19)
