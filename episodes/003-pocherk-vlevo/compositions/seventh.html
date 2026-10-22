@@ -1,0 +1,67 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050608; }
+    #v-page { position: absolute; left: 110px; top: 240px; width: 860px; height: 860px; border-radius: 10px; transform-origin: 50% 80%;
+      background: repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px), #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); overflow: hidden; }
+    .v-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 48px; color: rgba(35,48,94,0.4); white-space: nowrap; }
+    .v-ln b { font-family: "JetBrains Mono", monospace; font-style: normal; font-size: 36px; margin-right: 16px; }
+    #v-l7 { color: #23305e; }
+    #v-x7 { position: absolute; left: 110px; top: 625px; width: 560px; height: 6px; background: #a3121f; transform-origin: 0 50%; }
+    #v-l8 { position: absolute; left: 120px; top: 670px; font-family: "EB Garamond", serif; font-size: 50px; white-space: nowrap; color: #6a6a6a; opacity: 0;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.8), -1px -1px 0 rgba(0,0,0,0.25); }
+    #v-l8 span { display: inline-block; transform: skewX(24deg); transform-origin: 0 0; }
+    #v-rake { position: absolute; top: 0; left: -500px; width: 500px; height: 100%; opacity: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,250,220,0.75), rgba(255,255,255,0)); mix-blend-mode: soft-light; }
+    #v-circ { position: absolute; left: 90px; top: 650px; width: 760px; height: 110px; border: 7px solid #e0202f; border-radius: 50%; opacity: 0;
+      box-shadow: 0 0 24px rgba(224,32,47,0.6); }
+    #v-dark { position: absolute; inset: 0; background: rgba(0,0,0,0.0); }
+  </style>
+  <div id="root" data-composition-id="seventh" data-width="1080" data-height="1920">
+    <div class="scene-bg"></div>
+    <div id="v-page">
+      <div class="v-ln" style="top:110px"><b>1.</b>Строителей 12 — кв. 9</div>
+      <div class="v-ln" style="top:190px"><b>2.</b>пр. Мира 41 — кв. 118</div>
+      <div class="v-ln" style="top:270px"><b>3.</b>Лесная 7 — кв. 47</div>
+      <div class="v-ln" style="top:350px"><b>4.</b>Садовая 3 — кв. 22</div>
+      <div class="v-ln" style="top:430px"><b>5.</b>Заречная 15 — кв. 64</div>
+      <div class="v-ln" style="top:510px"><b>6.</b>Победы 30 — кв. 7</div>
+      <div class="v-ln" id="v-l7" style="top:590px"><b>7.</b>Школьная 2 — кв. 51</div>
+      <div id="v-x7"></div>
+      <div id="v-l8"><span>8. Лесная 22 — кв. 14 · Ершов</span></div>
+      <div id="v-rake"></div>
+      <div id="v-circ"></div>
+    </div>
+    <div id="v-dark"></div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="v-c1" class="chip">школьная 2 · кв. 51 · пусто</div></div>
+    <div class="hud" style="top: 1130px"></div>
+    <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div id="v-c2" class="chip yellow">строка 8 · карандаш</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.seventh;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.night - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#v-page", { scale: 1.0, y: 0 }, { scale: 1.12, y: -40, duration: at("eighth"), ease: "sine.inOut" }, 0);
+      tl.fromTo("#v-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#v-x7", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 0.6);
+      // косой свет проходит по листу — проступает стёртая строка
+      tl.set("#v-rake", { opacity: 1 }, at("light"));
+      tl.fromTo("#v-rake", { x: 0 }, { x: 1400, duration: 2.4, ease: "sine.inOut" }, at("light"));
+      tl.to("#v-dark", { background: "rgba(0,0,0,0.45)", duration: 0.6 }, at("light"));
+      tl.fromTo("#v-l8", { opacity: 0 }, { opacity: 0.35, duration: 0.8 }, at("light") + 1.0);
+      tl.fromTo("#v-c2", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.25 }, at("eighth"));
+      tl.to("#v-c1", { opacity: 0, duration: 0.2 }, at("eighth") - 0.1);
+      tl.to("#v-page", { scale: 1.3, y: -260, x: 0, duration: 0.9, ease: "power3.inOut" }, at("eighth"));
+      tl.to("#v-l8", { opacity: 0.18, duration: 0.5 }, at("erased"));
+      // он читает — строка проявляется полностью
+      tl.to("#v-l8", { opacity: 1, color: "#3b1a1a", duration: 1.8, ease: "power1.in" }, at("read"));
+      tl.to("#v-page", { scale: 1.4, duration: at("his") - at("read") + 0.6, ease: "sine.in" }, at("read"));
+      tl.fromTo("#v-circ", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("his") + 0.4);
+      tl.fromTo("#v-page", { rotation: 0 }, { rotation: 0.8, duration: 0.05, yoyo: true, repeat: 3 }, at("his") + 0.4);
+      window.__timelines["seventh"] = tl;
+    })();
+  </script>
+</template>

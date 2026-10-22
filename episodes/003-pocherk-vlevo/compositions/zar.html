@@ -1,0 +1,75 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #05070b; }
+    #z-cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 600px; }
+    #z-report { position: absolute; left: 150px; top: 360px; width: 780px; height: 540px; border-radius: 6px; background: #f3f1ea;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.7); font-family: "JetBrains Mono", monospace; color: #1d2230; padding: 40px 44px; }
+    #z-report h3 { font-size: 30px; letter-spacing: 0.16em; font-weight: 800; margin-bottom: 26px; }
+    #z-report p { font-size: 26px; line-height: 1.6; font-weight: 600; }
+    #z-st { position: absolute; right: 40px; bottom: 50px; padding: 12px 22px; border: 6px solid #2c56b8; color: #2c56b8; border-radius: 10px;
+      font-family: Montserrat, sans-serif; font-weight: 900; font-size: 40px; }
+    #z-note { position: absolute; left: 110px; top: 330px; width: 860px; height: 420px; border-radius: 10px;
+      background: repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px), #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); }
+    .z-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 50px; color: #23305e; white-space: nowrap; }
+    #z-word { position: absolute; left: 140px; top: 210px; font-family: "EB Garamond", serif; font-size: 110px; color: #a3121f; white-space: nowrap; }
+    #z-word span { display: inline-block; transform: skewX(24deg); transform-origin: 0 0; }
+  </style>
+  <div id="root" data-composition-id="zar" data-width="1080" data-height="1920">
+    <div id="z-cam">
+      <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+        <defs>
+          <linearGradient id="z-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1322" /><stop offset="1" stop-color="#1c2a44" /></linearGradient>
+          <linearGradient id="z-wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a4252" /><stop offset="1" stop-color="#2a303c" /></linearGradient>
+          <pattern id="z-win" width="130" height="160" patternUnits="userSpaceOnUse"><rect x="30" y="40" width="70" height="86" fill="#141a26" /></pattern>
+        </defs>
+        <rect width="1080" height="1920" fill="url(#z-sky)" />
+        <rect x="140" y="200" width="800" height="900" fill="url(#z-wall)" />
+        <rect x="140" y="200" width="800" height="900" fill="url(#z-win)" />
+        <rect x="300" y="400" width="70" height="86" fill="#ffcf7a" opacity="0.85" /><rect x="690" y="720" width="70" height="86" fill="#ffcf7a" opacity="0.7" />
+        <rect x="430" y="880" width="70" height="86" fill="#9fc1ff" opacity="0.5" />
+        <!-- балкон 5 этажа -->
+        <g id="z-balc"><rect x="545" y="300" width="140" height="70" fill="#4b5466" stroke="#8792a8" stroke-width="4" />
+          <line x1="545" y1="318" x2="685" y2="318" stroke="#8792a8" stroke-width="3" /></g>
+        <path id="z-fall" d="M615 370 L640 1080" stroke="#ff2e3e" stroke-width="6" stroke-dasharray="18 14" fill="none" opacity="0" />
+        <ellipse id="z-x" cx="640" cy="1095" rx="70" ry="20" fill="none" stroke="#ff2e3e" stroke-width="6" opacity="0" />
+        <rect y="1080" width="1080" height="840" fill="#14161b" />
+        <text x="190" y="250" font-family="JetBrains Mono" font-weight="800" font-size="30" fill="#8792a8">5 ЭТ.</text>
+      </svg>
+    </div>
+    <div id="z-report">
+      <h3>ПРОТОКОЛ · ЗАРЕЧНАЯ 15</h3>
+      <p>Падение с балкона 5-го этажа.<br />Следов борьбы нет.<br />Посторонних в квартире нет.<br />Дверь заперта изнутри.</p>
+      <div id="z-st">НЕСЧАСТНЫЙ СЛУЧАЙ</div>
+    </div>
+    <div id="z-note">
+      <div class="z-ln" style="top:110px"><b style="font-family:'JetBrains Mono';font-style:normal;font-size:38px;margin-right:16px">5.</b>Заречная 15 — кв. 64</div>
+      <div id="z-word"><span>мешал</span></div>
+    </div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="z-c1" class="chip">заречная 15 · кв. 64</div></div>
+    <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>ГОД</b><small>НАЗАД</small></div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.zar;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.pob - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#z-cam", { scale: 1.0, y: 80 }, { scale: 1.2, y: 0, duration: at("acc"), ease: "sine.inOut" }, 0);
+      tl.fromTo("#z-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#z-balc", { opacity: 1 }, { opacity: 0.4, duration: 0.3, yoyo: true, repeat: 3 }, at("fell"));
+      tl.fromTo("#z-fall", { opacity: 0, strokeDashoffset: 300 }, { opacity: 1, strokeDashoffset: 0, duration: 0.6, ease: "power2.in" }, at("fell") + 0.4);
+      tl.fromTo("#z-x", { opacity: 0 }, { opacity: 1, duration: 0.15 }, at("fell") + 1.0);
+      // протокол со штампом
+      tl.fromTo("#z-report", { opacity: 0, y: 200, rotation: 4 }, { opacity: 1, y: 0, rotation: -1, duration: 0.45, ease: "power3.out" }, at("acc") - 0.1);
+      tl.fromTo("#z-st", { opacity: 0, scale: 2, rotation: -8 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.22, ease: "power4.in" }, at("acc") + 0.9);
+      // тетрадь: «мешал»
+      tl.to("#z-report", { opacity: 0, duration: 0.2 }, at("note") - 0.1);
+      tl.fromTo("#z-note", { opacity: 0, y: 160 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at("note") - 0.1);
+      tl.fromTo("#z-word", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "none" }, at("word") + 0.1);
+      tl.fromTo("#z-note", { scale: 1 }, { scale: 1.12, duration: D - at("word"), ease: "sine.in" }, at("word"));
+      window.__timelines["zar"] = tl;
+    })();
+  </script>
+</template>

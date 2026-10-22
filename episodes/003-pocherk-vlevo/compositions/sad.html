@@ -1,0 +1,84 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #07090e; }
+    .s-layer { position: absolute; inset: 0; }
+    #s-table { position: absolute; inset: 0; background: radial-gradient(70% 45% at 50% 40%, #3b3127 0%, #1d1812 60%, #07090e 100%); }
+    #s-cards { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 640px; }
+    .s-card { position: absolute; width: 520px; height: 340px; border-radius: 8px; background: #f1ead9;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.65); overflow: hidden; }
+    .s-pic { position: absolute; left: 0; top: 0; width: 210px; height: 100%;
+      background: linear-gradient(180deg, #7fb2d8 0%, #bfe0f0 45%, #4f8a5a 46%, #2f5f3a 100%); }
+    .s-txt { position: absolute; left: 236px; top: 34px; right: 20px; font-family: "EB Garamond", serif; font-size: 36px; color: #3b1a1a; line-height: 1.35; }
+    .s-txt span { display: inline-block; transform: skewX(24deg); transform-origin: 0 0; }
+    .s-stampm { position: absolute; right: 18px; bottom: 16px; width: 80px; height: 96px; border: 3px dashed #b0412e; background: #e5d6b8; }
+    #s-basement { background: #0a0c10; }
+    #s-bsvg { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 700px; }
+    #s-red { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 0;
+      background: radial-gradient(55% 40% at 20% 40%, rgba(255,30,50,0.45), rgba(0,0,0,0) 70%); }
+    #s-blue { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 0;
+      background: radial-gradient(55% 40% at 80% 40%, rgba(40,110,255,0.5), rgba(0,0,0,0) 70%); }
+  </style>
+  <div id="root" data-composition-id="sad" data-width="1080" data-height="1920">
+    <div id="s-a" class="s-layer">
+      <div id="s-table"></div>
+      <div id="s-cards">
+        <div class="s-card" id="s-k1" style="left:90px;top:300px"><div class="s-pic"></div>
+          <div class="s-txt"><span>Привет из санатория!<br />Всё хорошо, кормят.<br />Не звоните.</span></div><div class="s-stampm"></div></div>
+        <div class="s-card" id="s-k2" style="left:470px;top:430px"><div class="s-pic" style="filter:hue-rotate(40deg)"></div>
+          <div class="s-txt"><span>Продлила ещё<br />на месяц. Целую.</span></div><div class="s-stampm"></div></div>
+        <div class="s-card" id="s-k3" style="left:220px;top:620px"><div class="s-pic" style="filter:hue-rotate(-30deg)"></div>
+          <div class="s-txt"><span>Не приезжайте.<br />Всё хорошо.</span></div><div class="s-stampm"></div></div>
+      </div>
+      <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="s-c1" class="chip">садовая 3 · кв. 22</div></div>
+      <div class="hud" style="top: 280px; justify-content: flex-start; padding-left: 70px"><div id="s-c2" class="chip yellow">хозяйка · 78 лет</div></div>
+      <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div id="s-c3" class="chip">«санаторий» · 3 мес.</div></div>
+      <div class="hud" style="top: 1010px"><div id="s-c4" class="chip red">почерк · наклон влево</div></div>
+    </div>
+    <div id="s-b" class="s-layer" style="opacity:0">
+      <div id="s-basement" class="s-layer">
+        <svg id="s-bsvg" viewBox="0 0 1080 1920">
+          <rect width="1080" height="1920" fill="#2a2f38" />
+          <rect y="1080" width="1080" height="840" fill="#1a1c20" />
+          <rect x="120" y="1000" width="840" height="80" fill="#3a3f48" />
+          <path d="M300 420 L780 420 L780 1080 L300 1080 Z" fill="#14171c" />
+          <rect x="316" y="436" width="448" height="644" fill="#4a4f58" />
+          <rect x="316" y="436" width="448" height="644" fill="none" stroke="#2a2d33" stroke-width="10" />
+          <rect x="690" y="740" width="40" height="70" rx="6" fill="#8b8f96" />
+          <text x="540" y="560" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="54" fill="#1b1d22">ПОДВАЛ</text>
+          <g opacity="0.95"><rect x="160" y="640" width="760" height="60" fill="#ffd23f" transform="rotate(8 540 670)" />
+            <text x="540" y="684" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="34" fill="#111" letter-spacing="6" transform="rotate(8 540 670)">НЕ ВХОДИТЬ · ПОЛИЦИЯ</text></g>
+          <g opacity="0.95"><rect x="160" y="800" width="760" height="60" fill="#ffd23f" transform="rotate(-6 540 830)" />
+            <text x="540" y="844" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="34" fill="#111" letter-spacing="6" transform="rotate(-6 540 830)">НЕ ВХОДИТЬ · ПОЛИЦИЯ</text></g>
+        </svg>
+      </div>
+      <div id="s-red"></div><div id="s-blue"></div>
+      <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="s-c5" class="chip solid-red">найдена · день 2</div></div>
+      <div class="hud" style="top: 280px; justify-content: flex-start; padding-left: 70px"><div id="s-c6" class="chip">подвал соседнего дома</div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.sad;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.zar - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s-cards", { scale: 1.12, y: 40 }, { scale: 1.0, y: 0, duration: at("found"), ease: "sine.out" }, 0);
+      tl.fromTo("#s-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#s-c2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("age"));
+      tl.fromTo("#s-c3", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.25 }, at("sanat"));
+      [["#s-k1", -7], ["#s-k2", 6], ["#s-k3", -2]].forEach(([k, r], i) =>
+        tl.fromTo(k, { opacity: 0, y: 60, rotation: r }, { opacity: 1, y: 0, rotation: r, duration: 0.3, ease: "power3.out" }, at("sanat") + 0.2 + i * 0.5));
+      tl.to("#s-cards", { scale: 1.7, x: -280, y: 160, duration: 0.6, ease: "power3.inOut" }, at("slant") - 0.2);
+      tl.fromTo("#s-c4", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.4)" }, at("slant") + 0.3);
+      // подвал, мигалки
+      tl.set("#s-a", { opacity: 0 }, at("found") - 0.05);
+      tl.set("#s-b", { opacity: 1 }, at("found") - 0.05);
+      tl.fromTo("#s-bsvg", { scale: 1.0 }, { scale: 1.15, duration: D - at("found"), ease: "sine.inOut" }, at("found"));
+      tl.fromTo("#s-c5", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("found") + 0.1);
+      tl.fromTo("#s-c6", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("cellar"));
+      const n = Math.floor((D - at("found")) / 0.4);
+      for (let i = 0; i < n; i++) tl.fromTo(i % 2 ? "#s-blue" : "#s-red", { opacity: 1 }, { opacity: 0, duration: 0.36, ease: "power2.in" }, at("found") + i * 0.4);
+      window.__timelines["sad"] = tl;
+    })();
+  </script>
+</template>

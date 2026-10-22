@@ -1,0 +1,80 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #05070b; }
+    .i-layer { position: absolute; inset: 0; }
+    #i-cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 520px; }
+    #i-torch { position: absolute; left: 540px; top: 470px; width: 1200px; height: 1200px; margin: -600px 0 0 -600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,248,225,0.38) 0%, rgba(255,248,225,0.1) 32%, rgba(0,0,0,0) 62%); mix-blend-mode: screen; }
+    #i-glitch { position: absolute; inset: 0; opacity: 0;
+      background: repeating-linear-gradient(0deg, rgba(255,46,62,0.35) 0 6px, rgba(0,0,0,0) 6px 22px); mix-blend-mode: screen; }
+    #i-page { position: absolute; left: 110px; top: 260px; width: 860px; height: 760px; border-radius: 10px;
+      background: repeating-linear-gradient(180deg, transparent 0 79px, rgba(70,110,180,0.32) 79px 81px),
+        linear-gradient(90deg, transparent 0 96px, rgba(220,60,60,0.45) 96px 99px, transparent 99px), #ece6d6;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75); }
+    .i-ln { position: absolute; left: 120px; font-family: "EB Garamond", serif; font-style: italic; font-weight: 600; font-size: 48px; color: #23305e; white-space: nowrap; }
+    .i-ln b { font-family: "JetBrains Mono", monospace; font-style: normal; font-size: 36px; margin-right: 16px; }
+    .i-ln.done { color: rgba(35,48,94,0.35); text-decoration: line-through; text-decoration-color: rgba(163,18,31,0.6); }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1080" data-height="1920">
+    <!-- флешфорвард: открытая антресоль в квартире следователя -->
+    <div id="i-a" class="i-layer">
+      <div id="i-cam">
+        <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+          <defs>
+            <linearGradient id="i-w" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#151c29" /><stop offset="1" stop-color="#22304a" /></linearGradient>
+            <linearGradient id="i-bag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b7a4c" /><stop offset="1" stop-color="#344026" /></linearGradient>
+            <linearGradient id="i-dr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2a1d" /><stop offset="1" stop-color="#5a4029" /></linearGradient>
+          </defs>
+          <rect width="1080" height="1920" fill="url(#i-w)" />
+          <rect y="1060" width="1080" height="860" fill="#1d1813" />
+          <rect x="300" y="300" width="480" height="230" fill="#0a0806" />
+          <path d="M330 520 Q340 400 420 380 L700 380 Q760 400 760 520 Z" fill="url(#i-bag)" />
+          <path d="M360 470 Q540 500 730 470" stroke="#232a19" stroke-width="7" fill="none" opacity="0.6" />
+          <path d="M520 520 Q560 640 540 720 L600 720 Q620 640 600 520 Z" fill="url(#i-bag)" />
+          <rect x="296" y="296" width="488" height="8" fill="#3a3226" />
+          <rect x="270" y="300" width="30" height="230" fill="#5d5444" /><rect x="780" y="300" width="30" height="230" fill="#5d5444" />
+          <rect x="340" y="560" width="400" height="500" fill="url(#i-dr)" />
+          <rect x="420" y="980" width="240" height="40" rx="6" fill="#6a4a2c" /><rect x="440" y="1020" width="18" height="40" fill="#4a321e" /><rect x="622" y="1020" width="18" height="40" fill="#4a321e" />
+        </svg>
+      </div>
+      <div id="i-torch"></div>
+      <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="i-c1" class="chip red">через неделю</div></div>
+      <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div class="stamp"><b>ЕРШОВ</b><small>СЛЕДОВАТЕЛЬ</small></div></div>
+      <div class="hud" style="top: 990px"><div id="i-c2" class="chip yellow">его квартира · антресоль</div></div>
+    </div>
+    <!-- «но сначала» — перемотка к списку -->
+    <div id="i-b" class="i-layer" style="opacity:0">
+      <div class="scene-bg"></div>
+      <div id="i-page">
+        <div class="i-ln done" style="top:110px"><b>1.</b>Строителей 12 — кв. 9</div>
+        <div class="i-ln done" style="top:190px"><b>2.</b>пр. Мира 41 — кв. 118</div>
+        <div class="i-ln done" style="top:270px"><b>3.</b>Лесная 7 — кв. 47</div>
+        <div class="i-ln i-n" style="top:350px"><b>4.</b>Садовая 3 — кв. 22</div>
+        <div class="i-ln i-n" style="top:430px"><b>5.</b>Заречная 15 — кв. 64</div>
+        <div class="i-ln i-n" style="top:510px"><b>6.</b>Победы 30 — кв. 7</div>
+        <div class="i-ln i-n" style="top:590px"><b>7.</b>Школьная 2 — кв. 51</div>
+      </div>
+      <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div class="chip yellow">неделей раньше · адреса 4–7</div></div>
+    </div>
+    <div id="i-glitch"></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.intro;
+      const at = (k) => window.CUES[k] - S;
+      const D = window.CUES.sad - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#i-cam", { scale: 1.0 }, { scale: 1.35, duration: at("first"), ease: "power1.in" }, 0);
+      tl.fromTo("#i-torch", { x: -60, y: 40 }, { x: 30, y: -10, duration: at("first"), ease: "sine.inOut" }, 0);
+      tl.fromTo("#i-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#i-c2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("home0"));
+      // перемотка назад
+      tl.fromTo("#i-glitch", { opacity: 0 }, { opacity: 1, duration: 0.06, yoyo: true, repeat: 5, ease: "steps(1)" }, at("first") - 0.2);
+      tl.set("#i-a", { opacity: 0 }, at("first") + 0.1);
+      tl.set("#i-b", { opacity: 1 }, at("first") + 0.1);
+      tl.fromTo("#i-page", { scale: 1.08, rotation: 2 }, { scale: 1.0, rotation: -1, duration: D - at("first"), ease: "sine.out" }, at("first") + 0.1);
+      tl.fromTo(".i-n", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.2, stagger: 0.12 }, at("first") + 0.4);
+      window.__timelines["intro"] = tl;
+    })();
+  </script>
+</template>

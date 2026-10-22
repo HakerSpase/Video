@@ -1,0 +1,71 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060a; }
+    #f-cam { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 540px 640px; }
+    #f-fin { position: absolute; inset: 0; background: #040506; opacity: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding-bottom: 520px; }
+    #f-fin-t { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 160px; color: #fff; letter-spacing: -0.02em; }
+    #f-fin-s { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-top: 24px; text-align: center; line-height: 1.6; }
+    #f-fin-q { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 160px; color: #ff2e3e; text-shadow: 0 0 40px rgba(255,46,62,0.5); }
+  </style>
+  <div id="root" data-composition-id="end" data-width="1080" data-height="1920">
+    <div id="f-cam">
+      <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+        <defs>
+          <linearGradient id="f-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1020" /><stop offset="1" stop-color="#1c2842" /></linearGradient>
+          <linearGradient id="f-wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#363e4e" /><stop offset="1" stop-color="#262c38" /></linearGradient>
+          <pattern id="f-win" width="130" height="160" patternUnits="userSpaceOnUse"><rect x="30" y="40" width="70" height="86" fill="#121824" /></pattern>
+          <radialGradient id="f-warm" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#ffe0a0" /><stop offset="1" stop-color="#ff9d3c" /></radialGradient>
+        </defs>
+        <rect width="1080" height="1920" fill="url(#f-sky)" />
+        <rect x="140" y="160" width="800" height="940" fill="url(#f-wall)" />
+        <rect x="140" y="160" width="800" height="940" fill="url(#f-win)" />
+        <!-- окно Ершова: сначала тёмное, потом в нём семья -->
+        <rect id="f-win1" x="560" y="520" width="70" height="86" fill="url(#f-warm)" opacity="0" />
+        <rect id="f-win2" x="430" y="520" width="70" height="86" fill="url(#f-warm)" opacity="0" />
+        <g id="f-fam" fill="#2a1a10" opacity="0">
+          <circle cx="580" cy="560" r="9" /><rect x="572" y="570" width="16" height="36" rx="6" />
+          <circle cx="606" cy="566" r="8" /><rect x="599" y="575" width="14" height="31" rx="6" />
+          <circle cx="455" cy="582" r="6" /><rect x="450" y="589" width="11" height="17" rx="4" />
+        </g>
+        <!-- грузовик переезда -->
+        <g id="f-truck"><rect x="620" y="1010" width="300" height="130" rx="10" fill="#c9cfd8" /><rect x="920" y="1050" width="90" height="90" rx="10" fill="#9aa4b0" />
+          <circle cx="680" cy="1150" r="26" fill="#111" /><circle cx="960" cy="1150" r="26" fill="#111" /></g>
+        <rect y="1100" width="1080" height="820" fill="#13151a" />
+      </svg>
+    </div>
+    <div class="hud" style="top: 196px; justify-content: flex-start; padding-left: 70px"><div id="f-c1" class="chip red">почерк 2 · не найден</div></div>
+    <div class="hud" style="top: 280px; justify-content: flex-start; padding-left: 70px"><div id="f-c2" class="chip">ершов · переехал</div></div>
+    <div class="hud" style="top: 196px; justify-content: flex-end; padding-right: 70px"><div id="f-st" class="stamp"><b>+7 ДНЕЙ</b><small>ЛЕСНАЯ 22</small></div></div>
+    <div class="hud" style="top: 1000px"><div id="f-c3" class="chip yellow">кв. 14 · новые жильцы</div></div>
+    <div id="f-fin">
+      <div id="f-fin-t">КОНЕЦ</div>
+      <div id="f-fin-q">?</div>
+      <div id="f-fin-s">ПРОВЕРЬ СВОЮ АНТРЕСОЛЬ<br />И ПОДПИШИСЬ</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.end;
+      const at = (k) => window.CUES[k] - S;
+      const E = window.CUES._end - S + 0.5; // финальная карточка — после последнего слова
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f-cam", { scale: 1.0 }, { scale: 1.5, duration: E, ease: "sine.in" }, 0);
+      tl.fromTo("#f-c1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, 0.1);
+      tl.fromTo("#f-c2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25 }, at("moved"));
+      tl.fromTo("#f-truck", { x: 0 }, { x: 900, duration: 2.0, ease: "power1.in" }, at("moved") + 0.4);
+      tl.fromTo("#f-st", { opacity: 0 }, { opacity: 1, duration: 0.25 }, at("family"));
+      tl.to(["#f-win1", "#f-win2"], { opacity: 1, duration: 0.3, stagger: 0.25 }, at("family") + 0.2);
+      tl.to("#f-fam", { opacity: 1, duration: 0.5 }, at("family") + 0.8);
+      tl.fromTo("#f-c3", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("family") + 0.5);
+      tl.to("#f-cam", { scale: 3.2, x: -150, y: 300, duration: 2.2, ease: "power2.inOut" }, at("family") + 1.2);
+      // «антресоль они пока не открывали» — финал
+      tl.set("#f-fin", { opacity: 1 }, E);
+      tl.fromTo("#f-fin-t", { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power4.out" }, E);
+      tl.fromTo("#f-fin-q", { opacity: 0 }, { opacity: 1, duration: 0.06, yoyo: true, repeat: 3, ease: "steps(1)" }, E + 0.5);
+      tl.set("#f-fin-q", { opacity: 1 }, E + 0.8);
+      tl.fromTo("#f-fin-s", { opacity: 0 }, { opacity: 1, duration: 0.4 }, E + 0.8);
+      window.__timelines["end"] = tl;
+    })();
+  </script>
+</template>

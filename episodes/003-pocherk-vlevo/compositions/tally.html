@@ -1,0 +1,35 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050608; }
+    .t-col { position: absolute; top: 300px; width: 300px; height: 640px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    .t-num { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 200px; line-height: 1; color: #fff; }
+    .t-addr { font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 30px; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.4; }
+    .t-x { width: 150px; height: 150px; position: relative; }
+    .t-x::before, .t-x::after { content: ""; position: absolute; left: 70px; top: -10px; width: 12px; height: 170px; background: #ff2e3e;
+      box-shadow: 0 0 20px rgba(255,46,62,0.8); border-radius: 6px; }
+    .t-x::before { transform: rotate(45deg); } .t-x::after { transform: rotate(-45deg); }
+    .t-st { padding: 8px 14px; border: 4px solid #2c56b8; border-radius: 8px; color: #6f95ff; font-family: Montserrat, sans-serif;
+      font-weight: 900; font-size: 22px; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="tally" data-width="1080" data-height="1920">
+    <div class="scene-bg"></div>
+    <div class="t-col" id="t1" style="left:45px"><div class="t-x"></div><div class="t-addr">САДОВАЯ 3<br />кв. 22</div><div class="t-st">«САНАТОРИЙ»</div></div>
+    <div class="t-col" id="t2" style="left:390px"><div class="t-x"></div><div class="t-addr">ЗАРЕЧНАЯ 15<br />кв. 64</div><div class="t-st">«БАЛКОН»</div></div>
+    <div class="t-col" id="t3" style="left:735px"><div class="t-x"></div><div class="t-addr">ПОБЕДЫ 30<br />кв. 7</div><div class="t-st">«ПРОПАЛ»</div></div>
+    <div class="hud" style="top: 196px"><div id="t-c" class="chip solid-red">3 адреса · 3 смерти</div></div>
+    <div class="hud" style="top: 1000px"><div id="t-c2" class="chip">каждая — «несчастный случай»</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.tally;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(["#t1", "#t2", "#t3"], { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.18, ease: "power3.out" }, 0.05);
+      tl.fromTo(".t-x", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.22, stagger: 0.22, ease: "back.out(3)" }, at("deaths"));
+      tl.fromTo("#t-c", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.out" }, at("deaths") + 0.5);
+      tl.fromTo(".t-st", { opacity: 0, scale: 1.6, rotation: -8 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.2, stagger: 0.15, ease: "power4.in" }, at("accident"));
+      tl.fromTo("#t-c2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.25 }, at("accident") + 0.3);
+      window.__timelines["tally"] = tl;
+    })();
+  </script>
+</template>
