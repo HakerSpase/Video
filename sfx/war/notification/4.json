@@ -1,0 +1,27 @@
+{
+ "id": "0e5760af-e1cf-4288-a823-88beafad6873",
+ "title": "NixenoFX - Ep 2 - short music jingle and start and end or sms rigtone.mp3",
+ "creator": "nixeno",
+ "license": "by",
+ "license_version": "4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "foreign_landing_url": "https://freesound.org/people/nixeno/sounds/440582",
+ "provider": "freesound",
+ "source": "freesound",
+ "duration": 70492,
+ "tags": [
+  "FX",
+  "bootup",
+  "intro",
+  "event",
+  "end",
+  "start",
+  "notification",
+  "sms",
+  "ringtone",
+  "beep",
+  "application",
+  "music"
+ ],
+ "query": "notification"
+}

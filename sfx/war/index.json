@@ -1,0 +1,594 @@
+[
+ {
+  "file": "drone-flyby/0.mp3",
+  "title": "Dji Mavic Mini 2 Take-off flyby landing LR XY Zoom H5 mic.wav",
+  "creator": "Sadiquecat",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 32882
+ },
+ {
+  "file": "quadcopter-hover/0.mp3",
+  "title": "15Y08M20-Drone_Take_Off 01.WAV",
+  "creator": "n_audioman",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 32048
+ },
+ {
+  "file": "distant-artillery/0.mp3",
+  "title": "AIRPLANE FLYOVER.mp3",
+  "creator": "tubbers",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 30159
+ },
+ {
+  "file": "distant-artillery/1.mp3",
+  "title": "Distant Battlefield Soundscape",
+  "creator": "Kostas17",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 61595
+ },
+ {
+  "file": "distant-artillery/2.mp3",
+  "title": "R12-31-Artillery Guns Firing.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 46562
+ },
+ {
+  "file": "distant-artillery/3.mp3",
+  "title": "R12-11-Artillery Explosion Sequence.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 30188
+ },
+ {
+  "file": "distant-explosion/0.mp3",
+  "title": "Distant Explosion",
+  "creator": "isaac_arva",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 57000
+ },
+ {
+  "file": "distant-explosion/1.mp3",
+  "title": "Fireworks, Close, A (H1).wav",
+  "creator": "InspectorJ",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 47561
+ },
+ {
+  "file": "distant-explosion/2.mp3",
+  "title": "Fireworks, Distant, B.wav",
+  "creator": "InspectorJ",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 70536
+ },
+ {
+  "file": "distant-explosion/3.mp3",
+  "title": "Nuclear distant.wav",
+  "creator": "Svarvarn",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 32443
+ },
+ {
+  "file": "distant-explosion/4.mp3",
+  "title": "G43-14-25 Distant Explosions.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 101074
+ },
+ {
+  "file": "distant-explosion/5.mp3",
+  "title": "Distant booming traffic",
+  "creator": "peridactyloptrix",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 82031
+ },
+ {
+  "file": "distant-explosion/6.mp3",
+  "title": "Fireworks, Distant, A.wav",
+  "creator": "InspectorJ",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 52438
+ },
+ {
+  "file": "distant-explosion/7.mp3",
+  "title": "thunder 5+ heavy rain.wav",
+  "creator": "icmusic",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 52011
+ },
+ {
+  "file": "big-explosion/0.mp3",
+  "title": "R30-07-Big Explosions Some Debris.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 48122
+ },
+ {
+  "file": "big-explosion/1.mp3",
+  "title": "misunderstanding.aif",
+  "creator": "Heigh-hoo",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 31554
+ },
+ {
+  "file": "big-explosion/2.mp3",
+  "title": "Big dynamite explosion in an open mine (Chile)",
+  "creator": "felix.blume",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 60074
+ },
+ {
+  "file": "big-explosion/3.mp3",
+  "title": "Large Energy Beam",
+  "creator": "LPHypeR",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 33493
+ },
+ {
+  "file": "big-explosion/4.mp3",
+  "title": "HappyNewYear!.wav",
+  "creator": "juskiddink",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 100066
+ },
+ {
+  "file": "big-explosion/5.mp3",
+  "title": "Distant Battlefield Soundscape",
+  "creator": "Kostas17",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 61595
+ },
+ {
+  "file": "big-explosion/6.mp3",
+  "title": "Silverlake - Ryan's House - Fireworks 3 (Nearby).aif",
+  "creator": "origin35",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 31000
+ },
+ {
+  "file": "big-explosion/7.mp3",
+  "title": "Big Emu War Explosion.wav",
+  "creator": "TotalDramaEmu",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 70793
+ },
+ {
+  "file": "bomb-explosion/0.mp3",
+  "title": "S30-35 Atom bomb explosion; brighter.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 52460
+ },
+ {
+  "file": "bomb-explosion/1.mp3",
+  "title": "Air Raid Request.wav",
+  "creator": "hello_flowers",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 57959
+ },
+ {
+  "file": "bomb-explosion/2.mp3",
+  "title": "War sounds.wav",
+  "creator": "1stWebArmy",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 34784
+ },
+ {
+  "file": "bomb-explosion/3.mp3",
+  "title": "Real explosions Real gunshots.wav",
+  "creator": "The_Sound_Side",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 43644
+ },
+ {
+  "file": "bomb-explosion/4.mp3",
+  "title": "atomic_bomb.mp3",
+  "creator": "Taira Komori",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 38821
+ },
+ {
+  "file": "bomb-explosion/5.mp3",
+  "title": "Atomic Bomb 2",
+  "creator": "Hard3eat",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 47064
+ },
+ {
+  "file": "building-collapse/0.mp3",
+  "title": "Crowd screaming.mp3",
+  "creator": "MultiMax2121",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 53199
+ },
+ {
+  "file": "building-collapse/1.mp3",
+  "title": "Bomb.flac",
+  "creator": "WaveAdventurer",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 69369
+ },
+ {
+  "file": "debris-falling/0.mp3",
+  "title": "construction glass debris falling though chute into dumpster.flac",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 47541
+ },
+ {
+  "file": "debris-falling/1.mp3",
+  "title": "Roaring House Fire Wall Fall In.wav",
+  "creator": "7778",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 31253
+ },
+ {
+  "file": "debris-falling/2.mp3",
+  "title": "bruits.chute.petite.urne.gravillons.WAV",
+  "creator": "cediez",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 57744
+ },
+ {
+  "file": "debris-falling/3.mp3",
+  "title": "G33-22-Falling Debris and Explosion.wav",
+  "creator": "craigsmith",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 51174
+ },
+ {
+  "file": "debris-falling/4.mp3",
+  "title": "impacts.wav",
+  "creator": "bruno.auzet",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 61209
+ },
+ {
+  "file": "debris-falling/5.mp3",
+  "title": "broken_glass_fall.flac",
+  "creator": "Troutpack",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 71099
+ },
+ {
+  "file": "rubble/0.mp3",
+  "title": "rubble walk rocky grit cave footsteps.wav",
+  "creator": "martian",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 46505
+ },
+ {
+  "file": "rubble/1.mp3",
+  "title": "construction site pile driver rubble nearby arabic voices1 Gaza 2016.wav",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 84778
+ },
+ {
+  "file": "rubble/2.mp3",
+  "title": "ruins Palestinian children kids playing marbles and soccer in rubble of ruined buildings Gaza 2016.wav",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 59432
+ },
+ {
+  "file": "rubble/3.mp3",
+  "title": "ruins Palestinian children kids playing marbles in rubble of bombed apartment with adults laughing inside nearby and distant machinery table saw2 +kicking soccer ball Gaza 2016.wav",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 61853
+ },
+ {
+  "file": "rubble/4.mp3",
+  "title": "ruins Palestinian children kids playing soccer in rubble of ruined buildings1 Gaza 2016.wav",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 95930
+ },
+ {
+  "file": "rubble/5.mp3",
+  "title": "ruins Palestinian children kids playing on dirt mound in rubble of ruined buildings echo3 Gaza 2016.wav",
+  "creator": "kyles",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 36661
+ },
+ {
+  "file": "jet-flyby/0.mp3",
+  "title": "Jet Flyby 1",
+  "creator": "unfa",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 59874
+ },
+ {
+  "file": "jet-flyby/1.mp3",
+  "title": "Jet Flyby - Loud.wav",
+  "creator": "SorinDragon",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 46257
+ },
+ {
+  "file": "jet-flyby/2.mp3",
+  "title": "Jet Flyby",
+  "creator": "spoonsandlessspoons",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 49716
+ },
+ {
+  "file": "jet-flyby/3.mp3",
+  "title": "air show flyby 2007-08-18.wav",
+  "creator": "xyzr_kx",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 30836
+ },
+ {
+  "file": "jet-flyby/4.mp3",
+  "title": "F-18 hornet pass 01.wav",
+  "creator": "FreqMan",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 63750
+ },
+ {
+  "file": "jet-flyby/5.mp3",
+  "title": "F-18 pass 02.wav",
+  "creator": "FreqMan",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 60452
+ },
+ {
+  "file": "tinnitus/0.mp3",
+  "title": "tinnitus, acufeno pro",
+  "creator": "lalopro",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 36051
+ },
+ {
+  "file": "tinnitus/1.mp3",
+  "title": "tinnitus.wav",
+  "creator": "Sclolex",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 30000
+ },
+ {
+  "file": "tinnitus/2.mp3",
+  "title": "Huge Cinematic Explosion.wav",
+  "creator": "musicace17",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 43190
+ },
+ {
+  "file": "tinnitus/3.mp3",
+  "title": "Rain On A Window.wav",
+  "creator": "metaepitome",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 75870
+ },
+ {
+  "file": "tinnitus/4.mp3",
+  "title": "Ear Ringing Sound",
+  "creator": "Grafidka",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 54878
+ },
+ {
+  "file": "tinnitus/5.mp3",
+  "title": "120595__hear-no-elvis__bigwave-to-shallow-10_stretchedx10.mp3",
+  "creator": "hear-no-elvis",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 99938
+ },
+ {
+  "file": "phone-vibrate/0.mp3",
+  "title": "Phone Vibrate",
+  "creator": "HarryPeeks",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 52565
+ },
+ {
+  "file": "phone-vibrate/1.mp3",
+  "title": "Phone Vibrate On Surface",
+  "creator": "HarryPeeks",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 50168
+ },
+ {
+  "file": "phone-vibrate/2.mp3",
+  "title": "Phone Vibrating",
+  "creator": "SoundBiterSFX",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 33164
+ },
+ {
+  "file": "phone-vibrate/3.mp3",
+  "title": "smartphone_vibrating_alarm_silent.wav",
+  "creator": "EricsSoundschmiede",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 31697
+ },
+ {
+  "file": "phone-vibrate/4.mp3",
+  "title": "mobile_phone_vibration.wav",
+  "creator": "wangzhuokun",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 30522
+ },
+ {
+  "file": "phone-vibrate/5.mp3",
+  "title": "Vibration mobile Phone",
+  "creator": "Sheyvan",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 39934
+ },
+ {
+  "file": "phone-vibrate/6.mp3",
+  "title": "Cellphone / Smartphone / Mobile Vibration with and without interferences",
+  "creator": "Netpunk",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 43421
+ },
+ {
+  "file": "phone-vibrate/7.mp3",
+  "title": "tree wind creaking.wav",
+  "creator": "HMTSCCSound",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 45756
+ },
+ {
+  "file": "notification/0.mp3",
+  "title": "Voice notification of delay.wav",
+  "creator": "dibko",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 55347
+ },
+ {
+  "file": "notification/1.mp3",
+  "title": "Beeps, Bytes, Future Sound & Sound Bites",
+  "creator": "DudeAwesome",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 106624
+ },
+ {
+  "file": "notification/2.mp3",
+  "title": "Discovery Sounds & Sound Bites",
+  "creator": "DudeAwesome",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 91091
+ },
+ {
+  "file": "notification/3.mp3",
+  "title": "Quiet of Working From Home.m4a",
+  "creator": "HighPeakEmma",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 35029
+ },
+ {
+  "file": "notification/4.mp3",
+  "title": "NixenoFX - Ep 2 - short music jingle and start and end or sms rigtone.mp3",
+  "creator": "nixeno",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 70492
+ },
+ {
+  "file": "notification/5.mp3",
+  "title": "Laughing Joker 01 Remastered, Inner Demon 05.wav",
+  "creator": "MATRIXXX_",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 36757
+ },
+ {
+  "file": "clock-ticking/0.mp3",
+  "title": "Shakkikello, tikitys, kellon vaihto / Chess clock, ticking, changes of turn, button press, two clocks (Jerger)",
+  "creator": "YleArkisto",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 120747
+ },
+ {
+  "file": "clock-ticking/1.mp3",
+  "title": "Grandfather clock tick, arm, chime 11.wav",
+  "creator": "StrangeAcoustics",
+  "license": "by",
+  "provider": "freesound",
+  "duration": 155875
+ },
+ {
+  "file": "clock-ticking/2.mp3",
+  "title": "BGSaSc Room Tone Workshop Birds Hum Clock Ticking",
+  "creator": "Profispiesser",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 146000
+ },
+ {
+  "file": "clock-ticking/3.mp3",
+  "title": "Mortality Boring Death Dying clock tick tock klok tik tak incl 20 Hertz sometimes",
+  "creator": "het_HCKM_DS_huis",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 317297
+ },
+ {
+  "file": "clock-ticking/4.mp3",
+  "title": "Clock ticking, natural room verb",
+  "creator": "janbezouska",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 199583
+ },
+ {
+  "file": "clock-ticking/5.mp3",
+  "title": "Clock Ticking And Striking.mp3",
+  "creator": "Cass_bass",
+  "license": "cc0",
+  "provider": "freesound",
+  "duration": 327243
+ }
+]
