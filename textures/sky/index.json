@@ -1,0 +1,54 @@
+{
+ "textures": [],
+ "hdris": [
+  {
+   "id": "moonless_golf",
+   "key": "moonless_golf",
+   "name": "Moonless Golf",
+   "tags": [
+    "grass",
+    "golf",
+    "stars",
+    "milky way",
+    "field"
+   ]
+  },
+  {
+   "id": "dikhololo_night",
+   "key": "dikhololo_night",
+   "name": "Dikhololo Night",
+   "tags": [
+    "bush",
+    "grass",
+    "road",
+    "safari",
+    "tree",
+    "veld",
+    "milky way",
+    "stars",
+    "astronomy"
+   ]
+  },
+  {
+   "id": "mud_road_puresky",
+   "key": "mud_road_puresky",
+   "name": "Mud Road (Pure Sky)",
+   "tags": [
+    "pure skies"
+   ]
+  },
+  {
+   "id": "satara_night",
+   "key": "satara_night",
+   "name": "Satara Night",
+   "tags": [
+    "stars",
+    "tree",
+    "lamp",
+    "milky way",
+    "galaxy",
+    "hut"
+   ]
+  }
+ ]
+}
