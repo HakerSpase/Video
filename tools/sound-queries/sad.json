@@ -1,0 +1,11 @@
+[
+  {"q": "sad cello solo", "n": 6, "length": "long", "max": 40},
+  {"q": "adagio strings", "n": 5, "length": "long", "max": 40},
+  {"q": "albinoni adagio", "n": 3, "length": "long", "max": 20},
+  {"q": "sad piano slow", "n": 6, "length": "long", "max": 40},
+  {"q": "elegy cello piano", "n": 4, "length": "long", "max": 30},
+  {"q": "requiem lacrimosa", "n": 3, "length": "long", "max": 20},
+  {"q": "melancholic strings ambient", "n": 5, "length": "long", "max": 40},
+  {"q": "chopin funeral march", "n": 3, "length": "long", "max": 20},
+  {"q": "grief violin", "n": 4, "length": "long", "max": 30}
+]
