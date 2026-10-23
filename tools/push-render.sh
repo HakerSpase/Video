@@ -15,8 +15,14 @@ else
   git clean -fdq
 fi
 mkdir -p renders
-cp "$TMP/$NAME.mp4" "renders/$NAME.mp4"
-git add -f "renders/$NAME.mp4"
+rm -f "renders/$NAME.mp4" "renders/$NAME.mp4.part-"*
+# GitHub не принимает файлы больше 100 МБ: крупный ролик кладём частями (собрать: cat NAME.mp4.part-* > NAME.mp4)
+if [ "$(stat -c %s "$TMP/$NAME.mp4")" -gt 95000000 ]; then
+  split -b 90M "$TMP/$NAME.mp4" "renders/$NAME.mp4.part-"
+else
+  cp "$TMP/$NAME.mp4" "renders/$NAME.mp4"
+fi
+git add -A -f renders
 git commit -qm "render: $NAME"
 git push -q origin HEAD:refs/heads/renders
 echo "renders/$NAME.mp4 → ветка renders"
