@@ -35,12 +35,15 @@ def main():
     gf = FOLEY_LUFS - lufs(["-i", str(a / "foley.wav")])
     gm = MUSIC_LUFS - lufs(["-i", str(a / "music.wav")])
     print(f"усиление: голос {gv:+.1f} дБ, эффекты {gf:+.1f} дБ, музыка {gm:+.1f} дБ")
+    vdur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video],
+                                capture_output=True, text=True).stdout.strip())
+    # голос добивается тишиной до конца видео, иначе sidechain обрежет музыку и эффекты вместе с последним словом
     fc = (
-        f"[1:a]volume={gv:.2f}dB,aresample=48000,asplit=3[v][k1][k2];"
+        f"[1:a]volume={gv:.2f}dB,aresample=48000,apad=whole_dur={vdur:.3f},asplit=3[v][k1][k2];"
         f"[2:a]volume={gf:.2f}dB,aresample=48000[f0];[f0][k1]sidechaincompress=threshold=0.03:ratio=3.5:attack=15:release=350:makeup=1[f];"
         f"[3:a]volume={gm:.2f}dB,aresample=48000[m0];[m0][k2]sidechaincompress=threshold=0.03:ratio=2:attack=40:release=700:makeup=1[m];"
         + ("[v]volume=0[vq];[vq]" if os.environ.get("NOVOICE") else "[v]")
-        + "[f][m]amix=inputs=3:normalize=0:duration=first,alimiter=limit=0.84:level=false[a]"
+        + "[f][m]amix=inputs=3:normalize=0:duration=longest,alimiter=limit=0.84:level=false[a]"
     )
     pre = ep / "out" / "mix_pre.wav"
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-i", str(tmp), "-i", str(a / "foley.wav"), "-i", str(a / "music.wav"),
