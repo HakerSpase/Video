@@ -15,3 +15,5 @@ episodes/*/assets/foley.wav
 episodes/*/assets/voice_fx.wav
 *.bundle
 episodes/*/out/*.wav
+episodes/*/out/fr/
+episodes/*/out/*.jpg
