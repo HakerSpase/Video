@@ -12,9 +12,9 @@
 
 ---
 
-### V01 · подвал, Соня · (0:00–0:10) · прикрепить: С
+### V01 · Соня у свечи · (0:00–0:10) · прикрепить: С
 ```
-A small dark cellar at night lit only by one candle. The girl from the reference photo sits on an old striped mattress, wrapped in her navy puffer jacket and knitted hat, hugging her knees. Extreme close-up on her face, warm flickering candle light from the left, deep shadows, cold air: her breath forms faint clouds of vapor. She looks down quietly, then slowly lifts her eyes towards a cold blue light falling from above, with a fragile hopeful look. Camera: very slow push-in on her face. Brick wall and shelves with glass jars of pickles blurred behind her. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+A small quiet cellar room lit by a single candle. The girl from the reference photo sits on a mattress, wrapped in her navy puffer jacket and knitted hat, hugging her knees, calm. Medium close-up, warm flickering candle light, soft shadows, her breath makes faint vapor in the cool air. She looks down, then lifts her eyes upward towards a soft blue light from above, curious and hopeful. Very slow push-in. Shelves with glass jars softly blurred behind her. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V02 · завал · (0:02–0:06) · без людей
@@ -29,7 +29,7 @@ In the same candle-lit cellar, the soldier from the reference photo sits on the 
 
 ### V04 · общий план подвала · (0:10–0:17) · прикрепить: Д, С, М
 ```
-Wide high-angle shot from a corner of a small cold cellar: the girl (photo 2) sits on a mattress on a wooden pallet; the young soldier (photo 1) sits on the floor against the wall facing her; the older medic (photo 3) sits on a wooden crate in the corner. One candle burns on a crate between them. Shelves with glass jars, sacks of potatoes, wooden stairs leading up to a closed hatch. Their breath is visible as vapor. Camera: slow drift across the room, ending close on the candle flame which flickers and bends. Shadows tremble on the walls. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+Wide shot of a small cellar room lit by one candle on a wooden crate. The girl (photo 2) sits on a mattress wrapped in a blanket; the young man in an olive hat (photo 1) sits on the floor against the brick wall facing her; the older man with grey stubble (photo 3) sits on a crate in the corner. Shelves with jars, sacks of potatoes, wooden stairs up to a hatch. Their breath makes faint vapor. Slow camera drift across the room, ending close on the candle flame, which flickers. Shadows move softly on the walls. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V05 · аптечка · (0:17–0:23) · прикрепить: М
@@ -37,9 +37,14 @@ Wide high-angle shot from a corner of a small cold cellar: the girl (photo 2) si
 Top-down close-up of a medic's kit laid on an olive cloth on a concrete floor: one single syringe, three rolled white bandages, a black tourniquet, scissors, dim candle light. The hands of the medic from the reference photo enter the frame, pick up the single syringe, and the camera tilts up to his chest as he slides it carefully into the chest pocket of his jacket and closes the velcro flap, resting his palm on it for a second. His tired face is half visible. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
 ```
 
-### V06 · разговор · (0:23–0:33) · прикрепить: Д, С
+### V06 · Соня и рисунок · (0:23–0:29) · прикрепить: С
 ```
-Candle-lit cellar. Over-the-shoulder shot from behind the soldier (photo 1, out of focus in foreground) towards the little girl (photo 2) on the mattress. She looks up at him and asks a short quiet question. Cut to a close-up of the soldier: he answers with one soft word and a forced reassuring half-smile, pain in his eyes. Then the girl's small hands unfold a sheet of squared school paper with a naive orange marker drawing of a cat and a little red heart, and she looks at it. Finally the soldier turns his face away, wet eyes catching the candle light, jaw clenched. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+A small cellar room lit by a candle. The girl from the reference photo sits on a mattress and unfolds a sheet of squared school paper with a naive orange marker drawing of a cat and a small red heart. She looks at the drawing, then looks up at someone off-screen and asks a short question with a shy little smile. Close-up, warm candle light, very slow push-in. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
+```
+
+### V06b · Денис отвечает · (0:29–0:33) · прикрепить: Д
+```
+Close-up of the young man from the reference photo sitting in a dim cellar lit by a candle. He looks at someone off-screen, answers with one soft word and a gentle reassuring half-smile, but there is sadness in his eyes. Then he slowly turns his face away, eyes glistening in the candle light, jaw clenched. Very slow push-in. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V07 · рация, Шах уходит · (0:33–0:41) · прикрепить: М, Ш
@@ -67,14 +72,14 @@ Night, a muddy field road. A boxy old Soviet UAZ-452 van, burned out and engulfe
 Candle-lit cellar. The bearded soldier (photo 1) comes down the wooden stairs alone, slowly, and sits on the bottom step. He takes off his helmet and stares at the floor with an empty face, saying nothing. Cut to the older medic (photo 2) sitting on a crate: he looks at his watch, then slowly raises his eyes towards the girl off-screen and barely shakes his head, his face grim. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
 ```
 
-### V12 · Соня под фольгой · (0:56–0:59) · прикрепить: С
+### V12 · Соня спит · (0:56–0:59) · прикрепить: С
 ```
-Candle-lit cellar. The little girl (reference photo) lies on the old mattress under a crumpled gold-silver emergency foil blanket, only her pale face and knitted hat visible, eyes half closed, breathing shallow. The candle light glints on the crinkled foil. Camera: very slow push-in to her face, she slowly closes and opens her eyes. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+The girl from the reference photo is sleeping peacefully on a mattress, tucked under a shiny gold emergency blanket like a cozy quilt, only her face and knitted hat visible. Warm candle light glints on the crinkled foil. She slowly opens her eyes, blinks sleepily and closes them again. Very slow push-in. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
-### V13 · он берёт её на руки · (0:59–1:04) · прикрепить: Д, С
+### V13 · берёт её на руки · (0:59–1:04) · прикрепить: Д, С
 ```
-Candle-lit cellar. The young soldier (photo 1) kneels by the mattress, carefully lifts the little girl (photo 2) wrapped in a blanket into his arms, her head on his shoulder, and stands up. He adjusts her head gently, switches on a red headlamp on his forehead, and climbs the wooden stairs towards the hatch. Cut: outside at night, he climbs out of a cellar hatch in the ground among rubble, holding her, red light from the headlamp, and walks towards the camera into darkness. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+A dim cellar room lit by a candle. The young man (photo 1) kneels by the mattress and gently picks up the sleepy girl (photo 2) wrapped in a warm blanket, holding her like a father carries a sleepy child, her head resting on his shoulder. He stands up, switches on a small red headlamp, and carefully walks up the wooden stairs towards an open hatch with night sky above. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V14 · тепловизор сверху · (1:04–1:08) · без людей (можно Д)
@@ -82,9 +87,9 @@ Candle-lit cellar. The young soldier (photo 1) kneels by the mattress, carefully
 Black-and-white thermal drone camera view from high above at night: a single white-hot human figure carrying something small walks along a dark treeline next to a field road. Grainy thermal noise, slight drone drift, the camera slowly tracks him. Cold, threatening, he looks tiny and alone. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
 ```
 
-### V15 · лесополоса · (1:08–1:15) · прикрепить: Д, С
+### V15 · идёт вдоль деревьев · (1:08–1:15) · прикрепить: Д
 ```
-Night, a dirt track along a row of bare winter trees, cold mist over a dark field, faint orange glow of distant fires on the horizon. The soldier (photo 1) walks carrying the little girl (photo 2) pressed to his chest, her head on his shoulder. Wide shot first: a small lonely figure in a huge dark landscape. Then the camera moves alongside him in a side close-up: he walks and quietly talks to her, his breath visible as vapor in the cold blue moonlight, her eyes half open against his jacket. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+Night, a dirt path along a row of bare winter trees, soft mist over a dark field, cold blue moonlight, faint orange glow on the far horizon. The young man from the reference photo walks along the path carrying a sleeping child wrapped in a blanket on his shoulder, only a small knitted hat is visible. Wide shot first: a small lonely figure in a huge dark landscape. Then the camera moves beside him in a side close-up: he walks and talks softly, his breath making vapor in the cold air. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V16 · море · (1:15–1:18) · без людей
@@ -92,14 +97,14 @@ Night, a dirt track along a row of bare winter trees, cold mist over a dark fiel
 A calm grey sea at dawn seen from an empty pebble beach, soft fog, pale silver light, small slow waves rolling onto the stones. Dreamlike, peaceful, desaturated, like a memory. Camera: slow lateral move. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
 ```
 
-### V17 · рука соскальзывает · (1:18–1:25) · прикрепить: Д, С · ⟶ продолжение V15
+### V17 · варежка · (1:18–1:25) · прикрепить: Д · ⟶ продолжение V15
 ```
-Night, cold moonlight, along the treeline. Close-up of the soldier walking with the girl in his arms: her small hand rests on his shoulder, then slowly slides down and hangs limp, swaying with his steps. He does not notice, keeps talking softly and walking. Camera ends behind him as he walks away along the treeline into the mist and darkness. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+Night, cold moonlight, a dirt path along a treeline. Low close-up on the ground: a small pink knitted child's mitten quietly falls onto the frosty path. The man's boots keep walking past without stopping. The camera stays on the mitten as he walks away into the mist and darkness, his silhouette slowly fading. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
-### V18 · точка эвакуации · (1:25–1:31) · прикрепить: Д, С, М
+### V18 · точка эвакуации · (1:25–1:31) · прикрепить: Д, М
 ```
-Night, an evacuation point at the edge of a forest: a large armored military truck with its rear door open and dim red light inside, no markings. The medic (photo 3) takes the little girl (photo 2) from the arms of the soldier (photo 1), lays her on a foil blanket on the ground, kneels and listens, two fingers on her neck, head lowered, for a long moment. The soldier stands frozen behind, his face lit by the red light. Photorealistic cinematic war drama, vertical 9:16, shot on ARRI Alexa with anamorphic lens, shallow depth of field, natural film grain, muted desaturated colors, low-key realistic lighting, subtle handheld camera, real physics, natural human motion. No text, no subtitles, no logos, no flags, no insignia, no blood, no gore, no music.
+Night at the edge of a forest: a large dark truck with its rear door open and dim red light inside, no markings. The older man with grey stubble (photo 2) gently takes a bundle wrapped in a blanket from the arms of the young man (photo 1) and turns away towards the red light. Close-up of the older man: he kneels, head lowered, eyes closed, listening for a long moment. The young man stands frozen behind him, his face lit by the red light. Photorealistic cinematic film, vertical 9:16, 35mm lens, shallow depth of field, soft film grain, muted warm colors, gentle natural motion, calm tender mood. No text, no logos.
 ```
 
 ### V19 · «Минут сорок, брат» · (1:31–1:37) · прикрепить: Д, М · ⟶ продолжение V18
@@ -123,5 +128,7 @@ Grey morning light, fog behind. Close-up of the soldier's hands (reference photo
 ```
 
 ---
+
+**Если всё равно «нарушает правила»:** попробуй без портрета Сони — только текст. Не выйдет — пропусти, кадры с Соней я соберу сам из её портрета (медленный наезд, свеча, пар).
 
 **Приоритет, если времени мало:** V01, V04, V06, V08, V09, V13, V15, V17, V18, V19, V20, V22.
