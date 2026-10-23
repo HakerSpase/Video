@@ -45,7 +45,9 @@ def main():
         else:
             # hold — сколько секунд в конце шота держать последний кадр (стоп-кадр)
             speed = (s["out"] - s["in"]) / (dur - s.get("hold", 0))
-            vf = [f"trim={s['in']}:{s['out']}", "setpts=PTS-STARTPTS", f"setpts=PTS/{speed:.5f}"]
+            # delogo — замазать мелочь в кадре (шевроны): [[t0, t1, x, y, w, h], ...] во времени и пикселях исходника
+            vf = [f"delogo=x={x}:y={y}:w={w}:h={h}:enable='between(t,{t0},{t1})'" for t0, t1, x, y, w, h in s.get("delogo", [])]
+            vf += [f"trim={s['in']}:{s['out']}", "setpts=PTS-STARTPTS", f"setpts=PTS/{speed:.5f}"]
             if "crop" in s:
                 x, y, w, h = s["crop"]
                 vf.append(f"crop={w}:{h}:{x}:{y}")

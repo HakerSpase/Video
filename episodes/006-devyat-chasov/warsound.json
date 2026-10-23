@@ -1,68 +1,552 @@
 {
  "ambience": [],
  "beds": [
-  [0, "granny", "assets/sfx/room_tone.mp3", 0.3, {"fade": 0.05}],
-  [0, "granny", "assets/sfx/drip.mp3", 0.25, {"fade": 0.05, "wet": 0.3}],
-  ["granny", "thinks", "assets/sfx/wind.mp3", 0.45, {"start": 12, "fade": 0.1}],
-  ["granny", "thinks", "assets/sfx/distant_booms.mp3", 0.4, {"start": 20, "lp": 900, "fade": 0.1, "wet": 0.3}],
-  ["thinks", "eight", "assets/sfx/room_tone.mp3", 0.3, {"start": 5, "fade": 0.05}],
-  ["thinks", "eight", "assets/sfx/drip.mp3", 0.3, {"start": 6, "fade": 0.05, "wet": 0.3}],
-  ["thinks", "eight", "assets/sfx/rumble.mp3", 0.3, {"start": 30, "lp": 200, "fade": 0.3}],
-  ["six_pm", "eight", "assets/sfx/tension.mp3", 0.25, {"start": 40, "fade": 1.0}],
-  ["burns", "inside", "assets/sfx/wind.mp3", 0.45, {"start": 30, "fade": 0.1}],
-  ["burns", "inside", "assets/sfx/distant_booms.mp3", 0.3, {"start": 5, "lp": 700, "fade": 0.2, "wet": 0.3}],
-  ["inside", "alone", "assets/sfx/wind_low.mp3", 0.4, {"fade": 0.1}],
-  ["alone", "lifts+1.8", "assets/sfx/room_tone.mp3", 0.3, {"start": 15, "fade": 0.05}],
-  ["alone", "lifts+1.8", "assets/sfx/drip.mp3", 0.3, {"start": 12, "fade": 0.05, "wet": 0.3}],
-  ["lifts+1.8", "treeline", "assets/sfx/wind.mp3", 0.45, {"start": 40, "fade": 0.1}],
-  ["treeline", "sea", "assets/sfx/wind.mp3", 0.4, {"start": 5, "fade": 0.1}],
-  ["treeline", "sea", "assets/sfx/steps_mud.mp3", 0.35, {"start": 2, "fade": 0.4}],
-  ["treeline", "sea", "assets/sfx/breathing.mp3", 0.22, {"start": 3, "lp": 4000, "fade": 0.5}],
-  ["sea", "km2", "assets/sfx/waves.mp3", 0.6, {"start": 5, "fade": 0.6, "wet": 0.4}],
-  ["km2", "takes", "assets/sfx/wind.mp3", 0.4, {"start": 20, "fade": 0.1}],
-  ["km2", "takes", "assets/sfx/steps_mud.mp3", 0.33, {"start": 12, "fade": 0.3}],
-  ["km2", "takes", "assets/sfx/breathing.mp3", 0.25, {"start": 14, "lp": 4000, "fade": 0.5}],
-  ["takes", "order_am", "assets/sfx/generator.mp3", 0.2, {"lp": 600, "fade": 0.3}],
-  ["takes", "order_am", "assets/sfx/wind_low.mp3", 0.35, {"start": 20, "fade": 0.2}],
-  ["order_am", "_duration", "assets/sfx/wind.mp3", 0.35, {"start": 60, "fade": 0.2}],
-  ["order_am", "pocket", "assets/sfx/steps_gravel.mp3", 0.4, {"start": 1, "fade": 0.4}],
-  ["order_am", "_duration", "assets/sfx/crows.mp3", 0.3, {"fade": 0.6, "wet": 0.5}]
+  [
+   0,
+   "granny",
+   "assets/sfx/room_tone.mp3",
+   0.3,
+   {
+    "fade": 0.05
+   }
+  ],
+  [
+   0,
+   "granny",
+   "assets/sfx/drip.mp3",
+   0.25,
+   {
+    "fade": 0.05,
+    "wet": 0.3
+   }
+  ],
+  [
+   "granny",
+   "thinks",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "start": 12,
+    "fade": 0.1
+   }
+  ],
+  [
+   "granny",
+   "thinks",
+   "assets/sfx/distant_booms.mp3",
+   0.4,
+   {
+    "start": 20,
+    "lp": 900,
+    "fade": 0.1,
+    "wet": 0.3
+   }
+  ],
+  [
+   "thinks",
+   "eight",
+   "assets/sfx/room_tone.mp3",
+   0.3,
+   {
+    "start": 5,
+    "fade": 0.05
+   }
+  ],
+  [
+   "thinks",
+   "eight",
+   "assets/sfx/drip.mp3",
+   0.3,
+   {
+    "start": 6,
+    "fade": 0.05,
+    "wet": 0.3
+   }
+  ],
+  [
+   "thinks",
+   "eight",
+   "assets/sfx/rumble.mp3",
+   0.3,
+   {
+    "start": 30,
+    "lp": 200,
+    "fade": 0.3
+   }
+  ],
+  [
+   "six_pm",
+   "eight",
+   "assets/sfx/tension.mp3",
+   0.25,
+   {
+    "start": 40,
+    "fade": 1.0
+   }
+  ],
+  [
+   "burns",
+   "inside",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "start": 30,
+    "fade": 0.1
+   }
+  ],
+  [
+   "burns",
+   "inside",
+   "assets/sfx/distant_booms.mp3",
+   0.3,
+   {
+    "start": 5,
+    "lp": 700,
+    "fade": 0.2,
+    "wet": 0.3
+   }
+  ],
+  [
+   "inside",
+   "alone",
+   "assets/sfx/wind_low.mp3",
+   0.4,
+   {
+    "fade": 0.1
+   }
+  ],
+  [
+   "alone",
+   "lifts+1.8",
+   "assets/sfx/room_tone.mp3",
+   0.3,
+   {
+    "start": 15,
+    "fade": 0.05
+   }
+  ],
+  [
+   "alone",
+   "lifts+1.8",
+   "assets/sfx/drip.mp3",
+   0.3,
+   {
+    "start": 12,
+    "fade": 0.05,
+    "wet": 0.3
+   }
+  ],
+  [
+   "lifts+1.8",
+   "treeline",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "start": 40,
+    "fade": 0.1
+   }
+  ],
+  [
+   "treeline",
+   "sea",
+   "assets/sfx/wind.mp3",
+   0.4,
+   {
+    "start": 5,
+    "fade": 0.1
+   }
+  ],
+  [
+   "treeline",
+   "sea",
+   "assets/sfx/steps_mud.mp3",
+   0.35,
+   {
+    "start": 2,
+    "fade": 0.4
+   }
+  ],
+  [
+   "treeline",
+   "sea",
+   "assets/sfx/breathing.mp3",
+   0.22,
+   {
+    "start": 3,
+    "lp": 4000,
+    "fade": 0.5
+   }
+  ],
+  [
+   "sea",
+   "km2",
+   "assets/sfx/waves.mp3",
+   0.6,
+   {
+    "start": 5,
+    "fade": 0.6,
+    "wet": 0.4
+   }
+  ],
+  [
+   "km2",
+   "takes",
+   "assets/sfx/wind.mp3",
+   0.4,
+   {
+    "start": 20,
+    "fade": 0.1
+   }
+  ],
+  [
+   "km2",
+   "takes",
+   "assets/sfx/steps_mud.mp3",
+   0.33,
+   {
+    "start": 12,
+    "fade": 0.3
+   }
+  ],
+  [
+   "km2",
+   "takes",
+   "assets/sfx/breathing.mp3",
+   0.25,
+   {
+    "start": 14,
+    "lp": 4000,
+    "fade": 0.5
+   }
+  ],
+  [
+   "takes",
+   "order_am",
+   "assets/sfx/generator.mp3",
+   0.2,
+   {
+    "lp": 600,
+    "fade": 0.3
+   }
+  ],
+  [
+   "takes",
+   "order_am",
+   "assets/sfx/wind_low.mp3",
+   0.35,
+   {
+    "start": 20,
+    "fade": 0.2
+   }
+  ],
+  [
+   "order_am",
+   "_duration",
+   "assets/sfx/wind.mp3",
+   0.35,
+   {
+    "start": 60,
+    "fade": 0.2
+   }
+  ],
+  [
+   "order_am",
+   "pocket",
+   "assets/sfx/steps_gravel.mp3",
+   0.4,
+   {
+    "start": 1,
+    "fade": 0.4
+   }
+  ],
+  [
+   "order_am",
+   "_duration",
+   "assets/sfx/crows.mp3",
+   0.3,
+   {
+    "fade": 0.6,
+    "wet": 0.5
+   }
+  ]
  ],
  "samples": [
-  ["thinks+1.5", "assets/sfx/artillery.mp3", 0.25, {"start": 3, "dur": 4, "lp": 250, "fade_out": 1.5}],
-  ["kit+2.5", "assets/sfx/artillery.mp3", 0.22, {"start": 12, "dur": 4, "lp": 250, "fade_out": 1.5}],
-  ["saves+0.5", "assets/sfx/velcro.mp3", 0.4, {"start": 16.7, "dur": 0.7}],
-  ["six_pm", "assets/sfx/radio_chop.mp3", 0.5, {"start": 3, "dur": 1.9, "hp": 300, "fade_out": 0.3}],
-  ["quote", "assets/sfx/radio.mp3", 0.25, {"start": 5, "dur": 2.3, "hp": 500, "lp": 3500, "fade_out": 0.3}],
-  ["quote+2.2", "assets/sfx/radio_chop.mp3", 0.4, {"start": 12, "dur": 0.4, "hp": 300}],
-  ["shah+0.3", "assets/sfx/steps_gravel.mp3", 0.3, {"start": 3, "dur": 2.2, "lp": 1800, "fade_out": 0.5}],
-  ["eight", "assets/sfx/fpv.mp3", 0.55, {"start": 1.2, "dur": 2.25, "rate": 1.25, "fade_in": 0.4, "fade_out": 0.02}],
-  ["eight+1.1", "assets/sfx/drone.mp3", 0.5, {"start": 20.5, "dur": 1.1, "rate": 1.35, "fade_in": 0.2, "fade_out": 0.02}],
-  ["hit+0.02", "assets/sfx/blast_low.mp3", 0.8, {"start": 0.0, "dur": 5.0, "lp": 170, "fade_out": 2.5}],
-  ["hit+0.1", "assets/sfx/tinnitus.mp3", 0.1, {"start": 2, "dur": 4.0, "fade_in": 0.3, "fade_out": 2.5}],
-  ["alone", "assets/sfx/steps_gravel.mp3", 0.32, {"start": 8, "dur": 1.8, "lp": 1500, "fade_out": 0.4}],
-  ["wontlast", "assets/sfx/heartbeat.mp3", 0.4, {"start": 2, "dur": 4.0, "lp": 160, "fade_in": 0.8, "fade_out": 1.0}],
-  ["lifts+1.8", "assets/sfx/steps_mud.mp3", 0.35, {"start": 20, "dur": 2.4, "fade_out": 0.5}],
-  ["three", "assets/sfx/hover.mp3", 0.2, {"start": 8, "dur": 4.5, "hp": 400, "fade_in": 1.0, "fade_out": 1.0, "wet": 0.5}],
-  ["talks+1", "assets/sfx/distant_booms.mp3", 0.25, {"start": 40, "dur": 4, "lp": 400, "fade_out": 1.5, "wet": 0.4}],
-  ["km2", "assets/sfx/hover.mp3", 0.25, {"start": 14, "dur": 3.0, "hp": 400, "fade_in": 0.8, "fade_out": 1.0, "wet": 0.5}],
-  ["pocket+0.3", "assets/sfx/paper.mp3", 0.45, {"start": 25.4, "dur": 1.2}],
-  ["pocket+1.8", "assets/sfx/velcro.mp3", 0.35, {"start": 16.7, "dur": 0.7}],
-  ["notall+0.5", "assets/sfx/artillery.mp3", 0.3, {"start": 3, "dur": 4, "lp": 400, "fade_out": 1.5, "wet": 0.4}]
+  [
+   "thinks+1.5",
+   "assets/sfx/artillery.mp3",
+   0.25,
+   {
+    "start": 3,
+    "dur": 4,
+    "lp": 250,
+    "fade_out": 1.5
+   }
+  ],
+  [
+   "kit+2.5",
+   "assets/sfx/artillery.mp3",
+   0.22,
+   {
+    "start": 12,
+    "dur": 4,
+    "lp": 250,
+    "fade_out": 1.5
+   }
+  ],
+  [
+   "saves+0.5",
+   "assets/sfx/velcro.mp3",
+   0.4,
+   {
+    "start": 16.7,
+    "dur": 0.7
+   }
+  ],
+  [
+   "six_pm",
+   "assets/sfx/radio_chop.mp3",
+   0.5,
+   {
+    "start": 3,
+    "dur": 1.9,
+    "hp": 300,
+    "fade_out": 0.3
+   }
+  ],
+  [
+   "quote",
+   "assets/sfx/radio.mp3",
+   0.25,
+   {
+    "start": 5,
+    "dur": 2.3,
+    "hp": 500,
+    "lp": 3500,
+    "fade_out": 0.3
+   }
+  ],
+  [
+   "quote+2.2",
+   "assets/sfx/radio_chop.mp3",
+   0.4,
+   {
+    "start": 12,
+    "dur": 0.4,
+    "hp": 300
+   }
+  ],
+  [
+   "shah+0.3",
+   "assets/sfx/steps_gravel.mp3",
+   0.3,
+   {
+    "start": 3,
+    "dur": 2.2,
+    "lp": 1800,
+    "fade_out": 0.5
+   }
+  ],
+  [
+   "eight",
+   "assets/sfx/fpv.mp3",
+   0.55,
+   {
+    "start": 1.2,
+    "dur": 2.25,
+    "rate": 1.25,
+    "fade_in": 0.4,
+    "fade_out": 0.02
+   }
+  ],
+  [
+   "eight+1.1",
+   "assets/sfx/drone.mp3",
+   0.5,
+   {
+    "start": 20.5,
+    "dur": 1.1,
+    "rate": 1.35,
+    "fade_in": 0.2,
+    "fade_out": 0.02
+   }
+  ],
+  [
+   "hit+0.02",
+   "assets/sfx/blast_low.mp3",
+   0.8,
+   {
+    "start": 0.0,
+    "dur": 5.0,
+    "lp": 170,
+    "fade_out": 2.5
+   }
+  ],
+  [
+   "hit+0.1",
+   "assets/sfx/tinnitus.mp3",
+   0.1,
+   {
+    "start": 2,
+    "dur": 4.0,
+    "fade_in": 0.3,
+    "fade_out": 2.5
+   }
+  ],
+  [
+   "alone",
+   "assets/sfx/steps_gravel.mp3",
+   0.32,
+   {
+    "start": 8,
+    "dur": 1.8,
+    "lp": 1500,
+    "fade_out": 0.4
+   }
+  ],
+  [
+   "wontlast",
+   "assets/sfx/heartbeat.mp3",
+   0.4,
+   {
+    "start": 2,
+    "dur": 4.0,
+    "lp": 160,
+    "fade_in": 0.8,
+    "fade_out": 1.0
+   }
+  ],
+  [
+   "lifts+1.8",
+   "assets/sfx/steps_mud.mp3",
+   0.35,
+   {
+    "start": 20,
+    "dur": 2.4,
+    "fade_out": 0.5
+   }
+  ],
+  [
+   "three",
+   "assets/sfx/hover.mp3",
+   0.2,
+   {
+    "start": 8,
+    "dur": 4.5,
+    "hp": 400,
+    "fade_in": 1.0,
+    "fade_out": 1.0,
+    "wet": 0.5
+   }
+  ],
+  [
+   "talks+1",
+   "assets/sfx/distant_booms.mp3",
+   0.25,
+   {
+    "start": 40,
+    "dur": 4,
+    "lp": 400,
+    "fade_out": 1.5,
+    "wet": 0.4
+   }
+  ],
+  [
+   "km2",
+   "assets/sfx/hover.mp3",
+   0.25,
+   {
+    "start": 14,
+    "dur": 3.0,
+    "hp": 400,
+    "fade_in": 0.8,
+    "fade_out": 1.0,
+    "wet": 0.5
+   }
+  ],
+  [
+   "pocket+0.3",
+   "assets/sfx/paper.mp3",
+   0.45,
+   {
+    "start": 25.4,
+    "dur": 1.2
+   }
+  ],
+  [
+   "pocket+1.8",
+   "assets/sfx/velcro.mp3",
+   0.35,
+   {
+    "start": 16.7,
+    "dur": 0.7
+   }
+  ],
+  [
+   "notall+0.5",
+   "assets/sfx/artillery.mp3",
+   0.3,
+   {
+    "start": 3,
+    "dur": 4,
+    "lp": 400,
+    "fade_out": 1.5,
+    "wet": 0.4
+   }
+  ]
  ],
  "events": [
-  ["thermal", "eight", "eight+1.1"],
-  ["fire", "burns", "inside", 0.35],
-  ["fire", "inside", "alone", 0.9],
-  ["rustle", "lifts", 1.0],
-  ["typing", "msg-0.45", "msg+0.65"],
-  ["send", "msg+0.9"],
-  ["last_vibe", "mark+0.6"]
+  [
+   "thermal",
+   "eight",
+   "eight+1.1"
+  ],
+  [
+   "fire",
+   "burns",
+   "inside",
+   0.35
+  ],
+  [
+   "fire",
+   "inside",
+   "alone",
+   0.9
+  ],
+  [
+   "rustle",
+   "lifts",
+   1.0
+  ],
+  [
+   "typing",
+   "msg-0.45",
+   "msg+0.65"
+  ],
+  [
+   "send",
+   "msg+0.9"
+  ],
+  [
+   "last_vibe",
+   "mark+0.6"
+  ]
  ],
  "duck": [
-  ["alone+1.6", "nocar", 0.35],
-  ["listens", "carried", 0.2],
-  ["mark", "mark+1.5", 0.5]
+  [
+   "alone+1.6",
+   "nocar",
+   0.35
+  ],
+  [
+   "listens",
+   "carried",
+   0.2
+  ],
+  [
+   "mark",
+   "mark+1.5",
+   0.5
+  ]
  ],
  "ring_synth": 0.0,
  "music": [],
@@ -70,11 +554,18 @@
  "duck_protect": [],
  "foley_lufs": -24,
  "tracks": [
-  [0, "six_pm-0.2", "assets/sfx/music_prelude.mp3", 1.0, {"start": 0, "fade_in": 1.0, "fade_out": 2.5, "duck": 0.55}],
-  ["nocar", "treeline", "assets/sfx/music_cello.mp3", 0.85, {"start": 0, "fade_in": 2.5, "fade_out": 2.0, "duck": 0.55}],
-  ["treeline-0.4", "forty", "assets/sfx/music_nocturne.mp3", 1.0, {"start": 0, "fade_in": 2.0, "fade_out": 0.5, "duck": 0.55}],
-  ["carried-0.3", "order_am", "assets/sfx/music_nocturne.mp3", 0.9, {"start": 180, "fade_in": 2.5, "fade_out": 1.5, "duck": 0.55}],
-  ["order_am-0.2", "_duration", "assets/sfx/music_prelude.mp3", 1.0, {"start": 76, "fade_in": 1.5, "fade_out": 3.0, "duck": 0.55}]
+  [
+   0,
+   "_duration",
+   "assets/sfx/music_sadness.mp3",
+   1.0,
+   {
+    "start": 0,
+    "fade_in": 1.5,
+    "fade_out": 3.5,
+    "duck": 0.55
+   }
+  ]
  ],
  "music_gain": 0.5
 }
