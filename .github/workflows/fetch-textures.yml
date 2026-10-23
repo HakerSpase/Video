@@ -1,0 +1,35 @@
+name: Текстуры Poly Haven в ветку renders
+
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: "Файл со списком (JSON)"
+        required: true
+      name:
+        description: "Имя набора"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Загрузка
+        timeout-minutes: 25
+        continue-on-error: true
+        run: python3 tools/fetch_textures.py "${{ inputs.spec }}" "/tmp/tex/${{ inputs.name }}"
+      - name: В ветку renders
+        if: always()
+        run: |
+          git config user.name "render-bot"
+          git config user.email "render-bot@users.noreply.github.com"
+          if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
+          mkdir -p textures && cp -r "/tmp/tex/${{ inputs.name }}" textures/
+          git add -f textures
+          git commit -qm "textures: ${{ inputs.name }}"
+          git push -q origin HEAD:refs/heads/renders
