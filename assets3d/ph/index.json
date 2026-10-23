@@ -1,0 +1,241 @@
+{
+ "sketchfab": {},
+ "polyhaven": {
+  "rubber_boots": [
+   {
+    "id": "rubber_boots",
+    "name": "Rubber Boots",
+    "tags": [
+     "clothing",
+     "shoes",
+     "outdoor",
+     "waterproof",
+     "wellies",
+     "rubber",
+     "workwear",
+     "utility"
+    ]
+   }
+  ],
+  "old_military_crate": [
+   {
+    "id": "old_military_crate",
+    "name": "Old Military Crate",
+    "tags": [
+     "ammunition crate",
+     "military supply crate",
+     "hand-painted symbol",
+     "transport container",
+     "wooden",
+     "vintage",
+     "worn",
+     "military"
+    ]
+   }
+  ],
+  "wooden_military_crate": [
+   {
+    "id": "wooden_military_crate",
+    "name": "Wooden Military Crate",
+    "tags": [
+     "military",
+     "crate",
+     "box",
+     "army",
+     "chest",
+     "ammunition crate",
+     "wooden",
+     "weathered"
+    ]
+   }
+  ],
+  "ammo_box": [
+   {
+    "id": "ammo_box",
+    "name": "Ammo Box",
+    "tags": [
+     "old",
+     "vintage",
+     "antique",
+     "metal",
+     "rusted",
+     "army",
+     "military",
+     "box"
+    ]
+   }
+  ],
+  "metal_jerrycan_green": [
+   {
+    "id": "metal_jerrycan_green",
+    "name": "Metal Jerrycan Green",
+    "tags": [
+     "old",
+     "worn",
+     "jerrycan",
+     "fuel can",
+     "military",
+     "petrol",
+     "garage",
+     "gas"
+    ]
+   }
+  ],
+  "dead_tree_trunk": [
+   {
+    "id": "dead_tree_trunk",
+    "name": "Dead Tree Trunk",
+    "tags": [
+     "log",
+     "dead tree",
+     "tree",
+     "trunk",
+     "bark",
+     "natural",
+     "foliage",
+     "nature"
+    ]
+   }
+  ],
+  "tree_stump_01": [
+   {
+    "id": "tree_stump_01",
+    "name": "Tree Stump 01",
+    "tags": [
+     "tree",
+     "trunk",
+     "stump",
+     "dead tree",
+     "bark",
+     "forest",
+     "natural",
+     "nature"
+    ]
+   }
+  ],
+  "Lantern_01": [
+   {
+    "id": "Lantern_01",
+    "name": "Lantern 01",
+    "tags": [
+     "prop",
+     "metal",
+     "glass",
+     "lantern",
+     "antique",
+     "vintage",
+     "hurricane",
+     "lamp"
+    ]
+   }
+  ],
+  "wooden_candlestick": [
+   {
+    "id": "wooden_candlestick",
+    "name": "Wooden Candlestick",
+    "tags": [
+     "old",
+     "antique",
+     "vintage",
+     "fancy",
+     "candle",
+     "historic",
+     "victorian"
+    ]
+   }
+  ],
+  "steel_frame_shelves_01": [
+   {
+    "id": "steel_frame_shelves_01",
+    "name": "Steel Frame Shelves 01",
+    "tags": [
+     "commercial",
+     "modern",
+     "shelf",
+     "bookshelf",
+     "metal",
+     "wood"
+    ]
+   }
+  ],
+  "wooden_bucket_01": [
+   {
+    "id": "wooden_bucket_01",
+    "name": "Wooden Bucket 01",
+    "tags": [
+     "wooden",
+     "bucket",
+     "old",
+     "worn",
+     "wood",
+     "prop",
+     "container"
+    ]
+   }
+  ],
+  "Barrel_01": [
+   {
+    "id": "Barrel_01",
+    "name": "Barrel_01",
+    "tags": [
+     "barrel",
+     "oil",
+     "explosive",
+     "radioactive",
+     "metal",
+     "red barrel",
+     "oil barrel",
+     "drums"
+    ]
+   }
+  ],
+  "boulder_01": [
+   {
+    "id": "boulder_01",
+    "name": "Boulder 01",
+    "tags": [
+     "rocks",
+     "boulder",
+     "lichen",
+     "landscape",
+     "rock",
+     "geology",
+     "formation",
+     "weathered"
+    ]
+   }
+  ],
+  "dry_branches_medium_01": [
+   {
+    "id": "dry_branches_medium_01",
+    "name": "Dry Branches Medium 01",
+    "tags": [
+     "branches",
+     "dead",
+     "dry",
+     "plants",
+     "nature",
+     "natural",
+     "plant",
+     "outdoor"
+    ]
+   }
+  ],
+  "wooden_crate_01": [
+   {
+    "id": "wooden_crate_01",
+    "name": "Wooden Crate 01",
+    "tags": [
+     "vintage",
+     "wood",
+     "old",
+     "wooden",
+     "fancy",
+     "colonial",
+     "chest",
+     "box"
+    ]
+   }
+  ]
+ }
+}
