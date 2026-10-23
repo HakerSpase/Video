@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .r-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    #r-q { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(8,10,12,0.72); border-left: 8px solid #3ddc84;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    #r-q small { display: block; font-size: 24px; color: #3ddc84; font-weight: 800; letter-spacing: 0.1em; }
+    #r-q b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+  </style>
+  <div id="root" data-composition-id="radio" data-width="1080" data-height="1920">
+    <div class="r-pos stamp" id="r-1"><b>18:00</b><small>ДО ЭВАКУАЦИИ — 6 ЧАСОВ</small></div>
+    <div id="r-q"><small>РАЦИЯ · КАНАЛ 4</small><b>«Таблетка» выехала.<br />Двадцать минут.</b></div>
+    <div class="r-pos" id="r-2"><span class="chip">ШАХ — К ПОВОРОТУ</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.radio;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#r-1", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at("six_pm") + 0.2);
+      tl.to("#r-1", { opacity: 0, duration: 0.2 }, at("quote") - 0.1);
+      tl.fromTo("#r-q", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, at("quote") + 0.1);
+      tl.to("#r-q", { opacity: 0, duration: 0.2 }, at("shah") - 0.1);
+      tl.fromTo("#r-2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, at("shah") + 0.3);
+      tl.to("#r-2", { opacity: 0, duration: 0.2 }, window.CUES.car - S - 0.1);
+      window.__timelines["radio"] = tl;
+    })();
+  </script>
+</template>

@@ -1,4 +1,11 @@
 {
   "id": "006-devyat-chasov",
-  "name": "006 · Девять часов"
+  "name": "006 · Девять часов",
+  "scripts": [
+    "human3d.js",
+    "humans/denis.js",
+    "humans/soldier2.js",
+    "humans/sonya.js",
+    "night3d.js"
+  ]
 }

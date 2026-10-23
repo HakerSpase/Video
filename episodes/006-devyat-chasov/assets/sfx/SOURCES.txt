@@ -1,0 +1,29 @@
+room_tone.mp3 — «room-tone WC» — Yuval — CC0 — freesound 
+drip.mp3 — «water dripping 1» — hybu — CC0 — freesound 
+rumble.mp3 — «Long Deep Rumble» — kwahmah_02 — BY — freesound 
+tension.mp3 — «horror ambience 80 150112_0504.ogg» — klankbeeld — BY — freesound 
+radio.mp3 — «Radio Static Off Station.wav» — digifishmusic — BY — freesound 
+radio_chop.mp3 — «Radio Static Short Wave choppy.wav» — digifishmusic — BY — freesound 
+fpv.mp3 — «Dji Mavic Mini 2 Take-off flyby landing LR XY Zoom H5 mic.wav» — Sadiquecat — CC0 — freesound 
+hover.mp3 — «15Y08M20-Drone_Take_Off 01.WAV» — n_audioman — BY — freesound 
+hit.mp3 — «Big dynamite explosion in an open mine (Chile)» — felix.blume — CC0 — freesound 
+steps_mud.mp3 — «Footsteps, Puddles, B.wav» — InspectorJ — BY — freesound 
+steps_gravel.mp3 — «120621 Footsteps, gravel, walking, outside, windy BLYTH.flac» — TRP — CC0 — freesound 
+breathing.mp3 — «Scared Male Heavy Breathing» — casiba842 — CC0 — freesound 
+heartbeat.mp3 — «heartbeat-120bpm.wav» — loudernoises — CC0 — freesound 
+crows.mp3 — «crows and owl.wav» — stevenj9 — CC0 — freesound 
+paper.mp3 — «Playing with a map» — pfranzen — BY — freesound 
+velcro.mp3 — «Velcro 2.aif» — JasonElrod — BY — freesound 
+tinnitus.mp3 — «tinnitus.wav» — Sclolex — CC0 — freesound 
+generator.mp3 — «Generator1.wav» — HerbertBoland — BY — freesound 
+music_nocturne.mp3 — «Chopin, Nocturne in C-sharp minor, Op. Posth» — Frédéric Chopin — BY — wikimedia_audio 
+music_prelude.mp3 — «Prelude en Mi mineur (Chopin)» — Etienne Gervot — BY-SA — jamendo 
+music_cello.mp3 — «Mournful.mp3» — SoundFlakes — BY — freesound 
+wind cc0 freesound https://freesound.org/people/klangfabrik/sounds/117513 | winter wind 01c.aiff | klangfabrik
+wind_low cc0 freesound https://freesound.org/people/haniebal/sounds/423314 | Wind ambience | haniebal
+distant_booms cc0 freesound https://freesound.org/people/craigsmith/sounds/438693 | G43-14-25 Distant Explosions.wav | craigsmith
+artillery cc0 freesound https://freesound.org/people/craigsmith/sounds/486020 | R12-11-Artillery Explosion Sequence.wav | craigsmith
+basement_tone cc0 freesound https://freesound.org/people/Yuval/sounds/210063 | room-tone WC | Yuval
+drone cc0 freesound https://freesound.org/people/Sadiquecat/sounds/683296 | Dji Mavic Mini 2 Take-off flyby landing LR XY Zoom H5 mic.wav | Sadiquecat
+blast_low cc0 freesound https://freesound.org/people/Hard3eat/sounds/388945 | Atomic Bomb 2 | Hard3eat
+waves.mp3 — «bigwave-to-shallow-10 stretchedx10» — hear-no-elvis — CC0 — freesound

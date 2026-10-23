@@ -1,0 +1,32 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .k-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    #k-dist { position: absolute; left: 0; right: 0; top: 300px; text-align: center; opacity: 0; }
+    #k-dist b { font-size: 150px; font-weight: 900; letter-spacing: -4px; text-shadow: 0 6px 30px rgba(0,0,0,0.8); }
+    #k-dist small { display: block; font-size: 34px; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <div class="k-pos stamp" id="k-1"><b>СОНЯ · 6 ЛЕТ</b><small>ПОДВАЛ · ДЕНЬ 214</small></div>
+    <div id="k-dist"><b>30 М</b><small>ОТ ПОДВАЛА ДО ЗАВАЛА</small></div>
+    <div class="k-pos" id="k-2"><span class="chip">«БАБУШКА В БОЛЬНИЦЕ»</span></div>
+    <div class="k-pos" id="k-3"><span class="chip red">ЭТО ПРИДУМАЛ ДЕНИС</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.hook;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, duration: 0.2 }, b);
+      };
+      show("#k-1", 0.25, at("granny") - 0.15);
+      tl.fromTo("#k-dist", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, at("granny") + 0.5);
+      tl.to("#k-dist", { opacity: 0, duration: 0.25 }, at("thinks") - 0.2);
+      show("#k-2", at("thinks") + 0.3, at("told") - 0.1);
+      show("#k-3", at("told") + 0.2, window.CUES.cellar - S - 0.1);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

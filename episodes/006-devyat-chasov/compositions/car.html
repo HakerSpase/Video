@@ -1,0 +1,54 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .hud { position: absolute; inset: 0; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .hud .c { position: absolute; width: 90px; height: 90px; border: 4px solid rgba(255,255,255,0.8); }
+    .hud .tl { left: 80px; top: 230px; border-right: 0; border-bottom: 0; }
+    .hud .tr { right: 80px; top: 230px; border-left: 0; border-bottom: 0; }
+    .hud .bl { left: 80px; bottom: 300px; border-right: 0; border-top: 0; }
+    .hud .br { right: 80px; bottom: 300px; border-left: 0; border-top: 0; }
+    .hud .x { position: absolute; left: 50%; top: 50%; width: 140px; height: 140px; transform: translate(-50%, -50%); }
+    .hud .x::before, .hud .x::after { content: ""; position: absolute; background: rgba(255,255,255,0.9); }
+    .hud .x::before { left: 0; right: 0; top: 68px; height: 4px; }
+    .hud .x::after { top: 0; bottom: 0; left: 68px; width: 4px; }
+    .hud .rec { position: absolute; left: 110px; top: 250px; font-size: 30px; }
+    .hud .rec::before { content: ""; display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #ff2e3e; margin-right: 12px; vertical-align: 1px; }
+    .hud .alt { position: absolute; right: 110px; top: 250px; font-size: 30px; text-align: right; line-height: 1.5; }
+    .hud .mode { position: absolute; left: 110px; bottom: 330px; font-size: 26px; }
+    #f-hud .x { width: 220px; height: 220px; border: 4px solid rgba(255,255,255,0.8); border-radius: 50%; }
+    #f-hud .x::before, #f-hud .x::after { display: none; }
+    #lost { position: absolute; left: 0; right: 0; top: 800px; text-align: center; font-family: "JetBrains Mono", monospace; font-size: 54px; font-weight: 800; opacity: 0; color: #fff; }
+    .a-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="car" data-width="1080" data-height="1920">
+    <div class="hud" id="t-hud"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><div class="x"></div>
+      <div class="rec">REC 18:08:41</div><div class="alt">ALT 120 м<br />×8<br />WHT</div><div class="mode">ТЕПЛОВИЗОР · ЦЕЛЬ: АВТО</div></div>
+    <div class="hud" id="f-hud"><div class="x"></div><div class="rec">FPV · 5.8G</div><div class="alt">RSSI 41%<br />BAT 15.2V</div><div class="mode" id="f-d">DIST 240 м</div></div>
+    <div id="lost">НЕТ СИГНАЛА</div>
+    <div class="a-pos stamp" id="a-1"><b>+8 МИНУТ</b><small>ДО ПОСЁЛКА — КИЛОМЕТР</small></div>
+    <div class="a-pos" id="a-2"><span class="chip red">ВОДИТЕЛЬ И ФЕЛЬДШЕР</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.car;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (id) => document.getElementById(id);
+      const E = at("eight"), F = E + 1.13, H = at("hit");
+      tl.set("#t-hud", { opacity: 1 }, E);
+      tl.set("#t-hud", { opacity: 0 }, F);
+      tl.fromTo("#t-hud .x", { scale: 1.4 }, { scale: 1, duration: 0.4, ease: "power2.out" }, E);
+      tl.set("#f-hud", { opacity: 1 }, F);
+      tl.set("#f-hud", { opacity: 0 }, H);
+      const d = { v: 240 };
+      tl.to(d, { v: 0, duration: H - F, ease: "power2.in", onUpdate: () => ($("f-d").textContent = "DIST " + Math.round(d.v) + " м") }, F);
+      tl.set("#lost", { opacity: 1 }, H + 0.12);
+      tl.set("#lost", { opacity: 0 }, at("burns"));
+      tl.fromTo("#a-1", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 }, E + 0.1);
+      tl.to("#a-1", { opacity: 0, duration: 0.15 }, F - 0.05);
+      tl.fromTo("#a-2", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, at("inside") + 0.3);
+      tl.to("#a-2", { opacity: 0, duration: 0.2 }, at("alone") - 0.1);
+      window.__timelines["car"] = tl;
+    })();
+  </script>
+</template>

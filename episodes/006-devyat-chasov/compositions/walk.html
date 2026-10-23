@@ -1,0 +1,38 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .w-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .hud { position: absolute; inset: 0; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .hud .c { position: absolute; width: 90px; height: 90px; border: 4px solid rgba(255,255,255,0.8); }
+    .hud .tl { left: 80px; top: 230px; border-right: 0; border-bottom: 0; }
+    .hud .tr { right: 80px; top: 230px; border-left: 0; border-bottom: 0; }
+    .hud .bl { left: 80px; bottom: 300px; border-right: 0; border-top: 0; }
+    .hud .br { right: 80px; bottom: 300px; border-left: 0; border-top: 0; }
+    .hud .rec { position: absolute; left: 110px; top: 250px; font-size: 30px; }
+    .hud .rec::before { content: ""; display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #ff2e3e; margin-right: 12px; vertical-align: 1px; }
+    .hud .alt { position: absolute; right: 110px; top: 250px; font-size: 30px; text-align: right; line-height: 1.5; }
+    #w-km { position: absolute; left: 0; right: 0; top: 400px; text-align: center; opacity: 0; font-family: "JetBrains Mono", monospace; font-size: 64px; font-weight: 800; }
+  </style>
+  <div id="root" data-composition-id="walk" data-width="1080" data-height="1920">
+    <div class="w-pos" id="w-1"><span class="chip">КМ 1 ИЗ 3</span></div>
+    <div class="w-pos stamp" id="w-2"><b>МОРЕ</b><small>ОН ВИДЕЛ ЕГО ТОЛЬКО В КИНО</small></div>
+    <div class="hud" id="w-hud"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><div class="rec">REC 22:31:17</div><div class="alt">ALT 150 м<br />WHT</div></div>
+    <div id="w-km">КМ 2 ИЗ 3</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.walk;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#w-1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, at("treeline") + 0.4);
+      tl.to("#w-1", { opacity: 0, duration: 0.2 }, at("talks") - 0.1);
+      tl.fromTo("#w-2", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4 }, at("sea") + 0.4);
+      tl.to("#w-2", { opacity: 0, duration: 0.2 }, at("km2") - 0.15);
+      tl.set("#w-hud", { opacity: 1 }, at("km2"));
+      tl.set("#w-hud", { opacity: 0 }, at("asleep"));
+      tl.fromTo("#w-km", { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("km2") + 0.2);
+      tl.to("#w-km", { opacity: 0, duration: 0.1 }, at("asleep") - 0.05);
+      window.__timelines["walk"] = tl;
+    })();
+  </script>
+</template>

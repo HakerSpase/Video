@@ -14,3 +14,4 @@ episodes/*/assets/music.wav
 episodes/*/assets/foley.wav
 episodes/*/assets/voice_fx.wav
 *.bundle
+episodes/*/out/*.wav

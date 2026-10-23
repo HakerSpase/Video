@@ -1,0 +1,67 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .h-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    /* карта маршрута */
+    #m-map { position: absolute; inset: 0; opacity: 0; background: #0b0d0c; }
+    #m-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #m-km { position: absolute; left: 0; right: 0; top: 200px; text-align: center; }
+    #m-km b { font-size: 150px; font-weight: 900; letter-spacing: -4px; }
+    #m-km small { display: block; font-size: 32px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
+    .hud { position: absolute; inset: 0; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 700; color: rgba(255,255,255,0.9); }
+    .hud .c { position: absolute; width: 90px; height: 90px; border: 4px solid rgba(255,255,255,0.8); }
+    .hud .tl { left: 80px; top: 230px; border-right: 0; border-bottom: 0; }
+    .hud .tr { right: 80px; top: 230px; border-left: 0; border-bottom: 0; }
+    .hud .bl { left: 80px; bottom: 300px; border-right: 0; border-top: 0; }
+    .hud .br { right: 80px; bottom: 300px; border-left: 0; border-top: 0; }
+    .hud .rec { position: absolute; left: 110px; top: 250px; font-size: 30px; }
+    .hud .rec::before { content: ""; display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: #ff2e3e; margin-right: 12px; vertical-align: 1px; }
+    .hud .alt { position: absolute; right: 110px; top: 250px; font-size: 30px; text-align: right; line-height: 1.5; }
+    .hud .mode { position: absolute; left: 110px; bottom: 330px; font-size: 26px; }
+  </style>
+  <div id="root" data-composition-id="choice" data-width="1080" data-height="1920">
+    <div class="h-pos" id="h-1"><span class="chip">СЛЕДУЮЩАЯ МАШИНА — УТРОМ</span></div>
+    <div class="h-pos" id="h-2"><span class="chip red">ДО УТРА ОНА НЕ ДОЖИВЁТ</span></div>
+    <div id="m-map">
+      <svg viewBox="0 0 1080 1920">
+        <defs><pattern id="m-g" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" /></pattern></defs>
+        <rect width="1080" height="1920" fill="url(#m-g)" />
+        <!-- посадка -->
+        <path d="M200 1650 C 260 1450, 330 1300, 420 1150 S 560 850, 640 640" stroke="#2d3a26" stroke-width="70" fill="none" stroke-linecap="round" />
+        <!-- маршрут -->
+        <path id="m-route" d="M260 1640 C 320 1450, 390 1300, 480 1150 S 620 850, 700 650" stroke="#ffd23f" stroke-width="10" fill="none" stroke-dasharray="26 18" stroke-linecap="round" />
+        <circle cx="260" cy="1640" r="22" fill="#fff" /><text x="300" y="1655" fill="#fff" font-size="38" font-weight="800">ПОДВАЛ</text>
+        <circle cx="700" cy="650" r="22" fill="#3ddc84" /><text x="740" y="665" fill="#3ddc84" font-size="38" font-weight="800">ТОЧКА</text>
+        <!-- дроны над дорогой -->
+        <g id="m-dr" fill="none" stroke="#ff3b30" stroke-width="5">
+          <circle cx="560" cy="1400" r="70" /><circle cx="640" cy="980" r="70" /><circle cx="400" cy="800" r="70" />
+        </g>
+      </svg>
+      <div id="m-km"><b>3 КМ</b><small>ПЕШКОМ · НОЧЬЮ · С РЕБЁНКОМ</small></div>
+    </div>
+    <div class="hud" id="t-hud"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+      <div class="rec">REC 21:14:02</div><div class="alt">ALT 150 м<br />×12<br />WHT</div><div class="mode">ТЕПЛОВИЗОР · ЦЕЛЬ: ПЕШИЙ</div></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.choice;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, duration: 0.2 }, b);
+      };
+      show("#h-1", at("nocar") + 0.3, at("wontlast") - 0.1);
+      show("#h-2", at("wontlast") + 0.6, at("lifts") - 0.1);
+      const M = at("three");
+      tl.to("#m-map", { opacity: 1, duration: 0.25 }, M - 0.05);
+      const L = document.getElementById("m-route").getTotalLength();
+      tl.fromTo("#m-route", { strokeDashoffset: L, strokeDasharray: L + " " + L }, { strokeDashoffset: 0, duration: 1.6, ease: "power1.inOut" }, M + 0.1);
+      tl.fromTo("#m-dr circle", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.2 }, at("thermal") - 0.8);
+      tl.to("#m-map", { opacity: 0, duration: 0.15 }, at("thermal") - 0.05);
+      tl.set("#t-hud", { opacity: 1 }, at("thermal"));
+      tl.set("#t-hud", { opacity: 0 }, window.CUES.walk - S - 0.02);
+      window.__timelines["choice"] = tl;
+    })();
+  </script>
+</template>

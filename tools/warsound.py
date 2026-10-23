@@ -623,6 +623,19 @@ def main():
             while tt < t1:
                 fx.put(tick(rng, 0.8), tt, 0.8, wet=0.2)
                 tt += 1.0
+        elif k == "fire":
+            # пожар: гул пламени + треск
+            t1, vol = at(ev[2]), ev[3] if len(ev) > 3 else 1.0
+            n = int((t1 - t) * SR)
+            wn = rng.standard_normal(n)
+            flick = 0.7 + 0.3 * np.sin(np.cumsum(rng.standard_normal(n)) * 0.0004)
+            roar = lowpass(wn, 380) * flick * 2.2
+            cr = np.zeros(n)
+            for _ in range(int((t1 - t) * 22)):
+                p0 = int(rng.random() * (n - 400))
+                m = int((0.002 + rng.random() * 0.01) * SR)
+                cr[p0:p0 + m] += rng.standard_normal(m) * np.exp(-np.arange(m) / (0.002 * SR)) * (0.3 + rng.random())
+            fx.put((roar + bandpass(cr, 700, 7000) * 1.6) * adsr(n, 0.6, 1.2), t, 0.45 * vol, pan=0.1, wet=0.25)
         elif k == "last_vibe":
             fx.put(vibe_burst(rng, 0.35), t, 0.5, wet=0.3)
     # реальные записи: фоны-петли и точечные события

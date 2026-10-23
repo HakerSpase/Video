@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    #c-timer { position: absolute; left: 0; right: 0; top: 230px; text-align: center; opacity: 0; }
+    #c-timer b { font-family: "JetBrains Mono", monospace; font-size: 130px; font-weight: 800; letter-spacing: -2px; text-shadow: 0 6px 30px rgba(0,0,0,0.8); }
+    #c-timer small { display: block; font-size: 32px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); }
+    #c-mini { position: absolute; right: 60px; top: 170px; font-family: "JetBrains Mono", monospace; font-size: 40px; font-weight: 800; opacity: 0;
+      background: rgba(0,0,0,0.45); padding: 8px 18px; border-radius: 12px; border: 2px solid rgba(255,80,60,0.7); }
+    .c-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="cellar" data-width="1080" data-height="1920">
+    <div id="c-timer"><b id="c-t">09:00:00</b><small>ДО ЭВАКУАЦИИ</small></div>
+    <div id="c-mini">08:59:12</div>
+    <div class="c-pos" id="c-1"><span class="chip">−4 °C · СВЕТА НЕТ</span></div>
+    <div class="c-pos" id="c-2"><span class="chip yellow">1 ШПРИЦ · 3 БИНТА</span></div>
+    <div class="c-pos" id="c-3"><span class="chip red">ДО НОЧИ — НЕ ТРОГАТЬ</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES.cellar;
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (id) => document.getElementById(id);
+      const fmt = (sec) => { sec = Math.max(0, Math.round(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec / 60) % 60, s = sec % 60; return [h, m, s].map((x) => String(x).padStart(2, "0")).join(":"); };
+      tl.fromTo("#c-timer", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at("nine") + 0.2);
+      const c = { v: 9 * 3600 };
+      tl.to(c, { v: 9 * 3600 - 47, duration: at("candle") - at("nine"), ease: "none", onUpdate: () => ($("c-t").textContent = fmt(c.v)) }, at("nine") + 0.2);
+      tl.to("#c-timer", { opacity: 0, duration: 0.2 }, at("candle") - 0.1);
+      const show = (sel, a, b) => {
+        tl.fromTo(sel, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, duration: 0.2 }, b);
+      };
+      show("#c-1", at("minus") + 0.2, at("kit") - 0.1);
+      show("#c-2", at("kit") + 0.3, at("saves") - 0.1);
+      show("#c-3", at("saves") + 0.4, window.CUES.talk - S - 0.1);
+      window.__timelines["cellar"] = tl;
+    })();
+  </script>
+</template>
