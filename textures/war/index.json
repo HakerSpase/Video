@@ -1,0 +1,762 @@
+{
+ "textures": [
+  {
+   "id": "concrete_floor_worn_001",
+   "key": "concrete",
+   "name": "Concrete Floor Worn 001",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "worn",
+    "old",
+    "plain",
+    "grey",
+    "weathered",
+    "bare",
+    "discolored"
+   ]
+  },
+  {
+   "id": "beige_wall_001",
+   "key": "concrete",
+   "name": "Beige Wall 001",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "beige",
+    "painted",
+    "smooth",
+    "suburb",
+    "house",
+    "home"
+   ]
+  },
+  {
+   "id": "painted_plaster_wall",
+   "key": "concrete",
+   "name": "Painted Plaster Wall",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "weathered",
+    "worn",
+    "wall",
+    "discolored",
+    "plaster",
+    "plastered",
+    "damaged",
+    "old",
+    "stained"
+   ]
+  },
+  {
+   "id": "white_plaster_02",
+   "key": "concrete",
+   "name": "White Plaster 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "smooth",
+    "flat",
+    "even"
+   ]
+  },
+  {
+   "id": "red_brick",
+   "key": "brick",
+   "name": "Red Brick",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "brick",
+    "bricks",
+    "wall",
+    "red brick",
+    "brick wall",
+    "rough",
+    "exterior"
+   ]
+  },
+  {
+   "id": "red_brick_03",
+   "key": "brick",
+   "name": "Red Brick 03",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "red",
+    "industrial",
+    "factory",
+    "brown"
+   ]
+  },
+  {
+   "id": "medieval_blocks_03",
+   "key": "brick",
+   "name": "Medieval Blocks 03",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "blocks",
+    "large",
+    "old",
+    "rough"
+   ]
+  },
+  {
+   "id": "brick_4",
+   "key": "brick",
+   "name": "Brick 4",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "red",
+    "moss",
+    "urban",
+    "city",
+    "damp",
+    "wet"
+   ]
+  },
+  {
+   "id": "brown_mud_leaves_01",
+   "key": "mud",
+   "name": "Brown Mud Leaves 01",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "grass",
+    "mud",
+    "moss",
+    "stones",
+    "orange",
+    "forest"
+   ]
+  },
+  {
+   "id": "rocks_ground_02",
+   "key": "mud",
+   "name": "Rocks Ground 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "mud",
+    "rock",
+    "stones",
+    "uneven",
+    "rocks",
+    "scattered rocks",
+    "gravel",
+    "dirt",
+    "exposed rock"
+   ]
+  },
+  {
+   "id": "brown_mud_dry",
+   "key": "mud",
+   "name": "Brown Mud Dry",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "mud",
+    "dirt",
+    "stones",
+    "dry",
+    "ground"
+   ]
+  },
+  {
+   "id": "wood_table_worn",
+   "key": "dirt",
+   "name": "Wood Table Worn",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "planks",
+    "table",
+    "worn",
+    "old",
+    "damaged",
+    "discolored",
+    "stained",
+    "brown",
+    "dry"
+   ]
+  },
+  {
+   "id": "metal_plate",
+   "key": "dirt",
+   "name": "Metal Plate",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "bare",
+    "painted",
+    "rusty",
+    "pattern",
+    "iron",
+    "factory",
+    "industrial",
+    "steel"
+   ]
+  },
+  {
+   "id": "weathered_brown_planks",
+   "key": "dirt",
+   "name": "Weathered Brown Planks",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "wood",
+    "planks",
+    "old",
+    "worn",
+    "brown",
+    "maroon",
+    "painted",
+    "chipped",
+    "damaged",
+    "dirty"
+   ]
+  },
+  {
+   "id": "forest_leaves_03",
+   "key": "forest ground",
+   "name": "Forest Leaves 03",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "leaves",
+    "autumn",
+    "dry",
+    "nature",
+    "forest",
+    "ground",
+    "cover",
+    "dirt",
+    "debris",
+    "brown"
+   ]
+  },
+  {
+   "id": "green_metal_rust",
+   "key": "rust",
+   "name": "Green Metal Rust",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "painted",
+    "ship",
+    "tank",
+    "industrial",
+    "canister"
+   ]
+  },
+  {
+   "id": "wood_cabinet_worn_long",
+   "key": "rust",
+   "name": "Wood Cabinet Worn Long",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "wood",
+    "planks",
+    "cabinet",
+    "worn",
+    "non square",
+    "long",
+    "rough",
+    "old",
+    "weathered",
+    "damaged"
+   ]
+  },
+  {
+   "id": "rust_coarse_01",
+   "key": "rust",
+   "name": "Rust Coarse 01",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "coarse",
+    "rusty",
+    "rust",
+    "red",
+    "stained",
+    "grunge",
+    "old",
+    "weathered",
+    "iron",
+    "metal"
+   ]
+  },
+  {
+   "id": "concrete_floor_02",
+   "key": "plaster",
+   "name": "Concrete Floor 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "moss",
+    "plain"
+   ]
+  },
+  {
+   "id": "concrete_layers_02",
+   "key": "plaster",
+   "name": "Concrete Layers 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "worn",
+    "chipped",
+    "rough",
+    "weathered",
+    "cracked",
+    "damaged",
+    "wall",
+    "discolored",
+    "dirty",
+    "dry"
+   ]
+  },
+  {
+   "id": "cracked_concrete_wall",
+   "key": "plaster",
+   "name": "Cracked Concrete Wall",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "uneven",
+    "old",
+    "weathered",
+    "wall",
+    "worn",
+    "discolored",
+    "cracked",
+    "chipped",
+    "stained"
+   ]
+  },
+  {
+   "id": "plywood",
+   "key": "wood",
+   "name": "Plywood",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "clean",
+    "even",
+    "smooth",
+    "flat",
+    "continuous",
+    "consistent"
+   ]
+  },
+  {
+   "id": "laminate_floor_02",
+   "key": "wood",
+   "name": "Laminate Floor 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "even",
+    "flat",
+    "wooden",
+    "floor",
+    "laminate",
+    "smooth",
+    "tiles",
+    "brown",
+    "wood",
+    "planks"
+   ]
+  },
+  {
+   "id": "wood_table_001",
+   "key": "wood",
+   "name": "Wood Table 001",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "wood",
+    "table",
+    "varnished",
+    "clean",
+    "stained",
+    "red",
+    "furniture",
+    "fancy",
+    "fine",
+    "grain"
+   ]
+  },
+  {
+   "id": "asphalt_02",
+   "key": "asphalt",
+   "name": "Asphalt 02",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "asphalt",
+    "cracked",
+    "flat",
+    "road",
+    "asphalt road",
+    "tarmac road",
+    "gritty",
+    "weathered",
+    "grey",
+    "cracking"
+   ]
+  },
+  {
+   "id": "aerial_asphalt_01",
+   "key": "asphalt",
+   "name": "Aerial Asphalt 01",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "road",
+    "flat",
+    "cracked"
+   ]
+  },
+  {
+   "id": "fabric_pattern_07",
+   "key": "fabric",
+   "name": "Fabric Pattern 07",
+   "maps": [
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "towel",
+    "plain",
+    "cloth",
+    "checkered",
+    "woven",
+    "textile",
+    "picnic"
+   ]
+  },
+  {
+   "id": "leather_red_02",
+   "key": "fabric",
+   "name": "Leather Red 02",
+   "maps": [
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "leather",
+    "even",
+    "smooth",
+    "new",
+    "creased",
+    "wrinkled",
+    "semi-gloss",
+    "upholstery",
+    "textile ",
+    "animal-hide"
+   ]
+  },
+  {
+   "id": "japanese_sycamore",
+   "key": "camo",
+   "name": "Japanese Sycamore",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "dry",
+    "tree",
+    "bark",
+    "wood",
+    "nature",
+    "forest",
+    "wooden",
+    "non square"
+   ]
+  },
+  {
+   "id": "rubble",
+   "key": "rubble",
+   "name": "Rubble",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rubble",
+    "debris",
+    "concrete",
+    "waste",
+    "building materials",
+    "demolition",
+    "broken",
+    "crumbling",
+    "construction",
+    "plasterconcrete"
+   ]
+  },
+  {
+   "id": "brick_gravel",
+   "key": "rubble",
+   "name": "Brick Gravel",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "uneven",
+    "brick",
+    "gravel",
+    "broken pieces",
+    "rubble",
+    "fragmented",
+    "crushed",
+    "aggregate",
+    "terracotta"
+   ]
+  },
+  {
+   "id": "forest_ground_04",
+   "key": "gravel",
+   "name": "Forest Ground 04",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "uneven",
+    "stones",
+    "ground",
+    "forest",
+    "dry",
+    "brown",
+    "gravel",
+    "rock",
+    "debris"
+   ]
+  },
+  {
+   "id": "rocky_trail",
+   "key": "gravel",
+   "name": "Rocky Trail",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "rough",
+    "uneven",
+    "stones",
+    "rock",
+    "gravel",
+    "chipped",
+    "rocks",
+    "nature",
+    "path",
+    "broken"
+   ]
+  },
+  {
+   "id": "brown_leather",
+   "key": "leather",
+   "name": "Brown Leather",
+   "maps": [
+    "diff",
+    "nor",
+    "rough"
+   ],
+   "tags": [
+    "leather",
+    "brown",
+    "chair",
+    "seat",
+    "upholstery",
+    "vintage",
+    "matte",
+    "wrinkled",
+    "textile ",
+    "creased"
+   ]
+  }
+ ],
+ "hdris": [
+  {
+   "id": "overcast_soil_puresky",
+   "key": "overcast",
+   "name": "Overcast Soil (Pure Sky)",
+   "tags": [
+    "pure skies"
+   ]
+  },
+  {
+   "id": "cannon",
+   "key": "overcast",
+   "name": "Cannon",
+   "tags": [
+    "rock",
+    "hill",
+    "view",
+    "cannon",
+    "ocean",
+    "mountain"
+   ]
+  },
+  {
+   "id": "mud_road_puresky",
+   "key": "overcast",
+   "name": "Mud Road (Pure Sky)",
+   "tags": [
+    "pure skies"
+   ]
+  },
+  {
+   "id": "moonless_golf",
+   "key": "night",
+   "name": "Moonless Golf",
+   "tags": [
+    "grass",
+    "golf",
+    "stars",
+    "milky way",
+    "field"
+   ]
+  },
+  {
+   "id": "dikhololo_night",
+   "key": "night",
+   "name": "Dikhololo Night",
+   "tags": [
+    "bush",
+    "grass",
+    "road",
+    "safari",
+    "tree",
+    "veld",
+    "milky way",
+    "stars",
+    "astronomy"
+   ]
+  },
+  {
+   "id": "satara_night",
+   "key": "night",
+   "name": "Satara Night",
+   "tags": [
+    "stars",
+    "tree",
+    "lamp",
+    "milky way",
+    "galaxy",
+    "hut"
+   ]
+  },
+  {
+   "id": "lilienstein",
+   "key": "sunset",
+   "name": "Lilienstein",
+   "tags": [
+    "sun",
+    "grass",
+    "field",
+    "forest",
+    "meadow"
+   ]
+  }
+ ]
+}
