@@ -50,11 +50,18 @@ def main():
     hd = json.loads(get("https://api.polyhaven.com/assets?t=hdris"))
     for key, n in spec.get("hdris", []):
         hits = [(k, v) for k, v in hd.items() if key in " ".join(v.get("tags", []) + v.get("categories", [])) or key in k]
+        exact = [(k, v) for k, v in hd.items() if k == key]
+        if exact:
+            hits = exact
         hits.sort(key=lambda kv: -kv[1].get("download_count", 0))
         for k, v in hits[:n]:
             files = json.loads(get(f"https://api.polyhaven.com/files/{k}"))
             (out / "hdri").mkdir(parents=True, exist_ok=True)
-            (out / "hdri" / f"{k}.hdr").write_bytes(get(files["hdri"][res]["hdr"]["url"], 120))
+            (out / "hdri" / f"{k}.hdr").write_bytes(get(files["hdri"][res]["hdr"]["url"], 300))
+            try:
+                (out / "hdri" / f"{k}_tonemapped.jpg").write_bytes(get(files["tonemapped"]["url"], 120))
+            except Exception as e:
+                print("no tonemapped", k, e)
             index["hdris"].append({"id": k, "key": key, "name": v.get("name"), "tags": v.get("tags", [])[:10]})
             print("hdri", key, k)
     (out / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=1), encoding="utf-8")
