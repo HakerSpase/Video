@@ -66,6 +66,10 @@ def main():
                 d = out / "polyhaven" / k
                 d.mkdir(parents=True, exist_ok=True)
                 try:
+                    (d / "thumb.jpg").write_bytes(get(f"https://cdn.polyhaven.com/asset_img/thumbs/{k}.png?width=512"))
+                    if not spec.get("download"):
+                        rows.append({"id": k, "name": v.get("name"), "tags": v.get("tags", [])[:8]})
+                        continue
                     files = json.loads(get(f"https://api.polyhaven.com/files/{k}"))
                     g = files["gltf"]["1k"]["gltf"]
                     (d / (k + ".gltf")).write_bytes(get(g["url"]))
@@ -73,7 +77,6 @@ def main():
                         p = d / rel
                         p.parent.mkdir(parents=True, exist_ok=True)
                         p.write_bytes(get(inc["url"]))
-                    (d / "thumb.jpg").write_bytes(get(f"https://cdn.polyhaven.com/asset_img/thumbs/{k}.png?width=512"))
                 except Exception as e:
                     print("polyhaven", k, e)
                 rows.append({"id": k, "name": v.get("name"), "tags": v.get("tags", [])[:8]})
