@@ -1,0 +1,36 @@
+name: Скачать модели Sketchfab в ветку renders
+
+on:
+  workflow_dispatch:
+    inputs:
+      uids:
+        description: "uid моделей через запятую"
+        required: true
+      name:
+        description: "Имя набора"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Загрузка
+        continue-on-error: true
+        env:
+          SKETCHFAB_TOKEN: ${{ secrets.SKETCHFAB_TOKEN }}
+        run: python3 tools/asset_fetch.py "${{ inputs.uids }}" "/tmp/m/${{ inputs.name }}"
+      - name: В ветку renders
+        if: always()
+        run: |
+          git config user.name "render-bot"
+          git config user.email "render-bot@users.noreply.github.com"
+          if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
+          mkdir -p models && cp -r "/tmp/m/${{ inputs.name }}" models/ || true
+          git add -f models
+          git commit -qm "models: ${{ inputs.name }}" || true
+          git push -q origin HEAD:refs/heads/renders
