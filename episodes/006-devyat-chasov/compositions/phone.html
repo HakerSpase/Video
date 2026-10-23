@@ -50,7 +50,7 @@
       tl.set("#ph-clock", { opacity: 0 }, at("mark"));
       tl.fromTo("#ph-err", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, at("mark") + 0.6);
       tl.to("#ph-errt", { opacity: 1, duration: 0.3 }, at("mark") + 0.9);
-      tl.to("#ph", { opacity: 0, duration: 0.3 }, window.CUES.order - S - 0.3);
+      tl.to("#ph", { opacity: 0, duration: 0.4 }, at("mark") + 1.3);
       window.__timelines["phone"] = tl;
     })();
   </script>

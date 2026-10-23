@@ -17,3 +17,5 @@ episodes/*/assets/voice_fx.wav
 episodes/*/out/*.wav
 episodes/*/out/fr/
 episodes/*/out/*.jpg
+episodes/*/assets/ai.mp4
+episodes/*/out/ai_shots/

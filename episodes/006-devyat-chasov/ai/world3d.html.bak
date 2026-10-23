@@ -1,0 +1,279 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #w-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
+    <canvas id="w-3d" width="1080" height="1920"></canvas>
+    <div id="w-black"></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, D = C._duration;
+      const at = (k) => C[k];
+      const PI = Math.PI;
+      const W = NIGHT3D.create(document.getElementById("w-3d"), { seed: 2142 });
+      const s = W.state, who = W.who;
+      window.__night = W;
+      const NAMES = Object.keys(who);
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+
+      function build() {
+        const tl = gsap.timeline({ paused: true });
+        // --- помощники монтажа
+        const BASE = { roll: 0, shake: 0, thermal: 0, sepia: 0, red: 0, flash: 0, signal: 0, aperture: 0.6, key: 0, rim: 0, keySide: 1, keyUp: 0.4, keyCol: 0xffc890, rimCol: 0x8aa0c8, hand: 1, grain: 0.05, vig: 0.6, chroma: 0.0015, breath: 0, drawing: 0, drawWho: "", phone: 0, foil: 0, phoneScr: 0 };
+        const SETS = {
+          cellar: { set: "cellar", candle: 1, hatch: 0.12, radioLed: 0, fog: 0.06, fogCol: 0x080605, hemi: 0.015, moon: 0, sky: 1, warm: 0.2, desat: 0.32, exposure: 1.6, bloom: 0.55, contrast: 0.42 },
+          yard: { set: "yard", candle: 0, moon: 0.45, hemi: 0.12, sky: 0.6, fog: 0.022, fogCol: 0x05070b, warm: -0.45, desat: 0.35, exposure: 1.6, bloom: 0.5, contrast: 0.4 },
+          road: { set: "road", moon: 0.3, hemi: 0.1, sky: 0.5, fog: 0.012, fogCol: 0x05070b, warm: -0.4, desat: 0.35, exposure: 1.6, bloom: 0.6, contrast: 0.4 },
+          field: { set: "field", moon: 0.35, hemi: 0.12, sky: 0.65, fog: 0.018, fogCol: 0x06080d, warm: -0.5, desat: 0.38, exposure: 1.7, bloom: 0.5, contrast: 0.42 },
+          evac: { set: "evac", moon: 0.2, hemi: 0.08, sky: 0.45, fog: 0.03, fogCol: 0x060506, redLight: 1, warm: -0.1, desat: 0.25, exposure: 1.5, bloom: 0.6, contrast: 0.42 },
+          sea: { set: "sea", moon: 1.6, hemi: 0.9, sky: 1, fog: 0.004, fogCol: 0x8a9298, warm: 0.25, desat: 0.6, exposure: 1.0, bloom: 0.8, contrast: 0.2, sepia: 0.2 },
+          morning: { set: "morning", moon: 0.7, hemi: 0.7, sky: 0.9, fog: 0.035, fogCol: 0x5a5e64, warm: -0.2, desat: 0.5, exposure: 0.8, bloom: 0.3, contrast: 0.3 },
+        };
+        const cam = (x, y, z, tx, ty, tz, fov, focus) => ({ camX: x, camY: y, camZ: z, tgtX: tx, tgtY: ty, tgtZ: tz, fov, focus });
+        const cut = (t, setName, c, o) => tl.set(s, Object.assign({}, BASE, SETS[setName], c, o || {}), t);
+        const mv = (t, d, o, e) => tl.to(s, Object.assign({ duration: d, ease: e || "sine.inOut" }, o), t);
+        const DEF = { on: 1, x: 0, y: 0, z: 0, rx: 0, ry: 0, rz: 0, pose: "stand", pose2: "", pk: 0, cad: 0, amp: 1, walkBase: "", sad: 0, closed: 0, slit: 0, frown: 0, open: 0, gear: "", held: 0, heldBy: "denis" };
+        // состав кадра: перечисленные — в своей локации, остальные скрыты
+        const cast = (t, setName, list) => NAMES.forEach((n) => tl.set(who[n], list[n] ? Object.assign({}, DEF, { set: setName }, list[n]) : { on: 0 }, t));
+        // строки/null (pose2, gear…) не тянем твином — ставим сразу
+        const act = (t, d, n, o, e) => {
+          const fix = {}, num = {};
+          for (const k in o) (typeof o[k] === "number" ? num : fix)[k] = o[k];
+          if (Object.keys(fix).length) tl.set(who[n], fix, t);
+          if (Object.keys(num).length) tl.to(who[n], Object.assign({ duration: d, ease: e || "sine.inOut" }, num), t);
+        };
+        const set = (t, n, o) => tl.set(who[n], o, t);
+        // камера на точку tg: dist — расстояние, yaw — угол от направления взгляда персонажа (0 — спереди, + — слева от него), pitch — сверху
+        const camAt = (tg, ry, dist, yaw, pitch, fov, o) => {
+          o = o || {};
+          const a = ry + (yaw * PI) / 180, p = (pitch * PI) / 180;
+          return { camX: tg.x + Math.sin(a) * Math.cos(p) * dist, camY: tg.y + Math.sin(p) * dist, camZ: tg.z + Math.cos(a) * Math.cos(p) * dist,
+            tgtX: tg.x + (o.tx || 0), tgtY: tg.y + (o.ty || 0), tgtZ: tg.z + (o.tz || 0), fov, focus: dist };
+        };
+        const aim = (n, w, bone, dist, yaw, pitch, fov, o) => camAt(W.probe(n, w, bone, o && o.local), w.ry || 0, dist, yaw, pitch, fov, o);
+        // «говорит»: рот чуть приоткрывается в ритме фраз
+        const talk = (n, t0, t1) => {
+          const per = 0.32;
+          const rep = Math.max(0, Math.floor((t1 - t0) / per) - 1);
+          tl.fromTo(who[n], { open: 0 }, { open: 0.35, duration: per / 2, repeat: rep, yoyo: true, ease: "sine.inOut" }, t0);
+          tl.set(who[n], { open: 0 }, t1);
+        };
+
+        // ---- раскладка подвала
+        const SON = { x: -1.32, y: 0.27, z: -0.1, ry: PI / 2, pose: "sitLegs", sad: 0.25, slit: 0.15 };
+        const DEN = { x: 0.38, z: 0.0, ry: -PI / 2, pose: "sitWall", gear: "cap", sad: 0.35 };
+        const MED = { x: 1.62, z: -1.62, ry: -0.75, pose: "sitChair", gear: "cap", sad: 0.3 };
+        const SHA = { x: 1.3, z: 0.15, ry: -2.3, pose: "tired", gear: "helmet", sad: 0.2 };
+        const LIE = { x: -1.25, y: 0.4, z: 0.55, ry: PI / 2, rz: -PI / 2, pose: "lieSide", slit: 0.65, sad: 0.2 };
+        const CELLAR_ALL = { sonya: SON, denis: DEN, medic: MED, shah: SHA };
+
+        // ================= ХУК =================
+        cast(0, "cellar", CELLAR_ALL);
+        cut(0, "cellar", aim("sonya", SON, "face", 0.62, 28, 4, 32), { aperture: 1.5, breath: 1, breathWho: "sonya", key: 0.12, keySide: 1 });
+        mv(0, at("granny"), aim("sonya", SON, "face", 0.5, 22, 2, 30));
+        // завал: бабушка там
+        cast(at("granny"), "yard", {});
+        cut(at("granny"), "yard", cam(3.2, 0.45, 2.5, 0.2, 1.6, -6, 34, 8), { aperture: 0.3, exposure: 2.0, sky: 0.45 });
+        mv(at("granny"), 2.3, { camX: 2.7, camZ: 1.6 });
+        cut(at("granny") + 2.3, "yard", cam(2.0, 1.8, -2.9, 1.2, 1.25, -4.2, 30, 1.6), { aperture: 1.2, key: 0.35, keyCol: 0x9ab0d0, keyUp: 1.2 });
+        mv(at("granny") + 2.3, at("thinks") - at("granny") - 2.3, { camX: 1.8, camY: 1.7, camZ: -3.2 });
+        // Соня смотрит на свет люка — «бабушка в больнице»
+        cast(at("thinks"), "cellar", Object.assign({}, CELLAR_ALL, { sonya: Object.assign({}, SON, { pose: "lookUp", sad: 0.1 }) }));
+        cut(at("thinks"), "cellar", aim("sonya", Object.assign({}, SON, { pose: "lookUp" }), "face", 0.6, -18, -14, 32), { aperture: 1.6, hatch: 0.35, breath: 1, breathWho: "sonya", key: 0.1, keyCol: 0x8aa0c8, keySide: -1, keyUp: 1.2 });
+        mv(at("thinks"), at("told") - at("thinks"), aim("sonya", Object.assign({}, SON, { pose: "lookUp" }), "face", 0.52, -14, -12, 31));
+        // Денис
+        cut(at("told"), "cellar", aim("denis", DEN, "face", 0.62, 22, 2, 30), { aperture: 1.8, key: 0.1, keySide: -1 });
+        act(at("told"), 1.2, "denis", { sad: 0.6 });
+        mv(at("told"), at("nine") - at("told"), aim("denis", DEN, "face", 0.54, 18, 1, 29));
+
+        // ================= ПОДВАЛ =================
+        cast(at("nine"), "cellar", CELLAR_ALL);
+        cut(at("nine"), "cellar", cam(-1.75, 1.95, 2.25, 0.25, 0.45, -0.6, 50, 3), { aperture: 0.3, exposure: 1.5 });
+        mv(at("nine"), at("candle") - at("nine"), { camX: -1.5, camY: 1.85, camZ: 2.0 });
+        cut(at("candle"), "cellar", cam(-0.1, 0.56, -0.12, -0.38, 0.47, -0.5, 30, 0.47), { aperture: 1.6, bloom: 0.7 });
+        mv(at("candle"), at("minus") - at("candle"), { camX: -0.16, camZ: -0.2, focus: 0.38 });
+        // мороз: пар изо рта Сони в профиль
+        cut(at("minus"), "cellar", aim("sonya", SON, "face", 0.75, 72, 2, 32, { tx: 0.1 }), { aperture: 1.4, breath: 1.4, breathWho: "sonya", key: 0.08, keySide: 1 });
+        // аптечка сверху
+        cut(at("kit"), "cellar", cam(0.95, 1.2, -0.7, 1.05, 0.0, -1.05, 32, 1.25), { aperture: 1, key: 0.35, keyUp: 1.0 });
+        mv(at("kit"), at("saves") - at("kit"), { camY: 1.05, camZ: -0.78, focus: 1.1 });
+        // медик убирает шприц в нагрудный карман
+        cut(at("saves"), "cellar", aim("medic", Object.assign({}, MED, { pose: "sitChairChest" }), "spine03", 0.95, 18, 12, 34, { ty: 0.05 }), { aperture: 1.2, key: 0.1, keySide: -1 });
+        act(at("saves") + 0.2, 0.9, "medic", { pose2: "sitChairChest", pk: 1 });
+        tl.set(s, { syringe: 0 }, at("saves") + 0.1);
+        act(at("saves") + 0.2, 1, "medic", { sad: 0.5 });
+
+        // ================= РАЗГОВОР =================
+        cast(at("nocry"), "cellar", Object.assign({}, CELLAR_ALL, { sonya: Object.assign({}, SON, { sad: 0.35, slit: 0.1 }) }));
+        cut(at("nocry"), "cellar", aim("sonya", SON, "face", 0.5, 12, 0, 28), { aperture: 2, breath: 0.8, breathWho: "sonya", key: 0.1 });
+        mv(at("nocry"), at("asks") - at("nocry"), aim("sonya", SON, "face", 0.44, 10, 0, 27));
+        cast(at("asks"), "cellar", Object.assign({}, CELLAR_ALL, { sonya: Object.assign({}, SON, { pose: "lookUp", sad: 0.4 }) }));
+        cut(at("asks"), "cellar", aim("sonya", Object.assign({}, SON, { pose: "lookUp" }), "face", 2.0, 14, 13, 30), { aperture: 0.9 });
+        mv(at("asks"), at("morning") - at("asks"), aim("sonya", Object.assign({}, SON, { pose: "lookUp" }), "face", 1.85, 12, 13, 29));
+        cut(at("morning"), "cellar", aim("denis", DEN, "face", 0.55, -16, 0, 28), { aperture: 2, key: 0.1, keySide: -1 });
+        act(at("morning"), 1.5, "denis", { sad: 0.7 });
+        // рисунок кота в руках Сони
+        cut(at("barsik"), "cellar", aim("sonya", SON, "wrist.R", 0.55, 25, 45, 32), Object.assign({ aperture: 2.4, drawing: 1, drawWho: "" }, (() => { const a = W.probe("sonya", SON, "wrist.L"), b = W.probe("sonya", SON, "wrist.R"); return { drawX: (a.x + b.x) / 2 + 0.05, drawY: (a.y + b.y) / 2 + 0.05, drawZ: (a.z + b.z) / 2, drawRx: -1.0, drawRy: 0, drawRz: 1.57 }; })()));
+        cut(at("yes"), "cellar", aim("denis", DEN, "face", 0.5, 26, 0, 26), { aperture: 2.2, key: 0.1, keySide: -1 });
+        act(at("yes"), 1.6, "denis", { ry: -PI / 2 + 0.35, sad: 0.9 });
+        mv(at("yes"), at("six_pm") - at("yes"), { fov: 23 });
+
+        // ================= РАЦИЯ =================
+        cast(at("six_pm"), "cellar", CELLAR_ALL);
+        cut(at("six_pm"), "cellar", cam(-1.3, 0.66, -0.62, -1.62, 0.52, -0.92, 30, 0.45), { aperture: 1.6, radioLed: 1, key: 0.12 });
+        mv(at("six_pm"), at("quote") - at("six_pm"), { camX: -1.36, camZ: -0.68, focus: 0.38 });
+        cut(at("quote"), "cellar", aim("shah", Object.assign({}, SHA, { ry: -2.6 }), "face", 0.75, 20, 0, 30), { aperture: 1.3, radioLed: 1, key: 0.12 });
+        act(at("quote"), 1, "shah", { ry: -2.6 });
+        // Шах уходит наверх, к люку
+        cut(at("shah"), "cellar", cam(0.3, 0.55, -0.5, 1.5, 1.5, 1.3, 42, 2), { aperture: 0.5, hatch: 0.5 });
+        set(at("shah"), "shah", { x: 1.5, z: 0.25, ry: 0, cad: 0.9, amp: 0.8, pose: "stand" });
+        act(at("shah"), at("eight") - at("shah"), "shah", { y: 1.6, z: 1.45 }, "none");
+
+        // ================= МАШИНА =================
+        // тепловизор дрона: «таблетка» идёт по дороге
+        cast(at("eight"), "road", {});
+        cut(at("eight"), "road", cam(9, 46, -40, 0.9, 0, -33, 16, 40), { thermal: 1, vanZ: -34, vanBurn: 0, vanOn: 1, vanHead: 1, grain: 0.09, vig: 0.3, aperture: 0 });
+        tl.to(s, { vanZ: -10, duration: at("hit") - at("eight"), ease: "none" }, at("eight"));
+        mv(at("eight"), 1.1, { camZ: -35, tgtZ: -28 }, "none");
+        // FPV: пикирует на машину
+        cut(at("eight") + 1.13, "road", cam(6, 14, -40, 0.9, 1, -18, 48, 10), { thermal: 0, desat: 0.75, exposure: 2.4, grain: 0.14, signal: 0.25, vanZ: -24, vanHead: 1, aperture: 0, vig: 0.35 });
+        tl.to(s, { camX: 1.5, camY: 2.2, camZ: -14, tgtZ: -9, signal: 0.9, duration: at("hit") - at("eight") - 1.13, ease: "power2.in" }, at("eight") + 1.13);
+        // удар: вспышка и обрыв сигнала
+        tl.set(s, { flash: 1, signal: 1 }, at("hit"));
+        tl.set("#w-black", { opacity: 1 }, at("hit") + 0.12);
+        tl.set("#w-black", { opacity: 0 }, at("burns"));
+        // горит в километре: Шах смотрит издалека
+        cast(at("burns"), "road", { shah: { x: -1.2, z: -70, ry: 0.05, pose: "tired", gear: "helmet" } });
+        cut(at("burns"), "road", cam(-2.2, 1.5, -74.5, 0.6, 1.4, 0, 22, 4), { vanZ: 0, vanBurn: 1, vanHead: 0, aperture: 0.8, bloom: 0.8, sky: 0.25 });
+        mv(at("burns"), at("inside") - at("burns"), { camX: -2.0, camZ: -73.6 });
+        cast(at("inside"), "road", {});
+        cut(at("inside"), "road", cam(9, 2.2, 13, 0.9, 2.2, 0, 34, 16), { vanZ: 0, vanBurn: 1, aperture: 0.5, bloom: 0.9, sky: 0.2, exposure: 1.2 });
+        mv(at("inside"), at("alone") - at("inside"), { camX: 5.2, camZ: 7.2 });
+        // Шах возвращается один
+        cast(at("alone"), "cellar", Object.assign({}, CELLAR_ALL, { shah: Object.assign({}, SHA, { x: 1.5, y: 1.4, z: 1.35, ry: PI, cad: 0.7, amp: 0.7 }) }));
+        cut(at("alone"), "cellar", cam(-0.5, 1.0, -1.25, 1.45, 1.2, 0.9, 38, 2.6), { aperture: 0.6, hatch: 0.3 });
+        act(at("alone"), 1.8, "shah", { y: 0, z: 0.35 }, "none");
+        set(at("alone") + 1.8, "shah", { cad: 0, pose: "tired", sad: 0.8 });
+        act(at("alone") + 1.8, 1.4, "shah", { pose2: "sitKnees", pk: 1, y: 0 });
+
+        // ================= ВЫБОР =================
+        cut(at("nocar"), "cellar", aim("medic", MED, "face", 0.6, 12, 0, 28), { aperture: 1.8, key: 0.1, keySide: -1 });
+        act(at("nocar"), 2, "medic", { sad: 0.7 });
+        // Соня под фольгой, бледная; медик смотрит на неё
+        cast(at("wontlast"), "cellar", Object.assign({}, CELLAR_ALL, { sonya: LIE }));
+        cut(at("wontlast"), "cellar", camAt(W.probe("sonya", LIE, "face"), PI / 2, 0.75, 0, 30, 32), { aperture: 1.3, foil: 0, key: 0.06 });
+        mv(at("wontlast"), 2, camAt(W.probe("sonya", LIE, "face"), PI / 2, 0.62, 0, 30, 31));
+        cut(at("wontlast") + 2, "cellar", aim("medic", MED, "face", 0.55, -14, 0, 27), { aperture: 2, key: 0.08, keySide: -1, foil: 0 });
+        act(at("wontlast") + 2, 1.6, "medic", { ry: -1.1, sad: 0.9 });
+        // Денис берёт её на руки
+        cast(at("lifts"), "cellar", { denis: { x: -0.55, z: 0.1, ry: -PI / 2 + 0.4, pose: "carry", gear: "helmet", sad: 0.6 }, sonya: { pose: "heldLimp", held: [0.04, -0.72, 0.2, 0, PI, 0], slit: 0.7 }, medic: MED, shah: Object.assign({}, SHA, { pose: "sitKnees", sad: 0.8 }) });
+        cut(at("lifts"), "cellar", aim("denis", { x: -0.55, z: 0.1, ry: -PI / 2 + 0.4, pose: "carry" }, "face", 1.25, -90, 4, 36, { ty: -0.3 }), { aperture: 1, key: 0.1 });
+        mv(at("lifts"), 1.8, { camX: 0.3, camY: 1.2, camZ: 0.85 });
+        // выходит в темноту: красный налобник
+        cast(at("lifts") + 1.8, "yard", { denis: { x: 0, z: 2.6, ry: 0.15, pose: "carry", cad: 0.85, amp: 0.7, walkBase: "carry", gear: "helmet", sad: 0.5 }, sonya: { pose: "heldLimp", held: [0.04, -0.72, 0.2, 0, PI, 0], slit: 0.8 } });
+        cut(at("lifts") + 1.8, "yard", cam(1.4, 0.9, 7.2, 0.0, 1.1, 2.6, 32, 4.5), { aperture: 0.8, hatchRed: 1, key: 0.05, keyCol: 0xff3020 });
+        act(at("lifts") + 1.8, at("three") - at("lifts") - 1.8, "denis", { z: 5.2 }, "none");
+        // карта маршрута — фон: поле
+        cast(at("three"), "field", {});
+        cut(at("three"), "field", cam(30, 60, 60, 0, 0, -20, 30, 50), { aperture: 0, exposure: 1.1, desat: 0.6 });
+        // тепловизоры над дорогой
+        cast(at("thermal"), "field", { denis: { x: 0.4, z: -10, ry: 0, pose: "carry", cad: 0.85, amp: 0.7, walkBase: "carry", gear: "helmet" }, sonya: { pose: "heldLimp", held: [0.04, -0.72, 0.2, 0, PI, 0] } });
+        cut(at("thermal"), "field", cam(16, 55, 10, 0.4, 0, -8, 14, 50), { thermal: 1, grain: 0.09, vig: 0.3, aperture: 0 });
+        act(at("thermal"), at("treeline") - at("thermal"), "denis", { z: -7.8 }, "none");
+
+        // ================= ДОРОГА ВДОЛЬ ПОСАДКИ =================
+        const WALKZ = (t) => -5 + (t - at("treeline")) * 1.05; // идёт к +z, ~1 м/с
+        const DW = { x: 0.35, ry: 0, pose: "carry", cad: 0.85, amp: 0.7, walkBase: "carry", gear: "helmet", sad: 0.5 };
+        const SH = { pose: "held", held: [0.04, -0.72, 0.2, 0, PI, 0], slit: 0.3 };
+        cast(at("treeline"), "field", { denis: Object.assign({}, DW, { z: WALKZ(at("treeline")) }), sonya: SH });
+        cut(at("treeline"), "field", cam(5.5, 0.9, 16, -1, 2.2, -6, 30, 14), { aperture: 0.4 });
+        act(at("treeline"), at("takes") - at("treeline"), "denis", { z: WALKZ(at("takes")) }, "none");
+        // говорит с ней: профиль, камера идёт рядом
+        const DWt = (t) => Object.assign({}, DW, { z: WALKZ(t) });
+        cut(at("talks"), "field", aim("denis", DWt(at("talks")), "face", 0.95, -78, 3, 30, { tx: 0, ty: -0.05 }), { aperture: 1.6, foil: 0, breath: 1.2, breathWho: "denis", key: 0.05, keyCol: 0x8aa0c8 });
+        mv(at("talks"), at("about") - at("talks"), aim("denis", DWt(at("about")), "face", 0.9, -74, 3, 30, { ty: -0.05 }), "none");
+        talk("denis", at("talks") + 0.2, at("sea"));
+        // лицо Сони у плеча
+        const sonF = (t, sw) => W.probeHeld("denis", DWt(t), SH.held, sw || SH, "face");
+        cut(at("about"), "field", camAt(sonF(at("about")), 0, 0.55, -62, 4, 28), { aperture: 2.0, foil: 0, key: 0.06, keyCol: 0x9ab0d0 });
+        mv(at("about"), at("sea") - at("about"), camAt(sonF(at("sea")), 0, 0.5, -60, 4, 28), "none");
+        // море, которого он не видел
+        cast(at("sea"), "sea", {});
+        cut(at("sea"), "sea", cam(0, 0.9, 0, 0, 1.2, -100, 40, 50), { aperture: 0 });
+        mv(at("sea"), at("km2") - at("sea"), { camX: 3, camY: 1.5, tgtX: 10 });
+        tl.fromTo("#w-black", { opacity: 0.6 }, { opacity: 0, duration: 0.6 }, at("sea"));
+        // второй километр: тепловизор сверху
+        cast(at("km2"), "field", { denis: Object.assign({}, DW, { z: WALKZ(at("km2")) }), sonya: SH });
+        act(at("km2"), at("takes") - at("km2"), "denis", { z: WALKZ(at("takes")) }, "none");
+        cut(at("km2"), "field", cam(8, 34, WALKZ(at("km2")) - 6, 0.3, 0, WALKZ(at("km2")) + 2, 18, 30), { thermal: 1, grain: 0.09, vig: 0.3, aperture: 0 });
+        mv(at("km2"), at("asleep") - at("km2"), { camZ: WALKZ(at("asleep")) - 6, tgtZ: WALKZ(at("asleep")) + 2 }, "none");
+        // её рука соскальзывает
+        const handAt = (t) => W.probeHeld("denis", DWt(t), SH.held, { pose: "heldLimp" }, "wrist.R");
+        cut(at("asleep"), "field", camAt(handAt(at("asleep")), 0, 1.35, -80, 8, 32, { ty: 0.28 }), { aperture: 1.6, foil: 0, key: 0.05, keyCol: 0x9ab0d0 });
+        mv(at("asleep"), at("goes") - at("asleep"), camAt(handAt(at("goes")), 0, 1.3, -78, 8, 32, { ty: 0.28 }), "none");
+        set(at("asleep"), "sonya", { pose: "held", pose2: "heldLimp", pk: 0 });
+        act(at("asleep") + 0.3, 1.3, "sonya", { pk: 1, slit: 0.2, closed: 0.9 }, "power2.in");
+        // и идёт дальше
+        cut(at("goes"), "field", cam(0.6, 1.5, WALKZ(at("goes")) - 3.2, 0.2, 1.3, WALKZ(at("goes")) + 8, 34, 4), { aperture: 0.6 });
+
+        // ================= ТОЧКА =================
+        const EV = { denis: { x: 0.2, z: -7.4, ry: PI, pose: "carry", gear: "helmet", sad: 0.6 }, extra: { x: 0.3, z: -8.5, ry: 0, pose: "standGive", gear: "helmet", sad: 0.4 }, sonya: { pose: "heldLimp", held: [0.04, -0.72, 0.2, 0, PI, 0], closed: 1 } };
+        cast(at("takes"), "evac", EV);
+        cut(at("takes"), "evac", cam(2.8, 1.4, -6.2, 0.2, 1.2, -8.0, 34, 2.6), { aperture: 0.8, key: 0.06, keyCol: 0xff3020 });
+        set(at("takes") + 1.4, "sonya", { heldBy: "extra" });
+        set(at("takes") + 1.4, "extra", { pose: "carry" });
+        set(at("takes") + 1.4, "denis", { pose: "standGive" });
+        act(at("takes") + 1.4, 1.2, "denis", { pose2: "stand", pk: 1 });
+        // слушает
+        cast(at("listens"), "evac", { extra: { x: 0.3, z: -8.6, ry: PI / 2, pose: "listen", gear: "helmet", sad: 0.5 }, sonya: { x: 0.95, y: 0.04, z: -8.6, ry: PI / 2, rz: -PI / 2, pose: "lieSide", closed: 1 }, denis: { x: 1.2, z: -7.2, ry: PI + 0.4, pose: "tired", gear: "helmet", sad: 0.8 } });
+        cut(at("listens"), "evac", camAt(W.probe("sonya", { x: 0.95, y: 0.04, z: -8.6, ry: PI / 2, rz: -PI / 2, pose: "lieSide" }, "spine03"), 0, 1.9, 55, 22, 34), { aperture: 0.9, foil: 0, key: 0.35, keyCol: 0xff4030 });
+        cut(at("long"), "evac", aim("denis", { x: 1.2, z: -7.2, ry: PI + 0.4, pose: "tired" }, "face", 0.62, 12, 0, 28), { aperture: 2, foil: 0, key: 0.06, keyCol: 0xff3020, keySide: -1 });
+        act(at("long"), 1, "denis", { sad: 1 });
+        cut(at("says"), "evac", aim("extra", { x: 0.3, z: -8.6, ry: PI / 2 + 0.5, pose: "kneel" }, "face", 0.75, 15, 0, 30), { aperture: 1.6, foil: 0, key: 0.06, keyCol: 0xff3020 });
+        set(at("says"), "extra", { pose: "kneel", pose2: "", pk: 0, ry: PI / 2 + 0.5 });
+        cut(at("forty"), "evac", aim("extra", { x: 0.3, z: -8.6, ry: PI / 2 + 0.5, pose: "kneel" }, "face", 2.2, 55, 8, 34, { ty: 0.1 }), { aperture: 0.9, foil: 0, key: 0.05, keyCol: 0xff3020 });
+        set(at("forty"), "extra", { pose: "kneel", pose2: "", pk: 0, ry: PI / 2 + 0.5, sad: 0.8 });
+        // он сидит у колеса с пустыми руками
+        const DSIT = { x: 1.9, z: -2.8, ry: PI / 2, pose: "sitWall", gear: "helmet", sad: 0.9, slit: 0.3 };
+        cast(at("carried"), "evac", { denis: DSIT });
+        cut(at("carried"), "evac", aim("denis", DSIT, "face", 2.0, 25, 10, 34, { ty: -0.2 }), { aperture: 0.8, key: 0.05, keyCol: 0xff3020 });
+        mv(at("carried"), at("spoke") - at("carried"), aim("denis", DSIT, "face", 1.7, 20, 8, 34, { ty: -0.2 }));
+        cut(at("spoke"), "evac", aim("denis", DSIT, "face", 0.55, 15, 0, 26), { aperture: 2.2, key: 0.06, keyCol: 0xff3020, keySide: -1 });
+        act(at("spoke"), 1.2, "denis", { closed: 0.9 });
+
+        // ================= ТЕЛЕФОН =================
+        const DPH = Object.assign({}, DSIT, { pose: "phone", gear: "cap" });
+        cast(at("night"), "evac", { denis: DPH });
+        cut(at("night"), "evac", aim("denis", DPH, "face", 0.7, 10, -28, 30), { aperture: 2, phone: 1, phoneScr: 1, redLight: 0.4 });
+        mv(at("night"), at("msg") - at("night"), aim("denis", DPH, "face", 0.6, 8, -26, 29));
+        cut(at("msg"), "evac", aim("denis", DPH, "face", 0.6, 8, -26, 29), { aperture: 3.5, phone: 1, phoneScr: 1, redLight: 0.4, exposure: 0.8 });
+
+        // ================= УТРО: «РОМАШКА» =================
+        const COL = (n, i) => ({ x: (i % 2 ? 0.6 : -0.5), z: -2 - i * 2.2, ry: PI, cad: 0.8, amp: 0.8, gear: "helmet", sad: 0.4 });
+        cast(at("order_am"), "morning", { denis: COL("denis", 0), shah: COL("shah", 1), extra: COL("extra", 2), extra2: COL("extra2", 3) });
+        cut(at("order_am"), "morning", cam(0.3, 1.5, 3.2, 0, 1.3, -20, 34, 6), { aperture: 0.5 });
+        ["denis", "shah", "extra", "extra2"].forEach((n, i) => act(at("order_am"), at("pocket") - at("order_am"), n, { z: -2 - i * 2.2 - (at("pocket") - at("order_am")) * 0.85 }, "none"));
+        cut(at("notall"), "morning", cam(-8, 3.5, -10, 0, 1, -40, 30, 25), { aperture: 0.2 });
+        mv(at("notall"), at("pocket") - at("notall"), { camX: -7, camY: 3.2 });
+        // рисунок в нагрудный карман
+        cast(at("pocket"), "morning", { denis: { x: 0, z: 0, ry: 0, pose: "standHand", gear: "helmet", sad: 0.6 } });
+        cut(at("pocket"), "morning", aim("denis", { pose: "standHand" }, "spine03", 0.8, 12, 4, 30, { ty: 0.06, tz: 0.18 }), Object.assign({ aperture: 2, drawing: 1, drawWho: "" }, (() => { const p = W.probe("denis", { pose: "standHand" }, "spine03", [0, 0.1, 0.26]); return { drawX: p.x, drawY: p.y + 0.16, drawZ: p.z, drawRx: -0.15, drawRy: 0, drawRz: 0.05 }; })()));
+        tl.to(s, { drawY: "-=0.12", duration: 1.6, ease: "power2.inOut" }, at("pocket") + 0.4);
+        act(at("pocket"), 1.6, "denis", { pose2: "stand", pk: 0.35 });
+        cut(at("all"), "morning", aim("denis", { pose: "stand" }, "face", 0.6, 12, 0, 30), { aperture: 2, key: 0.15, keyCol: 0xc0c8d0 });
+        act(at("all"), 1.8, "denis", { sad: 0.8, slit: 0.25 });
+        tl.to("#w-black", { opacity: 1, duration: 1.0 }, at("end") - 0.3);
+
+        tl.to({}, { duration: D }, 0);
+        tl.eventCallback("onUpdate", () => W.render(tl.time()));
+        window.__timelines["world"] = tl;
+        W.render(0);
+      }
+      window.__hf.buildReady.world = W.ready.then(build);
+    })();
+  </script>
+</template>
