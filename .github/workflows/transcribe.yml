@@ -1,0 +1,35 @@
+name: Тайминги слов озвучки (whisper) в ветку renders
+
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: "Папка эпизода, например episodes/007-zimovye"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  transcribe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Зависимости
+        run: pip install -q faster-whisper
+      - name: Распознавание
+        run: |
+          EP="${{ inputs.episode }}"
+          V=$(ls "$EP"/assets/voice.* | head -1)
+          python3 tools/transcribe.py "$V" /tmp/transcript.json --prompt-file "$EP/voice_text.txt"
+      - name: В ветку renders
+        run: |
+          NAME=$(basename "${{ inputs.episode }}")
+          git config user.name "render-bot"
+          git config user.email "render-bot@users.noreply.github.com"
+          if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
+          mkdir -p transcripts && cp /tmp/transcript.json "transcripts/$NAME.json"
+          git add -f transcripts
+          git commit -qm "transcript: $NAME"
+          git push -q origin HEAD:refs/heads/renders
