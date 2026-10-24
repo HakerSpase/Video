@@ -27,7 +27,7 @@
       const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("knock", "phone");
       $("#bg").innerHTML = T.svg(T.interior({ lamp: true }));
       tl.set(q("#bg .tg-dark"), { opacity: 0.45 }, 0);
-      tl.fromTo(q("#cam"), { scale: 1.5, x: 380, y: -40 }, { scale: 1.9, x: 520, y: -80, duration: D, ease: "sine.inOut" }, 0);
+      tl.fromTo(q("#cam"), { scale: 1.5, x: 260, y: -40 }, { scale: 1.9, x: 480, y: -80, duration: D, ease: "sine.inOut" }, 0);
       [0, 0.55, 1.1].forEach((d, i) => {
         const t = at("times") + d - 0.3;
         tl.fromTo(q("#cam"), { rotation: 0 }, { rotation: i % 2 ? -0.6 : 0.6, duration: 0.05, yoyo: true, repeat: 1 }, t);

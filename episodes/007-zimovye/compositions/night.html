@@ -28,7 +28,7 @@
       $("#bg").innerHTML = T.svg(T.interior({ lamp: true }));
       const cv = $("#sn"); cv.style.clipPath = "inset(450px 130px 1220px 660px)";
       T.snow(cv, tl, { from: 0, dur: D, n: 420, wind: 2.2, speed: 0.5, size: 3, streak: 3 });
-      tl.fromTo(q("#cam"), { scale: 1.05 }, { scale: 1.6, x: -330, y: 210, duration: D, ease: "sine.inOut" }, 0);
+      tl.fromTo(q("#cam"), { scale: 1.05 }, { scale: 1.6, x: -320, y: 210, duration: D, ease: "sine.inOut" }, 0);
       tl.to(q("#bg .tg-lampg"), { opacity: 0.22, duration: 0.08, yoyo: true, repeat: 3 }, at("hum") + 0.4);
       tl.to(q("#bg .tg-dark"), { opacity: 0.45, duration: 2 }, at("wrong"));
       show("#g-1", at("two") + 0.1, at("hum") - 0.1);

@@ -35,7 +35,7 @@
       tl.set(tr, { opacity: 0 }, 0);
       tr.forEach((e, i) => tl.to(e, { opacity: 0.95, duration: 0.08 }, at("tracks") + (at("noback") - at("tracks")) * (i / tr.length)));
       tl.fromTo(q("#cam"), { scale: 1.0, y: 0 }, { scale: 1.3, y: 140, duration: at("noback"), ease: "sine.inOut" }, 0);
-      tl.to(q("#cam"), { scale: 1.9, x: -560, y: 150, duration: 1.4, ease: "power2.inOut" }, at("tank") - 0.3);
+      tl.to(q("#cam"), { scale: 1.9, x: -480, y: 150, duration: 1.4, ease: "power2.inOut" }, at("tank") - 0.3);
       show("#w-1", 0.1, at("tracks") - 0.1);
       show("#w-2", at("size") + 0.1, at("path") - 0.1);
       show("#w-3", at("path") + 0.1, at("noback") - 0.1);
