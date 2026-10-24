@@ -16,6 +16,9 @@ import sys
 from pathlib import Path
 
 VOICE_LUFS, FOLEY_LUFS, MUSIC_LUFS, OUT_LUFS = -16.0, -32.0, -28.5, -14.0
+# для хоррора эффекты громче: FOLEY_LUFS=-26 MUSIC_LUFS=-27 python3 tools/finalmix.py …
+FOLEY_LUFS = float(os.environ.get("FOLEY_LUFS", FOLEY_LUFS))
+MUSIC_LUFS = float(os.environ.get("MUSIC_LUFS", MUSIC_LUFS))
 
 
 def lufs(args):

@@ -1,0 +1,365 @@
+{
+ "ambience": [],
+ "beds": [
+  [
+   0,
+   "cabin",
+   "assets/sfx/wind_low.mp3",
+   0.4,
+   {
+    "fade": 0.5
+   }
+  ],
+  [
+   "cabin",
+   "storm",
+   "assets/sfx/wind_low.mp3",
+   0.3,
+   {
+    "start": 20,
+    "fade": 0.4
+   }
+  ],
+  [
+   "cabin",
+   "trap",
+   "assets/sfx/generator.mp3",
+   0.1,
+   {
+    "lp": 600,
+    "fade": 0.5
+   }
+  ],
+  [
+   "storm",
+   "night",
+   "assets/sfx/wind.mp3",
+   0.5,
+   {
+    "fade": 1.0
+   }
+  ],
+  [
+   "night",
+   "four",
+   "assets/sfx/wind.mp3",
+   0.45,
+   {
+    "start": 10,
+    "lp": 1600,
+    "fade": 0.3
+   }
+  ],
+  [
+   "night",
+   "four",
+   "assets/sfx/generator.mp3",
+   0.16,
+   {
+    "start": 5,
+    "lp": 500,
+    "fade": 0.05
+   }
+  ],
+  [
+   "night",
+   "four",
+   "assets/sfx/room_tone.mp3",
+   0.25,
+   {
+    "fade": 0.3
+   }
+  ],
+  [
+   "four",
+   "dawn",
+   "assets/sfx/wind.mp3",
+   0.42,
+   {
+    "start": 40,
+    "lp": 1200,
+    "fade": 0.4
+   }
+  ],
+  [
+   "dawn",
+   "photos",
+   "assets/sfx/wind_low.mp3",
+   0.22,
+   {
+    "start": 40,
+    "fade": 0.6
+   }
+  ],
+  [
+   "photos",
+   "outro",
+   "assets/sfx/room_tone.mp3",
+   0.2,
+   {
+    "start": 20,
+    "fade": 0.5
+   }
+  ],
+  [
+   "outro",
+   "_duration",
+   "assets/sfx/wind_low.mp3",
+   0.25,
+   {
+    "start": 70,
+    "fade": 0.8
+   }
+  ]
+ ],
+ "samples": [
+  [
+   0,
+   "assets/sfx/generator.mp3",
+   0.22,
+   {
+    "start": 2,
+    "dur": 19,
+    "rate": 1.7,
+    "lp": 1400,
+    "fade_in": 0.8,
+    "fade_out": 1.5
+   }
+  ],
+  [
+   "alone",
+   "assets/sfx/impact-bass-1.mp3",
+   0.35,
+   {}
+  ],
+  [
+   "crunch+0.2",
+   "assets/sfx/steps_gravel.mp3",
+   0.35,
+   {
+    "start": 3,
+    "dur": 1.0,
+    "lp": 1600,
+    "fade_out": 0.3
+   }
+  ],
+  [
+   "step",
+   "assets/sfx/steps_gravel.mp3",
+   0.4,
+   {
+    "start": 8,
+    "dur": 0.45,
+    "lp": 1600,
+    "fade_out": 0.1
+   }
+  ],
+  [
+   "step+1.6",
+   "assets/sfx/steps_gravel.mp3",
+   0.4,
+   {
+    "start": 9,
+    "dur": 0.45,
+    "lp": 1600,
+    "fade_out": 0.1
+   }
+  ],
+  [
+   "times-0.3",
+   "assets/sfx/knock.wav",
+   0.9,
+   {
+    "wet": 0.3
+   }
+  ],
+  [
+   "times+0.25",
+   "assets/sfx/knock.wav",
+   0.9,
+   {
+    "wet": 0.3
+   }
+  ],
+  [
+   "times+0.8",
+   "assets/sfx/knock.wav",
+   0.95,
+   {
+    "wet": 0.3
+   }
+  ],
+  [
+   "bolt+0.4",
+   "assets/sfx/click.mp3",
+   0.4,
+   {
+    "lp": 3000
+   }
+  ],
+  [
+   "beep",
+   "assets/sfx/ping.mp3",
+   0.45,
+   {}
+  ],
+  [
+   "beep+0.3",
+   "assets/sfx/ping.mp3",
+   0.45,
+   {}
+  ],
+  [
+   "open+0.1",
+   "assets/sfx/impact-bass-2.mp3",
+   0.6,
+   {}
+  ],
+  [
+   "nail+0.2",
+   "assets/sfx/click-soft.mp3",
+   0.45,
+   {
+    "hp": 1500,
+    "wet": 0.3
+   }
+  ],
+  [
+   "nail+0.55",
+   "assets/sfx/click-soft.mp3",
+   0.45,
+   {
+    "hp": 1500,
+    "wet": 0.3
+   }
+  ],
+  [
+   "nail+0.9",
+   "assets/sfx/click-soft.mp3",
+   0.45,
+   {
+    "hp": 1500,
+    "wet": 0.3
+   }
+  ],
+  [
+   "momdead",
+   "assets/sfx/heartbeat.mp3",
+   0.35,
+   {
+    "start": 2,
+    "dur": 2.2,
+    "lp": 160,
+    "fade_out": 0.6
+   }
+  ],
+  [
+   "four+0.4",
+   "assets/sfx/glitch-2.mp3",
+   0.25,
+   {
+    "lp": 2000
+   }
+  ],
+  [
+   "four+0.5",
+   "assets/sfx/impact-bass-1.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "under+0.3",
+   "assets/sfx/paper.mp3",
+   0.45,
+   {
+    "start": 25.4,
+    "dur": 1.2
+   }
+  ],
+  [
+   "lost",
+   "assets/sfx/heartbeat.mp3",
+   0.35,
+   {
+    "start": 2,
+    "dur": 7.5,
+    "lp": 160,
+    "fade_in": 0.5,
+    "fade_out": 1.0
+   }
+  ],
+  [
+   "noback+0.1",
+   "assets/sfx/impact-bass-2.mp3",
+   0.6,
+   {}
+  ],
+  [
+   "p1-0.05",
+   "assets/sfx/click.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "p2-0.05",
+   "assets/sfx/click.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "p3-0.05",
+   "assets/sfx/click.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "p4-0.05",
+   "assets/sfx/click.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "time-0.05",
+   "assets/sfx/click.mp3",
+   0.6,
+   {}
+  ],
+  [
+   "time-0.05",
+   "assets/sfx/impact-bass-1.mp3",
+   0.5,
+   {}
+  ],
+  [
+   "inside",
+   "assets/sfx/tinnitus.mp3",
+   0.08,
+   {
+    "start": 2,
+    "dur": 3.5,
+    "fade_in": 0.3,
+    "fade_out": 2.0
+   }
+  ],
+  [
+   "fin-0.4",
+   "assets/sfx/riser.mp3",
+   0.3,
+   {}
+  ],
+  [
+   "fin+2.8",
+   "assets/sfx/impact-bass-2.mp3",
+   0.7,
+   {}
+  ]
+ ],
+ "duck": [],
+ "ring_synth": 0.0,
+ "music": [],
+ "foley_duck": 0.6,
+ "duck_protect": [],
+ "foley_lufs": -24,
+ "tracks": [],
+ "events": []
+}

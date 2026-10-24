@@ -20,3 +20,4 @@ episodes/*/out/*.jpg
 episodes/*/assets/ai.mp4
 episodes/*/out/ai_shots/
 episodes/*/assets/foley_raw.wav
+episodes/*/assets/score*.wav
