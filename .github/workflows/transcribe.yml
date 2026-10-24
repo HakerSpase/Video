@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Зависимости
-        run: pip install -q faster-whisper
+        run: pip install -q faster-whisper numpy
       - name: Распознавание
         run: |
           EP="${{ inputs.episode }}"

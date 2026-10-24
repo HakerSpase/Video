@@ -7,12 +7,24 @@
 Текст сценария подаётся подсказкой — модель реже ошибается в именах и редких словах.
 """
 import json
-import subprocess
 import sys
+import wave
 
 import numpy as np
 
-from faster_whisper import WhisperModel
+
+
+def load_wav16k(path):
+    """WAV (PCM 16 бит) → моно float32 16 кГц без ffmpeg и PyAV (на раннерах их может не быть или они несовместимы)."""
+    with wave.open(path, "rb") as w:
+        ch, sr, n = w.getnchannels(), w.getframerate(), w.getnframes()
+        x = np.frombuffer(w.readframes(n), np.int16).astype(np.float32) / 32768.0
+    if ch > 1:
+        x = x.reshape(-1, ch).mean(axis=1)
+    if sr != 16000:
+        t = np.arange(0, len(x) / sr, 1 / 16000)
+        x = np.interp(t, np.arange(len(x)) / sr, x).astype(np.float32)
+    return x
 
 
 def main():
@@ -20,10 +32,10 @@ def main():
     prompt = None
     if "--prompt-file" in sys.argv:
         prompt = open(sys.argv[sys.argv.index("--prompt-file") + 1], encoding="utf-8").read()[:800]
+    from faster_whisper import WhisperModel
+
     model = WhisperModel("medium", device="cpu", compute_type="int8")
-    # декодируем сами: PyAV на раннерах бывает несовместим с faster-whisper
-    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", src, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"], capture_output=True, check=True).stdout
-    audio = np.frombuffer(raw, np.float32)
+    audio = load_wav16k(src)
     segs, _ = model.transcribe(audio, language="ru", word_timestamps=True, vad_filter=False, beam_size=5, initial_prompt=prompt)
     words = []
     for s in segs:
