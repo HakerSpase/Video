@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .layer { position: absolute; inset: 0; }
+    canvas.sn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .pos2 { position: absolute; left: 70px; top: 275px; opacity: 0; }
+    .quote { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .quote small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .quote b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .tg-tc { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: rgba(0,0,0,0.75); display: flex; justify-content: space-between; align-items: center;
+      padding: 0 34px; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #e8e8e8; letter-spacing: 0.04em; }
+    .ir { filter: grayscale(1) contrast(1.35) brightness(1.55); }
+    #hl { position: absolute; left: 140px; top: 760px; width: 800px; height: 900px; background: radial-gradient(50% 50% at 50% 30%, rgba(255,240,200,0.32), rgba(255,240,200,0) 70%); }
+    #route { position: absolute; left: 70px; right: 70px; top: 1340px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 3px; opacity: 0; }
+    #route i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #ffd23f; border-radius: 3px; }
+    #route b { position: absolute; top: -50px; font-family: "JetBrains Mono", monospace; font-size: 26px; color: rgba(255,255,255,0.75); }
+  </style>
+  <div id="root" data-composition-id="road" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="layer" id="bg"></div></div>
+    <div id="hl"></div>
+    <canvas class="sn" id="sn" width="540" height="960"></canvas>
+    <div id="route"><i id="route-i"></i><b style="left:0">ГОРОД</b><b style="right:0">ЗИМОВЬЕ</b></div>
+    <div class="pos stamp" id="r-1"><b>180 КМ</b><small>ОТ ГОРОДА · ЯНВАРЬ</small></div>
+    <div class="pos" id="r-2"><span class="chip">ОБЫЧНО — ВТРОЁМ</span></div>
+    <div class="pos" id="r-3"><span class="chip red">В ЭТОТ РАЗ — ОДИН</span></div>
+    <div class="pos" id="r-4"><span class="chip yellow">4 ДНЯ</span></div>
+    <div class="pos" id="r-5"><span class="chip">ПОСЛЕДНИЕ 40 КМ — БЕЗ ДОРОГИ</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("road", "cabin");
+      // перспектива: ряды елей по краям, сходятся к горизонту
+      let s = T.sky("night") + T.ground(1000);
+      const r = T.rng(21);
+      for (let i = 0; i < 26; i++) {
+        const k = i / 26, y = 1000 + k * k * 1100, h = 120 + k * k * 1500, off = 120 + k * k * 900;
+        s += T.spruce(540 - off - r() * 60, y, h, h * 0.25, i % 2 ? "#070c16" : "#0b1322", 0.3, r);
+        s += T.spruce(540 + off + r() * 60, y, h, h * 0.25, i % 2 ? "#0b1322" : "#070c16", 0.3, r);
+      }
+      s += `<path d="M470 1000 L610 1000 L1180 1920 L-100 1920Z" fill="#7d8ea6" opacity=".35"/>`;
+      s += T.tracks([[540, 1920], [540, 1010]], { step: 60, size: 16, color: "#4c5d78", opacity: 0.5 });
+      $("#bg").innerHTML = T.svg(s);
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.35, duration: D, ease: "none" }, 0);
+      tl.fromTo(q("#cam"), { y: 0 }, { y: 120, duration: D, ease: "none" }, 0);
+      T.snow($("#sn"), tl, { from: 0, dur: D, n: 260, wind: 0.0, speed: 1.4, size: 3, streak: 4 });
+      tl.to(q("#hl"), { opacity: 0.75, duration: 0.15, yoyo: true, repeat: Math.floor(D / 0.3) - 1, ease: "sine.inOut" }, 0);
+      show("#r-1", 0.2, at("three") - 0.1);
+      show("#r-2", at("three") + 0.1, at("alone") - 0.1);
+      show("#r-3", at("alone") + 0.1, at("decide") - 0.1);
+      show("#r-4", at("decide") + 0.6, at("noroad") - 0.1);
+      show("#r-5", at("noroad") + 0.1, D - 0.2);
+      tl.to(q("#route"), { opacity: 1, duration: 0.3 }, at("noroad"));
+      tl.fromTo(q("#route-i"), { width: "0%" }, { width: "100%", duration: D - at("noroad") - 0.4, ease: "power1.inOut" }, at("noroad"));
+      window.__timelines["road"] = tl;
+    })();
+  </script>
+</template>

@@ -471,7 +471,9 @@ def main():
     for f in ("gsap.min.js", "kit.css", "grain.png", "iso.js", "fx.js", "grunge.png", "three.min.js", "hall3d.js", "tunnel3d.js", "people3d.js", "war3d.js"):
         shutil.copyfile(ROOT / "lib" / f, ep / "assets" / "lib" / f)
     # реалистичные люди, мир части 2, фототекстуры
-    for f in ("human3d.js", "night3d.js"):
+    # плюс всё, что эпизод просит в meta.json → "scripts" (taiga.js и т. п.)
+    meta_scripts = json.loads((ep / "meta.json").read_text(encoding="utf-8")).get("scripts", []) if (ep / "meta.json").exists() else []
+    for f in ["human3d.js", "night3d.js"] + [x for x in meta_scripts if "/" not in x]:
         if (ROOT / "lib" / f).exists():
             shutil.copyfile(ROOT / "lib" / f, ep / "assets" / "lib" / f)
     for d in ("humans", "tex"):

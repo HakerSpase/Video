@@ -1,0 +1,69 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .layer { position: absolute; inset: 0; }
+    canvas.sn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .pos2 { position: absolute; left: 70px; top: 275px; opacity: 0; }
+    .quote { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .quote small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .quote b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .tg-tc { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: rgba(0,0,0,0.75); display: flex; justify-content: space-between; align-items: center;
+      padding: 0 34px; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #e8e8e8; letter-spacing: 0.04em; }
+    .ir { filter: grayscale(1) contrast(1.35) brightness(1.55); }
+    #plan { position: absolute; inset: 0; }
+    .lbl { position: absolute; font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 800; color: #ff2e3e; opacity: 0; text-shadow: 0 0 20px rgba(255,46,62,0.6); }
+    #blk { position: absolute; inset: 0; background: #000; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="dark" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="layer" id="plan"></div></div>
+    <div class="lbl" id="l1" style="left:120px;top:560px">«ЛЁХА…»</div>
+    <div class="lbl" id="l2" style="left:690px;top:640px">«ЛЁХА…»</div>
+    <div class="lbl" id="l3" style="left:640px;top:1010px">«ЛЁША, СЫНОК…»</div>
+    <div id="blk"></div>
+    <div class="pos stamp" id="d-1"><b>10 МИНУТ</b><small>СТОИТ ЗА ДВЕРЬЮ</small></div>
+    <div class="pos" id="d-2"><span class="chip red">ГОЛОС МАМЫ · УМЕРЛА 3 ГОДА НАЗАД</span></div>
+    <div class="pos" id="d-3"><span class="chip red">04:00 · ГЕНЕРАТОР ЗАГЛОХ</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("dark", "journal");
+      // вид сверху: снег, изба, окна, генератор, кромка леса
+      let s = `<rect width="1080" height="1920" fill="#1a2433"/>`;
+      const r = T.rng(31);
+      for (let i = 0; i < 40; i++) { const x = r() * 1080, y = r() * 330; s += `<circle cx="${x}" cy="${y}" r="${40 + r() * 50}" fill="#0b1220"/><circle cx="${x}" cy="${y}" r="${18 + r() * 20}" fill="#122036"/>`; }
+      s += `<rect x="300" y="700" width="480" height="380" fill="#2a1d13" stroke="#0f0a06" stroke-width="10"/>`;
+      for (let i = 1; i < 8; i++) s += `<line x1="300" y1="${700 + i * 47}" x2="780" y2="${700 + i * 47}" stroke="#3a2a1d" stroke-width="5"/>`;
+      s += `<rect x="370" y="1070" width="110" height="26" fill="#6b5a46"/>`; // дверь (низ)
+      s += `<rect x="290" y="830" width="20" height="100" fill="#ffb45a" class="w1"/><rect x="770" y="830" width="20" height="100" fill="#ffb45a" class="w2"/><rect x="560" y="690" width="120" height="20" fill="#ffb45a" class="w3"/>`;
+      s += `<rect x="830" y="1100" width="120" height="80" rx="8" fill="#3d4a3a"/><circle class="gled" cx="925" cy="1140" r="12" fill="#3ddc84"/>`;
+      s += `<text x="830" y="1220" fill="#9fb4d6" font-family="JetBrains Mono" font-size="26">ГЕНЕРАТОР</text><text x="380" y="1140" fill="#9fb4d6" font-family="JetBrains Mono" font-size="26">ДВЕРЬ</text>`;
+      const path = [[420, 1160], [180, 1060], [230, 880], [420, 620], [700, 600], [860, 780], [880, 1000], [760, 1180], [420, 1160]];
+      s += T.tracks(path, { step: 38, size: 9, color: "#06090f", opacity: 0.9 });
+      s += `<circle id="dot" cx="420" cy="1160" r="18" fill="#ff2e3e"/><circle id="dotg" cx="420" cy="1160" r="60" fill="#ff2e3e" opacity=".25"/>`;
+      $("#plan").innerHTML = T.svg(s);
+      const tr = Array.from($("#plan").querySelectorAll(".tg-tr"));
+      tl.set(tr, { opacity: 0 }, 0);
+      tl.fromTo(q("#cam"), { scale: 1.15 }, { scale: 1.0, duration: D, ease: "sine.inOut" }, 0);
+      show("#d-1", at("ten") + 0.1, at("around") - 0.1);
+      // движение точки по контуру: от двери — вокруг дома
+      const A = at("around"), B = at("four") - 0.3, seg = path.length - 1, dt = (B - A) / seg;
+      for (let i = 1; i < path.length; i++) {
+        tl.to(q(["#dot", "#dotg"]), { attr: { cx: path[i][0], cy: path[i][1] }, duration: dt * 0.7, ease: "sine.inOut" }, A + (i - 1) * dt);
+      }
+      tr.forEach((e, i) => tl.to(e, { opacity: 0.9, duration: 0.1 }, A + ((B - A) * i) / tr.length));
+      tl.to(q("#dotg"), { attr: { r: 90 }, opacity: 0, duration: 0.6, repeat: Math.floor((B - A) / 0.8), ease: "power1.out" }, A);
+      tl.fromTo(q("#l1"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("name")); tl.to(q("#l1"), { opacity: 0, duration: 0.3 }, at("sgv") + 1.2);
+      tl.fromTo(q("#l2"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("sgv")); tl.to(q("#l2"), { opacity: 0, duration: 0.3 }, at("mom"));
+      tl.fromTo(q("#l3"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("mom")); tl.to(q("#l3"), { opacity: 0, duration: 0.3 }, at("four") - 0.2);
+      show("#d-2", at("momdead"), at("four") - 0.1);
+      tl.to(q("#plan .gled"), { attr: { fill: "#ff2e3e" }, duration: 0.05 }, at("four") + 0.2);
+      tl.to(q("#plan .w1, #plan .w2, #plan .w3"), { attr: { fill: "#0b0f15" }, duration: 0.05 }, at("four") + 0.5);
+      tl.to(q("#blk"), { opacity: 0.88, duration: 0.15 }, at("four") + 0.5);
+      show("#d-3", at("four") + 0.6, D - 0.05);
+      window.__timelines["dark"] = tl;
+    })();
+  </script>
+</template>

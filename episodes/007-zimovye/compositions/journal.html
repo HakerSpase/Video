@@ -1,0 +1,59 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .layer { position: absolute; inset: 0; }
+    canvas.sn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .pos2 { position: absolute; left: 70px; top: 275px; opacity: 0; }
+    .quote { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .quote small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .quote b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .tg-tc { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: rgba(0,0,0,0.75); display: flex; justify-content: space-between; align-items: center;
+      padding: 0 34px; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #e8e8e8; letter-spacing: 0.04em; }
+    .ir { filter: grayscale(1) contrast(1.35) brightness(1.55); }
+    #torch { position: absolute; inset: 0; background: radial-gradient(260px 260px at var(--tx, 540px) var(--ty, 1250px), rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.97) 100%); }
+    #book { position: absolute; left: 90px; right: 90px; top: 220px; height: 860px; background: #d8ceb6; transform: rotate(1.5deg); opacity: 0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8); padding: 50px 54px; font-family: "EB Garamond", serif; font-style: italic; color: #2b241c;
+      background-image: repeating-linear-gradient(#d8ceb6 0 58px, #9fb4d6 58px 60px); }
+    #book p { font-size: 44px; line-height: 60px; margin: 0; opacity: 0; }
+    #book p.last { color: #8f1018; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="journal" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="layer" id="bg"></div></div>
+    <div id="torch"></div>
+    <div id="book">
+      <p id="j1">Ночь 19. Опять ходил вокруг. Не открыл.</p>
+      <p id="j2">Ночь 21. Генератор заглушил. Бак пустой.</p>
+      <p id="j3">Ночь 22. Звал голосом Коли. Коля в городе.</p>
+      <p id="j4" class="last">Ночь 23. Третью ночь ходит вокруг. Говорит голосом Вали. Валя умерла в 98-м.</p>
+    </div>
+    <div class="pos stamp" id="j-1"><b>МИХАЛЫЧ</b><small>ПРОПАЛ ЗДЕСЬ ПРОШЛОЙ ЗИМОЙ</small></div>
+    <div class="pos" id="j-2"><span class="chip yellow">23 ЗАПИСИ</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("journal", "dawn");
+      $("#bg").innerHTML = T.svg(T.interior({ lamp: false }));
+      const L = { x: 300, y: 900 };
+      const mv = () => { $("#torch").style.setProperty("--tx", L.x + "px"); $("#torch").style.setProperty("--ty", L.y + "px"); };
+      mv();
+      tl.to(L, { x: 260, y: 1050, duration: at("board"), ease: "sine.inOut", onUpdate: mv }, 0);
+      tl.to(L, { x: 700, y: 1560, duration: 1.2, ease: "power2.inOut", onUpdate: mv }, at("board"));
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.6, x: -200, y: -500, duration: at("under") + 0.5, ease: "sine.inOut" }, 0);
+      tl.to(q("#torch"), { opacity: 0.6, duration: 0.4 }, at("under") + 0.3);
+      tl.fromTo(q("#book"), { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at("under") + 0.4);
+      show("#j-1", at("lost") + 0.1, at("last") - 0.1);
+      show("#j-2", at("count") + 0.1, at("lost") - 0.1);
+      tl.to(q("#j1"), { opacity: 1, duration: 0.3 }, at("hand"));
+      tl.to(q("#j2"), { opacity: 1, duration: 0.3 }, at("count") + 0.4);
+      tl.to(q("#j3"), { opacity: 1, duration: 0.3 }, at("count") + 1.2);
+      tl.to(q("#j4"), { opacity: 1, duration: 0.6 }, at("entry"));
+      tl.to(q(["#j1", "#j2", "#j3"]), { opacity: 0.35, duration: 0.5 }, at("entry"));
+      tl.to(q("#book"), { opacity: 0, duration: 1.4 }, at("asleep"));
+      tl.to(q("#torch"), { opacity: 1, duration: 1.4 }, at("asleep"));
+      window.__timelines["journal"] = tl;
+    })();
+  </script>
+</template>

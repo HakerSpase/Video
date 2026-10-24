@@ -1,0 +1,44 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .layer { position: absolute; inset: 0; }
+    canvas.sn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .pos2 { position: absolute; left: 70px; top: 275px; opacity: 0; }
+    .quote { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .quote small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .quote b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .tg-tc { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: rgba(0,0,0,0.75); display: flex; justify-content: space-between; align-items: center;
+      padding: 0 34px; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #e8e8e8; letter-spacing: 0.04em; }
+    .ir { filter: grayscale(1) contrast(1.35) brightness(1.55); }
+
+  </style>
+  <div id="root" data-composition-id="night" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="layer" id="bg"></div></div>
+    <canvas class="sn" id="sn" width="540" height="960"></canvas>
+    <div class="pos stamp" id="g-1"><b>02:04</b><small>НОЧЬ 3 · БУРАН</small></div>
+    <div class="pos" id="g-2"><span class="chip green">ГЕНЕРАТОР РАБОТАЕТ</span></div>
+    <div class="pos" id="g-3"><span class="chip red">ПОД ОКНОМ — ШАГИ</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("night", "knock");
+      $("#bg").innerHTML = T.svg(T.interior({ lamp: true }));
+      const cv = $("#sn"); cv.style.clipPath = "inset(450px 130px 1220px 660px)";
+      T.snow(cv, tl, { from: 0, dur: D, n: 420, wind: 2.2, speed: 0.5, size: 3, streak: 3 });
+      tl.fromTo(q("#cam"), { scale: 1.05 }, { scale: 1.6, x: -330, y: 210, duration: D, ease: "sine.inOut" }, 0);
+      tl.to(q("#bg .tg-lampg"), { opacity: 0.22, duration: 0.08, yoyo: true, repeat: 3 }, at("hum") + 0.4);
+      tl.to(q("#bg .tg-dark"), { opacity: 0.45, duration: 2 }, at("wrong"));
+      show("#g-1", at("two") + 0.1, at("hum") - 0.1);
+      show("#g-2", at("hum") + 0.1, at("crunch") - 0.1);
+      show("#g-3", at("crunch") + 0.1, D - 0.1);
+      // тень за окном проходит мимо и останавливается
+      tl.fromTo(q("#bg .tg-face"), { opacity: 0, x: -260 }, { opacity: 0.85, x: -60, duration: 3, ease: "none" }, at("moose"));
+      tl.to(q("#bg .tg-face"), { x: 40, duration: 2.5, ease: "none" }, at("notmoose"));
+      tl.to(q("#bg .tg-face"), { opacity: 0, x: 260, duration: 1.2 }, D - 1.3);
+      window.__timelines["night"] = tl;
+    })();
+  </script>
+</template>

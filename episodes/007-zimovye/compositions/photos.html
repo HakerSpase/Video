@@ -1,0 +1,65 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .layer { position: absolute; inset: 0; }
+    canvas.sn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .pos2 { position: absolute; left: 70px; top: 275px; opacity: 0; }
+    .quote { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e;
+      padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .quote small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .quote b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .tg-tc { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: rgba(0,0,0,0.75); display: flex; justify-content: space-between; align-items: center;
+      padding: 0 34px; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; color: #e8e8e8; letter-spacing: 0.04em; }
+    .ir { filter: grayscale(1) contrast(1.35) brightness(1.55); }
+    .shot { position: absolute; inset: 0; opacity: 0; }
+    #lap { position: absolute; inset: 0; background: radial-gradient(70% 40% at 50% 40%, #1d2a44, #05070b); }
+    #lap-s { position: absolute; left: 120px; right: 120px; top: 520px; height: 520px; background: #0c1220; border: 14px solid #2a2f38; border-radius: 16px;
+      font-family: "JetBrains Mono", monospace; font-size: 30px; color: #9fb4d6; padding: 30px; }
+    #lap-s i { display: block; font-style: normal; margin: 8px 0; }
+    #flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="photos" data-width="1080" data-height="1920">
+    <div id="lap"><div id="lap-s"><i>SD_CARD / DCIM / TRAIL</i><i>IMG_0412.JPG · 02:14</i><i>IMG_0413.JPG · 02:31</i><i>IMG_0414.JPG · 03:05</i><i>IMG_0415.JPG · 04:00</i><i style="color:#ff2e3e">IMG_0416.JPG · 04:52</i></div></div>
+    <div class="shot" id="s1"><div class="layer ir" id="i1"></div><div class="tcw"></div></div>
+    <div class="shot" id="s2"><div class="layer ir" id="i2"></div><div class="tcw"></div></div>
+    <div class="shot" id="s3"><div class="layer ir" id="i3"></div><div class="tcw"></div></div>
+    <div class="shot" id="s4"><div class="layer ir" id="i4"></div><div class="tcw"></div></div>
+    <div class="shot" id="s5"><div class="layer ir" id="i5"></div><div class="tcw"></div></div>
+    <div id="flash"></div>
+    <div class="pos" id="f-1"><span class="chip">НА ВСЕХ — СПИНОЙ К КАМЕРЕ</span></div>
+    <div class="pos" id="f-2"><span class="chip solid-red">СНЯТО ИЗНУТРИ ЗИМОВЬЯ</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show } = T.scene("photos", "outro");
+      const ext = (fig) => T.svg(T.sky("storm") + T.forest({ seed: 9, y: 980, h: 600, n: 12, color: "#121a26", snowy: 0.3 }) + T.ground(1020) + T.cabin({ x: 640, y: 1500, s: 1.25, lit: false }) + fig);
+      $("#i1").innerHTML = ext(T.figure(230, 1010, 330, { color: "#07080b" }));
+      $("#i2").innerHTML = ext(T.figure(330, 1520, 640, { color: "#08090c" }));
+      $("#i3").innerHTML = ext(T.figure(880, 1560, 700, { color: "#08090c" }));
+      $("#i4").innerHTML = T.svg(T.sky("storm") + T.ground(1000) + `<rect x="520" y="1180" width="420" height="260" rx="20" fill="#3d4a3a"/><rect x="500" y="1150" width="460" height="40" rx="14" fill="#c4d0df"/>` + T.figure(420, 1560, 720, { color: "#08090c" }));
+      let inn = T.interior({ lamp: true, paper: true });
+      inn += `<path d="M520 1300 q90 -110 220 -90 q60 -40 140 -10 q120 0 200 80 v20 h-560z" fill="#6a6a62"/><circle cx="600" cy="1235" r="46" fill="#8a8a80"/>`;
+      $("#i5").innerHTML = T.svg(inn);
+      $("#i5").style.filter = "grayscale(1) contrast(1.4) brightness(1.5)";
+      const tcs = Array.from(document.querySelectorAll('[data-composition-id="photos"] .tcw'));
+      const times = ["02:14:07", "02:31:40", "03:05:12", "04:00:26", "04:52:09"];
+      tcs.forEach((e, i) => (e.outerHTML = T.trailcam(times[i], i === 4 ? "+4°C" : "−31°C")));
+      tl.fromTo(q("#lap"), { scale: 1.1 }, { scale: 1.0, duration: at("p1"), ease: "sine.out" }, 0);
+      [["#s1", "p1"], ["#s2", "p2"], ["#s3", "p3"], ["#s4", "p4"]].forEach(([id, b]) => {
+        tl.set(q("#flash"), { opacity: 0.7 }, at(b) - 0.05); tl.to(q("#flash"), { opacity: 0, duration: 0.25 }, at(b));
+        tl.set(id, { opacity: 1 }, at(b) - 0.05);
+        tl.fromTo(id, { scale: 1.0 }, { scale: 1.06, duration: 3, ease: "none" }, at(b));
+      });
+      tl.set(q(["#s1", "#s2", "#s3"]), { opacity: 0 }, at("p4"));
+      show("#f-1", at("back2") + 0.1, at("lastph") - 0.1);
+      tl.set(q("#s4"), { opacity: 0 }, at("lastph"));
+      tl.set(q("#flash"), { opacity: 1 }, at("time") - 0.05); tl.to(q("#flash"), { opacity: 0, duration: 0.6 }, at("time"));
+      tl.set(q("#s5"), { opacity: 1 }, at("time") - 0.05);
+      tl.fromTo(q("#s5"), { scale: 1.0 }, { scale: 1.25, y: 120, duration: D - at("time"), ease: "sine.in" }, at("time"));
+      show("#f-2", at("inside") + 0.1, D - 0.1);
+      window.__timelines["photos"] = tl;
+    })();
+  </script>
+</template>

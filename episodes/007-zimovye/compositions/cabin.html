@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; font-family: Montserrat, sans-serif; color: #fff; }
+    #cam { position: absolute; inset: 0; transform-origin: 50% 55%; }
+    #bg { position: absolute; inset: 0; }
+    #sn { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .c-pos { position: absolute; left: 70px; top: 190px; opacity: 0; }
+    .c-pos2 { position: absolute; left: 70px; top: 270px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="cabin" data-width="1080" data-height="1920">
+    <div id="cam"><div id="bg"></div></div>
+    <canvas id="sn" width="540" height="960"></canvas>
+    <div class="c-pos stamp" id="c-1"><b>ЗИМОВЬЕ</b><small>180 КМ ОТ ГОРОДА · ДЕНЬ 1</small></div>
+    <div class="c-pos" id="c-2"><span class="chip yellow">БЕНЗИН — НА 4 НОЧИ</span></div>
+    <div class="c-pos" id="c-3"><span class="chip">РУЖЬЁ · 20 ПАТРОНОВ · ПЕЧКА</span></div>
+    <div class="c-pos" id="c-4"><span class="chip red">СВЯЗИ НЕТ</span></div>
+    <div class="c-pos2" id="c-5"><span class="chip green">СПУТНИКОВЫЙ ПЕЙДЖЕР</span></div>
+  </div>
+  <script>
+    (function () {
+      const T = window.TAIGA, { tl, at, D, $, q, show, root } = T.scene("cabin", "rules");
+      const S = 0, E = D;
+      $("#bg").innerHTML = T.svg(
+        T.sky("night") +
+        T.forest({ seed: 3, y: 900, h: 520, n: 16, color: "#16233a", snowy: 0.25 }) +
+        T.forest({ seed: 4, y: 980, h: 620, n: 11, color: "#070b14", snowy: 0.35, gap: [160, 920] }) +
+        T.ground(1000) +
+        T.cabin({ x: 520, y: 1060, s: 0.72, lit: true, smoke: true }) +
+        T.forest({ seed: 5, y: 1950, h: 900, n: 3, color: "#020306", snowy: 0.2, spread: [-200, 1300], gap: [60, 1000] })
+      );
+      tl.fromTo(q("#cam"), { scale: 1.18, y: -60 }, { scale: 1.0, y: 0, duration: E - S, ease: "sine.out" }, 0);
+      T.snow($("#sn"), tl, { from: 0, dur: E - S, n: 160, wind: 0.08, speed: 0.08, size: 3 });
+      tl.to(q("#bg .tg-smoke"), { y: -60, opacity: 0.15, duration: E - S, ease: "none" }, 0);
+      show("#c-1", 0.2, at("fuel") - 0.1);
+      show("#c-2", at("fuel") + 0.2, at("gun") - 0.1);
+      show("#c-3", at("gun") + 0.1, at("sat") - 0.1);
+      show("#c-4", at("sat") + 0.1, at("calm") - 0.1);
+      show("#c-5", at("sat") + 1.0, at("calm") - 0.1);
+      tl.to(q("#bg .tg-smoke"), { opacity: 0.5, duration: 0.5 }, at("calm"));
+      window.__timelines["cabin"] = tl;
+    })();
+  </script>
+</template>
