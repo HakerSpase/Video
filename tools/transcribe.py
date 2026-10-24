@@ -7,7 +7,10 @@
 Текст сценария подаётся подсказкой — модель реже ошибается в именах и редких словах.
 """
 import json
+import subprocess
 import sys
+
+import numpy as np
 
 from faster_whisper import WhisperModel
 
@@ -18,7 +21,10 @@ def main():
     if "--prompt-file" in sys.argv:
         prompt = open(sys.argv[sys.argv.index("--prompt-file") + 1], encoding="utf-8").read()[:800]
     model = WhisperModel("medium", device="cpu", compute_type="int8")
-    segs, _ = model.transcribe(src, language="ru", word_timestamps=True, vad_filter=False, beam_size=5, initial_prompt=prompt)
+    # декодируем сами: PyAV на раннерах бывает несовместим с faster-whisper
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", src, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"], capture_output=True, check=True).stdout
+    audio = np.frombuffer(raw, np.float32)
+    segs, _ = model.transcribe(audio, language="ru", word_timestamps=True, vad_filter=False, beam_size=5, initial_prompt=prompt)
     words = []
     for s in segs:
         for w in s.words or []:
