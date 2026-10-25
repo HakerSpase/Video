@@ -1,0 +1,28 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .p { position: absolute; left: 70px; top: 300px; opacity: 0; }
+    .q { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e; padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .q small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .q b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .big { position: absolute; left: 0; width: 100%; top: 330px; text-align: center; opacity: 0; font-weight: 900; font-size: 200px; line-height: 1; text-shadow: 0 10px 0 rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.8); }
+    .big small { display: block; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 800; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-top: 14px; }
+  </style>
+  <div id="root" data-composition-id="recap" data-width="1080" data-height="1920">
+    <div class="p stamp" id="a1"><b>ЧАСТЬ 2</b><small>СОРОК ОДИН</small></div>
+    <div class="big" id="a2"><span style="color:#ff2e3e">41</span><small>УШЛО 40 · ВЕРНУЛСЯ 41</small></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES["recap"];
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const R = Array.from(document.querySelectorAll('[data-composition-id="recap"]')).pop();
+      const q = (sel) => R.querySelectorAll(sel);
+      const show = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.2 }, b); };
+      show("#a1", 0.1, at("back") - 0.1);
+      tl.fromTo(q("#a2"), { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power4.out" }, at("back") + 0.4);
+      window.__timelines["recap"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,78 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #010204; }
+    #w-hand { position: absolute; inset: 0; }
+    #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #w-clock { position: absolute; right: 70px; top: 196px; }
+    #w-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+    #w-flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; mix-blend-mode: screen; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
+    <div id="w-hand">
+      <canvas id="w-3d" width="1080" height="1920"></canvas>
+      <div id="w-fxl" style="position:absolute;inset:0;pointer-events:none"></div>
+      <div class="fx-grunge" style="opacity:0.18"></div>
+      <div class="fx-grade"></div>
+    </div>
+    <div id="w-flash"></div>
+    <div id="w-black"></div>
+    <div id="w-clock" class="stamp"><b id="w-time">00:12</b><small>ПЕРЕГОН</small></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES;
+      const at = (k) => C[k];
+      const D = C._duration;
+      const W = TUNNEL3D.create(document.getElementById("w-3d"), { seed: 44 });
+      const s = W.state;
+      const tl = gsap.timeline({ paused: true });
+      const cam = (p, t, d, e) => tl.to(s, Object.assign({}, p, { duration: d || 0.8, ease: e || "power2.inOut" }), t);
+
+      // 1. Повтор: колонна стоит перед кабиной в аварийном свете
+      Object.assign(s, { head: 0, tunnelLamps: 0, emerg: 0.55, doors: 0, ret: 1, retDist: 3.5, retStep: 0,
+        camX: 0.2, camY: 2.1, camZ: -0.5, tgtX: 0, tgtY: 1.5, tgtZ: -8, fov: 48 });
+      cam({ camY: 1.9, tgtY: 1.6, tgtZ: -4, fov: 38 }, 0, at("went"), "sine.inOut");
+      cam({ camX: 2.6, camY: 1.4, camZ: -1.0, tgtX: 0, tgtY: 1.5, tgtZ: -6, fov: 50 }, at("back") - 0.2, 0.9);
+
+      // 2. Стоят у дверей: вдоль борта, двери закрыты
+      cam({ camX: -2.4, camY: 1.7, camZ: 5.5, tgtX: -0.6, tgtY: 1.5, tgtZ: -6, fov: 50 }, at("stand") - 0.2, 0.9);
+      cam({ camZ: 3.5 }, at("stand") + 0.8, at("six") - at("stand") - 0.8, "sine.inOut");
+      tl.set("#w-time", { textContent: "00:32" }, at("min"));
+      cam({ camX: 1.2, camY: 1.9, camZ: -0.6, tgtX: 0, tgtY: 1.6, tgtZ: -5, fov: 44 }, at("six") - 0.2, 0.8);
+
+      // 3. Муж: крупно первый ряд; «все сорок один» — дрожь кадра и мигание света
+      cam({ camX: 0.35, camY: 1.68, camZ: -1.4, tgtX: 0.1, tgtY: 1.62, tgtZ: -4, fov: 34 }, at("glass") - 0.2, 0.9);
+      cam({ fov: 28, camZ: -1.9 }, at("raise"), at("all") - at("raise"), "sine.in");
+      tl.to(s, { roll: 0.03, duration: 0.06, yoyo: true, repeat: 5 }, at("all"));
+      tl.to(s, { emerg: 0.15, duration: 0.05, yoyo: true, repeat: 5 }, at("all") + 0.1);
+      cam({ fov: 50, camZ: -0.5, camY: 2.0 }, at("onevoice"), 0.4, "power3.out");
+
+      // 4. Не моргают, нет пара: медленный наезд в упор
+      cam({ camX: -0.25, camY: 1.66, camZ: -2.3, tgtX: 0.05, tgtY: 1.66, tgtZ: -4, fov: 30 }, at("notice") - 0.2, at("yours") - at("notice"), "sine.inOut");
+
+      // 5. Дрезина: низко, вдоль путей за колонну; луч в спины, колонна исчезает рядами
+      cam({ camX: 0.9, camY: 1.15, camZ: -0.9, tgtX: -0.2, tgtY: 1.3, tgtZ: -60, fov: 55 }, at("far") - 0.3, 0.9);
+      tl.set(s, { drez: 0, drezZ: 150 }, 0);
+      tl.to(s, { drez: 1, duration: 1.2 }, at("far"));
+      tl.to(s, { drezZ: 100, duration: at("stopped") - at("far") + 1, ease: "power1.out" }, at("far"));
+      tl.to("#w-flash", { opacity: 0.25, duration: 0.15, yoyo: true, repeat: 1 }, at("beam"));
+      tl.to(s, { retFade: 0, duration: at("onrails") - at("gone"), ease: "power1.in" }, at("gone"));
+      tl.set(s, { dropped: 1 }, at("gone"));
+      cam({ camX: 0.5, camY: 0.75, camZ: -2.2, tgtX: 0, tgtY: 0.1, tgtZ: -9, fov: 50, hand: 0.5, aimX: 0, aimY: 0.1, aimZ: -7 }, at("onrails") - 0.2, 0.9);
+
+      // 6. Дрезина стоит; звонит аварийный телефон
+      cam({ camX: 0.6, camY: 1.6, camZ: -1.2, tgtX: 0, tgtY: 1.2, tgtZ: -100, fov: 30, hand: 0 }, at("stopped") - 0.2, 0.9);
+      cam({ camX: -1.6, camY: 1.65, camZ: -2.5, tgtX: -2.55, tgtY: 1.45, tgtZ: -18, fov: 40 }, at("ring") - 0.2, 0.8);
+      tl.to(s, { phone: 1, duration: 0.2 }, at("ring"));
+      cam({ fov: 26 }, at("ring") + 0.6, at("final") - at("ring") - 0.4, "sine.in");
+
+      tl.to("#w-black", { opacity: 1, duration: 0.6 }, at("final") - 0.2);
+      tl.set("#w-hand", { scale: 1.04 }, 0);
+      FX.handheld(tl, "#w-hand", 0, D, { amp: 5, rot: 0.25, seed: 8 });
+      FX.dust(tl, FX.canvas("#w-fxl", "w-dust"), 0, D, { count: 120, mask: { x: 540, y: 820, r: 700 }, color: "255,226,190", alpha: 0.5, seed: 9 });
+      tl.eventCallback("onUpdate", () => W.render(tl.time()));
+      W.render(0);
+      window.__timelines["world"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,6 @@
+[
+  {"type": "room", "vol": 1.0},
+  {"type": "silence", "at": "all", "offset": 0.0, "pre": 0.6},
+  {"type": "steps", "from": "far", "to": "stopped", "people": 1, "dir": "toward", "rate": 0.6, "vol": 0.0},
+  {"type": "phone", "at": "ring", "to": "_duration", "vol": 1.0}
+]

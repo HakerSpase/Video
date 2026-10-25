@@ -1,0 +1,30 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; font-family: Montserrat, sans-serif; color: #fff; }
+    .p { position: absolute; left: 70px; top: 300px; opacity: 0; }
+    .q { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; background: rgba(6,8,12,0.78); border-left: 8px solid #ff2e3e; padding: 26px 32px; border-radius: 10px; font-family: "JetBrains Mono", monospace; }
+    .q small { display: block; font-size: 24px; color: #ff6b74; font-weight: 800; letter-spacing: 0.1em; }
+    .q b { display: block; font-size: 46px; line-height: 1.25; margin-top: 10px; }
+    .big { position: absolute; left: 0; width: 100%; top: 330px; text-align: center; opacity: 0; font-weight: 900; font-size: 200px; line-height: 1; text-shadow: 0 10px 0 rgba(0,0,0,0.5), 0 0 60px rgba(0,0,0,0.8); }
+    .big small { display: block; font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 800; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-top: 14px; }
+  </style>
+  <div id="root" data-composition-id="breath" data-width="1080" data-height="1920">
+    <div class="p" id="d1"><span class="chip red">НЕ МОРГАЮТ</span></div>
+    <div class="p" id="d2" style="top:385px"><span class="chip red">ПАРА ИЗО РТА — НЕТ</span></div>
+    <div class="p" id="d3" style="top:470px"><span class="chip yellow">В ТОННЕЛЕ +4 °C</span></div>
+  </div>
+  <script>
+    (function () {
+      const S = window.CUES["breath"];
+      const at = (k) => window.CUES[k] - S;
+      const tl = gsap.timeline({ paused: true });
+      const R = Array.from(document.querySelectorAll('[data-composition-id="breath"]')).pop();
+      const q = (sel) => R.querySelectorAll(sel);
+      const show = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.2 }, b); };
+      show("#d1", at("noblink") + 0.1, null);
+      show("#d2", at("nosteam") + 0.1, null);
+      show("#d3", at("cold") + 0.1, null);
+      window.__timelines["breath"] = tl;
+    })();
+  </script>
+</template>
