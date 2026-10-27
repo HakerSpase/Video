@@ -40,15 +40,22 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("note", "cctv");
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("note", "cctv");
       show("#t1", 0.1, at("paper") - 0.1);
       show("#t2", at("june") + 1.2, at("paper") - 0.1);
       tl.fromTo(q("#cam"), { scale: 0.8, rotation: 3 }, { scale: 1.0, rotation: 0, duration: at("paper"), ease: "sine.inOut" }, 0);
-      tl.fromTo(q("#note"), { opacity: 0.0 }, { opacity: 1, duration: 0.4 }, at("before"));
+      tl.fromTo(q("#note"), { opacity: 0.0 }, { opacity: 1, duration: 0.4 }, at("june") + 0.8);
       const lines = ["#l1", "#l2", "#l3", "#l4", "#l5"], ts = [at("paper") + 0.1, at("paper") + 0.7, at("phone") - 0.3, at("phone"), at("phone") + 0.8];
       lines.forEach((l, k) => tl.fromTo(q(l), { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "none" }, ts[k]));
       tl.to(q("#cam"), { scale: 1.45, y: -60, duration: 1.4, ease: "power2.inOut" }, at("phone"));
       tl.fromTo(q("#ring"), { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, at("phone") + 0.6);
+
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      slam("13.06", at("june") + 0.1, { size: 250, top: 560, color: "#ffd23f", hold: 1.0 });
+      cut(at("paper"), fr(1.25, 540, 760, 720));
+      cut(at("with"), fr(1.7, 470, 650, 640));
+      cut(at("phone"), fr(1.65, 540, 820, 700));
+      flash(at("phone") + 0.6, "#ffd23f", 0.35); punch(at("phone") + 0.6, 0.07);
       window.__timelines["note"] = tl;
     })();
   </script>

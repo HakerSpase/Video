@@ -43,7 +43,7 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("park", "lure");
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("park", "lure");
       const r = C.rng(5); let g = "";
       g += `<rect width="1080" height="1920" fill="#0a0e16"/>`;
       for (let i = 0; i < 70; i++) { const y = r() * 1920, x = r() * 1080, a = (r() - 0.5) * 50; g += `<path d="M${x - 700},${y} L${x + 700},${y + a * 6}" stroke="#16202f" stroke-width="${2 + r() * 5}"/>`; }
@@ -77,6 +77,11 @@
       tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("shop"));
       tl.to(q("#r3"), { opacity: 1, duration: 0.2 }, at("mom"));
       tl.to(q("#home"), { opacity: 1, duration: 0.3 }, at("mom"));
+
+      slam("2006", at("city") + 0.2, { size: 300, top: 520, color: "#ffd23f", hold: 1.0 });
+      flash(at("fear"), "#ff2e3e", 0.45); shake(at("fear"), 0.35, 12);
+      punch(at("fear") + 1.2, 0.05);
+      punch(at("him"), 0.05); punch(at("shop"), 0.04); punch(at("mom"), 0.05);
       window.__timelines["park"] = tl;
     })();
   </script>

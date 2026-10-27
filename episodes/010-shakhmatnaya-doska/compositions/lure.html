@@ -33,7 +33,7 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("lure", "years");
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("lure", "years");
       let g = `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050812"/><stop offset="0.5" stop-color="#101a2c"/><stop offset="1" stop-color="#070a12"/></linearGradient>
         <linearGradient id="pth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3346"/><stop offset="1" stop-color="#11161f"/></linearGradient></defs>`;
       g += `<rect width="1080" height="1920" fill="url(#sk)"/><circle cx="780" cy="330" r="60" fill="#c9d3e3" opacity="0.8"/><circle cx="780" cy="330" r="160" fill="#9fb4d6" opacity="0.08"/>`;
@@ -62,8 +62,7 @@
       show("#t1", at("invite"), at("back") - 0.1);
       walk(["a1", "a2"], at("invite") + 0.3, Math.max(3, at("dog") - at("invite")));
       show("#t2", at("dog"), at("back") - 0.1);
-      tl.fromTo(q("#grave"), { opacity: 0 }, { opacity: 1, duration: 0.5 }, at("grave"));
-      walk(["b1", "b2"], at("went"), 2.2);
+            walk(["b1", "b2"], at("went"), 2.2);
       walk(["c1", "c2"], at("went") + 0.7, 2.0);
       // обратно — один
       tl.set(q("#ret"), { opacity: 0 }, 0);
@@ -71,6 +70,16 @@
         { x: 440, y: 1520, scale: 1.9, opacity: 1, duration: D - at("back"), ease: "power2.in" }, at("back"));
       tl.to(q("#glow"), { opacity: 1, duration: 0.8 }, at("back") + 0.4);
       show("#t3", at("back") + 0.2);
+
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      punch(at("invite"), 0.05);
+      tl.set(q("#grave"), { opacity: 1 }, at("dog"));
+      cut(at("dog"), fr(2.6, 760, 950, 820));
+      cut(at("grave") + 0.6, fr(1.5, 540, 1000, 900));
+      cut(at("went"), {});
+      cut(at("back"), fr(1.25, 540, 1100, 1000), false);
+      flash(at("back"), "#ff2e3e", 0.5); shake(at("back"), 0.5, 12);
+      slam("ОН", at("back") + 1.0, { size: 420, top: 500, color: "#ff2e3e", hold: 1.0, punch: 0.08 });
       window.__timelines["lure"] = tl;
     })();
   </script>

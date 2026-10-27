@@ -29,7 +29,7 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("board", "park");
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("board", "park");
       C.board($("#bd"));
       const ord = C.boardOrder(7), r = C.rng(31);
       ord.filled.forEach((i) => {
@@ -54,6 +54,17 @@
       tl.to(q("#red"), { opacity: 1, duration: 1.2 }, at("mean"));
       tl.to(q("#wrap"), { rotationX: 12, scale: 1.45, y: 80, duration: D - at("mean"), ease: "power1.in" }, at("mean"));
       tl.to(q(".dt"), { color: "#ff1a2a", duration: 0.6 }, at("mean"));
+
+      // динамика
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      punch(0.02, 0.08);
+      slam("64", at("sq") + 0.1, { size: 420, top: 470, color: "#ffd23f", hold: 1.2 });
+      cut(at("dates"), fr(1.7, 330, 760));
+      cut(at("dates") + 0.9, fr(1.9, 760, 1000));
+      cut(at("dates") + 1.7, fr(1.5, 520, 1180));
+      cut(at("mean"), {});
+      shake(at("mean"), 0.4, 10);
+      slam("НЕТ", D - 1.1, { size: 360, top: 520, color: "#ff2e3e", hold: 0.8, punch: 0.08 });
       window.__timelines["board"] = tl;
     })();
   </script>

@@ -51,7 +51,7 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("outro", null);
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("outro", null);
       const fill = (el, seed) => {
         C.board(el);
         const ord = C.boardOrder(7), r = C.rng(seed);
@@ -76,6 +76,11 @@
       tl.fromTo(q("#nx h3"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("next") + 0.4);
       // обложка на последние ~0.15 с
       tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+
+      punch(at("empty"), 0.05); punch(at("empty") + 0.6, 0.04);
+      slam("1 ЗАПИСКА", at("stopped") + 0.3, { size: 150, top: 600, color: "#ffd23f", hold: 1.0 });
+      flash(at("next"), "#fff", 0.8); shake(at("next"), 0.4, 12);
+      punch(at("trusted"), 0.06);
       window.__timelines["outro"] = tl;
     })();
   </script>

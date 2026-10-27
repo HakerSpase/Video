@@ -33,7 +33,7 @@
   </div>
   <script>
     (function () {
-      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("years", "note");
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("years", "note");
       const r = C.rng(17); let g = `<rect width="1080" height="1920" fill="#0a0e16"/>`;
       g += `<path id="pk" d="M160,520 C420,440 700,560 830,720 C960,900 1000,1060 960,1300 C920,1520 800,1720 600,1780 C420,1830 260,1700 200,1500 C130,1260 60,1000 90,820 C110,680 60,560 160,520 Z" fill="#0f2b1c" stroke="#2f7a4c" stroke-width="5"/>`;
       for (let i = 0; i < 420; i++) { const x = 70 + r() * 920, y = 480 + r() * 1360; g += `<circle cx="${x}" cy="${y}" r="${5 + r() * 12}" fill="#14381f" clip-path="url(#pkc)"/>`; }
@@ -64,6 +64,14 @@
       show("#t3", at("trust"));
       tl.fromTo(q("#pair"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, at("trust") + 0.1);
       tl.fromTo(q("#pair .no"), { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power4.in" }, at("trust") + 0.9);
+
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      slam("2001", at("first") + 0.3, { size: 300, top: 560, color: "#ffd23f", hold: 1.0 });
+      cut(at("wells"), fr(1.6, 450, 1000, 900));
+      cut(at("wells") + 1.6, fr(1.3, 640, 1350, 950));
+      cut(at("five"), {});
+      slam("5 ЛЕТ", at("five") + 0.1, { size: 260, top: 560, color: "#fff", hold: 1.1 });
+      flash(at("trust"), "#000", 0.6); shake(at("trust") + 0.9, 0.35, 10);
       window.__timelines["years"] = tl;
     })();
   </script>
