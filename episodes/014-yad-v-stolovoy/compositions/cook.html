@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0d13; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .desk { position: absolute; inset: -200px; background: radial-gradient(700px 800px at 50% 40%, #252b36, #090b10 75%); }
+    .grid { position: absolute; left: 70px; right: 70px; top: 300px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .c { position: relative; height: 300px; background: #d9d2bf; border-radius: 4px; overflow: hidden; }
+    .c svg { position: absolute; inset: 0; }
+    .c i { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-style: normal; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 20px; color: #3b3a36; }
+    .c.her { box-shadow: 0 0 0 6px #ff2e3e, 0 0 50px #ff2e3e; }
+    .card { position: absolute; left: 90px; top: 280px; width: 900px; height: 720px; background: #e6dfcc; color: #1b1a17; border-radius: 6px; opacity: 0;
+      box-shadow: 0 50px 90px rgba(0,0,0,0.85); transform: rotate(-1.5deg); font-family: "JetBrains Mono", monospace; padding: 40px 46px; }
+    .card .h { font-size: 28px; letter-spacing: 0.2em; border-bottom: 3px solid #1b1a17; padding-bottom: 12px; display: flex; justify-content: space-between; }
+    .card .ph { position: absolute; left: 46px; top: 120px; width: 300px; height: 380px; background: #c9c1ac; border: 3px solid #1b1a17; overflow: hidden; }
+    .card .ph svg { position: absolute; inset: 0; }
+    .card .rows { position: absolute; left: 380px; right: 40px; top: 130px; }
+    .card .row { font-size: 24px; color: #5b5850; letter-spacing: 0.12em; opacity: 0; }
+    .card .row b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 44px; color: #1b1a17; margin: 4px 0 22px; }
+    .pig { position: absolute; left: 120px; top: 560px; width: 760px; height: 140px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="cook" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="desk"></div>
+      <div class="grid" id="grid"></div>
+      <div class="card" id="card">
+        <div class="h"><span>РАБОТНИК СТОЛОВОЙ</span><span>КИЕВ</span></div>
+        <div class="ph" id="ph"></div>
+        <div class="rows">
+          <div class="row" id="r0">ФАМИЛИЯ<b>ИВАНЮТИНА Т.</b></div>
+          <div class="row" id="r1">ДОЛЖНОСТЬ<b>ПОСУДОМОЙКА</b></div>
+          <div class="row" id="r2">ХАРАКТЕР<b>ТИХАЯ</b></div>
+        </div>
+        <div class="pig" id="pig"><span class="chip yellow">ОБЪЕДКИ ДОМОЙ — ДЛЯ СВИНЕЙ</span></div>
+      </div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №5</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("cook", "search");
+      const roles = ["ПОВАР", "ПОВАР", "ЗАВЕДУЮЩИЙ", "КАССИР", "ПОВАР", "ПОСУДОМОЙКА", "ГРУЗЧИК", "ПОВАР"];
+      $("#grid").innerHTML = roles.map((r, i) => `<div class="c ${i === 5 ? "her" : ""}" id="g${i}">${C.svg(i === 5 || i % 3 === 0 ? C.woman(116, 400, 0.85, "#4a4842") : C.figure(116, 400, 0.85, "#4a4842"), 232, 300)}<i>${r}</i></div>`).join("");
+      $("#ph").innerHTML = C.svg(C.woman(150, 640, 1.6, "#1b1a17"), 300, 380);
+      q(".c").forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.15 }, 0.2 + i * 0.18));
+      punch(0.4, 0.04);
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("her"), fr(2.0, 422, 770, 700));
+      tl.set(q("#grid"), { opacity: 0 }, at("her") + 1.2);
+      cut(at("her") + 1.2, {}, true);
+      tl.fromTo(q("#card"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, at("her") + 1.2);
+      tl.to(q("#r0"), { opacity: 1, duration: 0.2 }, at("her") + 1.3);
+      tl.to(q("#r1"), { opacity: 1, duration: 0.2 }, at("her") + 1.6);
+      tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("quiet")); punch(at("quiet"), 0.04);
+      tl.fromTo(q("#pig"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, at("pigs") + 0.4);
+      flash(at("boss") + 0.6, "#ff2e3e", 0.45); shake(at("boss") + 0.6, 0.45, 12);
+      slam("МЕШАЛ — ТРАВИЛА", at("boss") + 0.7, { size: 110, top: 960, color: "#ff2e3e", hold: 1.0 });
+      window.__timelines["cook"] = tl;
+    })();
+  </script>
+</template>

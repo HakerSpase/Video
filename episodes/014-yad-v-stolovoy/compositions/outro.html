@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #06070a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .grid { position: absolute; left: 50px; right: 50px; top: 300px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .cv { position: relative; height: 380px; background: #0f1218; border-radius: 10px; overflow: hidden; border: 2px solid rgba(255,255,255,0.12); opacity: 0; }
+    .cv svg { position: absolute; inset: 0; }
+    .cv b { position: absolute; left: 14px; right: 10px; top: 46px; font-weight: 900; font-size: 34px; line-height: 0.95; text-transform: uppercase; }
+    .cv b span { color: #ff2e3e; }
+    .cv small { position: absolute; left: 14px; top: 14px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 20px; color: #ffd23f; }
+    .cv em { position: absolute; left: 14px; bottom: 14px; font-style: normal; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 20px; color: #fff; background: #c4121f; padding: 3px 8px; }
+    .sub { position: absolute; left: 0; right: 0; top: 1130px; text-align: center; opacity: 0; }
+    #cover { position: absolute; inset: 0; opacity: 0; background: #06070a; overflow: hidden; z-index: 50; }
+    #cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, #06070a 0%, rgba(6,7,10,0.92) 40%, rgba(6,7,10,0) 62%, rgba(6,7,10,0.6) 100%); }
+    #cover .k { position: absolute; left: 60px; top: 250px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.16em; color: #ffd23f; }
+    #cover h1 { position: absolute; left: 56px; right: 30px; top: 320px; margin: 0; font-weight: 900; font-size: 140px; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+    #cover h1 span { color: #ff2e3e; }
+    #cover .sub2 { position: absolute; left: 60px; top: 650px; font-weight: 900; font-size: 50px; text-transform: uppercase; background: #ff2e3e; padding: 6px 20px; }
+    #cover .num { position: absolute; right: 50px; top: 230px; font-weight: 900; font-size: 120px; color: rgba(255,255,255,0.12); }
+    #cover .fin { position: absolute; left: 60px; top: 740px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 34px; color: #fff; letter-spacing: 0.2em; }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="grid" id="grid"></div></div>
+    <div class="sub" id="sub"><span class="chip red">ПОДПИШИСЬ · НОВЫЕ ДЕЛА СКОРО</span></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ФИНАЛ СЕРИИ</b></div>
+    <div id="cover">
+      <div id="cbg" style="position:absolute;inset:0"></div>
+      <div class="shade"></div>
+      <div class="num">#5</div>
+      <div class="k">РЕАЛЬНЫЕ ДЕЛА</div>
+      <h1>Яд в<br><span>столовой</span></h1>
+      <div class="sub2">Киевская отравительница</div>
+      <div class="fin">ФИНАЛ СЕРИИ</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("outro", null);
+      const cases = [
+        ["#1", "Шахматная<br><span>доска</span>", "КОЛЛЕГА", C.figure(160, 380, 0.75, "#000")],
+        ["#2", "Человек<br>в <span>форме</span>", "МИЛИЦИОНЕР", C.figure(160, 380, 0.75, "#000", { cap: true })],
+        ["#3", "Расстреляли<br><span>невиновного</span>", "УЧИТЕЛЬ", C.figure(160, 380, 0.75, "#000", { hat: true, bag: true })],
+        ["#4", "Искал<br><span>сам себя</span>", "ДРУЖИННИК", C.figure(160, 380, 0.75, "#000", { band: "#c4121f" })],
+        ["#5", "Яд в<br><span>столовой</span>", "ПОСУДОМОЙКА", C.woman(160, 380, 0.75, "#000")],
+      ];
+      $("#grid").innerHTML = cases.map((c, i) => `<div class="cv" id="v${i}">${C.svg(`<radialGradient id="g${i}"><stop offset="0" stop-color="#ff2e3e" stop-opacity="0.35"/><stop offset="1" stop-color="#ff2e3e" stop-opacity="0"/></radialGradient><ellipse cx="160" cy="300" rx="150" ry="160" fill="url(#g${i})"/>` + c[3], 320, 380)}<small>${c[0]}</small><b>${c[1]}</b><em>${c[2]}</em></div>`).join("");
+      const roles = at("list"), step = Math.max(0.5, (at("same") - roles) / 5);
+      q(".cv").forEach((v, i) => { tl.fromTo(v, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.in" }, roles + i * step); punch(roles + i * step + 0.18, 0.04); });
+      slam("5 ДЕЛ", 0.15, { size: 300, top: 520, color: "#ffd23f", hold: 0.9 });
+      slam("ДОВЕРЯЛИ", at("same") + 0.2, { size: 190, top: 960, color: "#ff2e3e", hold: 1.0 });
+      show("#sub", at("sub") + 0.2);
+      // обложка: тот же поднос из столовой
+      let f = `<rect width="1080" height="1920" fill="#1b2026"/><g transform="translate(0,620)">`;
+      for (let i = 0; i < 12; i++) for (let j = 0; j < 14; j++) f += `<rect x="${i * 92}" y="${j * 92}" width="88" height="88" fill="${(i + j) % 2 ? "#cfd6dc" : "#b9c2ca"}" opacity="0.16"/>`;
+      f += `<rect x="190" y="360" width="700" height="440" rx="24" fill="#7a5a3a"/><ellipse cx="420" cy="580" rx="170" ry="120" fill="#eceff1"/><ellipse cx="420" cy="580" rx="120" ry="80" fill="#d8c08a"/>`;
+      f += `<rect x="650" y="440" width="120" height="200" rx="10" fill="#dfe8ee" opacity="0.8"/><rect x="655" y="500" width="110" height="135" fill="#3ddc84" opacity="0.6"/></g>`;
+      $("#cbg").innerHTML = C.svg(f);
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

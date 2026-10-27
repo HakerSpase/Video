@@ -1,0 +1,16 @@
+[
+  {"at": "hook", "file": "impact-bass-2.mp3", "vol": 0.55, "offset": 0.6},
+  {"at": "lunch", "file": "whoosh-short.mp3", "vol": 0.3},
+  {"at": "hosp", "file": "impact-bass-1.mp3", "vol": 0.5, "offset": 0.4},
+  {"at": "hair", "file": "glitch-1.mp3", "vol": 0.3, "offset": 0.3},
+  {"at": "thal", "file": "impact-bass-1.mp3", "vol": 0.7, "offset": 0.7},
+  {"at": "her", "file": "whoosh-short.mp3", "vol": 0.3},
+  {"at": "boss", "file": "impact-bass-2.mp3", "vol": 0.6, "offset": 0.6},
+  {"at": "liquid", "file": "impact-bass-2.mp3", "vol": 0.5, "offset": 0.5},
+  {"at": "found", "file": "impact-bass-1.mp3", "vol": 0.6, "offset": 1.2},
+  {"at": "recipe", "file": "riser.mp3", "vol": 0.25, "offset": -0.4},
+  {"at": "thirteen", "file": "impact-bass-1.mp3", "vol": 0.6, "offset": 1.0},
+  {"at": "shot", "file": "impact-bass-2.mp3", "vol": 0.7, "offset": 0.4},
+  {"at": "list", "file": "pop.mp3", "vol": 0.3},
+  {"at": "same", "file": "impact-bass-1.mp3", "vol": 0.55, "offset": 0.2}
+]

@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0c10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
+    .desk { position: absolute; inset: -200px; background: radial-gradient(700px 800px at 50% 40%, #2a2f38, #0b0d11 75%); }
+    .folder { position: absolute; left: 80px; top: 240px; width: 920px; height: 820px; background: #c7b48a; border-radius: 10px; box-shadow: 0 50px 90px rgba(0,0,0,0.85); transform: rotate(-1.2deg); }
+    .sheet { position: absolute; left: 40px; right: 40px; top: 40px; bottom: 40px; background: #ece6d6; border-radius: 4px; color: #1b1a17; padding: 40px 50px; font-family: "JetBrains Mono", monospace; }
+    .sheet .h { font-size: 28px; letter-spacing: 0.18em; border-bottom: 3px solid #1b1a17; padding-bottom: 14px; display: flex; justify-content: space-between; }
+    .sheet .nm { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 58px; margin-top: 22px; }
+    .row { display: flex; align-items: baseline; gap: 24px; margin-top: 30px; opacity: 0; }
+    .row .n { font-family: Montserrat, sans-serif; font-weight: 900; font-size: 160px; line-height: 0.9; min-width: 200px; color: #b88a00; }
+    .row .l { font-size: 30px; line-height: 1.25; color: #3b3a36; font-weight: 700; }
+    .big { left: 220px; top: 640px; font-size: 92px; }
+    .last { position: absolute; left: 60px; right: 60px; top: 300px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="end" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="desk"></div>
+      <div class="folder"><div class="sheet">
+        <div class="h"><span>ПРИГОВОР</span><span>КИЕВ · 1987</span></div>
+        <div class="nm">ИВАНЮТИНА Т.</div>
+        <div class="row" id="r1"><span class="n" id="n9">0</span><span class="l">УБИЙСТВ<br>ПРИЗНАЛ СУД</span></div>
+      </div></div>
+      <div class="cs-stamp big" id="st">РАССТРЕЛ</div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №5</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("end", "outro");
+      tl.fromTo(q("#cam"), { scale: 1.1 }, { scale: 1.0, duration: D, ease: "sine.out" }, 0);
+      tl.fromTo(q("#r1"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, 0.3);
+      const c = { n: 0 };
+      tl.to(c, { n: 9, duration: 1.0, ease: "power2.out", onUpdate: () => ($("#n9").textContent = Math.round(c.n)) }, 0.4);
+      stamp("#st", at("shot") + 0.4); flash(at("shot") + 0.5, "#ff2e3e", 0.5); shake(at("shot") + 0.5, 0.5, 14);
+      slam("ПОСЛЕДНИЙ", at("last") + 0.4, { size: 180, top: 940, color: "#fff", hold: 1.2 });
+      window.__timelines["end"] = tl;
+    })();
+  </script>
+</template>

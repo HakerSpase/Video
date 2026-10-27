@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #1b2026; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+    .ly { position: absolute; inset: 0; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%); }
+    .ttl { position: absolute; left: 50px; right: 50px; top: 250px; }
+    .ttl h1 { margin: 0; font-size: 110px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+    .ttl h1 span { color: #ff2e3e; }
+    #caf { position: absolute; inset: 0; opacity: 0; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="school" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="ly" id="caf"></div>
+    </div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №5</b></div>
+    <div class="ttl" id="ttl"><h1>Яд<br>в <span>столовой</span></h1></div>
+    <div class="pos" id="t1"><span class="chip red">ПОСЛЕ ОБЕДА — В БОЛЬНИЦУ</span></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("school", "doctors");
+      // типовая школа: трёхэтажный корпус
+      let g = `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6a80"/><stop offset="1" stop-color="#a8b2bd"/></linearGradient></defs><rect width="1080" height="1920" fill="url(#sk)"/>`;
+      g += C.trees(9, 980, 10, { color: "#3a4650", h: 300 });
+      g += `<rect x="60" y="560" width="960" height="420" fill="#c9b9a0"/><rect x="60" y="540" width="960" height="30" fill="#8a7a66"/>`;
+      for (let f = 0; f < 3; f++) for (let w = 0; w < 9; w++) g += `<rect x="${100 + w * 102}" y="${600 + f * 120}" width="70" height="86" fill="#5d7489"/><rect x="${133 + w * 102}" y="${600 + f * 120}" width="4" height="86" fill="#c9b9a0"/>`;
+      g += `<rect x="470" y="880" width="140" height="100" fill="#4a3a2a"/><rect x="420" y="830" width="240" height="40" fill="#2b4a7a"/><text x="540" y="860" text-anchor="middle" class="mt" font-weight="900" font-size="26" fill="#fff">ШКОЛА</text>`;
+      g += `<rect y="980" width="1080" height="1000" fill="#6b6e72"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      // столовая: столы, подносы
+      let c = `<rect width="1080" height="1920" fill="#2a2f36"/>`;
+      for (let i = 0; i < 12; i++) for (let j = 0; j < 22; j++) c += `<rect x="${i * 92}" y="${j * 92}" width="88" height="88" fill="${(i + j) % 2 ? "#cfd6dc" : "#b9c2ca"}" opacity="0.14"/>`;
+      for (let k = 0; k < 3; k++) {
+        const y = 460 + k * 230;
+        c += `<rect x="120" y="${y}" width="840" height="150" rx="10" fill="#8a6a48"/>`;
+        for (let t = 0; t < 4; t++) c += `<ellipse cx="${210 + t * 220}" cy="${y + 75}" rx="60" ry="40" fill="#eceff1"/><ellipse cx="${210 + t * 220}" cy="${y + 75}" rx="40" ry="26" fill="#d8c08a"/>`;
+      }
+      $("#caf").innerHTML = C.svg(c);
+      punch(0.02, 0.07);
+      slam("ПОСЛЕДНЯЯ", at("hook") + 0.6, { size: 150, top: 520, color: "#ff2e3e", hold: 1.0 });
+      tl.to(q("#ttl"), { opacity: 0, y: -30, duration: 0.3 }, at("kiev") - 0.1);
+      slam("1987", at("kiev") + 0.3, { size: 320, top: 360, color: "#ffd23f", hold: 0.8 });
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.2, duration: at("lunch") - at("kiev"), ease: "sine.in" }, at("kiev"));
+      tl.set(q("#caf"), { opacity: 1 }, at("lunch")); flash(at("lunch"), "#fff", 0.4);
+      tl.fromTo(q("#caf"), { scale: 1.25 }, { scale: 1.0, duration: 2.5, ease: "power2.out" }, at("lunch"));
+      tl.to(q("#caf"), { filter: "hue-rotate(60deg) saturate(1.6) blur(2px)", duration: 1.5 }, at("lunch") + 1.5);
+      show("#t1", at("hosp") + 0.3);
+      flash(at("hosp") + 0.4, "#ff2e3e", 0.4); shake(at("hosp") + 0.4, 0.45, 12);
+      window.__timelines["school"] = tl;
+    })();
+  </script>
+</template>

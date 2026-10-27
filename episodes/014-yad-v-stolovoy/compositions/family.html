@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0c10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .bg { position: absolute; inset: 0; background: radial-gradient(800px 900px at 50% 40%, #2a1a1e, #08090c 75%); }
+    .p { position: absolute; top: 380px; width: 280px; height: 420px; opacity: 0; }
+    .p svg { position: absolute; inset: 0; }
+    .p i { position: absolute; left: 0; right: 0; bottom: -10px; text-align: center; font-style: normal; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 30px; color: #ffd23f; }
+    .cnt { position: absolute; top: 300px; font-weight: 900; font-size: 210px; line-height: 0.9; opacity: 0; }
+    .cnt small { display: block; font-family: "JetBrains Mono", monospace; font-size: 30px; color: #fff; letter-spacing: 0.1em; margin-top: 10px; }
+  </style>
+  <div id="root" data-composition-id="family" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="bg"></div>
+      <div id="lines"></div>
+      <div class="p" id="p0" style="left:400px; top:300px"></div>
+      <div class="p" id="p1" style="left:120px; top:660px"></div>
+      <div class="p" id="p2" style="left:680px; top:660px"></div>
+      <div class="cnt" id="c40" style="left:80px; color:#ffd23f"><span id="n40">0</span><small>ОТРАВЛЕНИЙ</small></div>
+      <div class="cnt" id="c13" style="left:600px; color:#ff2e3e"><span id="n13">0</span><small>СМЕРТЕЙ</small></div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №5</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("family", "end");
+      $("#p0").innerHTML = C.svg(C.woman(140, 390, 1.0, "#000"), 280, 420) + "<i>МАТЬ</i>";
+      $("#p1").innerHTML = C.svg(C.woman(140, 390, 1.0, "#000"), 280, 420) + "<i>СЕСТРА</i>";
+      $("#p2").innerHTML = C.svg(C.woman(140, 390, 1.0, "#1a0306"), 280, 420) + "<i style='color:#ff2e3e'>ТАМАРА</i>";
+      $("#lines").innerHTML = C.svg(`<path d="M540,720 L260,760 M540,720 L820,760" stroke="#ff2e3e" stroke-width="6" stroke-dasharray="14 10" fill="none"/>`);
+      gsap.set(q("#lines"), { opacity: 0 });
+      tl.fromTo(q("#cam"), { scale: 1.1 }, { scale: 1.0, duration: at("forty"), ease: "sine.out" }, 0);
+      flash(0.2, "#000", 0.6); shake(0.3, 0.3, 8);
+      slam("СЕМЬЯ", at("recipe") - 0.2, { size: 220, top: 420, color: "#ff2e3e", hold: 0.9 });
+      tl.fromTo(q("#p0"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, at("mom")); punch(at("mom"), 0.04);
+      tl.fromTo(q("#p1"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, at("mom") + 0.6); punch(at("mom") + 0.6, 0.04);
+      tl.to(q("#lines"), { opacity: 1, duration: 0.2 }, at("mom") + 0.6);
+      tl.fromTo(q("#p2"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25 }, at("mom") + 1.2); punch(at("mom") + 1.2, 0.06);
+      tl.to(q(["#p0", "#p1", "#p2", "#lines"]), { opacity: 0.18, duration: 0.3 }, at("forty"));
+      tl.to(q("#c40"), { opacity: 1, duration: 0.2 }, at("forty"));
+      const a = { n: 0 }, b = { n: 0 };
+      tl.to(a, { n: 40, duration: 1.2, ease: "power2.out", onUpdate: () => ($("#n40").textContent = Math.round(a.n)) }, at("forty") + 0.1);
+      tl.to(q("#c13"), { opacity: 1, duration: 0.2 }, at("thirteen"));
+      tl.to(b, { n: 13, duration: 1.0, ease: "power2.out", onUpdate: () => ($("#n13").textContent = Math.round(b.n)) }, at("thirteen") + 0.1);
+      flash(at("thirteen") + 1.0, "#ff2e3e", 0.4); shake(at("thirteen") + 1.0, 0.4, 12);
+      window.__timelines["family"] = tl;
+    })();
+  </script>
+</template>

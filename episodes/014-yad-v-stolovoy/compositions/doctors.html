@@ -1,0 +1,45 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0d1416; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .chart { position: absolute; left: 90px; top: 280px; width: 900px; height: 720px; background: #eef2f3; color: #1b1a17; border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,0.7); font-family: "JetBrains Mono", monospace; padding: 40px 46px; }
+    .chart .h { font-size: 28px; letter-spacing: 0.18em; border-bottom: 3px solid #1b1a17; padding-bottom: 12px; display: flex; justify-content: space-between; }
+    .row { font-size: 38px; font-weight: 800; margin-top: 30px; display: flex; align-items: center; gap: 20px; opacity: 0; }
+    .row s { color: #8a8a8a; } .row b { color: #b10d18; }
+    .tl { position: absolute; left: 290px; top: 360px; width: 500px; height: 560px; background: #12201a; border: 8px solid #3ddc84; border-radius: 20px; opacity: 0; box-shadow: 0 0 60px rgba(61,220,132,0.5); }
+    .tl .n { position: absolute; left: 34px; top: 24px; font-family: "JetBrains Mono", monospace; font-size: 54px; font-weight: 800; color: #3ddc84; }
+    .tl .sy { position: absolute; left: 0; right: 0; top: 120px; text-align: center; font-weight: 900; font-size: 260px; line-height: 1; color: #fff; }
+    .tl .nm { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 50px; color: #3ddc84; letter-spacing: 0.1em; }
+    .comb { position: absolute; left: 640px; top: 760px; width: 300px; height: 200px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="doctors" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="chart" id="chart">
+        <div class="h"><span>ИСТОРИЯ БОЛЕЗНИ</span><span>КИЕВ · 1987</span></div>
+        <div class="row" id="r1">ДИАГНОЗ: <s>КИШЕЧНАЯ ИНФЕКЦИЯ?</s></div>
+        <div class="row" id="r2">СИМПТОМ: <b>ВЫПАДАЮТ ВОЛОСЫ</b></div>
+        <div id="comb" class="comb"></div>
+      </div>
+      <div class="tl" id="tl"><span class="n">81</span><div class="sy">Tl</div><div class="nm">ТАЛЛИЙ</div></div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №5</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("doctors", "cook");
+      let cb = `<rect x="20" y="40" width="260" height="40" rx="8" fill="#2b2b2b"/>`;
+      for (let i = 0; i < 24; i++) cb += `<rect x="${28 + i * 10.5}" y="80" width="5" height="70" fill="#2b2b2b"/>`;
+      for (let i = 0; i < 14; i++) cb += `<path d="M${40 + i * 17},150 q${10},30 ${-5},60" stroke="#5a4636" stroke-width="3" fill="none"/>`;
+      $("#comb").innerHTML = C.svg(cb, 300, 220);
+      tl.fromTo(q("#cam"), { scale: 1.1 }, { scale: 1.0, duration: at("thal"), ease: "sine.out" }, 0);
+      tl.to(q("#r1"), { opacity: 1, duration: 0.2 }, 0.3); punch(0.3, 0.04);
+      tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("hair") + 0.3); punch(at("hair") + 0.3, 0.05);
+      tl.fromTo(q("#comb"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, at("hair") + 0.8);
+      tl.to(q("#chart"), { opacity: 0.2, duration: 0.3 }, at("thal"));
+      tl.fromTo(q("#tl"), { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in" }, at("thal") + 0.6);
+      flash(at("thal") + 0.8, "#3ddc84", 0.45); shake(at("thal") + 0.8, 0.45, 12);
+      slam("БЕЗ ВКУСА", at("taste") + 0.3, { size: 150, top: 960, color: "#fff", hold: 0.7 });
+      window.__timelines["doctors"] = tl;
+    })();
+  </script>
+</template>
