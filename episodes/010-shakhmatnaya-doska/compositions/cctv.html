@@ -1,0 +1,89 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; font-family: Montserrat, sans-serif; color: #fff; }
+    .mon { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .scr { position: absolute; inset: 0; filter: grayscale(1) contrast(1.25) brightness(1.1) blur(0.6px); }
+    .scan { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 2px, rgba(0,0,0,0) 2px 4px); }
+    .noise { position: absolute; inset: -40px; background-image: url(assets/lib/grain.png); opacity: 0.35; mix-blend-mode: screen; }
+    .osd { position: absolute; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 32px; color: #f2f2f2; text-shadow: 0 0 4px #000, 2px 2px 0 #000; }
+    .rec { color: #ff2e3e; }
+    .osdt { font-family: Montserrat, sans-serif; }
+    .fig { position: absolute; left: 0; top: 0; width: 200px; height: 400px; transform-origin: 50% 100%; }
+    .fig svg { position: absolute; inset: 0; }
+    .box { position: absolute; border: 5px solid #ff2e3e; opacity: 0; box-shadow: 0 0 20px rgba(255,46,62,0.6); }
+    .box i { position: absolute; left: -5px; top: -46px; background: #ff2e3e; color: #fff; font-style: normal; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 26px; padding: 4px 12px; white-space: nowrap; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    .big { position: absolute; left: 90px; top: 560px; font-size: 76px; }
+    #fade { position: absolute; inset: 0; background: #05070b; opacity: 0; }
+    .dossier { position: absolute; left: 70px; right: 70px; top: 300px; opacity: 0; display: flex; gap: 26px; align-items: center;
+      background: rgba(8,11,18,0.94); border: 2px solid rgba(255,210,63,0.6); border-radius: 14px; padding: 26px; font-family: "JetBrains Mono", monospace; }
+    .dossier .ic { width: 150px; height: 190px; background: #111827; border-radius: 8px; position: relative; overflow: hidden; flex: none; }
+    .dossier .ic svg { position: absolute; inset: 0; }
+    .dossier small { display: block; color: #9fb4d6; font-size: 24px; letter-spacing: 0.12em; }
+    .dossier b { display: block; font-size: 40px; margin-top: 8px; }
+    .dossier em { display: block; font-style: normal; color: #ffd23f; font-size: 30px; margin-top: 14px; }
+  </style>
+  <div id="root" data-composition-id="cctv" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="scr">
+        <div id="bg"></div>
+        <div class="fig" id="f1"></div><div class="fig" id="f2"></div>
+        <div class="fig" id="p1"></div><div class="fig" id="p2"></div>
+      </div>
+      <div class="box" id="box"><i>13.06.2006 · ВДВОЁМ</i></div>
+    </div>
+    <div class="scan"></div><div class="noise"></div>
+    <div class="osd" style="left:50px; top:250px">КАМ 02 · «КОНЬКОВО»</div>
+    <div class="osd" style="left:50px; top:300px">13-06-2006</div>
+    <div class="osd rec" id="rec" style="right:50px; top:250px">● REC</div>
+    <div class="osd" id="tc" style="right:50px; top:300px">00:00:00</div>
+    <div id="fade"></div>
+    <div class="pos" id="t1"><span class="chip">МАРИНУ НАШЛИ В ПАРКЕ</span></div>
+    <div class="dossier" id="dos"><div class="ic" id="ic"></div><div><small>НОМЕР ИЗ ЗАПИСКИ</small><b>ПИЧУШКИН А. Ю.</b><em>32 ГОДА · СОСЕД ПАРКА</em></div></div>
+    <div class="cs-stamp on-dark big" id="st">ЗАДЕРЖАН<br>16.06.2006</div>
+    <div class="cs-quote" id="qt" style="top:300px"><small>ПОЗЖЕ, НА ДОПРОСЕ</small><b>«Я знал, что после Марины меня поймают»</b></div>
+    <div class="cs-series" style="top:190px; font-size:22px">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp } = C.scene("cctv", "court");
+      // вестибюль: пол, колонны, турникеты — вид камеры сверху-сзади
+      let g = `<rect width="1080" height="1920" fill="#3a3f45"/><rect width="1080" height="760" fill="#24282d"/>`;
+      g += `<path d="M0,760 L1080,760 L1080,1920 L0,1920 Z" fill="#6d7075"/>`;
+      for (let i = -10; i <= 10; i++) g += `<path d="M${540 + i * 40},760 L${540 + i * 220},1920" stroke="#55585d" stroke-width="3"/>`;
+      for (let k = 0; k < 12; k++) { const y = 760 + Math.pow(k / 11, 1.8) * 1160; g += `<path d="M0,${y} L1080,${y}" stroke="#55585d" stroke-width="3"/>`; }
+      g += `<rect x="60" y="400" width="960" height="120" fill="#16191d"/><text x="540" y="485" text-anchor="middle" class="osdt" font-size="70" font-weight="900" fill="#e5e5e5" letter-spacing="8">КОНЬКОВО</text>`;
+      for (let i = 0; i < 4; i++) { const x = 120 + i * 280; g += `<rect x="${x}" y="520" width="70" height="260" fill="#4a4e54"/><rect x="${x - 10}" y="760" width="90" height="20" fill="#2c2f33"/>`; }
+      // турникеты
+      for (let i = 0; i < 7; i++) { const x = 170 + i * 115; g += `<rect x="${x}" y="880" width="60" height="150" rx="8" fill="#2a2d31"/><rect x="${x + 6}" y="886" width="48" height="16" fill="#8fd18f" opacity="0.6"/>`; }
+      g += `<rect x="150" y="1010" width="820" height="10" fill="#1f2125"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      ["#f1", "#f2", "#p1", "#p2"].forEach((id, i) => ($(id).innerHTML = C.svg(C.figure(100, 392, 1, i < 2 ? "#141518" : "#2a2c30", { step: i * 0.37 }), 200, 400)));
+      // прохожие и двое
+      tl.fromTo(q("#p1"), { x: 120, y: 1500, scale: 1.4 }, { x: 260, y: 640, scale: 0.6, duration: 5, ease: "none" }, 0);
+      tl.fromTo(q("#p2"), { x: 820, y: 1700, scale: 1.6 }, { x: 760, y: 650, scale: 0.6, duration: 6, ease: "none" }, 0.8);
+      const t2 = Math.max(2.2, at("metro") + 2.0);
+      tl.fromTo(q("#f1"), { x: 420, y: 1700, scale: 1.7 }, { x: 430, y: 700, scale: 0.75, duration: t2, ease: "none" }, 0);
+      tl.fromTo(q("#f2"), { x: 560, y: 1720, scale: 1.75 }, { x: 540, y: 705, scale: 0.76, duration: t2, ease: "none" }, 0);
+      tl.fromTo(q("#box"), { opacity: 0 }, { opacity: 1, duration: 0.1, repeat: 3, yoyo: true }, Math.max(0.5, at("metro") + 2.0));
+      gsap.set(q("#box"), { left: 405, top: 780, width: 290, height: 340 });
+      tl.to(q("#cam"), { scale: 1.6, y: -160, duration: 1.2, ease: "power2.inOut" }, Math.max(0.5, at("metro") + 2.0));
+      const tc = { s: 0 };
+      tl.to(tc, { s: D, duration: D, ease: "none", onUpdate: () => {
+        const s = Math.floor(tc.s); $("#tc").textContent = "00:00:" + String(s % 60).padStart(2, "0");
+        $("#rec").style.opacity = Math.floor(tc.s * 2) % 2 ? 0.2 : 1;
+      } }, 0);
+      tl.to(q("#fade"), { opacity: 0.75, duration: 0.5 }, at("found"));
+      show("#t1", at("found"), at("number") - 0.1);
+      tl.fromTo(q("#dos"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35 }, at("number"));
+      $("#ic").innerHTML = C.svg(C.figure(75, 250, 0.62, "#000"), 150, 190) + `<span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:72px;font-weight:800;color:rgba(255,255,255,0.18)">?</span>`;
+      tl.to(q("#dos"), { opacity: 0, duration: 0.25 }, at("knew") - 0.2);
+      stamp("#st", at("arrest") + 0.3);
+      tl.to(q("#st"), { opacity: 0, duration: 0.25 }, at("knew") - 0.2);
+      tl.to(q("#fade"), { opacity: 0.92, duration: 0.4 }, at("knew") - 0.2);
+      tl.fromTo(q("#qt"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35 }, at("knew"));
+      window.__timelines["cctv"] = tl;
+    })();
+  </script>
+</template>

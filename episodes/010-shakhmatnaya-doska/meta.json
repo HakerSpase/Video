@@ -1,0 +1,5 @@
+{
+  "id": "010-shakhmatnaya-doska",
+  "name": "010 · Шахматная доска",
+  "scripts": ["case.js"]
+}

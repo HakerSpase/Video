@@ -1,0 +1,70 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #070a10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+    .lbl { font-family: "JetBrains Mono", monospace; }
+    .tlb { position: absolute; left: 70px; right: 70px; top: 250px; height: 150px; }
+    .tlb .bar { position: absolute; left: 0; right: 0; top: 70px; height: 6px; background: rgba(159,180,214,0.3); border-radius: 3px; }
+    .tlb .fill { position: absolute; left: 0; top: 70px; height: 6px; width: 0; background: #ff2e3e; border-radius: 3px; box-shadow: 0 0 14px #ff2e3e; }
+    .tlb .y { position: absolute; top: 0; transform: translateX(-50%); font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 34px; color: rgba(255,255,255,0.35); }
+    .tlb .y::after { content: ""; position: absolute; left: 50%; top: 62px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: #1a2333; border: 3px solid rgba(159,180,214,0.6); }
+    .tlb .y.on { color: #fff; }
+    .tlb .y.on::after { background: #ff2e3e; border-color: #ff2e3e; }
+    .pos { position: absolute; left: 70px; top: 430px; opacity: 0; }
+    .pair { position: absolute; left: 0; right: 0; top: 520px; height: 420px; opacity: 0; }
+    .pair svg { position: absolute; }
+    .pair .no { position: absolute; left: 50%; top: 40px; width: 360px; height: 360px; margin-left: -180px; border: 14px solid #ff2e3e; border-radius: 50%; }
+    .pair .no::after { content: ""; position: absolute; left: 50%; top: -10px; bottom: -10px; width: 14px; margin-left: -7px; background: #ff2e3e; transform: rotate(45deg); }
+    .dim { position: absolute; inset: 0; background: #05070b; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="years" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div id="map"></div></div>
+    <div class="dim" id="dim"></div>
+    <div class="tlb" id="tlb">
+      <div class="bar"></div><div class="fill" id="fill"></div>
+      <div class="y" style="left:0%">2001</div><div class="y" style="left:20%">2002</div><div class="y" style="left:40%">2003</div>
+      <div class="y" style="left:60%">2004</div><div class="y" style="left:80%">2005</div><div class="y" style="left:100%">2006</div>
+    </div>
+    <div class="pos" id="t1"><span class="chip">КАНАЛИЗАЦИОННЫЕ КОЛОДЦЫ</span></div>
+    <div class="pos" id="t2"><span class="chip yellow">5 ЛЕТ ПОИСКОВ</span></div>
+    <div class="pos" id="t3"><span class="chip red">ВМЕСТЕ ИХ НЕ ВИДЕЛИ</span></div>
+    <div class="pair" id="pair"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("years", "note");
+      const r = C.rng(17); let g = `<rect width="1080" height="1920" fill="#0a0e16"/>`;
+      g += `<path id="pk" d="M160,520 C420,440 700,560 830,720 C960,900 1000,1060 960,1300 C920,1520 800,1720 600,1780 C420,1830 260,1700 200,1500 C130,1260 60,1000 90,820 C110,680 60,560 160,520 Z" fill="#0f2b1c" stroke="#2f7a4c" stroke-width="5"/>`;
+      for (let i = 0; i < 420; i++) { const x = 70 + r() * 920, y = 480 + r() * 1360; g += `<circle cx="${x}" cy="${y}" r="${5 + r() * 12}" fill="#14381f" clip-path="url(#pkc)"/>`; }
+      g = `<defs><clipPath id="pkc"><use href="#pk"/></clipPath></defs>` + g;
+      // тропинки
+      g += `<path d="M180,700 C380,820 520,760 640,980 C760,1200 600,1400 760,1700" stroke="#2c3a2e" stroke-width="10" fill="none"/><path d="M120,1150 C340,1100 500,1250 900,1180" stroke="#2c3a2e" stroke-width="8" fill="none"/>`;
+      const holes = [];
+      for (let i = 0; i < 18; i++) {
+        const x = 200 + r() * 680, y = 640 + r() * 1050;
+        holes.push(i);
+        g += `<g class="mh h${i}" opacity="0"><circle cx="${x}" cy="${y}" r="20" fill="#1d232c" stroke="#7b8796" stroke-width="5"/><path d="M${x - 12},${y} L${x + 12},${y} M${x},${y - 12} L${x},${y + 12}" stroke="#7b8796" stroke-width="3"/><circle class="hr" cx="${x}" cy="${y}" r="20" fill="none" stroke="#ff2e3e" stroke-width="4" opacity="0"/></g>`;
+      }
+      $("#map").innerHTML = C.svg(g);
+      $("#pair").innerHTML = C.svg(C.figure(440, 400, 0.95, "#c9d3e3") + C.figure(640, 400, 0.95, "#c9d3e3"), 1080, 420) + `<div class="no"></div>`;
+      // годы
+      const ys = q(".tlb .y"), span = at("five") - 0.6;
+      tl.to(q("#fill"), { width: "100%", duration: span, ease: "none" }, 0.2);
+      ys.forEach((y, k) => tl.set(y, { className: "y" }, 0).set(y, { className: "y on" }, 0.2 + span * k / 5));
+      tl.fromTo(q("#cam"), { scale: 1.05 }, { scale: 1.25, y: 60, duration: D, ease: "sine.inOut" }, 0);
+      show("#t1", at("wells"), at("five") - 0.1);
+      holes.forEach((i, k) => {
+        const t = at("wells") + 0.15 * k;
+        tl.fromTo(q(".h" + i), { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, transformOrigin: "50% 50%", duration: 0.25, ease: "back.out(2)" }, t);
+        tl.fromTo(q(".h" + i + " .hr"), { attr: { r: 20 }, opacity: 1 }, { attr: { r: 60 }, opacity: 0, duration: 0.8 }, t);
+      });
+      show("#t2", at("five"), at("trust") - 0.1);
+      tl.to(q("#dim"), { opacity: 0.7, duration: 0.5 }, at("trust"));
+      show("#t3", at("trust"));
+      tl.fromTo(q("#pair"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, at("trust") + 0.1);
+      tl.fromTo(q("#pair .no"), { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.25, ease: "power4.in" }, at("trust") + 0.9);
+      window.__timelines["years"] = tl;
+    })();
+  </script>
+</template>

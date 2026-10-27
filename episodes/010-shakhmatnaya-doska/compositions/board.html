@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050608; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; perspective: 1500px; }
+    .table { position: absolute; inset: -200px; background:
+      radial-gradient(700px 600px at 50% 46%, rgba(255,180,90,0.28), rgba(0,0,0,0) 70%),
+      repeating-linear-gradient(90deg, #1a120c 0 60px, #20160e 60px 64px, #17100a 64px 130px); }
+    .wrap { position: absolute; left: 66px; top: 400px; width: 948px; height: 948px; transform-style: preserve-3d; transform-origin: 50% 60%; }
+    .lamp { position: absolute; inset: 0; background: radial-gradient(620px 560px at 50% 44%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.88) 100%); }
+    .redwash { position: absolute; inset: 0; background: radial-gradient(800px 800px at 50% 50%, rgba(160,0,12,0) 30%, rgba(120,0,10,0.55) 100%); opacity: 0; }
+    .ttl { position: absolute; left: 50px; right: 50px; top: 250px; opacity: 1; }
+    .ttl h1 { margin: 0; font-size: 92px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+    .ttl h1 span { color: #ff2e3e; }
+    .c64 { position: absolute; left: 50px; top: 230px; opacity: 0; }
+    .cnt { position: absolute; right: 50px; top: 230px; opacity: 0; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 30px; }
+  </style>
+  <div id="root" data-composition-id="board" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="table"></div>
+      <div class="wrap" id="wrap"><div class="cs-board" id="bd" style="left:0;top:0"></div></div>
+    </div>
+    <div class="lamp"></div>
+    <div class="redwash" id="red"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+    <div class="ttl" id="ttl"><h1>Шахматная<br><span>доска</span></h1></div>
+    <div class="c64" id="c64"><span class="chip yellow">64 КЛЕТКИ</span></div>
+    <div class="cnt" id="cnt"><span class="chip red" id="cntv">ДАТ: 0</span></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("board", "park");
+      C.board($("#bd"));
+      const ord = C.boardOrder(7), r = C.rng(31);
+      ord.filled.forEach((i) => {
+        const y = 1 + Math.floor(r() * 6), m = 1 + Math.floor(r() * 12), d = 1 + Math.floor(r() * 28);
+        $(".c" + i + " .dt").textContent = String(d).padStart(2, "0") + "." + String(m).padStart(2, "0") + ".0" + y;
+      });
+      gsap.set(q("#wrap"), { rotationX: 48, y: 60, scale: 0.9 });
+      // доска медленно поднимается к камере
+      tl.to(q("#wrap"), { rotationX: 30, y: -40, scale: 1.0, duration: at("dates"), ease: "sine.inOut" }, 0);
+      tl.to(q("#ttl"), { opacity: 0, y: -40, duration: 0.4 }, at("sq") - 0.2);
+      show("#c64", at("sq"), D - 0.3);
+      // даты появляются одна за другой
+      const t0 = at("dates"), span = Math.max(1.6, at("mean") - at("dates") - 0.1);
+      const cnt = { n: 0 };
+      ord.filled.forEach((i, k) => {
+        const t = t0 + span * Math.pow(k / 60, 0.8);
+        tl.fromTo(q(".c" + i + " .dt"), { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.12, ease: "power3.in" }, t);
+      });
+      tl.to(q("#cnt"), { opacity: 1, duration: 0.2 }, t0);
+      tl.to(cnt, { n: 61, duration: span, ease: "power1.in", onUpdate: () => ($("#cntv").textContent = "ДАТ: " + Math.round(cnt.n)) }, t0);
+      // «человек, которого больше нет»: красный, наезд
+      tl.to(q("#red"), { opacity: 1, duration: 1.2 }, at("mean"));
+      tl.to(q("#wrap"), { rotationX: 12, scale: 1.45, y: 80, duration: D - at("mean"), ease: "power1.in" }, at("mean"));
+      tl.to(q(".dt"), { color: "#ff1a2a", duration: 0.6 }, at("mean"));
+      window.__timelines["board"] = tl;
+    })();
+  </script>
+</template>

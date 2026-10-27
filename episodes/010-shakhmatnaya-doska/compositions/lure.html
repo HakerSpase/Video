@@ -1,0 +1,77 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060b; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 48%; }
+    .ly { position: absolute; inset: 0; }
+    .fig { position: absolute; left: 0; top: 0; width: 200px; height: 400px; transform-origin: 50% 100%; opacity: 0; }
+    .fig svg { position: absolute; inset: 0; }
+    .fog { position: absolute; left: -100px; right: -100px; top: 760px; height: 420px; background: radial-gradient(60% 50% at 50% 50%, rgba(120,140,170,0.22), rgba(0,0,0,0)); }
+    .vig { position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%); }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    .pos2 { position: absolute; left: 50px; top: 320px; opacity: 0; }
+    #grave { position: absolute; left: 700px; top: 905px; width: 120px; height: 80px; opacity: 0; }
+    #glow { position: absolute; inset: 0; background: radial-gradient(240px 300px at 540px 1500px, rgba(255,46,62,0.35), rgba(0,0,0,0)); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="lure" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="fog"></div>
+      <div id="grave"></div>
+      <div class="fig" id="a1"></div><div class="fig" id="a2"></div>
+      <div class="fig" id="b1"></div><div class="fig" id="b2"></div>
+      <div class="fig" id="c1"></div><div class="fig" id="c2"></div>
+      <div class="fig" id="ret"></div>
+      <div class="ly" id="fg"></div>
+    </div>
+    <div id="glow"></div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+    <div class="pos" id="t1"><span class="chip yellow">«ВЫПЬЕМ В ПАРКЕ»</span></div>
+    <div class="pos2" id="t2"><span class="chip">ПОВОД: ПОМЯНУТЬ СОБАКУ</span></div>
+    <div class="pos" id="t3"><span class="chip red">ВОЗВРАЩАЛСЯ ОДИН</span></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("lure", "years");
+      let g = `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050812"/><stop offset="0.5" stop-color="#101a2c"/><stop offset="1" stop-color="#070a12"/></linearGradient>
+        <linearGradient id="pth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3346"/><stop offset="1" stop-color="#11161f"/></linearGradient></defs>`;
+      g += `<rect width="1080" height="1920" fill="url(#sk)"/><circle cx="780" cy="330" r="60" fill="#c9d3e3" opacity="0.8"/><circle cx="780" cy="330" r="160" fill="#9fb4d6" opacity="0.08"/>`;
+      g += C.trees(11, 980, 14, { color: "#18233a", h: 600 });
+      g += `<rect y="960" width="1080" height="960" fill="#0b0f18"/>`;
+      g += C.trees(23, 1020, 10, { color: "#0e1626", h: 760 });
+      g += `<path d="M520,960 L560,960 L900,1920 L180,1920 Z" fill="url(#pth)"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      const r = C.rng(3); let f = "";
+      f += `<path d="M-60,1920 L-60,0 L60,0 L90,1920 Z" fill="#020305"/><ellipse cx="0" cy="300" rx="300" ry="260" fill="#020305"/><ellipse cx="80" cy="620" rx="200" ry="170" fill="#020305"/>`;
+      f += `<path d="M1010,1920 L1040,0 L1140,0 L1140,1920 Z" fill="#020305"/><ellipse cx="1080" cy="420" rx="280" ry="260" fill="#020305"/>`;
+      for (let i = 0; i < 26; i++) f += `<ellipse cx="${r() * 1080}" cy="${1840 + r() * 120}" rx="${80 + r() * 120}" ry="${30 + r() * 30}" fill="#020305"/>`;
+      $("#fg").innerHTML = C.svg(f);
+      $("#grave").innerHTML = C.svg(`<ellipse cx="60" cy="66" rx="52" ry="14" fill="#1b2232"/><rect x="56" y="12" width="7" height="56" fill="#8b7a5f"/><rect x="40" y="24" width="40" height="7" fill="#8b7a5f"/>`, 120, 80);
+      const figs = { a1: "#05070b", a2: "#07090e", b1: "#05070b", b2: "#07090e", c1: "#05070b", c2: "#07090e", ret: "#020203" };
+      Object.keys(figs).forEach((k, i) => ($("#" + k).innerHTML = C.svg(C.figure(100, 392, 1, figs[k], { step: (i % 2) * 0.5 }), 200, 400)));
+      // пара уходит по тропинке вглубь: от низа кадра к точке схода (540, 960)
+      const walk = (ids, t, dur) => ids.forEach((id, k) => {
+        const off = k ? 70 : -70;
+        tl.set(q("#" + id), { opacity: 1 }, t);
+        tl.fromTo(q("#" + id), { x: 440 + off, y: 1320, scale: 1.25 },
+          { x: 440 + off * 0.12, y: 600, scale: 0.16, duration: dur, ease: "power1.out" }, t);
+        tl.to(q("#" + id), { opacity: 0, duration: 0.4 }, t + dur - 0.4);
+      });
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.12, duration: D, ease: "none" }, 0);
+      show("#t1", at("invite"), at("back") - 0.1);
+      walk(["a1", "a2"], at("invite") + 0.3, Math.max(3, at("dog") - at("invite")));
+      show("#t2", at("dog"), at("back") - 0.1);
+      tl.fromTo(q("#grave"), { opacity: 0 }, { opacity: 1, duration: 0.5 }, at("grave"));
+      walk(["b1", "b2"], at("went"), 2.2);
+      walk(["c1", "c2"], at("went") + 0.7, 2.0);
+      // обратно — один
+      tl.set(q("#ret"), { opacity: 0 }, 0);
+      tl.fromTo(q("#ret"), { x: 440, y: 600, scale: 0.16, opacity: 0 },
+        { x: 440, y: 1520, scale: 1.9, opacity: 1, duration: D - at("back"), ease: "power2.in" }, at("back"));
+      tl.to(q("#glow"), { opacity: 1, duration: 0.8 }, at("back") + 0.4);
+      show("#t3", at("back") + 0.2);
+      window.__timelines["lure"] = tl;
+    })();
+  </script>
+</template>

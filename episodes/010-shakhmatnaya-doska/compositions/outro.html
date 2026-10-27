@@ -1,0 +1,82 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050608; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; perspective: 1500px; }
+    .table { position: absolute; inset: -200px; background: radial-gradient(700px 600px at 50% 46%, rgba(255,180,90,0.22), rgba(0,0,0,0) 70%), #120c08; }
+    .wrap { position: absolute; left: 66px; top: 400px; width: 948px; height: 948px; transform-style: preserve-3d; transform-origin: 50% 50%; }
+    .glow { position: absolute; inset: 4px; border-radius: 4px; box-shadow: inset 0 0 0 6px #fff, 0 0 40px #fff; opacity: 0; }
+    .lamp { position: absolute; inset: 0; background: radial-gradient(620px 560px at 50% 44%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.88) 100%); }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    #nx { position: absolute; inset: 0; background: #030306; opacity: 0; }
+    #nx .man { position: absolute; left: 290px; top: 380px; width: 500px; height: 1000px; }
+    #nx .man svg { position: absolute; inset: 0; }
+    #nx .rim { position: absolute; inset: 0; background: radial-gradient(360px 520px at 540px 820px, rgba(255,46,62,0.32), rgba(0,0,0,0) 70%); }
+    #nx h2 { position: absolute; left: 0; right: 0; top: 250px; text-align: center; margin: 0; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.3em; color: #ffd23f; }
+    #nx h3 { position: absolute; left: 0; right: 0; top: 310px; text-align: center; margin: 0; font-weight: 900; font-size: 84px; text-transform: uppercase; }
+    #nx h3 span { color: #ff2e3e; }
+    /* обложка: последние кадры ролика — их выбираем превью в TikTok / YouTube */
+    #cover { position: absolute; inset: 0; opacity: 0; background: #050608; overflow: hidden; z-index: 50; }
+    #cover .cb { position: absolute; left: -40px; top: 760px; width: 1160px; height: 1160px; transform: perspective(1400px) rotateX(38deg); }
+    #cover .cb .cs-board { width: 1092px; height: 1092px; }
+    #cover .red { position: absolute; inset: 0; background: linear-gradient(180deg, #050608 0%, rgba(5,6,8,0.9) 40%, rgba(90,0,8,0.35) 70%, rgba(5,6,8,0.9) 100%); }
+    #cover .k { position: absolute; left: 60px; top: 250px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.16em; color: #ffd23f; }
+    #cover h1 { position: absolute; left: 56px; right: 40px; top: 320px; margin: 0; font-weight: 900; font-size: 150px; line-height: 0.88; letter-spacing: -0.03em; text-transform: uppercase; }
+    #cover h1 span { color: #ff2e3e; }
+    #cover .sub { position: absolute; left: 60px; top: 650px; font-weight: 900; font-size: 54px; text-transform: uppercase; background: #ff2e3e; padding: 6px 20px; }
+    #cover .num { position: absolute; right: 50px; top: 230px; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 120px; color: rgba(255,255,255,0.12); }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="table"></div>
+      <div class="wrap" id="wrap"><div class="cs-board" id="bd" style="left:0;top:0"></div></div>
+    </div>
+    <div class="lamp"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+    <div class="pos" id="t1"><span class="chip">3 ПУСТЫЕ КЛЕТКИ</span></div>
+    <div class="pos" id="t2" style="top:320px"><span class="chip yellow">ОСТАНОВИЛА ОДНА ЗАПИСКА</span></div>
+    <div id="nx">
+      <div class="rim"></div>
+      <div class="man" id="man"></div>
+      <h2>ДЕЛО №2</h2>
+      <h3>Человек в <span>форме</span></h3>
+    </div>
+    <div id="cover">
+      <div class="cb"><div class="cs-board" id="bd2" style="left:0;top:0"></div></div>
+      <div class="red"></div>
+      <div class="num">#1</div>
+      <div class="k">РЕАЛЬНЫЕ ДЕЛА</div>
+      <h1>Шахмат&shy;ная<br><span>доска</span></h1>
+      <div class="sub">Битцевский маньяк</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("outro", null);
+      const fill = (el, seed) => {
+        C.board(el);
+        const ord = C.boardOrder(7), r = C.rng(seed);
+        ord.filled.forEach((i) => {
+          const s = el.querySelector(".c" + i + " .dt");
+          s.textContent = String(1 + Math.floor(r() * 28)).padStart(2, "0") + "." + String(1 + Math.floor(r() * 12)).padStart(2, "0") + ".0" + (1 + Math.floor(r() * 6));
+          s.style.opacity = 1; s.style.color = "#c4121f";
+        });
+        ord.empty.forEach((i) => el.querySelector(".c" + i).insertAdjacentHTML("beforeend", '<i class="glow"></i>'));
+      };
+      fill($("#bd"), 31); fill($("#bd2"), 31);
+      gsap.set(q("#wrap"), { rotationX: 20, scale: 1.2 });
+      tl.to(q("#wrap"), { rotationX: 34, scale: 1.0, duration: at("next"), ease: "sine.inOut" }, 0);
+      tl.fromTo(q("#wrap .glow"), { opacity: 0 }, { opacity: 1, duration: 0.25, repeat: 5, yoyo: true }, at("empty") + 0.6);
+      tl.to(q("#wrap .glow"), { opacity: 1, duration: 0.2 }, at("empty") + 2.2);
+      show("#t1", at("empty") + 0.6, at("next") - 0.1);
+      show("#t2", at("stopped") + 0.4, at("next") - 0.1);
+      // тизер дела №2
+      $("#man").innerHTML = C.svg(C.figure(250, 990, 2.75, "#000", { cap: true }), 500, 1000);
+      tl.to(q("#nx"), { opacity: 1, duration: 0.15 }, at("next"));
+      tl.fromTo(q("#man"), { scale: 0.92, opacity: 0 }, { scale: 1.0, opacity: 1, duration: 2.5, ease: "sine.out" }, at("next"));
+      tl.fromTo(q("#nx h3"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("next") + 0.4);
+      // обложка на последние ~0.15 с
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

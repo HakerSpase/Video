@@ -1,0 +1,83 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #070a10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+    .lbl { font-family: "JetBrains Mono", monospace; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .dim { position: absolute; inset: 0; background: #05070b; opacity: 0; }
+    .paper { position: absolute; left: 90px; right: 90px; top: 250px; height: 470px; background: #e4dcc7; color: #141414; opacity: 0;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.85); padding: 30px 40px; font-family: "EB Garamond", serif;
+      clip-path: polygon(0 2%, 6% 0, 18% 1.5%, 33% 0, 51% 2%, 70% 0, 88% 1.2%, 100% 0, 99% 50%, 100% 100%, 80% 98%, 60% 100%, 38% 98%, 20% 100%, 0 98%, 1% 50%); }
+    .paper .mast { font-family: "EB Garamond", serif; font-size: 30px; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 3px double #141414; padding-bottom: 8px; display: flex; justify-content: space-between; }
+    .paper h2 { margin: 26px 0 0; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 84px; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.02em; }
+    .paper h2 span { color: #b10d18; }
+    .paper p { margin: 22px 0 0; font-size: 31px; line-height: 1.3; color: #333; }
+    .card { position: absolute; left: 70px; right: 70px; top: 270px; height: 560px; background: rgba(8,11,18,0.92); border: 2px solid rgba(159,180,214,0.45);
+      border-radius: 14px; opacity: 0; box-shadow: 0 30px 80px rgba(0,0,0,0.8); }
+    .card .ph { position: absolute; left: 34px; top: 34px; width: 300px; height: 380px; background: linear-gradient(#1c2638,#0d1320); border-radius: 8px; overflow: hidden; }
+    .card .ph svg { position: absolute; inset: 0; }
+    .card .ph i { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 72px; font-weight: 800; color: rgba(255,255,255,0.18); }
+    .card .rows { position: absolute; left: 370px; right: 30px; top: 40px; font-family: "JetBrains Mono", monospace; }
+    .card .row { font-size: 24px; color: #9fb4d6; letter-spacing: 0.12em; margin-bottom: 4px; opacity: 0; }
+    .card .row b { display: block; font-size: 38px; color: #fff; letter-spacing: 0; margin-top: 4px; margin-bottom: 22px; }
+    .card .hd { position: absolute; left: 34px; right: 34px; bottom: 30px; font-family: "JetBrains Mono", monospace; font-size: 26px; color: #ffd23f; letter-spacing: 0.1em; }
+  </style>
+  <div id="root" data-composition-id="park" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div id="map"></div></div>
+    <div class="dim" id="dim"></div>
+    <div class="paper" id="paper">
+      <div class="mast"><span>Хроника</span><span>Москва · 2006</span></div>
+      <h2>В Битцевском парке — <span>снова тело</span></h2>
+      <p>Жители Юго-Запада боятся заходить в лес после заката…</p>
+    </div>
+    <div class="card" id="card">
+      <div class="ph" id="ph"><i>?</i></div>
+      <div class="rows">
+        <div class="row" id="r1">ВОЗРАСТ<b>32 ГОДА</b></div>
+        <div class="row" id="r2">РАБОТА<b>МАГАЗИН</b></div>
+        <div class="row" id="r3">ЖИВЁТ<b>С МАМОЙ, У ПАРКА</b></div>
+      </div>
+      <div class="hd">ВНЕ ПОДОЗРЕНИЙ</div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("park", "lure");
+      const r = C.rng(5); let g = "";
+      g += `<rect width="1080" height="1920" fill="#0a0e16"/>`;
+      for (let i = 0; i < 70; i++) { const y = r() * 1920, x = r() * 1080, a = (r() - 0.5) * 50; g += `<path d="M${x - 700},${y} L${x + 700},${y + a * 6}" stroke="#16202f" stroke-width="${2 + r() * 5}"/>`; }
+      for (let i = 0; i < 40; i++) { const x = r() * 1080; g += `<path d="M${x},0 L${x + (r() - 0.5) * 300},1920" stroke="#141c2a" stroke-width="${2 + r() * 4}"/>`; }
+      // кварталы
+      for (let i = 0; i < 160; i++) { const x = r() * 1080, y = r() * 1920; g += `<rect x="${x}" y="${y}" width="${20 + r() * 40}" height="${12 + r() * 30}" fill="#121a28" transform="rotate(${(r() - 0.5) * 20} ${x} ${y})"/>`; }
+      // парк
+      g += `<path id="pk" d="M380,560 C520,520 640,600 700,700 C760,820 820,900 800,1060 C790,1200 720,1330 640,1400 C560,1460 470,1420 430,1320 C380,1200 330,1080 340,940 C350,820 300,640 380,560 Z" fill="#0f2b1c" stroke="#2f7a4c" stroke-width="5"/>`;
+      for (let i = 0; i < 260; i++) { const x = 340 + r() * 470, y = 560 + r() * 860; g += `<circle cx="${x}" cy="${y}" r="${4 + r() * 9}" fill="#14381f" opacity="0.8" clip-path="url(#pkc)"/>`; }
+      g = `<defs><clipPath id="pkc"><use href="#pk"/></clipPath></defs>` + g;
+      // метро
+      const line = (pts, col) => `<polyline points="${pts.map((p) => p.join(",")).join(" ")}" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round"/>` +
+        pts.map((p) => `<circle cx="${p[0]}" cy="${p[1]}" r="13" fill="#0a0e16" stroke="${col}" stroke-width="7"/>`).join("");
+      const og = [[230, 300], [250, 520], [270, 760], [280, 1000], [300, 1250], [380, 1520]];
+      g += line(og, "#f28c28") + line([[900, 320], [880, 600], [900, 900], [930, 1200], [960, 1500]], "#9aa3ad");
+      const nm = ["Новые Черёмушки", "Калужская", "Беляево", "Коньково", "Тёплый Стан", "Ясенево"];
+      og.forEach((p, i) => (g += `<text x="${p[0] - 26}" y="${p[1] + 8}" text-anchor="end" class="lbl" font-weight="700" font-size="24" fill="#c2cad6">${nm[i]}</text>`));
+      g += `<text x="575" y="980" text-anchor="middle" class="mt" font-weight="900" font-size="46" fill="#7fdc9f" letter-spacing="2">БИТЦЕВСКИЙ</text><text x="575" y="1032" text-anchor="middle" class="mt" font-weight="900" font-size="46" fill="#7fdc9f" letter-spacing="2">ПАРК</text>`;
+      g += `<g id="pulse"><circle cx="575" cy="1150" r="18" fill="#ff2e3e"/><circle class="ring" cx="575" cy="1150" r="18" fill="none" stroke="#ff2e3e" stroke-width="5"/></g>`;
+      g += `<g id="home" opacity="0"><rect x="300" y="610" width="56" height="44" fill="#ffd23f"/><path d="M292,612 L328,580 L364,612 Z" fill="#ffd23f"/><text x="328" y="690" text-anchor="middle" class="lbl" font-weight="800" font-size="24" fill="#ffd23f">ДОМ</text></g>`;
+      $("#map").innerHTML = C.svg(g);
+      $("#ph").insertAdjacentHTML("afterbegin", C.svg(C.figure(150, 520, 1.15, "#03050a"), 300, 380));
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.35, y: -40, duration: at("fear"), ease: "sine.inOut" }, 0);
+      for (let k = 0; k < 8; k++) tl.fromTo(q(".ring"), { attr: { r: 18 }, opacity: 1 }, { attr: { r: 90 }, opacity: 0, duration: 1.2, ease: "power2.out" }, k * 1.4);
+      tl.fromTo(q("#paper"), { opacity: 0, y: -60, rotation: -4 }, { opacity: 1, y: 0, rotation: -2, duration: 0.35, ease: "power3.out" }, at("fear"));
+      tl.to(q("#paper"), { opacity: 0, y: -40, duration: 0.25 }, at("him") - 0.2);
+      tl.to(q("#cam"), { scale: 1.9, x: 420, y: 520, duration: D - at("him"), ease: "sine.inOut" }, at("him"));
+      tl.to(q("#dim"), { opacity: 0.55, duration: 0.5 }, at("him"));
+      tl.fromTo(q("#card"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at("him"));
+      tl.to(q("#r1"), { opacity: 1, duration: 0.2 }, at("him") + 0.6);
+      tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("shop"));
+      tl.to(q("#r3"), { opacity: 1, duration: 0.2 }, at("mom"));
+      tl.to(q("#home"), { opacity: 1, duration: 0.3 }, at("mom"));
+      window.__timelines["park"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,55 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b0806; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 46%; }
+    .tbl { position: absolute; inset: -300px; background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0 3px, rgba(0,0,0,0) 3px 14px),
+      linear-gradient(90deg, #6e4a2c, #7d5634 30%, #6a4529 60%, #7a5332); }
+    .light { position: absolute; inset: 0; background: radial-gradient(560px 640px at 50% 44%, rgba(255,190,110,0.25), rgba(0,0,0,0) 60%), radial-gradient(900px 1100px at 50% 44%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%); }
+    .note { position: absolute; left: 170px; top: 520px; width: 740px; height: 640px; background: #f3efe4; transform: rotate(-4deg);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.6); padding: 60px 56px 40px 90px; font-family: "Caveat", cursive; color: #1d2a6b;
+      background-image: linear-gradient(90deg, rgba(0,0,0,0) 64px, rgba(210,70,70,0.5) 64px 67px, rgba(0,0,0,0) 67px), repeating-linear-gradient(#f3efe4 0 66px, #a9c1dd 66px 68px); }
+    .note p { margin: 0; font-size: 62px; line-height: 68px; opacity: 0; }
+    .note .num { position: relative; display: inline-block; }
+    .note .num i { font-style: normal; letter-spacing: 0.04em; }
+    .ring { position: absolute; left: -26px; top: -8px; right: -26px; bottom: -6px; border: 6px solid #ffd23f; border-radius: 50%; opacity: 0; transform: rotate(-3deg); }
+    .pen { position: absolute; left: 640px; top: 1130px; width: 380px; height: 30px; border-radius: 15px; background: linear-gradient(#2b4ad1, #13246e); transform: rotate(-32deg); box-shadow: 0 16px 20px rgba(0,0,0,0.5); }
+    .pen::before { content: ""; position: absolute; left: -36px; top: 7px; border-right: 40px solid #ddd; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+    .keys { position: absolute; left: 110px; top: 1190px; width: 120px; height: 120px; border: 12px solid #b9b4a4; border-radius: 50%; box-shadow: 0 10px 14px rgba(0,0,0,0.5); }
+    .keys::after { content: ""; position: absolute; left: 90px; top: 70px; width: 130px; height: 26px; background: #c8c2ae; border-radius: 4px; transform: rotate(28deg); }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    .pos2 { position: absolute; left: 50px; top: 320px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="note" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="tbl"></div>
+      <div class="note" id="note">
+        <p id="l1">Сынок, я ушла гулять</p>
+        <p id="l2">в парк с Сашей.</p>
+        <p id="l3">Его телефон:</p>
+        <p id="l4"><span class="num"><i>8-9••-•••-••-••</i><span class="ring" id="ring"></span></span></p>
+        <p id="l5" style="text-align:right">мама</p>
+      </div>
+      <div class="pen"></div>
+    </div>
+    <div class="light"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №1</b></div>
+    <div class="pos" id="t1"><span class="stamp" style="font-family:'JetBrains Mono',monospace"><b>13 ИЮНЯ 2006</b></span></div>
+    <div class="pos2" id="t2" style="top:340px"><span class="chip">МАРИНА · КОЛЛЕГА ПО РАБОТЕ</span></div>
+    <div class="cs-tag" style="top:1290px">РЕКОНСТРУКЦИЯ · ТЕКСТ НЕ ДОСЛОВНЫЙ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show } = C.scene("note", "cctv");
+      show("#t1", 0.1, at("paper") - 0.1);
+      show("#t2", at("june") + 1.2, at("paper") - 0.1);
+      tl.fromTo(q("#cam"), { scale: 0.8, rotation: 3 }, { scale: 1.0, rotation: 0, duration: at("paper"), ease: "sine.inOut" }, 0);
+      tl.fromTo(q("#note"), { opacity: 0.0 }, { opacity: 1, duration: 0.4 }, at("before"));
+      const lines = ["#l1", "#l2", "#l3", "#l4", "#l5"], ts = [at("paper") + 0.1, at("paper") + 0.7, at("phone") - 0.3, at("phone"), at("phone") + 0.8];
+      lines.forEach((l, k) => tl.fromTo(q(l), { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.5, ease: "none" }, ts[k]));
+      tl.to(q("#cam"), { scale: 1.45, y: -60, duration: 1.4, ease: "power2.inOut" }, at("phone"));
+      tl.fromTo(q("#ring"), { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, at("phone") + 0.6);
+      window.__timelines["note"] = tl;
+    })();
+  </script>
+</template>
