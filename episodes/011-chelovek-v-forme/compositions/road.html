@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060b; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .mv svg { position: absolute; inset: 0; }
+    #glare { position: absolute; left: 0; top: 0; width: 900px; height: 500px; margin: -250px 0 0 -450px;
+      background: radial-gradient(closest-side, rgba(255,246,216,0.85), rgba(255,240,200,0.25) 35%, rgba(0,0,0,0) 100%); mix-blend-mode: screen; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.9) 100%); }
+    .ttl { position: absolute; left: 50px; right: 50px; top: 250px; }
+    .ttl h1 { margin: 0; font-size: 96px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+    .ttl h1 span { color: #ff2e3e; }
+  </style>
+  <div id="root" data-composition-id="road" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="mv" id="girl"></div>
+      <div class="mv" id="car"></div>
+      <div id="glare"></div>
+    </div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №2</b></div>
+    <div class="ttl" id="ttl"><h1>Человек<br>в <span>форме</span></h1></div>
+    <div class="cs-quote" id="qt" style="top:300px"><small>ИЗ МАШИНЫ</small><b>«Садись, подвезу. Ночью опасно»</b></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("road", "city");
+      const G = 1000;
+      let g = `<defs>${C.coneDef}<linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050a"/><stop offset="1" stop-color="#121a2a"/></linearGradient></defs>`;
+      g += `<rect width="1080" height="1920" fill="url(#sk)"/>`;
+      g += C.blocks(4, G - 60, { h: 520, lit: 0.07, color: "#0b111c" });
+      g += `<rect y="${G - 60}" width="1080" height="60" fill="#151b26"/><rect y="${G}" width="1080" height="920" fill="#0a0d13"/>`;
+      for (let i = 0; i < 9; i++) g += `<rect x="${i * 140 - 20}" y="${G + 120}" width="80" height="10" fill="#2a2f38"/>`;
+      g += C.lamp(180, G - 40) + C.lamp(820, G - 40);
+      $("#bg").innerHTML = C.svg(g);
+      const girlSvg = (st) => C.svg(C.woman(0, 0, 0.95, "#05070b", { step: st }));
+      $("#girl").innerHTML = C.svg(C.woman(0, G - 50, 1.25, "#2b3447", { step: 0.25 }) + C.woman(-3, G - 52, 1.22, "#06080d", { step: 0.25 }));
+      $("#car").innerHTML = C.svg(C.niva(0, G - 18, 1.0, { flip: true, lights: true, driver: true }));
+      // девушка идёт вправо, машина едет навстречу и тормозит рядом
+      tl.fromTo(q("#girl"), { x: 220 }, { x: 430, duration: at("car") + 1.0, ease: "none" }, 0);
+      tl.fromTo(q("#car"), { x: 1500 }, { x: 640, duration: 1.4, ease: "power2.out" }, at("car"));
+      tl.fromTo(q("#glare"), { x: 1500 - 200, y: G - 95, opacity: 0.0 }, { x: 640 - 200, y: G - 95, opacity: 1, duration: 1.4, ease: "power2.out" }, at("car"));
+      gsap.set(q("#glare"), { x: 1500, y: G - 95, opacity: 0 });
+      tl.to(q("#ttl"), { opacity: 0, y: -30, duration: 0.3 }, at("car") - 0.2);
+      punch(0.02, 0.07);
+      flash(at("car") + 0.2, "#fff6d8", 0.4);
+      // кабина крупно: в форме и фуражке
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("cop"), fr(3.0, 660, G - 160, 720));
+      slam("МИЛИЦИОНЕР", at("cop") + 0.5, { size: 140, top: 430, color: "#ff2e3e", hold: 1.1 });
+      cut(at("offer"), fr(1.6, 520, G - 150, 860));
+      tl.fromTo(q("#qt"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3 }, at("offer") + 0.2);
+      tl.to(q("#cam"), { scale: 1.08, duration: D - at("offer"), ease: "none" }, at("offer"));
+      window.__timelines["road"] = tl;
+    })();
+  </script>
+</template>

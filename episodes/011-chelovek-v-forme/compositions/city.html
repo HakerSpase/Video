@@ -1,0 +1,59 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #070a10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+    .lbl { font-family: "JetBrains Mono", monospace; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .paper { position: absolute; left: 90px; right: 90px; top: 250px; height: 440px; background: #e4dcc7; color: #141414; opacity: 0;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.85); padding: 30px 40px; font-family: "EB Garamond", serif; }
+    .paper .mast { font-size: 30px; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 3px double #141414; padding-bottom: 8px; display: flex; justify-content: space-between; }
+    .paper h2 { margin: 26px 0 0; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 100px; line-height: 0.95; text-transform: uppercase; color: #b10d18; }
+    .paper p { margin: 18px 0 0; font-size: 31px; line-height: 1.3; color: #333; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="city" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div id="map"></div></div>
+    <div class="pos" id="t1"><span class="chip">ВСЕ ПРОПАЛИ НОЧЬЮ</span></div>
+    <div class="paper" id="paper">
+      <div class="mast"><span>Ангарск</span><span>Хроника</span></div>
+      <h2>«Оборотень»</h2>
+      <p>Женщинам советуют не ходить по ночам одним…</p>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №2</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("city", "uniform");
+      const r = C.rng(9); let g = `<rect width="1080" height="1920" fill="#0b1210"/>`;
+      // тайга вокруг
+      for (let i = 0; i < 900; i++) g += `<circle cx="${r() * 1080}" cy="${r() * 1920}" r="${6 + r() * 12}" fill="${r() < 0.5 ? "#0f1d17" : "#12241b"}"/>`;
+      // Ангара
+      g += `<path d="M-40,200 C200,320 140,700 300,900 C460,1100 380,1400 520,1600 C640,1760 700,1900 760,2000" stroke="#1d3550" stroke-width="90" fill="none"/>`;
+      g += `<path d="M-40,200 C200,320 140,700 300,900 C460,1100 380,1400 520,1600 C640,1760 700,1900 760,2000" stroke="#28476a" stroke-width="40" fill="none" opacity="0.6"/>`;
+      // город
+      g += `<path d="M520,760 L860,700 L940,980 L780,1180 L540,1120 Z" fill="#1a1f29" stroke="#3b4556" stroke-width="4"/>`;
+      for (let i = 0; i < 70; i++) { const x = 560 + r() * 340, y = 740 + r() * 400; g += `<rect x="${x}" y="${y}" width="${14 + r() * 26}" height="${10 + r() * 20}" fill="#2a3242" clip-path="url(#cc)"/>`; }
+      g = `<defs><clipPath id="cc"><path d="M520,760 L860,700 L940,980 L780,1180 L540,1120 Z"/></clipPath></defs>` + g;
+      g += `<text x="730" y="960" text-anchor="middle" class="mt" font-weight="900" font-size="56" fill="#e5e9f0">АНГАРСК</text>`;
+      // дороги из города
+      g += `<path d="M860,700 L1100,420 M940,980 L1100,1100 M540,1120 L300,1500 M780,1180 L900,1700" stroke="#3a3a30" stroke-width="10"/>`;
+      const pins = [[1000, 520], [980, 1060], [420, 1330], [860, 1500], [1030, 640], [360, 1420], [920, 1620], [1050, 1150], [470, 1250], [880, 1380], [1010, 840], [300, 1560]];
+      pins.forEach((p, i) => (g += `<g class="pin p${i}" opacity="0"><circle cx="${p[0]}" cy="${p[1]}" r="14" fill="#ff2e3e"/><circle class="pr" cx="${p[0]}" cy="${p[1]}" r="14" fill="none" stroke="#ff2e3e" stroke-width="4"/></g>`));
+      $("#map").innerHTML = C.svg(g);
+      tl.fromTo(q("#cam"), { scale: 1.6 }, { scale: 1.0, duration: at("found") + 0.3, ease: "power2.inOut" }, 0);
+      slam("90-е", at("angarsk") + 1.2, { size: 300, top: 520, color: "#ffd23f", hold: 0.9 });
+      const span = at("nick") - at("found") - 0.3;
+      pins.forEach((p, i) => {
+        const t = at("found") + 0.3 + span * i / pins.length;
+        tl.fromTo(q(".p" + i), { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, t);
+        tl.fromTo(q(".p" + i + " .pr"), { attr: { r: 14 }, opacity: 1 }, { attr: { r: 70 }, opacity: 0, duration: 0.8 }, t);
+        if (i % 3 === 0) punch(t, 0.03);
+      });
+      show("#t1", at("pattern"), at("nick") - 0.1);
+      tl.to(q("#cam"), { scale: 1.15, duration: D - at("pattern"), ease: "none" }, at("pattern"));
+      tl.fromTo(q("#paper"), { opacity: 0, y: -60, rotation: -5 }, { opacity: 1, y: 0, rotation: -2, duration: 0.3, ease: "power3.out" }, at("nick") + 0.8);
+      flash(at("nick") + 0.8, "#ff2e3e", 0.45); shake(at("nick") + 0.8, 0.4, 12);
+      window.__timelines["city"] = tl;
+    })();
+  </script>
+</template>

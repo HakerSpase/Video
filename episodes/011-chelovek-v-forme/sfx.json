@@ -1,0 +1,16 @@
+[
+  {"at": "car", "file": "whoosh-cinematic.mp3", "vol": 0.35},
+  {"at": "cop", "file": "impact-bass-2.mp3", "vol": 0.55, "offset": 0.4},
+  {"at": "found", "file": "click-soft.mp3", "vol": 0.3, "offset": 0.3},
+  {"at": "nick", "file": "impact-bass-1.mp3", "vol": 0.6, "offset": 0.8},
+  {"at": "officer", "file": "pop.mp3", "vol": 0.3},
+  {"at": "safe", "file": "impact-bass-2.mp3", "vol": 0.55, "offset": 0.6},
+  {"at": "colleague", "file": "impact-bass-1.mp3", "vol": 0.5, "offset": 1.4},
+  {"at": "niva", "file": "whoosh-short.mp3", "vol": 0.3},
+  {"at": "test", "file": "typing.mp3", "vol": 0.25},
+  {"at": "match", "file": "impact-bass-1.mp3", "vol": 0.75, "offset": 0.55},
+  {"at": "arrest", "file": "impact-bass-2.mp3", "vol": 0.55, "offset": 0.4},
+  {"at": "life", "file": "impact-bass-1.mp3", "vol": 0.6, "offset": 0.3},
+  {"at": "next", "file": "whoosh-cinematic.mp3", "vol": 0.35, "offset": -0.2},
+  {"at": "wrong", "file": "glitch-2.mp3", "vol": 0.4, "offset": 0.6}
+]

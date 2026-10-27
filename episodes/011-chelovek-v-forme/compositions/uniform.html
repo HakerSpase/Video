@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0d13; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .desk { position: absolute; inset: -200px; background: radial-gradient(700px 800px at 50% 40%, #252b36, #090b10 75%); }
+    .card { position: absolute; left: 90px; top: 260px; width: 900px; height: 760px; background: #e6dfcc; color: #1b1a17; border-radius: 6px;
+      box-shadow: 0 50px 90px rgba(0,0,0,0.85); transform: rotate(-1.5deg); font-family: "JetBrains Mono", monospace; padding: 40px 46px; }
+    .card .h { font-size: 28px; letter-spacing: 0.2em; border-bottom: 3px solid #1b1a17; padding-bottom: 12px; display: flex; justify-content: space-between; }
+    .card .ph { position: absolute; left: 46px; top: 120px; width: 300px; height: 380px; background: #c9c1ac; border: 3px solid #1b1a17; overflow: hidden; }
+    .card .ph svg { position: absolute; inset: 0; }
+    .card .rows { position: absolute; left: 380px; right: 40px; top: 130px; }
+    .card .row { font-size: 24px; color: #5b5850; letter-spacing: 0.12em; opacity: 0; }
+    .card .row b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 50px; color: #1b1a17; letter-spacing: -0.01em; margin: 4px 0 26px; }
+    .big { left: 380px; top: 640px; font-size: 54px; }
+    #night { position: absolute; inset: 0; opacity: 0; }
+    #night .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #night .mv svg { position: absolute; inset: 0; }
+  </style>
+  <div id="root" data-composition-id="uniform" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="desk"></div>
+      <div class="card" id="card">
+        <div class="h"><span>ЛИЧНОЕ ДЕЛО</span><span>ОВД · АНГАРСК</span></div>
+        <div class="ph" id="ph"></div>
+        <div class="rows">
+          <div class="row" id="r0">ФАМИЛИЯ<b>ПОПКОВ М. В.</b></div>
+          <div class="row" id="r1">СЛУЖБА<b>МИЛИЦИОНЕР</b></div>
+          <div class="row" id="r2">СЕМЬЯ<b>ЖЕНА, ДОЧЬ</b></div>
+        </div>
+        <div class="cs-stamp big" id="st">ВНЕ ПОДОЗРЕНИЙ</div>
+      </div>
+      <div id="night"><div class="mv" id="nbg"></div><div class="mv" id="ncar"></div><div class="mv" id="nw"></div></div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №2</b></div>
+    <div class="cs-tag" id="tag" style="opacity:0">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("uniform", "years");
+      $("#ph").innerHTML = C.svg(C.figure(150, 640, 1.6, "#1b1a17", { cap: true }), 300, 380) + `<span style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:80px;font-weight:800;color:rgba(255,255,255,0.35)">?</span>`;
+      const G = 1000;
+      let g = `<defs>${C.coneDef}</defs><rect width="1080" height="1920" fill="#060912"/>` + C.blocks(8, G - 60, { h: 480, lit: 0.06 });
+      g += `<rect y="${G - 60}" width="1080" height="1000" fill="#0a0d13"/>` + C.lamp(760, G - 40);
+      $("#nbg").innerHTML = C.svg(g);
+      $("#ncar").innerHTML = C.svg(C.niva(560, G - 18, 1.15, { flip: true, lights: true, driver: true }));
+      $("#nw").innerHTML = C.svg(C.woman(0, G - 30, 0.95, "#05070b"));
+      tl.fromTo(q("#cam"), { scale: 1.12 }, { scale: 1.0, duration: at("trust"), ease: "sine.out" }, 0);
+      tl.to(q("#r0"), { opacity: 1, duration: 0.2 }, 0.3);
+      tl.to(q("#r1"), { opacity: 1, duration: 0.2 }, at("officer")); punch(at("officer"), 0.06);
+      tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("family")); punch(at("family"), 0.04);
+      stamp("#st", at("family") + 0.45);
+      // ночь: она сама садится в машину
+      tl.set(q("#night"), { opacity: 1 }, at("trust")); flash(at("trust"), "#fff", 0.5);
+      tl.set(q("#tag"), { opacity: 1 }, at("trust"));
+      tl.fromTo(q("#nw"), { x: 250 }, { x: 470, duration: 1.6, ease: "sine.out" }, at("trust"));
+      tl.to(q("#nw"), { opacity: 0, duration: 0.3 }, at("trust") + 1.7);
+      tl.fromTo(q("#night"), { scale: 1.0 }, { scale: 1.25, transformOrigin: "50% 50%", duration: D - at("trust"), ease: "none" }, at("trust"));
+      slam("ЗАЩИЩАТЬ", at("safe") + 0.6, { size: 170, top: 470, stroke: true, hold: 1.2, punch: 0.07 });
+      window.__timelines["uniform"] = tl;
+    })();
+  </script>
+</template>

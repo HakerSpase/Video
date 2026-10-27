@@ -1,0 +1,69 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060b; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.9) 100%); }
+    #nx { position: absolute; inset: 0; background: #030306; opacity: 0; }
+    #nx .ly { opacity: 0.9; }
+    #nx h2 { position: absolute; left: 0; right: 0; top: 250px; text-align: center; margin: 0; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.3em; color: #ffd23f; }
+    #nx h3 { position: absolute; left: 40px; right: 40px; top: 310px; text-align: center; margin: 0; font-weight: 900; font-size: 76px; line-height: 1; text-transform: uppercase; }
+    #nx h3 span { color: #ff2e3e; }
+    #cover { position: absolute; inset: 0; opacity: 0; background: #04060b; overflow: hidden; z-index: 50; }
+    #cover .red { position: absolute; inset: 0; background: linear-gradient(180deg, #04060b 0%, rgba(4,6,11,0.9) 38%, rgba(4,6,11,0) 60%, rgba(4,6,11,0.6) 100%); }
+    #cover .k { position: absolute; left: 60px; top: 250px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.16em; color: #ffd23f; }
+    #cover h1 { position: absolute; left: 56px; right: 40px; top: 320px; margin: 0; font-weight: 900; font-size: 160px; line-height: 0.88; letter-spacing: -0.03em; text-transform: uppercase; }
+    #cover h1 span { color: #ff2e3e; }
+    #cover .sub { position: absolute; left: 60px; top: 650px; font-weight: 900; font-size: 54px; text-transform: uppercase; background: #ff2e3e; padding: 6px 20px; }
+    #cover .num { position: absolute; right: 50px; top: 230px; font-weight: 900; font-size: 120px; color: rgba(255,255,255,0.12); }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="ly" id="bg"></div></div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №2</b></div>
+    <div class="pos" id="t1"><span class="chip yellow">ЕГО НАШЛИ СРЕДИ СВОИХ</span></div>
+    <div id="nx">
+      <div class="ly" id="forest"></div>
+      <h2>ДЕЛО №3</h2>
+      <h3>Расстреляли<br><span>невиновного</span></h3>
+    </div>
+    <div id="cover">
+      <div class="ly" id="cbg"></div>
+      <div class="red"></div>
+      <div class="num">#2</div>
+      <div class="k">РЕАЛЬНЫЕ ДЕЛА</div>
+      <h1>Человек<br>в <span>форме</span></h1>
+      <div class="sub">Ангарский маньяк</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("outro", null);
+      const G = 1000;
+      const street = (car) => {
+        let g = `<defs>${C.coneDef}</defs><rect width="1080" height="1920" fill="#05080f"/>` + C.blocks(4, G - 60, { h: 520, lit: 0.05 });
+        g += `<rect y="${G - 60}" width="1080" height="1000" fill="#0a0d13"/>` + C.lamp(180, G - 40) + C.lamp(820, G - 40);
+        if (car) g += C.niva(560, G - 18, 1.25, { flip: true, lights: true, driver: true });
+        return C.svg(g);
+      };
+      $("#bg").innerHTML = street(false);
+      $("#cbg").innerHTML = C.svg(`<defs>${C.coneDef}</defs><g transform="translate(0,560)">` + `<rect width="1080" height="1400" fill="#05080f"/>` + C.blocks(4, G - 60, { h: 520, lit: 0.06 }) +
+        `<rect y="${G - 60}" width="1080" height="1000" fill="#0a0d13"/>` + C.lamp(180, G - 40) + C.niva(600, G - 18, 1.4, { flip: true, lights: true, driver: true }) + `</g>`);
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.15, duration: at("next"), ease: "none" }, 0);
+      show("#t1", at("found2"), at("next") - 0.1);
+      slam("СРЕДИ СВОИХ", at("found2") + 0.3, { size: 130, top: 520, color: "#ffd23f", hold: 1.0 });
+      // тизер дела №3: лесополоса у железной дороги
+      let f = `<rect width="1080" height="1920" fill="#050608"/>` + C.trees(41, 1000, 16, { color: "#0c1018", h: 560 });
+      f += `<rect y="990" width="1080" height="930" fill="#07090c"/><path d="M0,1040 L1080,1040 M0,1070 L1080,1070" stroke="#2a2f38" stroke-width="6"/>`;
+      f += `<radialGradient id="rg"><stop offset="0" stop-color="#ff2e3e" stop-opacity="0.35"/><stop offset="1" stop-color="#ff2e3e" stop-opacity="0"/></radialGradient><ellipse cx="540" cy="800" rx="420" ry="360" fill="url(#rg)"/>`;
+      f += C.figure(540, 1000, 1.5, "#000");
+      $("#forest").innerHTML = C.svg(f);
+      tl.to(q("#nx"), { opacity: 1, duration: 0.12 }, at("next")); flash(at("next"), "#fff", 0.8); shake(at("next"), 0.35, 10);
+      tl.fromTo(q("#forest"), { scale: 1.12 }, { scale: 1.0, duration: D - at("next"), ease: "sine.out" }, at("next"));
+      tl.fromTo(q("#nx h3"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("wrong") + 0.6); punch(at("wrong") + 0.6, 0.06);
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>
