@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    #nx { position: absolute; inset: 0; background: #0b0c0e; opacity: 0; }
+    #nx h2 { position: absolute; left: 0; right: 0; top: 250px; text-align: center; margin: 0; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.3em; color: #ffd23f; }
+    #nx h3 { position: absolute; left: 40px; right: 40px; top: 310px; text-align: center; margin: 0; font-weight: 900; font-size: 80px; line-height: 1; text-transform: uppercase; opacity: 0; }
+    #nx h3 span { color: #ff2e3e; }
+    #cover { position: absolute; inset: 0; opacity: 0; background: #04060a; overflow: hidden; z-index: 50; }
+    #cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, #04060a 0%, rgba(4,6,10,0.92) 40%, rgba(4,6,10,0) 62%, rgba(4,6,10,0.6) 100%); }
+    #cover .k { position: absolute; left: 60px; top: 250px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.16em; color: #ffd23f; }
+    #cover h1 { position: absolute; left: 56px; right: 30px; top: 320px; margin: 0; font-weight: 900; font-size: 160px; line-height: 0.88; letter-spacing: -0.03em; text-transform: uppercase; }
+    #cover h1 span { color: #ff2e3e; }
+    #cover .sub { position: absolute; left: 60px; top: 650px; font-weight: 900; font-size: 54px; text-transform: uppercase; background: #ff2e3e; padding: 6px 20px; }
+    #cover .num { position: absolute; right: 50px; top: 230px; font-weight: 900; font-size: 120px; color: rgba(255,255,255,0.12); }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="ly" id="bg"></div></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+    <div class="pos" id="t1"><span class="chip red">ИСКАЛ ВМЕСТЕ СО ВСЕМИ</span></div>
+    <div id="nx"><div class="ly" id="caf"></div><h2>ФИНАЛ · ДЕЛО №5</h2><h3>Яд в школьной<br><span>столовой</span></h3></div>
+    <div id="cover">
+      <div class="ly" id="cbg"></div>
+      <div class="shade"></div>
+      <div class="num">#4</div>
+      <div class="k">РЕАЛЬНЫЕ ДЕЛА</div>
+      <h1>Искал<br><span>сам себя</span></h1>
+      <div class="sub">Витебский душитель</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("outro", null);
+      const G = 1000;
+      const line = (dy) => {
+        let g = `<rect width="1080" height="1920" fill="#060912"/><g transform="translate(0,${dy})">` + C.trees(77, 980, 14, { color: "#0b0f16", h: 560 }) + `<rect y="960" width="1080" height="1000" fill="#06080c"/>`;
+        [140, 330, 540, 750, 940].forEach((x, i) => {
+          g += `<path d="M${x + 30},780 L${x + 330},1100 L${x - 80},1100 Z" fill="#fff3c4" opacity="0.08"/>`;
+          g += C.figure(x, 1000, i === 2 ? 1.25 : 1.0, i === 2 ? "#000" : "#0d1118", { band: "#c4121f" });
+        });
+        return C.svg(g + `<radialGradient id="rg"><stop offset="0" stop-color="#ff2e3e" stop-opacity="0.35"/><stop offset="1" stop-color="#ff2e3e" stop-opacity="0"/></radialGradient><ellipse cx="540" cy="760" rx="200" ry="300" fill="url(#rg)"/></g>`);
+      };
+      $("#bg").innerHTML = line(0);
+      $("#cbg").innerHTML = line(420);
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.25, transformOrigin: "540px 800px", duration: at("next"), ease: "none" }, 0);
+      show("#t1", at("hid") + 0.5, at("next") - 0.1);
+      // тизер: школьная столовая — поднос, стакан, тарелка
+      let f = `<rect width="1080" height="1920" fill="#1b2026"/>`;
+      for (let i = 0; i < 12; i++) for (let j = 0; j < 22; j++) f += `<rect x="${i * 92}" y="${j * 92}" width="88" height="88" fill="${(i + j) % 2 ? "#cfd6dc" : "#b9c2ca"}" opacity="0.18"/>`;
+      f += `<rect x="190" y="560" width="700" height="440" rx="24" fill="#7a5a3a"/><ellipse cx="420" cy="780" rx="170" ry="120" fill="#eceff1"/><ellipse cx="420" cy="780" rx="120" ry="80" fill="#d8c08a"/>`;
+      f += `<rect x="650" y="640" width="120" height="200" rx="10" fill="#dfe8ee" opacity="0.8"/><rect x="655" y="700" width="110" height="135" fill="#c97a4a" opacity="0.75"/>`;
+      f += `<text x="710" y="560" text-anchor="middle" font-size="120" fill="#ff2e3e">☠</text>`;
+      $("#caf").innerHTML = C.svg(f);
+      tl.to(q("#nx"), { opacity: 1, duration: 0.12 }, at("next")); flash(at("next"), "#fff", 0.8); shake(at("next"), 0.35, 10);
+      tl.fromTo(q("#nx h3"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("cook")); punch(at("cook"), 0.06);
+      tl.fromTo(q("#caf"), { scale: 1.15 }, { scale: 1.0, duration: D - at("next"), ease: "sine.out" }, at("next"));
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

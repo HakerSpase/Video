@@ -1,0 +1,47 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0d13; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .desk { position: absolute; inset: -200px; background: radial-gradient(700px 800px at 50% 40%, #252b36, #090b10 75%); }
+    .card { position: absolute; left: 90px; top: 260px; width: 900px; height: 760px; background: #e6dfcc; color: #1b1a17; border-radius: 6px;
+      box-shadow: 0 50px 90px rgba(0,0,0,0.85); transform: rotate(1.5deg); font-family: "JetBrains Mono", monospace; padding: 40px 46px; }
+    .card .h { font-size: 28px; letter-spacing: 0.2em; border-bottom: 3px solid #1b1a17; padding-bottom: 12px; display: flex; justify-content: space-between; }
+    .card .ph { position: absolute; left: 46px; top: 120px; width: 300px; height: 380px; background: #c9c1ac; border: 3px solid #1b1a17; overflow: hidden; }
+    .card .ph svg { position: absolute; inset: 0; }
+    .card .rows { position: absolute; left: 380px; right: 40px; top: 130px; }
+    .card .row { font-size: 24px; color: #5b5850; letter-spacing: 0.12em; opacity: 0; }
+    .card .row b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 46px; color: #1b1a17; margin: 4px 0 22px; }
+    .card .row b.r { color: #b10d18; }
+    .band { position: absolute; left: 40px; top: 560px; width: 820px; height: 120px; background: #c4121f; color: #fff; display: flex; align-items: center; justify-content: center;
+      font-family: Montserrat, sans-serif; font-weight: 900; font-size: 68px; letter-spacing: 0.08em; opacity: 0; transform: rotate(-3deg); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  </style>
+  <div id="root" data-composition-id="who" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="desk"></div>
+      <div class="card" id="card">
+        <div class="h"><span>ХАРАКТЕРИСТИКА</span><span>ВИТЕБСКАЯ ОБЛ.</span></div>
+        <div class="ph" id="ph"></div>
+        <div class="rows">
+          <div class="row" id="r0">ФАМИЛИЯ<b>МИХАСЕВИЧ Г. М.</b></div>
+          <div class="row" id="r1">РАБОТА<b>МЕХАНИК · КПСС</b></div>
+          <div class="row" id="r2">СЕМЬЯ<b>ЖЕНА, ДЕТИ</b></div>
+        </div>
+        <div class="band" id="band">ДРУЖИННИК</div>
+      </div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("who", "wrong");
+      $("#ph").innerHTML = C.svg(C.figure(150, 640, 1.6, "#1b1a17", { band: "#c4121f" }), 300, 380) + `<span style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:80px;font-weight:800;color:rgba(255,255,255,0.35)">?</span>`;
+      tl.fromTo(q("#cam"), { scale: 1.12 }, { scale: 1.0, duration: D, ease: "sine.out" }, 0);
+      tl.to(q("#r0"), { opacity: 1, duration: 0.2 }, 0.2); punch(0.2, 0.05);
+      tl.to(q("#r1"), { opacity: 1, duration: 0.2 }, at("job")); punch(at("job"), 0.04);
+      tl.to(q("#r2"), { opacity: 1, duration: 0.2 }, at("fam")); punch(at("fam"), 0.04);
+      tl.fromTo(q("#band"), { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power4.in" }, at("band") + 0.5);
+      flash(at("band") + 0.7, "#ff2e3e", 0.4); shake(at("band") + 0.7, 0.4, 12);
+      window.__timelines["who"] = tl;
+    })();
+  </script>
+</template>

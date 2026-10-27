@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #1c2230; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%); }
+    .ttl { position: absolute; left: 50px; right: 50px; top: 250px; }
+    .ttl h1 { margin: 0; font-size: 104px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+    .ttl h1 span { color: #ff2e3e; }
+  </style>
+  <div id="root" data-composition-id="road" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="mv" id="w"></div>
+      <div class="mv" id="car"></div>
+    </div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+    <div class="ttl" id="ttl"><h1>Искал<br><span>сам себя</span></h1></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("road", "who");
+      const G = 1000;
+      let g = `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3346"/><stop offset="1" stop-color="#6b6a70"/></linearGradient></defs>`;
+      g += `<rect width="1080" height="1920" fill="url(#sk)"/>` + C.trees(3, 900, 14, { color: "#1f2733", h: 380 });
+      g += `<rect y="880" width="1080" height="1100" fill="#3a3e36"/><rect y="${G - 40}" width="1080" height="140" fill="#2b2d31"/><path d="M0,${G + 30} L1080,${G + 30}" stroke="#d8d8d0" stroke-width="6" stroke-dasharray="60 50"/>`;
+      // остановка
+      g += `<rect x="90" y="${G - 330}" width="300" height="20" fill="#7a8088"/><rect x="100" y="${G - 310}" width="12" height="270" fill="#55595f"/><rect x="368" y="${G - 310}" width="12" height="270" fill="#55595f"/><rect x="112" y="${G - 300}" width="256" height="160" fill="#8fa3b8" opacity="0.25"/>`;
+      g += `<rect x="420" y="${G - 420}" width="8" height="380" fill="#55595f"/><rect x="390" y="${G - 440}" width="70" height="60" rx="6" fill="#e9e3d3"/><text x="425" y="${G - 397}" text-anchor="middle" class="mt" font-weight="900" font-size="34" fill="#1b1a17">А</text>`;
+      $("#bg").innerHTML = C.svg(g);
+      $("#w").innerHTML = C.svg(C.woman(260, G - 40, 1.05, "#0b0d12"));
+      $("#car").innerHTML = C.svg(C.niva(0, G + 10, 0.9, { flip: true, lights: true, driver: true, body: "#9e1b1b" }));
+      punch(0.02, 0.07);
+      slam("14", at("hook") + 0.6, { size: 420, top: 470, color: "#ffd23f", hold: 0.9 });
+      slam("НЕВИНОВНЫХ", at("hook") + 1.7, { size: 140, top: 520, color: "#fff", hold: 0.8 });
+      tl.to(q("#ttl"), { opacity: 0, y: -30, duration: 0.3 }, at("one") - 0.1);
+      flash(at("one") + 0.4, "#ff2e3e", 0.5); shake(at("one") + 0.4, 0.4, 12);
+      tl.fromTo(q("#cam"), { scale: 1.15 }, { scale: 1.0, duration: at("car"), ease: "sine.out" }, at("where"));
+      tl.fromTo(q("#car"), { x: 1500 }, { x: 600, duration: 1.6, ease: "power2.out" }, at("car"));
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("lift"), fr(2.2, 610, G - 140, 760));
+      slam("ЗАПОРОЖЕЦ", at("car") + 1.2, { size: 150, top: 470, color: "#ff2e3e", hold: 0.8 });
+      window.__timelines["road"] = tl;
+    })();
+  </script>
+</template>

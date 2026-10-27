@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #04060a; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.88) 100%); }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    #rev { position: absolute; inset: 0; background: #0a0c10; opacity: 0; }
+    #rev .ly svg { overflow: visible; }
+  </style>
+  <div id="root" data-composition-id="search" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="mv" id="car"></div>
+      <div class="ly" id="men"></div>
+      <div class="ly" id="beam"></div>
+    </div>
+    <div id="rev"><div class="ly" id="rv"></div></div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+    <div class="pos" id="t1"><span class="chip">ПАТРУЛЬ ДРУЖИННИКОВ</span></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("search", "letter");
+      const G = 1000;
+      let g = `<rect width="1080" height="1920" fill="#070a12"/>` + C.trees(19, 900, 14, { color: "#0c1119", h: 460 });
+      g += `<rect y="880" width="1080" height="1100" fill="#0b0d10"/><rect y="${G - 40}" width="1080" height="140" fill="#15171b"/><path d="M0,${G + 30} L1080,${G + 30}" stroke="#55575c" stroke-width="6" stroke-dasharray="60 50"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      $("#car").innerHTML = C.svg(C.niva(0, G + 10, 0.95, { lights: true }));
+      const man = (x, band, col) => C.figure(x, G + 120, 1.15, col, { band });
+      $("#men").innerHTML = C.svg(man(360, "#c4121f", "#020305") + man(620, "#c4121f", "#0b0e14") + man(820, "#c4121f", "#0b0e14"));
+      $("#beam").innerHTML = C.svg(`<path d="M400,${G - 150} L-80,${G - 20} L-80,${G + 160} Z" fill="#fff3c4" opacity="0.14"/><circle cx="400" cy="${G - 150}" r="10" fill="#fff3c4"/>`);
+      // жезл: машину останавливают
+      tl.fromTo(q("#car"), { x: -500 }, { x: 140, duration: 1.4, ease: "power2.out" }, at("stop"));
+      show("#t1", 0.3, at("self") - 0.1);
+      tl.fromTo(q("#cam"), { scale: 1.1 }, { scale: 1.0, duration: at("self"), ease: "sine.out" }, 0);
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("looks"), fr(1.6, 620, G - 200, 760));
+      // разворот: среди ищущих — он сам
+      tl.set(q("#rev"), { opacity: 1 }, at("self"));
+      $("#rv").innerHTML = C.svg(`<radialGradient id="rg"><stop offset="0" stop-color="#ff2e3e" stop-opacity="0.45"/><stop offset="1" stop-color="#ff2e3e" stop-opacity="0"/></radialGradient><ellipse cx="540" cy="760" rx="420" ry="520" fill="url(#rg)"/>` + C.figure(540, 1300, 2.6, "#000", { band: "#ff2e3e" }));
+      flash(at("self"), "#fff", 0.7); shake(at("self") + 0.1, 0.5, 14);
+      slam("СЕБЯ", at("self") + 0.5, { size: 330, top: 300, color: "#ff2e3e", hold: 1.2, punch: 0.08 });
+      window.__timelines["search"] = tl;
+    })();
+  </script>
+</template>

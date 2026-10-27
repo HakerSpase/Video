@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b0d11; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .grid { position: absolute; left: 60px; right: 60px; top: 330px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .c { position: relative; height: 230px; background: #d9d2bf; border-radius: 4px; overflow: hidden; opacity: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .c svg { position: absolute; inset: 0; }
+    .c i { position: absolute; left: 4px; right: 4px; bottom: 8px; text-align: center; font-style: normal; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 17px;
+      color: #c4121f; border: 3px solid #c4121f; transform: rotate(-8deg); background: rgba(217,210,191,0.85); }
+    .c.dead { box-shadow: 0 0 0 5px #ff2e3e, 0 0 40px #ff2e3e; }
+    .c.dead i { background: #c4121f; color: #fff; }
+    .yr { position: absolute; left: 60px; top: 250px; opacity: 0; }
+    #map { position: absolute; inset: 0; }
+  </style>
+  <div id="root" data-composition-id="wrong" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div id="map"></div><div class="grid" id="grid"></div></div>
+    <div class="yr" id="yr"><span class="chip yellow">1971 — 1985</span></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("wrong", "search");
+      const r = C.rng(8); let g = `<rect width="1080" height="1920" fill="#10161a"/>`;
+      for (let i = 0; i < 400; i++) g += `<circle cx="${r() * 1080}" cy="${r() * 1920}" r="${6 + r() * 12}" fill="#13201a"/>`;
+      g += `<path d="M120,300 C300,600 500,700 560,980 C620,1260 820,1500 960,1800" stroke="#3a3f48" stroke-width="18" fill="none"/>`;
+      g += `<circle cx="120" cy="300" r="22" fill="#e5e9f0"/><circle cx="960" cy="1800" r="22" fill="#e5e9f0"/>`;
+      const pins = [[200, 470], [330, 610], [470, 760], [540, 900], [590, 1100], [660, 1280], [780, 1450], [880, 1640], [400, 700], [700, 1350]];
+      pins.forEach((p, i) => (g += `<g class="p${i}" opacity="0"><circle cx="${p[0]}" cy="${p[1]}" r="14" fill="#ff2e3e"/><circle class="pr" cx="${p[0]}" cy="${p[1]}" r="14" fill="none" stroke="#ff2e3e" stroke-width="4"/></g>`));
+      $("#map").innerHTML = C.svg(g);
+      let h = "";
+      for (let i = 0; i < 14; i++) h += `<div class="c ${i === 9 ? "dead" : ""}" id="c${i}">${C.svg(C.figure(91, 300, 0.75, "#4a4842"), 182, 230)}<i>${i === 9 ? "РАССТРЕЛЯН" : "ОСУЖДЁН"}</i></div>`;
+      $("#grid").innerHTML = h;
+      show("#yr", 0.2, at("arrests") - 0.1);
+      const sp = at("arrests") - 0.4;
+      pins.forEach((p, i) => {
+        const t = 0.3 + sp * i / pins.length;
+        tl.fromTo(q(".p" + i), { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, t);
+        tl.fromTo(q(".p" + i + " .pr"), { attr: { r: 14 }, opacity: 1 }, { attr: { r: 70 }, opacity: 0, duration: 0.8 }, t);
+      });
+      slam("15 ЛЕТ", at("years") + 0.3, { size: 260, top: 520, color: "#ffd23f", hold: 0.9 });
+      tl.to(q("#map"), { opacity: 0.18, duration: 0.4 }, at("arrests"));
+      const t0 = at("arrests") + 0.2, t1 = at("fourteen") + 1.0;
+      for (let i = 0; i < 14; i++) {
+        const t = t0 + (t1 - t0) * i / 14;
+        tl.fromTo(q("#c" + i), { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.15, ease: "power3.in" }, t);
+        if (i % 4 === 0) punch(t + 0.15, 0.03);
+      }
+      flash(at("pressed"), "#000", 0.6); shake(at("pressed") + 0.1, 0.3, 8);
+      slam("14", at("fourteen") + 0.4, { size: 420, top: 480, color: "#ff2e3e", hold: 0.8 });
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("shot"), fr(2.2, 928, 690, 700));
+      flash(at("shot") + 0.5, "#ff2e3e", 0.5); shake(at("shot") + 0.5, 0.45, 12);
+      cut(at("free"), {});
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.1, duration: D - at("free"), ease: "none" }, at("free"));
+      window.__timelines["wrong"] = tl;
+    })();
+  </script>
+</template>

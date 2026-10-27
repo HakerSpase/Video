@@ -1,0 +1,56 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b0806; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 46%; }
+    .tbl { position: absolute; inset: -300px; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0 3px, rgba(0,0,0,0) 3px 14px), linear-gradient(90deg, #5a3d26, #684830 30%, #573a24); }
+    .light { position: absolute; inset: 0; background: radial-gradient(900px 1100px at 50% 44%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.88) 100%); }
+    .env { position: absolute; left: 600px; top: 1010px; width: 420px; height: 250px; background: #e8dfc6; transform: rotate(8deg); box-shadow: 0 20px 30px rgba(0,0,0,0.5); }
+    .env::after { content: "«ВИТЕБСКИЙ РАБОЧИЙ»"; position: absolute; left: 30px; top: 110px; font-family: "Caveat", cursive; font-size: 40px; color: #1d2a6b; }
+    .lt { position: absolute; left: 110px; top: 330px; width: 700px; height: 700px; background: #f3efe4; transform: rotate(-3deg); box-shadow: 0 30px 50px rgba(0,0,0,0.6); padding: 50px 56px;
+      font-family: "Caveat", cursive; color: #1b1b1b; }
+    .lt p { margin: 0 0 6px; font-size: 54px; line-height: 64px; }
+    .lt .x { color: #6b665c; letter-spacing: -0.06em; }
+    .lt .sg { margin-top: 40px; text-align: right; font-size: 60px; color: #7a0c14; }
+    .cmp { position: absolute; left: 60px; right: 60px; top: 300px; height: 620px; opacity: 0; background: rgba(8,11,18,0.94); border: 2px solid rgba(159,180,214,0.5); border-radius: 14px; }
+    .cmp .s { position: absolute; left: 40px; right: 40px; height: 200px; background: #f3efe4; font-family: "Caveat", cursive; color: #1b1b1b; font-size: 70px; padding: 30px 40px; border-radius: 6px; }
+    .cmp small { position: absolute; left: 44px; font-family: "JetBrains Mono", monospace; font-size: 24px; color: #9fb4d6; letter-spacing: 0.12em; }
+    .cmp svg { position: absolute; inset: 0; }
+  </style>
+  <div id="root" data-composition-id="letter" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="tbl"></div>
+      <div class="env"></div>
+      <div class="lt" id="lt"><p>Редакции газеты.</p><p class="x">▬▬▬ ▬▬▬▬▬ ▬▬▬▬</p><p class="x">▬▬ ▬▬▬▬▬▬ ▬▬▬</p><p class="x">▬▬▬▬▬ ▬▬▬ ▬▬▬▬▬</p><p class="sg" id="sg">«Патриоты Витебска»</p></div>
+    </div>
+    <div class="light"></div>
+    <div class="cmp" id="cmp">
+      <small style="top:24px">АНОНИМНОЕ ПИСЬМО</small><div class="s" style="top:60px">Патриоты Витебска</div>
+      <small style="top:320px">ОБРАЗЕЦ ПОЧЕРКА · МИХАСЕВИЧ</small><div class="s" style="top:356px">Патриоты Витебска</div>
+      <div id="lines"></div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №4</b></div>
+    <div class="cs-tag" style="top:1300px">РЕКОНСТРУКЦИЯ · ТЕКСТ НЕ ДОСЛОВНЫЙ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("letter", "end");
+      tl.fromTo(q("#cam"), { scale: 0.85, rotation: 3 }, { scale: 1.0, rotation: 0, duration: at("sign"), ease: "sine.inOut" }, 0);
+      q("#lt p").forEach((p, k) => tl.fromTo(p, { opacity: 0, clipPath: "inset(0 100% 0 0)" }, { opacity: 1, clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none" }, 0.3 + k * 0.55));
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("sign"), fr(1.8, 560, 900, 700));
+      punch(at("sign") + 0.4, 0.05);
+      cut(at("goal"), {});
+      cut(at("hand"), fr(1.5, 400, 600, 700));
+      // экспертиза почерка
+      let l = "";
+      [[200, 310, 230, 420], [360, 320, 380, 420], [520, 300, 540, 430], [700, 310, 690, 420], [860, 320, 870, 430]].forEach((s) => (l += `<line x1="${s[0]}" y1="${s[1]}" x2="${s[2]}" y2="${s[3]}" stroke="#3ddc84" stroke-width="5" stroke-dasharray="10 8"/>`));
+      $("#lines").innerHTML = C.svg(l, 960, 620);
+      tl.fromTo(q("#cmp"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, at("match"));
+      tl.fromTo(q("#lines"), { opacity: 0 }, { opacity: 1, duration: 0.2, repeat: 3, yoyo: true }, at("match") + 0.5);
+      tl.to(q("#lines"), { opacity: 1, duration: 0.1 }, at("match") + 1.4);
+      flash(at("match") + 1.0, "#3ddc84", 0.35); shake(at("match") + 1.0, 0.4, 12);
+      slam("ПОЧЕРК", at("match") + 1.1, { size: 150, top: 940, color: "#3ddc84", hold: 0.8 });
+      window.__timelines["letter"] = tl;
+    })();
+  </script>
+</template>
