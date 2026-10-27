@@ -1,0 +1,65 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0d12; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .mv svg { position: absolute; inset: 0; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.88) 100%); }
+    .ttl { position: absolute; left: 50px; right: 50px; top: 250px; }
+    .ttl h1 { margin: 0; font-size: 92px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+    .ttl h1 span { color: #ff2e3e; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .pos2 { position: absolute; left: 50px; top: 320px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="station" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="mv" id="tr"></div>
+      <div class="ly" id="pf"></div>
+      <div class="mv" id="man"></div>
+      <div class="mv" id="vic"></div>
+      <div class="ly" id="arrow" style="opacity:0"></div>
+    </div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+    <div class="ttl" id="ttl"><h1>Расстреляли<br><span>невиновного</span></h1></div>
+    <div class="pos" id="t1"><span class="chip">ОЧКИ · ПОРТФЕЛЬ · ВЕЖЛИВЫЙ</span></div>
+    <div class="pos2" id="t2"><span class="chip red">«ПОЙДЁМ КОРОТКОЙ ДОРОГОЙ»</span></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("station", "first");
+      const G = 1000;
+      let g = `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2230"/><stop offset="1" stop-color="#3a3f48"/></linearGradient></defs>`;
+      g += `<rect width="1080" height="1920" fill="url(#sk)"/>` + C.trees(5, 760, 12, { color: "#141a22", h: 420 });
+      g += `<rect y="740" width="1080" height="1200" fill="#1a1d22"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      $("#tr").innerHTML = C.svg(C.train(0, 790, 4, 0.9));
+      let p = `<rect y="${G - 30}" width="1080" height="950" fill="#2a2d33"/><rect y="${G - 30}" width="1080" height="14" fill="#d9c34a"/>`;
+      p += `<rect x="760" y="${G - 520}" width="12" height="490" fill="#0c0e12"/><rect x="700" y="${G - 560}" width="260" height="70" fill="#2b4a7a"/><text x="830" y="${G - 513}" text-anchor="middle" class="mt" font-weight="900" font-size="34" fill="#fff">ПЛАТФОРМА</text>`;
+      $("#pf").innerHTML = C.svg(p);
+      $("#man").innerHTML = C.svg(C.figure(0, G + 40, 1.3, "#07080b", { bag: true, hat: true }));
+      $("#vic").innerHTML = C.svg(C.figure(0, G + 40, 1.15, "#12151b"));
+      $("#arrow").innerHTML = C.svg(`<path d="M420,${G + 60} C380,900 260,820 140,760" stroke="#ff2e3e" stroke-width="10" stroke-dasharray="26 18" fill="none"/><path d="M140,760 l40,-6 l-14,38 z" fill="#ff2e3e"/>`);
+      gsap.set(q("#man"), { x: 380 }); gsap.set(q("#vic"), { x: 620 });
+      // электричка уходит
+      tl.fromTo(q("#tr"), { x: 0 }, { x: -2600, duration: Math.max(4, at("man")), ease: "power1.in" }, 0.4);
+      tl.to(q("#ttl"), { opacity: 0, y: -30, duration: 0.3 }, at("rostov") - 0.1);
+      punch(0.02, 0.07);
+      slam("ДРУГОГО", at("hook") + 1.2, { size: 210, top: 470, color: "#ff2e3e", hold: 0.8 });
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("man"), fr(2.4, 380, 650, 700));
+      show("#t1", at("man") + 0.3, at("short") - 0.1);
+      cut(at("talk"), fr(1.5, 500, 760, 760));
+      tl.to(q("#man"), { x: 470, duration: 1.2, ease: "sine.inOut" }, at("talk"));
+      cut(at("short"), {});
+      tl.to(q("#arrow"), { opacity: 1, duration: 0.4 }, at("short") + 0.3);
+      show("#t2", at("short") + 0.2);
+      slam("ЛЕСОПОЛОСА", D - 1.3, { size: 140, top: 470, color: "#ffd23f", hold: 0.9 });
+      window.__timelines["station"] = tl;
+    })();
+  </script>
+</template>

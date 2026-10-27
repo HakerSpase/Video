@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b0d11; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+    .tbl { position: absolute; inset: -200px; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0 3px, rgba(0,0,0,0) 3px 16px), linear-gradient(90deg, #3a3f46, #444a52 40%, #3a3f46); }
+    .light { position: absolute; inset: 0; background: radial-gradient(600px 640px at 50% 42%, rgba(255,255,255,0.08), rgba(0,0,0,0) 60%), radial-gradient(900px 1100px at 50% 44%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.88) 100%); }
+    .st1 { left: 150px; top: 330px; font-size: 54px; }
+    .st2 { left: 560px; top: 900px; font-size: 64px; color: #1f8f4e; border-color: #1f8f4e; }
+    .tag { position: absolute; background: #f2e9c9; color: #1b1a17; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 28px; padding: 10px 18px; border-radius: 6px; opacity: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+  </style>
+  <div id="root" data-composition-id="bag" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="tbl"></div>
+      <div id="items"></div>
+      <div class="tag" id="k1" style="left:610px; top:620px">НОЖ</div>
+      <div class="tag" id="k2" style="left:200px; top:840px">ВЕРЁВКА</div>
+      <div class="cs-stamp st1" id="s1">ЗАДЕРЖАН · 14.09.1984</div>
+      <div class="cs-stamp st2" id="s2">ОТПУЩЕН</div>
+    </div>
+    <div class="light"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("bag", "lesh");
+      let g = "";
+      // раскрытый портфель
+      g += `<rect x="140" y="440" width="800" height="560" rx="30" fill="#3a2414"/><rect x="170" y="470" width="740" height="500" rx="18" fill="#24160c"/>`;
+      g += `<rect x="470" y="420" width="140" height="40" rx="10" fill="#1a0f08"/><rect x="420" y="450" width="40" height="20" fill="#b9a46a"/><rect x="620" y="450" width="40" height="20" fill="#b9a46a"/>`;
+      // бумаги
+      g += `<rect x="210" y="500" width="300" height="400" fill="#d8d2c2" transform="rotate(-4 360 700)"/><path d="M240,560 L470,550 M240,600 L470,590 M240,640 L440,630" stroke="#7b766a" stroke-width="6" transform="rotate(-4 360 700)"/>`;
+      // верёвка
+      for (let k = 0; k < 6; k++) g += `<ellipse cx="320" cy="820" rx="${110 - k * 12}" ry="${70 - k * 8}" fill="none" stroke="#b49a68" stroke-width="12"/>`;
+      // нож (силуэт, без крови)
+      g += `<g transform="translate(600,720) rotate(-24)"><rect x="0" y="-14" width="120" height="28" rx="8" fill="#1c1c1c"/><path d="M120,-14 L330,-6 L330,0 L120,14 Z" fill="#c9ccd1"/></g>`;
+      $("#items").innerHTML = C.svg(g);
+      slam("1984", 0.1, { size: 320, top: 520, color: "#ffd23f", hold: 0.8 });
+      tl.fromTo(q("#cam"), { scale: 0.9 }, { scale: 1.0, duration: at("inside"), ease: "sine.out" }, 0);
+      stamp("#s1", at("held") + 0.2); shake(at("held") + 0.4, 0.3, 10);
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("inside"), fr(1.9, 720, 690, 700));
+      tl.fromTo(q("#k1"), { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.2 }, at("inside") + 0.5);
+      cut(at("inside") + 1.3, fr(1.8, 320, 820, 760));
+      tl.fromTo(q("#k2"), { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.2 }, at("inside") + 1.4);
+      cut(at("free"), {});
+      stamp("#s2", at("out") + 0.2); flash(at("out") + 0.3, "#3ddc84", 0.3);
+      slam("ЕЩЁ 6 ЛЕТ", at("six") + 0.5, { size: 170, top: 470, color: "#ff2e3e", hold: 1.1, punch: 0.07 });
+      window.__timelines["bag"] = tl;
+    })();
+  </script>
+</template>

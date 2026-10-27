@@ -1,0 +1,66 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050608; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .pos { position: absolute; left: 50px; top: 240px; opacity: 0; }
+    #nx { position: absolute; inset: 0; background: #030306; opacity: 0; }
+    #nx h2 { position: absolute; left: 0; right: 0; top: 250px; text-align: center; margin: 0; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.3em; color: #ffd23f; }
+    #nx h3 { position: absolute; left: 40px; right: 40px; top: 310px; text-align: center; margin: 0; font-weight: 900; font-size: 76px; line-height: 1; text-transform: uppercase; opacity: 0; }
+    #nx h3 span { color: #ff2e3e; }
+    #cover { position: absolute; inset: 0; opacity: 0; background: #050608; overflow: hidden; z-index: 50; }
+    #cover .shade { position: absolute; inset: 0; background: linear-gradient(180deg, #050608 0%, rgba(5,6,8,0.92) 40%, rgba(5,6,8,0) 62%, rgba(5,6,8,0.6) 100%); }
+    #cover .k { position: absolute; left: 60px; top: 250px; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 40px; letter-spacing: 0.16em; color: #ffd23f; }
+    #cover h1 { position: absolute; left: 56px; right: 30px; top: 320px; margin: 0; font-weight: 900; font-size: 128px; line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+    #cover h1 span { color: #ff2e3e; }
+    #cover .sub { position: absolute; left: 60px; top: 600px; font-weight: 900; font-size: 54px; text-transform: uppercase; background: #ff2e3e; padding: 6px 20px; }
+    #cover .num { position: absolute; right: 50px; top: 230px; font-weight: 900; font-size: 120px; color: rgba(255,255,255,0.12); }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div class="ly" id="bg"></div></div>
+    <div class="pos" id="t1"><span class="chip red">ШАНС БЫЛ В 1978</span></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+    <div id="nx">
+      <div class="ly" id="sr"></div>
+      <h2>ДЕЛО №4</h2>
+      <h3>Искал<br><span>сам себя</span></h3>
+    </div>
+    <div id="cover">
+      <div class="ly" id="cbg"></div>
+      <div class="shade"></div>
+      <div class="num">#3</div>
+      <div class="k">РЕАЛЬНЫЕ ДЕЛА</div>
+      <h1>Расстреляли<br><span>невинов&shy;ного</span></h1>
+      <div class="sub">Чикатило</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("outro", null);
+      const scene = (dy) => {
+        let g = `<rect width="1080" height="1920" fill="#1a1f28"/>` + `<g transform="translate(0,${dy})">` + C.trees(5, 880, 13, { color: "#0e1218", h: 480 });
+        g += `<rect y="860" width="1080" height="1100" fill="#14171c"/><path d="M0,940 L1080,940 M0,980 L1080,980" stroke="#3a3f48" stroke-width="8"/>`;
+        for (let i = 0; i < 24; i++) g += `<rect x="${i * 48}" y="930" width="22" height="60" fill="#2a2d33"/>`;
+        g += C.figure(540, 1020, 1.6, "#030405", { bag: true, hat: true }) + `</g>`;
+        return C.svg(g);
+      };
+      $("#bg").innerHTML = scene(0);
+      $("#cbg").innerHTML = scene(380);
+      tl.fromTo(q("#cam"), { scale: 1.0 }, { scale: 1.15, duration: at("next"), ease: "none" }, 0);
+      show("#t1", at("could") + 0.4, at("next") - 0.1);
+      slam("1978", at("could") + 1.6, { size: 300, top: 520, color: "#ff2e3e", hold: 0.9 });
+      // тизер дела №4: цепь поисковиков с фонарями, у одного — повязка дружинника
+      let s = `<rect width="1080" height="1920" fill="#04060a"/>` + C.trees(77, 980, 14, { color: "#0b0f16", h: 560 }) + `<rect y="960" width="1080" height="960" fill="#06080c"/>`;
+      [160, 340, 540, 740, 920].forEach((x, i) => {
+        s += `<path d="M${x + 30},${780} L${x + 330},${1100} L${x - 80},${1100} Z" fill="#fff3c4" opacity="0.08"/>`;
+        s += C.figure(x, 1000, 1.0, i === 2 ? "#000" : "#0d1118", { band: i === 2 ? "#ff2e3e" : null });
+      });
+      $("#sr").innerHTML = C.svg(s);
+      tl.to(q("#nx"), { opacity: 1, duration: 0.12 }, at("next")); flash(at("next"), "#fff", 0.8); shake(at("next"), 0.35, 10);
+      tl.fromTo(q("#nx h3"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, at("self")); punch(at("self"), 0.06);
+      tl.fromTo(q("#sr"), { scale: 1.1 }, { scale: 1.0, duration: D - at("next"), ease: "sine.out" }, at("next"));
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

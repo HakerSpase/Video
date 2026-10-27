@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0c10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
+    .desk { position: absolute; inset: -200px; background: radial-gradient(700px 800px at 50% 40%, #2a2f38, #0b0d11 75%); }
+    .cd { position: absolute; top: 380px; width: 430px; height: 620px; background: #e6dfcc; color: #1b1a17; border-radius: 6px; box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+      font-family: "JetBrains Mono", monospace; padding: 26px; opacity: 0; }
+    .cd .ph { width: 100%; height: 360px; background: #c9c1ac; border: 3px solid #1b1a17; position: relative; overflow: hidden; }
+    .cd .ph svg { position: absolute; inset: 0; }
+    .cd small { display: block; margin-top: 18px; font-size: 22px; letter-spacing: 0.12em; color: #5b5850; }
+    .cd b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 40px; margin-top: 6px; }
+    #a { left: 60px; transform: rotate(-3deg); } #b { left: 590px; transform: rotate(2deg); }
+    .st1 { left: 610px; top: 620px; font-size: 52px; }
+    .glow { position: absolute; left: 40px; top: 360px; width: 470px; height: 660px; border-radius: 12px; box-shadow: 0 0 0 6px #ff2e3e, 0 0 60px #ff2e3e; opacity: 0; }
+    .hd { position: absolute; left: 60px; top: 260px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="first" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="desk"></div>
+      <div class="hd" id="hd"><span class="stamp"><b>ШАХТЫ · ДЕКАБРЬ 1978</b></span></div>
+      <div class="glow" id="gl"></div>
+      <div class="cd" id="a"><div class="ph" id="pa"></div><small>БЫЛ ПОД ПОДОЗРЕНИЕМ</small><b>???</b></div>
+      <div class="cd" id="b"><div class="ph" id="pb"></div><small>АРЕСТОВАН</small><b>КРАВЧЕНКО А.</b></div>
+      <div class="cs-stamp st1" id="st">РАССТРЕЛЯН</div>
+    </div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("first", "strip");
+      $("#pa").innerHTML = C.svg(C.figure(190, 600, 1.45, "#1b1a17", { hat: true }), 380, 360);
+      $("#pb").innerHTML = C.svg(C.figure(190, 600, 1.45, "#3b3a36"), 380, 360);
+      slam("1978", 0.15, { size: 320, top: 520, color: "#ffd23f", hold: 0.9 });
+      show("#hd", 0.9);
+      tl.fromTo(q("#a"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3 }, at("check")); punch(at("check"), 0.04);
+      tl.fromTo(q("#b"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3 }, at("kr")); punch(at("kr"), 0.05);
+      tl.to(q("#a"), { opacity: 0.35, duration: 0.3 }, at("kr"));
+      stamp("#st", at("shot") + 0.3); flash(at("shot") + 0.4, "#ff2e3e", 0.5); shake(at("shot") + 0.4, 0.5, 14);
+      tl.to(q("#a"), { opacity: 1, duration: 0.3 }, at("true"));
+      tl.to(q("#gl"), { opacity: 1, duration: 0.3 }, at("true") + 0.3);
+      tl.to(q("#a b"), { color: "#c4121f", duration: 0.2 }, at("true") + 0.3);
+      tl.call(() => {}, null, 0);
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("true"), fr(1.5, 280, 690, 720));
+      slam("НА СВОБОДЕ", at("true") + 1.0, { size: 150, top: 440, color: "#ff2e3e", hold: 1.0 });
+      window.__timelines["first"] = tl;
+    })();
+  </script>
+</template>

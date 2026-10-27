@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b0f0c; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 45%; }
+    .mt { font-family: Montserrat, sans-serif; } .lbl { font-family: "JetBrains Mono", monospace; }
+    .op { position: absolute; left: 80px; right: 80px; top: 300px; height: 380px; background: #c7b48a; border-radius: 10px; opacity: 0; box-shadow: 0 40px 80px rgba(0,0,0,0.85);
+      color: #1b1a17; font-family: "JetBrains Mono", monospace; padding: 40px; }
+    .op small { display: block; font-size: 26px; letter-spacing: 0.2em; }
+    .op b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 84px; line-height: 0.95; margin-top: 20px; }
+    .op i { position: absolute; right: 40px; bottom: 30px; font-style: normal; font-size: 28px; font-weight: 800; color: #b10d18; border: 5px solid #b10d18; padding: 6px 16px; transform: rotate(-6deg); }
+  </style>
+  <div id="root" data-composition-id="strip" data-width="1080" data-height="1920">
+    <div class="cam" id="cam"><div id="map"></div></div>
+    <div class="op" id="op"><small>ДЕЛО ОСОБОЙ ВАЖНОСТИ</small><b>ОПЕРАЦИЯ<br>«ЛЕСОПОЛОСА»</b><i>СЕКРЕТНО</i></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("strip", "bag");
+      const r = C.rng(13); let g = `<rect width="1080" height="1920" fill="#1b1f17"/>`;
+      // поля и лесополосы
+      for (let i = 0; i < 26; i++) { const y = 200 + i * 70 + r() * 30; g += `<rect x="-40" y="${y}" width="1160" height="${16 + r() * 10}" fill="#0f1a12" transform="rotate(${-8 + r() * 4} 540 ${y})"/>`; }
+      // железная дорога
+      const rail = "M120,-40 C260,400 420,700 520,980 C620,1260 760,1600 900,1980";
+      g += `<path d="${rail}" stroke="#4a4a44" stroke-width="22" fill="none"/><path d="${rail}" stroke="#1b1f17" stroke-width="10" stroke-dasharray="4 18" fill="none"/>`;
+      g += `<path d="M1100,520 C820,640 700,820 520,980 C340,1140 160,1240 -40,1300" stroke="#4a4a44" stroke-width="16" fill="none"/>`;
+      const towns = [[330, 470, "ШАХТЫ"], [520, 980, "РОСТОВ"], [780, 1500, "НОВОЧЕРКАССК"]];
+      towns.forEach((t) => (g += `<circle cx="${t[0]}" cy="${t[1]}" r="20" fill="#e5e9f0"/><text x="${t[0] + 34}" y="${t[1] + 12}" class="mt" font-weight="900" font-size="38" fill="#e5e9f0">${t[2]}</text>`));
+      const pins = [[230, 180], [360, 480], [440, 760], [610, 1180], [690, 1360], [850, 1760], [300, 1160], [820, 700], [180, 1250], [560, 1080], [720, 1600], [400, 620]];
+      pins.forEach((p, i) => (g += `<g class="p${i}" opacity="0"><circle cx="${p[0]}" cy="${p[1]}" r="14" fill="#ff2e3e"/><circle class="pr" cx="${p[0]}" cy="${p[1]}" r="14" fill="none" stroke="#ff2e3e" stroke-width="4"/></g>`));
+      $("#map").innerHTML = C.svg(g);
+      tl.fromTo(q("#cam"), { scale: 1.4 }, { scale: 1.0, duration: at("op"), ease: "sine.inOut" }, 0);
+      const span = at("op") - 0.3;
+      pins.forEach((p, i) => {
+        const t = 0.3 + span * i / pins.length;
+        tl.fromTo(q(".p" + i), { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(3)" }, t);
+        tl.fromTo(q(".p" + i + " .pr"), { attr: { r: 14 }, opacity: 1 }, { attr: { r: 70 }, opacity: 0, duration: 0.8 }, t);
+        if (i % 3 === 1) punch(t, 0.03);
+      });
+      tl.fromTo(q("#op"), { opacity: 0, y: -60, rotation: -4 }, { opacity: 1, y: 0, rotation: -1.5, duration: 0.3, ease: "power3.out" }, at("op"));
+      flash(at("op"), "#fff", 0.4); shake(at("op") + 0.1, 0.35, 10);
+      tl.to(q("#cam"), { scale: 1.12, duration: D - at("op"), ease: "none" }, at("op"));
+      window.__timelines["strip"] = tl;
+    })();
+  </script>
+</template>

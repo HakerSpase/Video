@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0a0c10; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    .ly { position: absolute; inset: 0; }
+    .cnt { position: absolute; left: 0; right: 0; top: 300px; text-align: center; font-weight: 900; font-size: 300px; line-height: 0.9; color: #ffd23f; opacity: 0; }
+    .cnt small { display: block; font-family: "JetBrains Mono", monospace; font-size: 34px; color: #fff; letter-spacing: 0.15em; margin-top: 14px; }
+    .st1 { left: 260px; top: 700px; font-size: 76px; }
+    #kr { position: absolute; inset: 0; background: #0b0d11; opacity: 0; }
+    #kr .cd { position: absolute; left: 290px; top: 330px; width: 500px; height: 640px; background: #e6dfcc; color: #1b1a17; border-radius: 6px; padding: 28px; font-family: "JetBrains Mono", monospace; transform: rotate(-2deg); box-shadow: 0 40px 80px rgba(0,0,0,0.8); }
+    #kr .ph { width: 100%; height: 400px; background: #c9c1ac; border: 3px solid #1b1a17; position: relative; overflow: hidden; }
+    #kr .ph svg { position: absolute; inset: 0; }
+    #kr b { display: block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 44px; margin-top: 20px; }
+    #kr small { display: block; font-size: 24px; color: #5b5850; letter-spacing: 0.1em; margin-top: 8px; }
+    .st2 { left: 300px; top: 660px; font-size: 42px; color: #1f8f4e; border-color: #1f8f4e; }
+  </style>
+  <div id="root" data-composition-id="court" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="cnt" id="cnt"><span id="n">0</span><small>УБИЙСТВ ДОКАЗАЛ СУД</small></div>
+      <div class="cs-stamp on-dark st1" id="s1">РАССТРЕЛ · 1994</div>
+    </div>
+    <div id="kr"><div class="cd"><div class="ph" id="pk"></div><b>КРАВЧЕНКО А.</b><small>РАССТРЕЛЯН ЗА ЧУЖОЕ УБИЙСТВО</small></div><div class="cs-stamp st2" id="s2">ПРИГОВОР ОТМЕНЁН</div></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, stamp, punch, shake, flash, cut, slam } = C.scene("court", "outro");
+      // зал суда: металлическая клетка, внутри силуэт
+      let g = `<rect width="1080" height="1920" fill="#1a1d22"/><rect y="1050" width="1080" height="900" fill="#121418"/>`;
+      g += C.figure(540, 1050, 1.5, "#050608", { hat: false });
+      for (let i = 0; i <= 14; i++) g += `<rect x="${120 + i * 60}" y="420" width="12" height="640" fill="#7b828c"/>`;
+      g += `<rect x="110" y="410" width="860" height="20" fill="#8a919b"/><rect x="110" y="740" width="860" height="14" fill="#8a919b"/>`;
+      $("#bg").innerHTML = C.svg(g);
+      $("#pk").innerHTML = C.svg(C.figure(222, 660, 1.6, "#3b3a36"), 444, 400);
+      slam("ЗАДЕРЖАН", 0.2, { size: 170, top: 520, color: "#ff2e3e", hold: 0.9 });
+      tl.fromTo(q("#cam"), { scale: 1.2 }, { scale: 1.0, duration: at("sum"), ease: "sine.out" }, 0);
+      punch(at("conf"), 0.05);
+      tl.to(q("#cnt"), { opacity: 1, duration: 0.2 }, at("sum"));
+      const c = { n: 0 };
+      tl.to(c, { n: 52, duration: 1.4, ease: "power2.out", onUpdate: () => ($("#n").textContent = Math.round(c.n)) }, at("sum") + 0.1);
+      punch(at("sum") + 1.5, 0.06);
+      tl.to(q("#cnt"), { opacity: 0.25, duration: 0.3 }, at("exec"));
+      stamp("#s1", at("exec") + 0.5); flash(at("exec") + 0.6, "#ff2e3e", 0.5); shake(at("exec") + 0.6, 0.5, 14);
+      tl.set(q("#kr"), { opacity: 1 }, at("krav")); flash(at("krav"), "#fff", 0.45);
+      tl.fromTo(q("#kr .cd"), { scale: 1.15 }, { scale: 1, duration: 0.6, ease: "power2.out" }, at("krav"));
+      stamp("#s2", at("krav") + 1.2);
+      slam("ПОСМЕРТНО", at("late") + 0.8, { size: 170, top: 1000 - 70, color: "#fff", hold: 1.0 });
+      window.__timelines["court"] = tl;
+    })();
+  </script>
+</template>

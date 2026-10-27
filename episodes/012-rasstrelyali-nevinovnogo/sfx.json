@@ -1,0 +1,17 @@
+[
+  {"at": "hook", "file": "impact-bass-2.mp3", "vol": 0.55, "offset": 1.2},
+  {"at": "man", "file": "whoosh-short.mp3", "vol": 0.3},
+  {"at": "short", "file": "impact-bass-1.mp3", "vol": 0.45, "offset": 0.3},
+  {"at": "kr", "file": "pop.mp3", "vol": 0.3},
+  {"at": "shot", "file": "impact-bass-1.mp3", "vol": 0.7, "offset": 0.4},
+  {"at": "true", "file": "glitch-1.mp3", "vol": 0.35, "offset": 1.0},
+  {"at": "op", "file": "impact-bass-2.mp3", "vol": 0.55},
+  {"at": "held", "file": "impact-bass-2.mp3", "vol": 0.5, "offset": 0.3},
+  {"at": "out", "file": "whoosh-short.mp3", "vol": 0.3, "offset": 0.2},
+  {"at": "six", "file": "impact-bass-1.mp3", "vol": 0.55, "offset": 0.5},
+  {"at": "name", "file": "impact-bass-1.mp3", "vol": 0.75, "offset": 0.5},
+  {"at": "exec", "file": "impact-bass-2.mp3", "vol": 0.65, "offset": 0.5},
+  {"at": "krav", "file": "riser.mp3", "vol": 0.25, "offset": -0.3},
+  {"at": "next", "file": "whoosh-cinematic.mp3", "vol": 0.35, "offset": -0.2},
+  {"at": "self", "file": "glitch-2.mp3", "vol": 0.4, "offset": 0.4}
+]

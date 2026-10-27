@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #2b3038; font-family: Montserrat, sans-serif; color: #fff; }
+    .cam { position: absolute; inset: 0; }
+    .ly { position: absolute; inset: 0; }
+    .mv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .mv svg { position: absolute; inset: 0; }
+    .mt { font-family: Montserrat, sans-serif; }
+    .vig { position: absolute; inset: 0; background: radial-gradient(75% 55% at 50% 45%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%); }
+    #pad { position: absolute; left: 140px; top: 360px; width: 800px; height: 560px; background: #efe9d8; opacity: 0; transform: rotate(-2deg); box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+      background-image: repeating-linear-gradient(#efe9d8 0 70px, #9fb4d6 70px 72px); padding: 40px 50px; font-family: "Caveat", cursive; color: #1d2a6b; }
+    #pad p { margin: 0; font-size: 64px; line-height: 72px; }
+    #pad .nm { color: #9b0f19; font-size: 84px; }
+  </style>
+  <div id="root" data-composition-id="lesh" data-width="1080" data-height="1920">
+    <div class="cam" id="cam">
+      <div class="ly" id="bg"></div>
+      <div class="mv" id="man"></div>
+      <div class="mv" id="cop"></div>
+      <div id="pad"><p>06.11.1990, ст. «Лесхоз»</p><p>Проверка документов:</p><p class="nm" id="nm">Чикатило А. Р.</p></div>
+    </div>
+    <div class="vig"></div>
+    <div class="cs-series">РЕАЛЬНЫЕ ДЕЛА · <b>ДЕЛО №3</b></div>
+    <div class="cs-tag">РЕКОНСТРУКЦИЯ</div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CASE, { tl, at, D, $, q, show, punch, shake, flash, cut, slam } = C.scene("lesh", "court");
+      const G = 1000;
+      let g = `<rect width="1080" height="1920" fill="#4a505a"/>` + C.trees(17, 860, 13, { color: "#20262c", h: 520 });
+      g += `<rect y="840" width="1080" height="1100" fill="#3a3a36"/><rect y="${G - 20}" width="1080" height="940" fill="#55575a"/><rect y="${G - 20}" width="1080" height="12" fill="#d9c34a"/>`;
+      g += `<rect x="120" y="${G - 480}" width="12" height="460" fill="#16181c"/><rect x="40" y="${G - 540}" width="330" height="90" fill="#2b4a7a"/><text x="205" y="${G - 480}" text-anchor="middle" class="mt" font-weight="900" font-size="48" fill="#fff">ЛЕСХОЗ</text>`;
+      $("#bg").innerHTML = C.svg(g);
+      $("#man").innerHTML = C.svg(C.figure(0, G + 40, 1.25, "#0b0c0f", { bag: true, hat: true }));
+      $("#cop").innerHTML = C.svg(C.figure(0, G + 40, 1.3, "#1a2440", { cap: true }));
+      gsap.set(q("#man"), { x: 820, y: -160, scale: 0.6, transformOrigin: "0px " + (G + 40) + "px" }); gsap.set(q("#cop"), { x: 300 });
+      slam("1990", 0.15, { size: 320, top: 520, color: "#ffd23f", hold: 0.8 });
+      // выходит из леса к платформе
+      tl.to(q("#man"), { x: 640, y: 0, scale: 1, duration: at("scratch") + 0.4, ease: "sine.inOut" }, at("cop") - 0.6);
+      const fr = (s, px, py, ty = 760) => ({ scale: s, transformOrigin: px + "px " + py + "px", x: 540 - px, y: ty - py });
+      cut(at("cop"), fr(1.4, 300, 700, 720));
+      cut(at("cop") + 1.6, {});
+      cut(at("scratch"), fr(2.8, 640, G - 400, 640));
+      cut(at("docs"), {}, false);
+      tl.fromTo(q("#pad"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3 }, at("docs") + 0.1);
+      tl.fromTo(q("#nm"), { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "none" }, at("name") - 0.2);
+      flash(at("name") + 0.5, "#ff2e3e", 0.45); shake(at("name") + 0.5, 0.5, 14);
+      slam("ЧИКАТИЛО", at("name") + 0.6, { size: 150, top: 940, color: "#ff2e3e", hold: 1.0, punch: 0.08 });
+      window.__timelines["lesh"] = tl;
+    })();
+  </script>
+</template>
