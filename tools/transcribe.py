@@ -29,19 +29,32 @@ def load_wav16k(path):
 
 def main():
     src, out = sys.argv[1], sys.argv[2]
-    prompt = None
+    prompt = full = None
     if "--prompt-file" in sys.argv:
-        prompt = open(sys.argv[sys.argv.index("--prompt-file") + 1], encoding="utf-8").read()[:800]
+        full = open(sys.argv[sys.argv.index("--prompt-file") + 1], encoding="utf-8").read()
+        prompt = full[:800]
     from faster_whisper import WhisperModel
 
     model = WhisperModel("medium", device="cpu", compute_type="int8")
     audio = load_wav16k(src)
-    segs, _ = model.transcribe(audio, language="ru", word_timestamps=True, vad_filter=False, beam_size=5, initial_prompt=prompt)
-    words = []
-    for s in segs:
-        for w in s.words or []:
-            words.append({"text": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)})
-        print(f"{s.start:7.2f} {s.text}", flush=True)
+    expect = len(full.split()) if full else 0
+
+    def run(**kw):
+        segs, _ = model.transcribe(audio, language="ru", word_timestamps=True, beam_size=5, **kw)
+        ws = []
+        for s in segs:
+            for w in s.words or []:
+                ws.append({"text": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)})
+            print(f"{s.start:7.2f} {s.text}", flush=True)
+        return ws
+
+    words = run(vad_filter=False, initial_prompt=prompt)
+    # whisper иногда «проглатывает» большие куски (особенно с подсказкой) — тогда повтор без неё
+    if expect and len(words) < 0.8 * expect:
+        print(f"мало слов ({len(words)}), повтор без подсказки", flush=True)
+        alt = run(vad_filter=True, condition_on_previous_text=False)
+        if len(alt) > len(words):
+            words = alt
     json.dump({"words": words}, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
     print(f"слов: {len(words)} → {out}")
 
