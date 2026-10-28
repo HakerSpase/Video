@@ -1,0 +1,1791 @@
+{
+ "sketchfab": {
+  "kia rio sedan": [
+   {
+    "uid": "174691e01fec4accb318159d6a3de3b3",
+    "name": "Kia Rio 2019",
+    "author": "teenlin3",
+    "license": "CC Attribution",
+    "faces": 1499502,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-174691e01fec4accb318159d6a3de3b3"
+   },
+   {
+    "uid": "5803e95ef3d94204b78268f7806d2fff",
+    "name": "Kia Rio 1999",
+    "author": "teenlin3",
+    "license": "CC Attribution",
+    "faces": 1500000,
+    "likes": 0,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-5803e95ef3d94204b78268f7806d2fff"
+   }
+  ],
+  "hyundai solaris": [
+   {
+    "uid": "cec6b04b06724f1088129c1054ccb1ec",
+    "name": "hyundai accent 2013",
+    "author": "I95XP",
+    "license": "CC Attribution",
+    "faces": 951346,
+    "likes": 187,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-cec6b04b06724f1088129c1054ccb1ec"
+   },
+   {
+    "uid": "8270bf067a5247f687b2d38b3b1eae39",
+    "name": "2013 Hyundai Accent",
+    "author": "Tyler_Dave",
+    "license": "CC Attribution",
+    "faces": 951340,
+    "likes": 43,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-8270bf067a5247f687b2d38b3b1eae39"
+   },
+   {
+    "uid": "b4b954c0d8c54a6e80b6cc2a8cc96d26",
+    "name": "2019 Hyundai H350 Solati",
+    "author": "nguyenhoanglam20100609",
+    "license": "CC Attribution",
+    "faces": 3095,
+    "likes": 21,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-b4b954c0d8c54a6e80b6cc2a8cc96d26"
+   },
+   {
+    "uid": "1fa0c04858e94d23bccf700fa806e59f",
+    "name": "Hyundai_Solaris_ModLandNet",
+    "author": "zapkolenko07",
+    "license": "CC Attribution",
+    "faces": 622050,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-1fa0c04858e94d23bccf700fa806e59f"
+   },
+   {
+    "uid": "cce851ca14df4acaa539ad660bc27e7f",
+    "name": "Подушка стабилизатора KIA/HYUNDAI 548133Х000",
+    "author": "BabakinAS",
+    "license": "CC Attribution",
+    "faces": 609444,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-cce851ca14df4acaa539ad660bc27e7f"
+   },
+   {
+    "uid": "ff6040836f4b43c8b431270372ed826e",
+    "name": "Подушка стабилизатора 54813-39100 HYUNDAI, KIA",
+    "author": "BabakinAS",
+    "license": "CC Attribution",
+    "faces": 155960,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ff6040836f4b43c8b431270372ed826e"
+   }
+  ],
+  "volkswagen polo sedan": [
+   {
+    "uid": "3955e5c050f843398b49b2b21ab2f232",
+    "name": "2022 Volkswagen Virtus GT",
+    "author": "BHP3D",
+    "license": "CC Attribution",
+    "faces": 671143,
+    "likes": 192,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-3955e5c050f843398b49b2b21ab2f232"
+   },
+   {
+    "uid": "bab77902c638427bb85e68b6762a481f",
+    "name": "2016 Volkswagen Polo",
+    "author": "BHP3D",
+    "license": "CC Attribution",
+    "faces": 179345,
+    "likes": 129,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-bab77902c638427bb85e68b6762a481f"
+   },
+   {
+    "uid": "2da5059c3068448b9541eafb930a45a0",
+    "name": "2017 Skoda Superb",
+    "author": "BHP3D",
+    "license": "CC Attribution",
+    "faces": 159633,
+    "likes": 115,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-2da5059c3068448b9541eafb930a45a0"
+   },
+   {
+    "uid": "53dfe733a62a4a419a7e50ae1f58b54f",
+    "name": "2009 Skoda Superb",
+    "author": "BHP3D",
+    "license": "CC Attribution",
+    "faces": 593699,
+    "likes": 69,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-53dfe733a62a4a419a7e50ae1f58b54f"
+   },
+   {
+    "uid": "de203c04b4da40c8beb9a460ffe3eb7e",
+    "name": "low-poly Volkswagen Passat B8",
+    "author": "DU1701",
+    "license": "CC Attribution",
+    "faces": 12623,
+    "likes": 63,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-de203c04b4da40c8beb9a460ffe3eb7e"
+   },
+   {
+    "uid": "24db62db678548f9a07b90b57fb1abbd",
+    "name": "Low Poly Volkswagen",
+    "author": "elenaisakova248",
+    "license": "CC Attribution",
+    "faces": 7470,
+    "likes": 43,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-24db62db678548f9a07b90b57fb1abbd"
+   },
+   {
+    "uid": "bd9289cea7b347a092562e8bc2e2120d",
+    "name": "Maximus - Superwing Plus",
+    "author": "akashi.3d",
+    "license": "CC Attribution",
+    "faces": 3696804,
+    "likes": 41,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-bd9289cea7b347a092562e8bc2e2120d"
+   },
+   {
+    "uid": "004bef020bb34445b2b31e97552cd421",
+    "name": "Volkswagen Polo sedan",
+    "author": "poormancantaffordto3dmodels",
+    "license": "CC Attribution",
+    "faces": 117532,
+    "likes": 18,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-004bef020bb34445b2b31e97552cd421"
+   },
+   {
+    "uid": "7be5690be54f4ea7a5c9b1bda3d395be",
+    "name": "2017 Volkswagen Polo Sedan [Low-Poly]",
+    "author": "R1peer",
+    "license": "CC Attribution",
+    "faces": 3796,
+    "likes": 9,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-7be5690be54f4ea7a5c9b1bda3d395be"
+   },
+   {
+    "uid": "cd10a52dfdc9499ea4019d0a9c4f605f",
+    "name": "Volkswagen Polo Green",
+    "author": "zairiqzairiqpixarcarsbfdi",
+    "license": "CC Attribution",
+    "faces": 1225,
+    "likes": 7,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-cd10a52dfdc9499ea4019d0a9c4f605f"
+   }
+  ],
+  "skoda rapid": [
+   {
+    "uid": "bdf27493e8eb45b29a0160d2c1fb3ecb",
+    "name": "2020 Skoda Rapid",
+    "author": "tonielpro520",
+    "license": "CC Attribution",
+    "faces": 115581,
+    "likes": 16,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-bdf27493e8eb45b29a0160d2c1fb3ecb"
+   },
+   {
+    "uid": "50e9e66e465c4bcea723892359982af4",
+    "name": "Skoda Fabia Nuh Vanplus REPAIRED",
+    "author": "ardis09333333frui",
+    "license": "CC Attribution",
+    "faces": 2545,
+    "likes": 5,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-50e9e66e465c4bcea723892359982af4"
+   },
+   {
+    "uid": "3341f3bbeaa24054a4354a9add4484b2",
+    "name": "Skoda Rapid Spaceback 2020",
+    "author": "szymonpasterczyk",
+    "license": "CC Attribution",
+    "faces": 113274,
+    "likes": 3,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-3341f3bbeaa24054a4354a9add4484b2"
+   },
+   {
+    "uid": "78e69ece07b148c584f39775e288e798",
+    "name": "Skoda Fabia Nuh Rapid",
+    "author": "ardis09333333frui",
+    "license": "CC Attribution",
+    "faces": 3115,
+    "likes": 2,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-78e69ece07b148c584f39775e288e798"
+   },
+   {
+    "uid": "248eff5abde94ddd897c3e2a2995c558",
+    "name": "Skoda Fabia NUH Vanplus",
+    "author": "ardis09333333frui",
+    "license": "CC Attribution",
+    "faces": 2627,
+    "likes": 2,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-248eff5abde94ddd897c3e2a2995c558"
+   },
+   {
+    "uid": "e79da4a4738542e5874e6f6675456480",
+    "name": "Skoda Rapid Spaceback algeria",
+    "author": "belmihoubm1",
+    "license": "CC Attribution",
+    "faces": 264280,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-e79da4a4738542e5874e6f6675456480"
+   }
+  ],
+  "car interior sedan": [
+   {
+    "uid": "9462b07c10244fd4a28d86846dc9e3a9",
+    "name": "Volvo S90 Recharge (Free)",
+    "author": "lazercar",
+    "license": "CC Attribution",
+    "faces": 3274586,
+    "likes": 1452,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-9462b07c10244fd4a28d86846dc9e3a9"
+   },
+   {
+    "uid": "8ff2a13f30914932a70c7950cfa58465",
+    "name": "Generic civil service vehicles pack",
+    "author": "comrade1280",
+    "license": "CC Attribution",
+    "faces": 92709,
+    "likes": 1180,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-8ff2a13f30914932a70c7950cfa58465"
+   },
+   {
+    "uid": "5c17c582ef9549798f694b660feea42a",
+    "name": "Kiri '86 - Low poly model",
+    "author": "DanielZhabotinsky",
+    "license": "CC Attribution",
+    "faces": 20319,
+    "likes": 785,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-5c17c582ef9549798f694b660feea42a"
+   },
+   {
+    "uid": "9e8f92a215784f3d8aaaaeab1bef54c4",
+    "name": "Canyon '75 Taxi - Low poly model",
+    "author": "DanielZhabotinsky",
+    "license": "CC Attribution",
+    "faces": 20037,
+    "likes": 758,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-9e8f92a215784f3d8aaaaeab1bef54c4"
+   },
+   {
+    "uid": "8509a7f82665442592627940b7a1cfab",
+    "name": "Riverside '88 - Low poly model",
+    "author": "DanielZhabotinsky",
+    "license": "CC Attribution",
+    "faces": 19332,
+    "likes": 499,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-8509a7f82665442592627940b7a1cfab"
+   },
+   {
+    "uid": "6a2169dafc254f399387a679305bb1bf",
+    "name": "Abandoned Generic Sedan 1 - Game Ready",
+    "author": "rashad-brahimli",
+    "license": "CC Attribution",
+    "faces": 9597,
+    "likes": 394,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-6a2169dafc254f399387a679305bb1bf"
+   },
+   {
+    "uid": "db2df46c49f9441286c84c66208ef7ac",
+    "name": "Abandoned Generic Sedan 2 - Game Ready",
+    "author": "rashad-brahimli",
+    "license": "CC Attribution",
+    "faces": 16487,
+    "likes": 300,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-db2df46c49f9441286c84c66208ef7ac"
+   },
+   {
+    "uid": "ebe7c5e98a7448b5abb2eaf0cb22b766",
+    "name": "Low Poly Small car",
+    "author": "scailman",
+    "license": "CC Attribution",
+    "faces": 7292,
+    "likes": 206,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ebe7c5e98a7448b5abb2eaf0cb22b766"
+   },
+   {
+    "uid": "f30b644b59b54e809355009dce463d47",
+    "name": "Chapman '73 - Low poly model",
+    "author": "DanielZhabotinsky",
+    "license": "CC Attribution",
+    "faces": 12817,
+    "likes": 193,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-f30b644b59b54e809355009dce463d47"
+   },
+   {
+    "uid": "3955e5c050f843398b49b2b21ab2f232",
+    "name": "2022 Volkswagen Virtus GT",
+    "author": "BHP3D",
+    "license": "CC Attribution",
+    "faces": 671143,
+    "likes": 192,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-3955e5c050f843398b49b2b21ab2f232"
+   }
+  ],
+  "realistic man hoodie": [
+   {
+    "uid": "ae9559912f6240a8a87057911b69edd0",
+    "name": "Full Body Scan - Clean Pose",
+    "author": "OverseerThuror",
+    "license": "CC Attribution",
+    "faces": 153880,
+    "likes": 235,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ae9559912f6240a8a87057911b69edd0"
+   },
+   {
+    "uid": "bb3dc1c6d6d84708b6d9a297458e1516",
+    "name": "NEILUS THE GREY",
+    "author": "FredDrabble",
+    "license": "CC Attribution",
+    "faces": 95896,
+    "likes": 53,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-bb3dc1c6d6d84708b6d9a297458e1516"
+   },
+   {
+    "uid": "fc822f0698694496a3d2221a7a10497f",
+    "name": "001534_The Man in the Gray Hoodie",
+    "author": "3dfarm",
+    "license": "CC Attribution",
+    "faces": 500015,
+    "likes": 44,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-fc822f0698694496a3d2221a7a10497f"
+   },
+   {
+    "uid": "78c2d136f91c46a8a696d5bacfde2daf",
+    "name": "A-Pose - Male Full Body 3D Scan",
+    "author": "OverseerThuror",
+    "license": "CC Attribution",
+    "faces": 2599407,
+    "likes": 43,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-78c2d136f91c46a8a696d5bacfde2daf"
+   },
+   {
+    "uid": "ec899d0b6254487fb0fb6f8b111dc642",
+    "name": "Male Dancing Animation",
+    "author": "OverseerThuror",
+    "license": "CC Attribution",
+    "faces": 76940,
+    "likes": 19,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-ec899d0b6254487fb0fb6f8b111dc642"
+   },
+   {
+    "uid": "ea45f224cc144f26a897fbe5d91b0816",
+    "name": "Fisher Man",
+    "author": "Yaseen.0_0",
+    "license": "CC Attribution",
+    "faces": 10294,
+    "likes": 7,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ea45f224cc144f26a897fbe5d91b0816"
+   },
+   {
+    "uid": "4940195f47f54df48ef196c353731675",
+    "name": "cartoon illustration of a bird dressed in a purp",
+    "author": "klrxyz",
+    "license": "CC Attribution",
+    "faces": 19582,
+    "likes": 2,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-4940195f47f54df48ef196c353731675"
+   },
+   {
+    "uid": "ee033db06c434142b32111239492a64d",
+    "name": "[FREE 3d] Stylized 3D Character",
+    "author": "shadowdarkdemon2",
+    "license": "CC Attribution",
+    "faces": 277672,
+    "likes": 1,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ee033db06c434142b32111239492a64d"
+   },
+   {
+    "uid": "8646e5a371c849f7a31a11895c036ba4",
+    "name": "a cartoon girl in a blue jacket and pink hoodie,",
+    "author": "klrxyz",
+    "license": "CC Attribution",
+    "faces": 15694,
+    "likes": 0,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-8646e5a371c849f7a31a11895c036ba4"
+   }
+  ],
+  "scanned human hooded": [],
+  "realistic man rigged": [
+   {
+    "uid": "de876bfdce1c47a4aa67670faee7208e",
+    "name": "Sci-Fi Soldier / Futuristic Combat Trooper",
+    "author": "evgenytvidov",
+    "license": "CC Attribution",
+    "faces": 30757,
+    "likes": 1098,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-de876bfdce1c47a4aa67670faee7208e"
+   },
+   {
+    "uid": "a46bc9f67aaa415bb4f3241eef900e7f",
+    "name": "Eric Rigged 001 - Rigged 3D Business Man",
+    "author": "renderpeople",
+    "license": "CC Attribution",
+    "faces": 20542,
+    "likes": 501,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-a46bc9f67aaa415bb4f3241eef900e7f"
+   },
+   {
+    "uid": "acf520f450d14dd799f98a6fede3edf5",
+    "name": "Carla Rigged 001 - Rigged 3D Business Women",
+    "author": "renderpeople",
+    "license": "CC Attribution",
+    "faces": 19988,
+    "likes": 422,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-acf520f450d14dd799f98a6fede3edf5"
+   },
+   {
+    "uid": "c659bd0accab47c6bbe390cf822a2b92",
+    "name": "Claudia Rigged 002 - 3D Rigged Business Women",
+    "author": "renderpeople",
+    "license": "CC Attribution",
+    "faces": 21492,
+    "likes": 409,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-c659bd0accab47c6bbe390cf822a2b92"
+   },
+   {
+    "uid": "0814b068d5af485a9ac7fb77d6492e78",
+    "name": "Anime classroom retextured",
+    "author": "Katydid.",
+    "license": "CC Attribution",
+    "faces": 62896,
+    "likes": 404,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-0814b068d5af485a9ac7fb77d6492e78"
+   },
+   {
+    "uid": "770a5ae9843b463d85de300d18a9427e",
+    "name": "City map(not a scan)",
+    "author": "Pasha.",
+    "license": "CC Attribution",
+    "faces": 53714,
+    "likes": 301,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-770a5ae9843b463d85de300d18a9427e"
+   },
+   {
+    "uid": "6b8009a6e4f747f59ccadb121adc3679",
+    "name": "Realistic Old Russian Guy (animated)",
+    "author": "jungle_jim",
+    "license": "CC Attribution",
+    "faces": 53891,
+    "likes": 264,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-6b8009a6e4f747f59ccadb121adc3679"
+   },
+   {
+    "uid": "2880a251b89e4f0dba4e4c5ae161c0c4",
+    "name": "Realistic kitchen scene",
+    "author": "Katydid.",
+    "license": "CC Attribution",
+    "faces": 126545,
+    "likes": 239,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-2880a251b89e4f0dba4e4c5ae161c0c4"
+   },
+   {
+    "uid": "e77a26778dc14b3c8f4838fe6a827dc3",
+    "name": "Just man",
+    "author": "vrimen",
+    "license": "CC Attribution",
+    "faces": 44760,
+    "likes": 208,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-e77a26778dc14b3c8f4838fe6a827dc3"
+   },
+   {
+    "uid": "dbf9fe0cb81d4758ad2525a56d10e2fc",
+    "name": "Balthazar (rigged & animated)",
+    "author": "jungle_jim",
+    "license": "CC Attribution",
+    "faces": 110940,
+    "likes": 203,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-dbf9fe0cb81d4758ad2525a56d10e2fc"
+   }
+  ],
+  "man running animated": [
+   {
+    "uid": "cba5c3b8a946499083b4adfbb6d568b8",
+    "name": "Rat Animated",
+    "author": "Shintokin",
+    "license": "CC Attribution",
+    "faces": 3642,
+    "likes": 278,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-cba5c3b8a946499083b4adfbb6d568b8"
+   },
+   {
+    "uid": "2b9b5c9323b94476b40e8786c4730766",
+    "name": "Rosie Rigged Cartoon Girl Character",
+    "author": "Ar3Designer",
+    "license": "CC Attribution",
+    "faces": 359022,
+    "likes": 56,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-2b9b5c9323b94476b40e8786c4730766"
+   },
+   {
+    "uid": "5718a53d18a142f686b1d9f02a637773",
+    "name": "Bearded man - Low poly animated",
+    "author": "Agor_",
+    "license": "CC Attribution",
+    "faces": 3480,
+    "likes": 51,
+    "animated": 10,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-5718a53d18a142f686b1d9f02a637773"
+   },
+   {
+    "uid": "9f59e01c9bd945359ea46ad5437bf1cb",
+    "name": "Sci-fi soldier running from boulder (animated)",
+    "author": "jungle_jim",
+    "license": "CC Attribution",
+    "faces": 302682,
+    "likes": 39,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-9f59e01c9bd945359ea46ad5437bf1cb"
+   },
+   {
+    "uid": "21c59f98ac56490785a520eff72c99b1",
+    "name": "Army man Running",
+    "author": "nandupofficial",
+    "license": "CC Attribution",
+    "faces": 47397,
+    "likes": 36,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-21c59f98ac56490785a520eff72c99b1"
+   },
+   {
+    "uid": "7045943fe9654fab8200359b28e7982b",
+    "name": "Animated Man-Run and Jump Character",
+    "author": "numonegames",
+    "license": "CC Attribution",
+    "faces": 61952,
+    "likes": 27,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-7045943fe9654fab8200359b28e7982b"
+   },
+   {
+    "uid": "93fcad02a6354757902cc9dba2301969",
+    "name": "Exo-Skeleton Man Running on Futuristic Treadmill",
+    "author": "LasquetiSpice",
+    "license": "CC Attribution",
+    "faces": 36704,
+    "likes": 15,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-93fcad02a6354757902cc9dba2301969"
+   },
+   {
+    "uid": "3ae7ff1299844d4e9e6b15a0fa23d2b9",
+    "name": "Animated Dance Teacher - Running Man",
+    "author": "LasquetiSpice",
+    "license": "CC Attribution",
+    "faces": 35979,
+    "likes": 13,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-3ae7ff1299844d4e9e6b15a0fa23d2b9"
+   },
+   {
+    "uid": "4e19faf01fb04bfc9d92eabfe45b116c",
+    "name": "Amy Lee Cowgirl Animated Unity",
+    "author": "maddex88",
+    "license": "CC Attribution",
+    "faces": 301531,
+    "likes": 9,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-4e19faf01fb04bfc9d92eabfe45b116c"
+   },
+   {
+    "uid": "01fed91d80e047378c32a584300a07c9",
+    "name": "Runningman",
+    "author": "Erlangga1",
+    "license": "CC Attribution",
+    "faces": 1506,
+    "likes": 7,
+    "animated": 1,
+    "rigged": true,
+    "url": "https://sketchfab.com/3d-models/none-01fed91d80e047378c32a584300a07c9"
+   }
+  ],
+  "parking lot": [
+   {
+    "uid": "80e54d8326ea4646949961e8ada35518",
+    "name": "Parking lot",
+    "author": "windofglass",
+    "license": "CC Attribution",
+    "faces": 23020,
+    "likes": 889,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-80e54d8326ea4646949961e8ada35518"
+   },
+   {
+    "uid": "b820496c29b94bf3986fe6223d44fc8c",
+    "name": "Parking Lot UF",
+    "author": "hkang2",
+    "license": "CC Attribution",
+    "faces": 51897,
+    "likes": 479,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-b820496c29b94bf3986fe6223d44fc8c"
+   },
+   {
+    "uid": "ff1e0cd35f2c4f43b23047e276f902e3",
+    "name": "Pontiac Firebird Formula (1974)",
+    "author": "alban",
+    "license": "CC Attribution",
+    "faces": 228275,
+    "likes": 476,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ff1e0cd35f2c4f43b23047e276f902e3"
+   },
+   {
+    "uid": "188e5d8dd2cb4f098871b5dd5f6fa990",
+    "name": "Japanese neon sign set (low poly for background)",
+    "author": "ydvisual",
+    "license": "CC Attribution",
+    "faces": 36,
+    "likes": 472,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-188e5d8dd2cb4f098871b5dd5f6fa990"
+   },
+   {
+    "uid": "8b33ab96b91a45b1bdaa81b3effd7970",
+    "name": "Fire Escape",
+    "author": "KnightFallows",
+    "license": "CC Attribution",
+    "faces": 28940,
+    "likes": 430,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-8b33ab96b91a45b1bdaa81b3effd7970"
+   },
+   {
+    "uid": "88c3f49f553f41f59382e0e38781193c",
+    "name": "Parking Garage",
+    "author": "dylanheyes",
+    "license": "CC Attribution",
+    "faces": 33776,
+    "likes": 355,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-88c3f49f553f41f59382e0e38781193c"
+   },
+   {
+    "uid": "94f51a526c714a6a96f3a8c1c29b44d5",
+    "name": "Building workshop Parking workshop LOW POLY",
+    "author": "ahmagh2e",
+    "license": "CC Attribution",
+    "faces": 2650,
+    "likes": 276,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-94f51a526c714a6a96f3a8c1c29b44d5"
+   },
+   {
+    "uid": "79afe5bf6e41428e9c37c1eb38251d31",
+    "name": "American Road",
+    "author": "jimbogies",
+    "license": "CC Attribution",
+    "faces": 95136,
+    "likes": 233,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-79afe5bf6e41428e9c37c1eb38251d31"
+   },
+   {
+    "uid": "1f08e865706944d9b6092b57913203ee",
+    "name": "Fnaf SOTM Parking Lot Part 1",
+    "author": "skylajade69",
+    "license": "CC Attribution",
+    "faces": 396370,
+    "likes": 226,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-1f08e865706944d9b6092b57913203ee"
+   },
+   {
+    "uid": "bf25a01bf66b4e2bbf2772397a67c588",
+    "name": "Trash / Garbage 002 3D Scan",
+    "author": "albentan2012",
+    "license": "CC Attribution",
+    "faces": 88507,
+    "likes": 224,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-bf25a01bf66b4e2bbf2772397a67c588"
+   }
+  ],
+  "street lamp sodium": [
+   {
+    "uid": "1173b0c4d9b0400bbeaafbee0e94ca59",
+    "name": "Various Low-Poly Street Lights",
+    "author": "kmb_jr",
+    "license": "CC Attribution",
+    "faces": 10987,
+    "likes": 409,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-1173b0c4d9b0400bbeaafbee0e94ca59"
+   },
+   {
+    "uid": "32bd9bc6f27844e795bd5030091cf96e",
+    "name": "Low Poly Light Street",
+    "author": "xboyghost07",
+    "license": "CC Attribution",
+    "faces": 1952,
+    "likes": 4,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-32bd9bc6f27844e795bd5030091cf96e"
+   },
+   {
+    "uid": "b53fd8d9906e4e5e98301adac7133afb",
+    "name": "Modern Street Light",
+    "author": "vcotta",
+    "license": "CC Attribution",
+    "faces": 36,
+    "likes": 0,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-b53fd8d9906e4e5e98301adac7133afb"
+   }
+  ],
+  "traffic light russia": [
+   {
+    "uid": "0832a2270ced4a759b952af5b80604bd",
+    "name": "Russian Poly Signal concept",
+    "author": "Signalrenders",
+    "license": "CC Attribution",
+    "faces": 2154304,
+    "likes": 90,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-0832a2270ced4a759b952af5b80604bd"
+   },
+   {
+    "uid": "635cd7f805504894a3e60c14cfeeb204",
+    "name": "Volga",
+    "author": "Sirolalo",
+    "license": "CC Attribution",
+    "faces": 24791,
+    "likes": 71,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-635cd7f805504894a3e60c14cfeeb204"
+   },
+   {
+    "uid": "248d06eb61644befbd0bc737e0bf3a68",
+    "name": "Traffic Light",
+    "author": "max_aesthetics",
+    "license": "CC Attribution",
+    "faces": 709,
+    "likes": 22,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-248d06eb61644befbd0bc737e0bf3a68"
+   }
+  ],
+  "supermarket building": [
+   {
+    "uid": "1a0feafb044148e585bfe588afe617b8",
+    "name": "Small Red Gas Station",
+    "author": "SmashedBones",
+    "license": "CC Attribution",
+    "faces": 616890,
+    "likes": 711,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-1a0feafb044148e585bfe588afe617b8"
+   },
+   {
+    "uid": "9935e4fd04c440d4aeb8d57ae6b024a2",
+    "name": "silent hill 3-gallery",
+    "author": "Pasha.",
+    "license": "CC Attribution",
+    "faces": 23964,
+    "likes": 130,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-9935e4fd04c440d4aeb8d57ae6b024a2"
+   },
+   {
+    "uid": "920667014e2d4580af8affb0e54ccc77",
+    "name": "LowPoly Football field and a Supermarket",
+    "author": "jg-3d",
+    "license": "CC Attribution",
+    "faces": 32838,
+    "likes": 128,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-920667014e2d4580af8affb0e54ccc77"
+   },
+   {
+    "uid": "cf6d380dc7f64b52b4ebd39b9c59c613",
+    "name": "Supermarket low poly",
+    "author": "steam813",
+    "license": "CC Attribution",
+    "faces": 404174,
+    "likes": 81,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-cf6d380dc7f64b52b4ebd39b9c59c613"
+   },
+   {
+    "uid": "e048ffead668466d993e0ffd8acdce2e",
+    "name": "Pyaterochka 3d model !!! Пятерочка 3д модель",
+    "author": "SanyaKrutoy99",
+    "license": "CC Attribution",
+    "faces": 2508,
+    "likes": 66,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-e048ffead668466d993e0ffd8acdce2e"
+   },
+   {
+    "uid": "ce85c3d2ca0e4fb7afb3fb14e65ae850",
+    "name": "meed grocery store",
+    "author": "RAGHAD111",
+    "license": "CC Attribution",
+    "faces": 2516,
+    "likes": 60,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-ce85c3d2ca0e4fb7afb3fb14e65ae850"
+   },
+   {
+    "uid": "68318c21805848daa2ca8f2eb8ec4d42",
+    "name": "Supermarket",
+    "author": "raynoa",
+    "license": "CC Attribution",
+    "faces": 7934,
+    "likes": 43,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-68318c21805848daa2ca8f2eb8ec4d42"
+   },
+   {
+    "uid": "09133ba8b8a149cf9590d747c45c5f16",
+    "name": "Supermarket building",
+    "author": "Randonavt",
+    "license": "CC Attribution",
+    "faces": 989,
+    "likes": 27,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-09133ba8b8a149cf9590d747c45c5f16"
+   },
+   {
+    "uid": "9340ed0e8ede4c3fa179508397375d69",
+    "name": "7-Eleven Rebrand 2020",
+    "author": "prankscare99",
+    "license": "CC Attribution",
+    "faces": 1268,
+    "likes": 11,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-9340ed0e8ede4c3fa179508397375d69"
+   },
+   {
+    "uid": "00d523cb87564730aa98aff2bfb06ff4",
+    "name": "Simple Mini Market Low Poly",
+    "author": "iwak.rebus",
+    "license": "CC Attribution",
+    "faces": 304,
+    "likes": 8,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-00d523cb87564730aa98aff2bfb06ff4"
+   }
+  ],
+  "bus stop": [
+   {
+    "uid": "fe4d132434c24e1c8447a6d1190e8c6d",
+    "name": "Old Soviet Bus Stop",
+    "author": "GameDevNick",
+    "license": "CC Attribution",
+    "faces": 4364,
+    "likes": 850,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-fe4d132434c24e1c8447a6d1190e8c6d"
+   },
+   {
+    "uid": "977fe8fc309548299cbc537f382e1a03",
+    "name": "Bus Stop - low",
+    "author": "milionna",
+    "license": "CC Attribution",
+    "faces": 520,
+    "likes": 652,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-977fe8fc309548299cbc537f382e1a03"
+   },
+   {
+    "uid": "619d27fc93f24be1a7d6994906ca4620",
+    "name": "Bus stop",
+    "author": "Elbolilloduro",
+    "license": "CC Attribution",
+    "faces": 12162,
+    "likes": 532,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-619d27fc93f24be1a7d6994906ca4620"
+   },
+   {
+    "uid": "e79f70d2e8494f55a1982bb75ab507e4",
+    "name": "Bus Stop USSR",
+    "author": "milionna",
+    "license": "CC Attribution",
+    "faces": 778,
+    "likes": 479,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-e79f70d2e8494f55a1982bb75ab507e4"
+   },
+   {
+    "uid": "d9df5cfa079f4da8a18ef1372c00d01c",
+    "name": "Modular City Road Pack – Game Ready",
+    "author": "abbasyounis214",
+    "license": "CC Attribution",
+    "faces": 9402,
+    "likes": 475,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-d9df5cfa079f4da8a18ef1372c00d01c"
+   },
+   {
+    "uid": "2f52ea53c58e455f9b69d11f58763c96",
+    "name": "City Props Collection (volume 2)",
+    "author": "TampaJoey",
+    "license": "CC Attribution",
+    "faces": 52212,
+    "likes": 393,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-2f52ea53c58e455f9b69d11f58763c96"
+   },
+   {
+    "uid": "310c806355814c3794f5e3022b38db85",
+    "name": "Free Low Poly Simple Urban City 3D Asset Pack",
+    "author": "moldydoldy",
+    "license": "CC Attribution",
+    "faces": 37780,
+    "likes": 380,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-310c806355814c3794f5e3022b38db85"
+   },
+   {
+    "uid": "5eb07fc3b28f474dbf15b1bbac814c82",
+    "name": "Kyoto Cityscene: Bus Stop",
+    "author": "Xavaltir",
+    "license": "CC Attribution",
+    "faces": 6576,
+    "likes": 360,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-5eb07fc3b28f474dbf15b1bbac814c82"
+   },
+   {
+    "uid": "6cc9ea3b4d5b42628b19de84997f89ed",
+    "name": "Bus stop 2",
+    "author": "Elbolilloduro",
+    "license": "CC Attribution",
+    "faces": 10150,
+    "likes": 337,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-6cc9ea3b4d5b42628b19de84997f89ed"
+   },
+   {
+    "uid": "cc3125710c554ac793bf797a6039fec4",
+    "name": "Soviet Bus Stop - Argel, Armenia",
+    "author": "azadbal",
+    "license": "CC Attribution",
+    "faces": 158067,
+    "likes": 304,
+    "animated": 0,
+    "rigged": false,
+    "url": "https://sketchfab.com/3d-models/none-cc3125710c554ac793bf797a6039fec4"
+   }
+  ]
+ },
+ "polyhaven": {
+  "street": [
+   {
+    "id": "fire_hydrant",
+    "name": "Fire Hydrant",
+    "tags": [
+     "city",
+     "urban",
+     "street",
+     "road",
+     "emergency",
+     "valve",
+     "extinguisher",
+     "utility"
+    ]
+   },
+   {
+    "id": "modular_electricity_poles",
+    "name": "Modular Electricity Poles",
+    "tags": [
+     "urban",
+     "infrastructure",
+     "city",
+     "road",
+     "utility",
+     "street",
+     "electrical",
+     "power"
+    ]
+   },
+   {
+    "id": "modular_street_seating",
+    "name": "Modular Street Seating",
+    "tags": [
+     "chair",
+     "outdoor",
+     "urban",
+     "cityscape",
+     "contemporary",
+     "bench",
+     "city",
+     "infrastructure"
+    ]
+   },
+   {
+    "id": "outdoor_table_chair_set_01",
+    "name": "Outdoor Table Chair Set 01",
+    "tags": [
+     "outdoor",
+     "foldable",
+     "folding",
+     "seating",
+     "coffee",
+     "diner",
+     "street",
+     "urban"
+    ]
+   },
+   {
+    "id": "spray_paint_bottles_02",
+    "name": "Spray Paint Bottles 02",
+    "tags": [
+     "graffiti",
+     "street art",
+     "spray paint",
+     "paint",
+     "urban art"
+    ]
+   },
+   {
+    "id": "street_lamp_01",
+    "name": "Street Lamp 01",
+    "tags": [
+     "street",
+     "road",
+     "light",
+     "lamppost",
+     "outdoor",
+     "pole",
+     "sidewalk",
+     "night"
+    ]
+   },
+   {
+    "id": "street_lamp_02",
+    "name": "Street Lamp 02",
+    "tags": [
+     "street",
+     "road",
+     "light",
+     "lamppost",
+     "outdoor",
+     "pole",
+     "sidewalk",
+     "night"
+    ]
+   },
+   {
+    "id": "street_rat",
+    "name": "Street Rat",
+    "tags": [
+     "rat",
+     "mouse",
+     "animal",
+     "vermin",
+     "rodent",
+     "alleyway",
+     "pest",
+     "feral"
+    ]
+   },
+   {
+    "id": "trashbag",
+    "name": "Trashbag",
+    "tags": [
+     "garbage bag",
+     "refuse",
+     "street waste",
+     "trash",
+     "street",
+     "scrapyard",
+     "junkyard",
+     "garbage"
+    ]
+   },
+   {
+    "id": "water_manhole_cover",
+    "name": "Water Manhole Cover",
+    "tags": [
+     "infrastructure",
+     "drainage",
+     "utility",
+     "manhole",
+     "underground",
+     "maintenance",
+     "access cover",
+     "sewer"
+    ]
+   }
+  ],
+  "lamp": [
+   {
+    "id": "Lantern_01",
+    "name": "Lantern 01",
+    "tags": [
+     "prop",
+     "metal",
+     "glass",
+     "lantern",
+     "antique",
+     "vintage",
+     "hurricane",
+     "lamp"
+    ]
+   },
+   {
+    "id": "brass_diya_lantern",
+    "name": "Brass Diya Lantern",
+    "tags": [
+     "lighting",
+     "brass",
+     "metal",
+     "lamp",
+     "candle",
+     "light",
+     "cultural",
+     "hanging"
+    ]
+   },
+   {
+    "id": "chemistry_set",
+    "name": "Chemistry Set",
+    "tags": [
+     "laboratory",
+     "science",
+     "chemistry",
+     "glassware",
+     "equipment",
+     "testing",
+     "lab",
+     "retort stand"
+    ]
+   },
+   {
+    "id": "desk_lamp_arm_01",
+    "name": "Desk Lamp Arm 01",
+    "tags": [
+     "industrial",
+     "lamp",
+     "mounted",
+     "fixed",
+     "desk",
+     "table",
+     "light",
+     "arm"
+    ]
+   },
+   {
+    "id": "hanging_industrial_lamp",
+    "name": "Hanging Industrial Lamp",
+    "tags": [
+     "industrial lighting",
+     "hanging lamp",
+     "warehouse lighting",
+     "bunker",
+     "metal lamp",
+     "factory",
+     "warehouse"
+    ]
+   },
+   {
+    "id": "industrial_caged_sconce",
+    "name": "Industrial Caged Sconce",
+    "tags": [
+     "caged lamp",
+     "pipe fixture",
+     "guarded light",
+     "utility lighting",
+     "warehouse",
+     "factory",
+     "bunker",
+     "wall light"
+    ]
+   },
+   {
+    "id": "industrial_pipe_lamp",
+    "name": "Industrial Pipe Lamp",
+    "tags": [
+     "desk light",
+     "lamp",
+     "metal",
+     "industrial",
+     "workshop lamp",
+     "mechanical"
+    ]
+   },
+   {
+    "id": "industrial_wall_lamp",
+    "name": "Industrial Wall Lamp",
+    "tags": [
+     "industrial",
+     "factory",
+     "warehouse",
+     "wall light",
+     "metal",
+     "bunker",
+     "mine"
+    ]
+   },
+   {
+    "id": "lightbulb_01",
+    "name": "Lightbulb 01",
+    "tags": [
+     "globe",
+     "filament",
+     "light",
+     "lamp",
+     "shed",
+     "bulb",
+     "illumination",
+     "incandescent"
+    ]
+   },
+   {
+    "id": "modern_ceiling_lamp_01",
+    "name": "Modern Ceiling Lamp 01",
+    "tags": [
+     "lighting",
+     "light",
+     "modern",
+     "glass",
+     "round",
+     "hanging",
+     "hanging lamp",
+     "ceiling lamp"
+    ]
+   }
+  ],
+  "car": [
+   {
+    "id": "CheeseBox_01",
+    "name": "CheeseBox_01",
+    "tags": [
+     "box",
+     "wood",
+     "storage",
+     "crate",
+     "wooden",
+     "vintage",
+     "farmhouse",
+     "aged"
+    ]
+   },
+   {
+    "id": "CoffeeCart_01",
+    "name": "Coffee Cart 01",
+    "tags": [
+     "table",
+     "metal",
+     "shelf",
+     "plastic",
+     "cart",
+     "coffee",
+     "portable",
+     "wheels"
+    ]
+   },
+   {
+    "id": "ammo_box",
+    "name": "Ammo Box",
+    "tags": [
+     "old",
+     "vintage",
+     "antique",
+     "metal",
+     "rusted",
+     "army",
+     "military",
+     "box"
+    ]
+   },
+   {
+    "id": "cardboard_box_01",
+    "name": "Cardboard Box 01",
+    "tags": [
+     "warehouse",
+     "shed",
+     "storage",
+     "box",
+     "paper",
+     "worn",
+     "old",
+     "broken"
+    ]
+   },
+   {
+    "id": "carrot_cake",
+    "name": "Carrot Cake",
+    "tags": [
+     "baked goods",
+     "cake",
+     "carrot",
+     "food",
+     "bakery",
+     "dish",
+     "cooking",
+     "dessert"
+    ]
+   },
+   {
+    "id": "carved_wooden_elephant",
+    "name": "Carved Wooden Elephant",
+    "tags": [
+     "wood",
+     "wooden",
+     "woodwork",
+     "statue",
+     "carved",
+     "animal"
+    ]
+   },
+   {
+    "id": "carved_wooden_plate",
+    "name": "Carved Wooden Plate",
+    "tags": [
+     "vintage",
+     "wood",
+     "antique",
+     "carved",
+     "hand made",
+     "crafted",
+     "fruitbowl",
+     "plate"
+    ]
+   },
+   {
+    "id": "covered_car",
+    "name": "Covered Car",
+    "tags": [
+     "garage",
+     "stored",
+     "vehicle",
+     "car",
+     "workshop",
+     "mechanic",
+     "automotive",
+     "repair shop"
+    ]
+   },
+   {
+    "id": "crowbar_01",
+    "name": "Crowbar 01",
+    "tags": [
+     "metal",
+     "shed",
+     "workshop",
+     "garage",
+     "used",
+     "dirty",
+     "construction",
+     "carpentry"
+    ]
+   },
+   {
+    "id": "flathead_screwdriver",
+    "name": "Flathead Screwdriver",
+    "tags": [
+     "wood",
+     "shed",
+     "wooden",
+     "garage",
+     "workshop",
+     "woodwork",
+     "carpentry"
+    ]
+   }
+  ],
+  "sign": [
+   {
+    "id": "Ottoman_01",
+    "name": "Ottoman 01",
+    "tags": [
+     "furniture",
+     "leather",
+     "chair",
+     "fabric",
+     "ottoman",
+     "upholstery",
+     "interior design",
+     "living room"
+    ]
+   },
+   {
+    "id": "WetFloorSign_01",
+    "name": "Wet Floor Sign 01",
+    "tags": [
+     "prop",
+     "plastic",
+     "sign",
+     "safety",
+     "caution",
+     "warning",
+     "yellow",
+     "hazard"
+    ]
+   },
+   {
+    "id": "mid_century_lounge_chair",
+    "name": "Mid Century Lounge Chair",
+    "tags": [
+     "wooden",
+     "leather",
+     "couch",
+     "lounge",
+     "architecture",
+     "modern",
+     "interior design",
+     "home decor"
+    ]
+   },
+   {
+    "id": "modern_ceiling_lamp_01",
+    "name": "Modern Ceiling Lamp 01",
+    "tags": [
+     "lighting",
+     "light",
+     "modern",
+     "glass",
+     "round",
+     "hanging",
+     "hanging lamp",
+     "ceiling lamp"
+    ]
+   },
+   {
+    "id": "modern_wooden_cabinet",
+    "name": "Modern Wooden Cabinet",
+    "tags": [
+     "cabinet",
+     "wood",
+     "modern",
+     "minimalist",
+     "interrior",
+     "living room",
+     "contemporary",
+     "design"
+    ]
+   },
+   {
+    "id": "signal_flashlight",
+    "name": "Signal Flashlight",
+    "tags": [
+     "handheld",
+     "light",
+     "torch",
+     "signal device",
+     "portable beacon",
+     "emergency signal",
+     "vintage"
+    ]
+   },
+   {
+    "id": "standing_chalkboard_01",
+    "name": "Standing Chalkboard 01",
+    "tags": [
+     "resturant",
+     "sign",
+     "signage",
+     "chalk",
+     "board",
+     "coffee",
+     "workshop",
+     "cafe"
+    ]
+   }
+  ],
+  "barrier": [
+   {
+    "id": "concrete_road_barrier",
+    "name": "Concrete Road Barrier",
+    "tags": [
+     "road barrier",
+     "traffic barrier",
+     "safety barrier",
+     "wall",
+     "road",
+     "road block",
+     "blockade",
+     "partition"
+    ]
+   },
+   {
+    "id": "concrete_road_barrier_02",
+    "name": "Concrete Road Barrier 02",
+    "tags": [
+     "road barrier",
+     "traffic barrier",
+     "safety barrier",
+     "wall",
+     "road",
+     "road block",
+     "blockade"
+    ]
+   },
+   {
+    "id": "modular_chainlink_fence",
+    "name": "Modular Chainlink Fence",
+    "tags": [
+     "infrastructure",
+     "city",
+     "urban",
+     "fencing",
+     "barrier",
+     "security",
+     "fencing",
+     "boundary"
+    ]
+   }
+  ],
+  "bench": [
+   {
+    "id": "bench_vice_01",
+    "name": "Bench Vice 01",
+    "tags": [
+     "workshop",
+     "garage",
+     "used",
+     "metal",
+     "old",
+     "shed",
+     "woodwork"
+    ]
+   },
+   {
+    "id": "industrial_storage_cart",
+    "name": "Industrial Storage Cart",
+    "tags": [
+     "old",
+     "metal",
+     "steel",
+     "container",
+     "garage",
+     "workshop",
+     "rusted",
+     "shed"
+    ]
+   },
+   {
+    "id": "modular_street_seating",
+    "name": "Modular Street Seating",
+    "tags": [
+     "chair",
+     "outdoor",
+     "urban",
+     "cityscape",
+     "contemporary",
+     "bench",
+     "city",
+     "infrastructure"
+    ]
+   },
+   {
+    "id": "old_drill_press",
+    "name": "Old Drill Press",
+    "tags": [
+     "metal",
+     "workshop",
+     "garage",
+     "bench drill",
+     "stand",
+     "power cable"
+    ]
+   },
+   {
+    "id": "painted_wooden_bench",
+    "name": "Painted Wooden Bench",
+    "tags": [
+     "vintage",
+     "old",
+     "wooden",
+     "worn",
+     "antique",
+     "farmhouse",
+     "aged",
+     "rustic"
+    ]
+   },
+   {
+    "id": "tool_cart",
+    "name": "Tool Cart",
+    "tags": [
+     "rusted",
+     "metal",
+     "cart",
+     "drawer",
+     "rolling",
+     "workshop",
+     "casters",
+     "garage"
+    ]
+   },
+   {
+    "id": "vintage_day_bed",
+    "name": "Vintage Day Bed",
+    "tags": [
+     "old",
+     "vintage",
+     "antique",
+     "wooden",
+     "couch",
+     "bench",
+     "sofa-bed",
+     "matress"
+    ]
+   },
+   {
+    "id": "wooden_picnic_table",
+    "name": "Wooden Picnic Table",
+    "tags": [
+     "vintage",
+     "old",
+     "worn",
+     "park",
+     "bench",
+     "outdoor",
+     "weathered",
+     "countryside"
+    ]
+   }
+  ]
+ }
+}
