@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
+    <canvas id="w-3d" width="1080" height="1920"></canvas>
+    <div class="fx-grunge" style="opacity:0.12"></div>
+    <div class="fx-grade"></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, at = (k) => C[k], D = C._duration;
+      const W = CAR3D.create(document.getElementById("w-3d"), { seed: 7 });
+      const s = W.state;
+      const tl = gsap.timeline({ paused: true });
+      // ТЕСТ: три плана
+      Object.assign(s, { carX: 2.7, carZ: -6, carYaw: Math.PI / 2, camX: 9, camY: 2.2, camZ: 8, tgtX: 2, tgtY: 1, tgtZ: -6, fov: 38, head: 0, tail: 0.3, cabin: 1, figure: 1 });
+      tl.set(s, { camX: 2.7 + 0.15, camY: 1.22, camZ: -6 + 0.37 - 0.2, tgtX: 2.7 + 0.15, tgtY: 1.0, tgtZ: -6 - 6, fov: 60, seat: 1 }, 3);
+      tl.set(s, { carX: 196, carZ: 28.5, carYaw: 0, head: 1, tail: 1, camX: 186, camY: 2.4, camZ: 34, tgtX: 205, tgtY: 2, tgtZ: 26, fov: 40 }, 6);
+      tl.to({}, { duration: D }, 0);
+      tl.eventCallback("onUpdate", () => W.render(tl.time()));
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady.car3d = W.ready.then(() => W.render(0));
+      window.__timelines["world"] = tl;
+    })();
+  </script>
+</template>
