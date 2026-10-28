@@ -1,0 +1,5 @@
+{
+  "id": "015-kreslo-u-rulya",
+  "name": "015 · Кресло у руля",
+  "scripts": ["car3d.js"]
+}
