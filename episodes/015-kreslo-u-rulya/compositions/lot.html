@@ -1,4 +1,45 @@
 <template>
-  <div id="root" data-composition-id="lot" data-width="1080" data-height="1920" style="position:absolute;inset:0"></div>
-  <script>(function(){ const tl = gsap.timeline({ paused: true }); window.__timelines["lot"] = tl; })();</script>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .pos { position: absolute; left: 50px; top: 250px; opacity: 0; }
+    .pos2 { position: absolute; left: 50px; top: 330px; opacity: 0; }
+    .tstamp { position: absolute; left: 0; right: 0; top: 185px; text-align: center; opacity: 0; }
+    .tstamp span { display: inline-block; font-family: "JetBrains Mono", monospace; font-weight: 800; font-size: 24px; letter-spacing: 0.1em; color: #ffd23f;
+      background: rgba(10,12,16,0.8); border: 2px solid rgba(255,210,63,0.6); border-radius: 8px; padding: 6px 14px; }
+    .big { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; }
+    .big span { display: inline-block; font-family: Montserrat, sans-serif; font-weight: 900; font-size: 64px; color: #fff; background: #e0182b; padding: 10px 26px; border-radius: 12px; text-transform: uppercase; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+    .chip { font-size: 30px; }
+    .pu { transform: scale(0.8); transform-origin: 50% 0; }
+  </style>
+  <div id="root" data-composition-id="lot" data-width="1080" data-height="1920">
+    <div class="tstamp" id="ts"><span>● 01:00 · ПАРКОВКА ГИПЕРМАРКЕТА</span></div>
+    <div id="ph"></div>
+    <div class="pos" id="c1"><span class="chip yellow">+22° В САЛОНЕ</span></div>
+    <div class="pos2" id="c2"><span class="chip red">ПО ПРИЛОЖЕНИЮ — С 13:05</span></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, ID = "lot";
+      const S = C[ID], at = (k) => C[k] - S;
+      const R = Array.from(document.querySelectorAll('[data-composition-id="' + ID + '"]')).pop();
+      const q = (s) => Array.from(R.querySelectorAll(s));
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
+      const pop = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.in" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
+      const phone = (P, a, b) => { tl.fromTo(P.el, { opacity: 0, y: 260, rotation: -4 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: "power3.out" }, a); if (b != null) tl.to(P.el, { opacity: 0, y: 200, duration: 0.3, ease: "power2.in" }, b); };
+      const page = (P, name, t) => { Object.entries(P.pages).forEach(([k, el]) => tl.set(el, { opacity: k === name ? 1 : 0 }, t)); };
+      const P = PHONEUI.make(q("#ph")[0], { top: 240 });
+      page(P, "app", 0);
+      show("#ts", 0.05, at("app"));
+      phone(P, at("app") - 0.1, at("warm") - 0.05);
+      tl.call(() => {}, null, 0);
+      const btn = P.$(".btn");
+      tl.set(btn, { className: "btn" }, 0);
+      tl.set(btn, { className: "btn done", textContent: "МАШИНА ОТКРЫТА ✓" }, at("app") + 0.9);
+      tl.set(btn, { textContent: "ОТКРЫТЬ" }, 0);
+      show("#c1", at("warm") + 0.2, at("since") + 0.1);
+      pop("#c2", at("since") + 0.4);
+      window.__timelines[ID] = tl;
+    })();
+  </script>
 </template>

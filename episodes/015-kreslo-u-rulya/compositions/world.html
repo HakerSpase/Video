@@ -2,22 +2,120 @@
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
     #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #w-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+    #w-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+    #w-red { position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 45%, rgba(255,0,0,0) 40%, rgba(160,0,0,0.55) 100%); opacity: 0; }
   </style>
   <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
     <canvas id="w-3d" width="1080" height="1920"></canvas>
-    <div class="fx-grunge" style="opacity:0.12"></div>
-    <div class="fx-grade"></div>
+    <div class="fx-grunge" style="opacity:0.1"></div>
+    <div id="w-red"></div>
+    <div id="w-flash"></div>
+    <div id="w-black"></div>
   </div>
   <script>
     (function () {
       const C = window.CUES, at = (k) => C[k], D = C._duration;
-      const W = CAR3D.create(document.getElementById("w-3d"), { seed: 7 });
+      const W = CAR3D.create(document.getElementById("w-3d"), { seed: 7, hoodTint: 0.45 });
       const s = W.state;
+      const R = Array.from(document.querySelectorAll('[data-composition-id="world"]')).pop();
+      const q = (sel) => R.querySelector(sel);
       const tl = gsap.timeline({ paused: true });
-      // ТЕСТ: три плана
-      Object.assign(s, { carX: 2.7, carZ: -6, carYaw: Math.PI / 2, camX: 9, camY: 2.2, camZ: 8, tgtX: 2, tgtY: 1, tgtZ: -6, fov: 38, head: 0, tail: 0.3, cabin: 1, figure: 1 });
-      tl.set(s, { camX: 2.7 + 0.15, camY: 1.22, camZ: -6 + 0.37 - 0.2, tgtX: 2.7 + 0.15, tgtY: 1.0, tgtZ: -6 - 6, fov: 60, seat: 1 }, 3);
-      tl.set(s, { carX: 196, carZ: 28.5, carYaw: 0, head: 1, tail: 1, camX: 186, camY: 2.4, camZ: 34, tgtX: 205, tgtY: 2, tgtZ: 26, fov: 40 }, 6);
+
+      // ---- места ----
+      const PARK = { x: 2.7, z: -6, yaw: Math.PI / 2 };      // стоит носом к гипермаркету
+      const STOPX = 200, ROADZ = 28.5;                        // стоп-линия перед перекрёстком
+      const DRIVER = { x: 0.12, y: 1.14, z: -0.37 };          // глаза водителя (кресло вплотную)
+
+      // камера в системе машины: глаза (ex,ey,ez) → цель (lx,ly,lz); car — где стоит машина на этот момент
+      function camIn(car, ex, ey, ez, lx, ly, lz) {
+        const r = (x, z) => ({ x: car.x + x * Math.cos(car.yaw) + z * Math.sin(car.yaw), z: car.z - x * Math.sin(car.yaw) + z * Math.cos(car.yaw) });
+        const a = r(ex, ez), b = r(lx, lz);
+        return { camX: a.x, camY: ey, camZ: a.z, tgtX: b.x, tgtY: ly, tgtZ: b.z };
+      }
+      const set = (t, p) => tl.set(s, p, t);
+      const go = (t, p, d, e) => tl.to(s, Object.assign({}, p, { duration: d, ease: e || "sine.inOut" }), t);
+      const flash = (t, c, o) => { tl.set(q("#w-flash"), { background: c || "#fff" }, t); tl.fromTo(q("#w-flash"), { opacity: o || 0.6 }, { opacity: 0, duration: 0.3, immediateRender: false }, t); };
+      const shake = (t, amp, d) => { tl.set(s, { shake: amp }, t); tl.to(s, { shake: 0, duration: d || 0.5, ease: "power2.out" }, t + 0.02); };
+      const parked = { x: PARK.x, z: PARK.z, yaw: PARK.yaw };
+      const stopped = { x: STOPX - 4, z: ROADZ, yaw: 0 };
+
+      // ===== HOOK: кресло вплотную к рулю → рывок назад =====
+      Object.assign(s, { carX: PARK.x, carZ: PARK.z, carYaw: PARK.yaw, head: 0, tail: 0, figure: 1, figX: -0.62, figY: -0.5, figZ: -0.37,
+        cabinLight: 0.25, dashLight: 1, redIn: 0, exposure: 0.85, rain: 0.8, hemi: 1 },
+        camIn(parked, DRIVER.x + 0.02, 1.1, DRIVER.z, 3, 0.92, -0.3), { fov: 70 });
+      go(0, camIn(parked, DRIVER.x + 0.1, 1.08, DRIVER.z, 3, 0.9, -0.33), at("look") - 0.1, "sine.out");
+      // «не посмотрев назад»: рывок камеры назад — сзади в щели кепка
+      set(at("look") + 0.25, Object.assign(camIn(parked, 0.18, 1.2, -0.22, -2, 0.98, -0.37), { fov: 54, redIn: 0.35, cabinLight: 0.08, exposure: 0.8 }));
+      flash(at("look") + 0.25, "#fff", 0.5); shake(at("look") + 0.25, 1.2, 0.6);
+      go(at("look") + 0.3, Object.assign(camIn(parked, 0.1, 1.2, -0.25, -2, 0.98, -0.37), { fov: 46 }), at("lot") - at("look") - 0.3, "power1.in");
+
+      // ===== LOT: парковка, приложение, тёплый салон =====
+      set(at("night"), Object.assign({ camX: -16, camY: 12, camZ: 10, tgtX: PARK.x, tgtY: 0, tgtZ: PARK.z, fov: 38, redIn: 0, exposure: 1.0 }));
+      go(at("night"), { camX: -11, camY: 7.5, camZ: 6 }, at("app") - at("night"), "sine.inOut");
+      set(at("app"), { camX: 10.5, camY: 1.9, camZ: 3.5, tgtX: PARK.x, tgtY: 0.9, tgtZ: PARK.z, fov: 34 });
+      go(at("app"), { camX: 8, camZ: 1.5 }, at("warm") - at("app"), "sine.out");
+      tl.set(s, { blink: 1 }, at("app") + 0.9); tl.set(s, { blink: 0 }, at("app") + 1.7);
+      set(at("warm"), Object.assign(camIn(parked, 0.1, 1.12, -0.37, 3, 0.95, -0.2), { fov: 60, cabinLight: 0.35, exposure: 0.9 }));
+      go(at("warm"), camIn(parked, 0.15, 1.1, -0.37, 3, 0.93, 0.1), at("knees") - at("warm"), "sine.inOut");
+
+      // ===== SEAT: колени в руль, рычаг, «что-то мешает сзади» =====
+      set(at("knees"), Object.assign(camIn(parked, 0.22, 1.02, -0.37, 1.4, 0.55, -0.37), { fov: 74 }));
+      go(at("knees"), camIn(parked, 0.26, 1.0, -0.37, 1.4, 0.55, -0.37), at("lever") - at("knees"));
+      shake(at("lever") + 0.3, 0.6, 0.3); shake(at("stuck") + 0.1, 0.9, 0.35);
+      go(at("behind"), Object.assign(camIn(parked, 0.2, 1.16, -0.2, -1.6, 0.85, 0.0), { fov: 56, cabinLight: 0.12 }), at("broken") - at("behind"), "sine.inOut");
+      set(at("broken"), Object.assign(camIn(parked, 0.15, 1.12, -0.37, 3, 0.95, -0.25), { fov: 60, cabinLight: 0.3 }));
+      // «Трогаетесь»: машина выезжает на дорогу, камера ведёт сзади
+      set(at("go"), { carX: 30, carZ: ROADZ, carYaw: 0, head: 1, tail: 1, camX: 20, camY: 1.6, camZ: 31, tgtX: 34, tgtY: 0.9, tgtZ: ROADZ, fov: 40, cabinLight: 0.2 });
+      go(at("go"), { carX: 62 }, at("call") - at("go"), "power1.in");
+      go(at("go"), { camX: 44, tgtX: 66 }, at("call") - at("go"), "power1.in");
+
+      // ===== CALL: красный, звонок поддержки =====
+      set(at("red"), { carX: stopped.x, carZ: ROADZ, carYaw: 0, red: 1, green: 0, camX: STOPX + 12, camY: 1.3, camZ: 24.5, tgtX: stopped.x, tgtY: 1.0, tgtZ: ROADZ, fov: 34 });
+      go(at("red"), { camX: STOPX + 10, camY: 1.2 }, at("q1") - at("red"));
+      set(at("q1"), Object.assign(camIn(stopped, 0.12, 1.12, -0.37, 3, 1.0, 0.0), { fov: 58, redIn: 0.7, cabinLight: 0.1, exposure: 0.85 }));
+      go(at("q1"), camIn(stopped, 0.14, 1.1, -0.37, 3, 0.98, 0.15), at("open") - at("q1"));
+      // «открылась задняя дверь»: взгляд на заднюю дверь водителя
+      set(at("door"), Object.assign(camIn(stopped, 0.35, 1.18, 0.1, -1.0, 0.85, -0.78), { fov: 46 }));
+      go(at("door"), camIn(stopped, 0.3, 1.18, 0.05, -1.0, 0.85, -0.7), at("never") - at("door"));
+      // «и больше не открывалась» — медленный наезд в щель между креслами
+      set(at("never"), Object.assign(camIn(stopped, 0.2, 1.17, -0.18, -1.6, 0.95, -0.2), { fov: 50, cabinLight: 0.05, exposure: 0.75 }));
+      go(at("never"), Object.assign(camIn(stopped, 0.05, 1.15, -0.15, -1.6, 0.95, -0.25), { fov: 40 }), at("shove") - at("never"), "power1.in");
+
+      // ===== PUSH: кресло толкает в спину; разворот — он там =====
+      set(at("shove"), Object.assign(camIn(stopped, 0.12, 1.1, -0.37, 3, 0.95, -0.3), { fov: 66, push: 0 }));
+      go(at("shove"), { push: 1, camY: 1.06 }, 0.5, "power3.in");
+      shake(at("shove") + 0.3, 1.6, 0.8); flash(at("shove") + 0.3, "#300", 0.5);
+      go(at("slow"), { push: 1.4 }, 2.2, "sine.inOut");
+      set(at("now"), Object.assign(camIn(stopped, 0.55, 1.17, 0.3, -0.7, 1.02, -0.37), { fov: 40, redIn: 1, cabinLight: 0.12, figY: -0.46, figX: -0.5 }));
+      go(at("now"), Object.assign(camIn(stopped, 0.45, 1.15, 0.25, -0.7, 1.05, -0.37), { fov: 30 }), at("run") - at("now"), "power2.in");
+      flash(at("now"), "#f00", 0.35);
+      tl.to(q("#w-red"), { opacity: 1, duration: 0.4 }, at("now"));
+      tl.to(q("#w-red"), { opacity: 0, duration: 0.2 }, at("run"));
+
+      // ===== RUN: бег через перекрёсток, хлопок, тишина, оборот =====
+      set(at("jump"), { redIn: 0, camX: STOPX - 2, camY: 1.55, camZ: 26.5, tgtX: STOPX + 30, tgtY: 1.2, tgtZ: 17, fov: 62, exposure: 1.0 });
+      go(at("jump"), { camX: STOPX + 22, camZ: 21.5, tgtX: STOPX + 50 }, at("turn") - at("jump"), "none");
+      tl.set(s, { shake: 2.2 }, at("jump")); tl.to(s, { shake: 1.2, duration: at("turn") - at("jump") }, at("jump") + 0.05);
+      // «Сзади хлопает дверь» — короткий взгляд через плечо на машину
+      set(at("slam"), { tgtX: stopped.x, tgtY: 1.0, tgtZ: ROADZ, fov: 50 });
+      set(at("slam") + 0.9, { tgtX: STOPX + 50, tgtY: 1.2, tgtZ: 17, fov: 62 });
+      // «Шагов нет»
+      set(at("steps"), { shake: 0.3 });
+      // на остановке — оборот назад
+      set(at("turn"), { shake: 0.4, camX: 229, camY: 1.65, camZ: 20.2, tgtX: 236, tgtY: 1.4, tgtZ: 18, fov: 50 });
+      go(at("turn") + 0.3, { tgtX: stopped.x, tgtY: 1.0, tgtZ: ROADZ, fov: 34 }, 0.9, "power2.inOut");
+
+      // ===== FINAL: машина трогается, за рулём силуэт, навигатор =====
+      set(at("drive"), { red: 0, green: 1, shake: 0.2 });
+      go(at("drive"), { carX: stopped.x + 30 }, D - at("drive"), "power3.in");
+      // силуэт за рулём: фигура пересаживается вперёд; камера сбоку, у остановки
+      set(at("driver"), { figX: 0.02, figY: -0.48, figZ: -0.37, cabinLight: 0.25, dashLight: 1.6 });
+      set(at("driver"), { camX: stopped.x + 1.5, camY: 1.3, camZ: 21.4, tgtX: stopped.x + 0.4, tgtY: 1.1, tgtZ: ROADZ, fov: 24 });
+      tl.to(s, { camX: stopped.x + 3.5, tgtX: stopped.x + 3.5, duration: at("screen") - at("driver"), ease: "power2.in" }, at("driver"));
+      // уезжает: вид сзади, красные огни растворяются в дожде
+      set(at("screen"), { camX: stopped.x - 9, camY: 1.5, camZ: ROADZ + 0.6, tgtX: stopped.x + 40, tgtY: 1.0, tgtZ: ROADZ, fov: 40 });
+      tl.to(q("#w-black"), { opacity: 0.35, duration: 0.5 }, at("screen"));
       tl.to({}, { duration: D }, 0);
       tl.eventCallback("onUpdate", () => W.render(tl.time()));
       window.__hf = window.__hf || {};

@@ -1,5 +1,9 @@
 {
   "id": "015-kreslo-u-rulya",
   "name": "015 · Кресло у руля",
-  "scripts": ["three-loaders.min.js", "car3d.js"]
+  "scripts": [
+    "three-loaders.min.js",
+    "car3d.js",
+    "phoneui.js"
+  ]
 }

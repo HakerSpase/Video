@@ -33,7 +33,8 @@ def main():
     vchain = "highpass=f=75,acompressor=threshold=-22dB:ratio=2.5:attack=8:release=150:makeup=2,equalizer=f=3200:t=q:w=1.2:g=2.5,equalizer=f=200:t=q:w=1:g=-1.5"
     tmp = ep / "out" / "voice_fx.wav"
     tmp.parent.mkdir(exist_ok=True)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(a / "voice.wav"), "-af", vchain, "-ar", "48000", str(tmp)], check=True)
+    src = a / "voice_fx.wav" if (a / "voice_fx.wav").exists() else a / "voice.wav"  # «телефонные» реплики (carsound.py, foley.py)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-af", vchain, "-ar", "48000", str(tmp)], check=True)
     gv = VOICE_LUFS - lufs(["-i", str(tmp)])
     gf = FOLEY_LUFS - lufs(["-i", str(a / "foley.wav")])
     gm = MUSIC_LUFS - lufs(["-i", str(a / "music.wav")])
