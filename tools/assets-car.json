@@ -1,0 +1,9 @@
+{
+ "per_query": 10,
+ "sketchfab": [
+  "kia rio sedan", "hyundai solaris", "volkswagen polo sedan", "skoda rapid", "car interior sedan",
+  "realistic man hoodie", "scanned human hooded", "realistic man rigged", "man running animated",
+  "parking lot", "street lamp sodium", "traffic light russia", "supermarket building", "bus stop"
+ ],
+ "polyhaven": ["street", "lamp", "car", "sign", "barrier", "bench"]
+}
