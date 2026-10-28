@@ -9,6 +9,10 @@ on:
       name:
         description: "Имя набора"
         required: true
+      token:
+        description: "Ключ Sketchfab (если нет секрета SKETCHFAB_TOKEN)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -22,8 +26,12 @@ jobs:
       - name: Загрузка
         continue-on-error: true
         env:
-          SKETCHFAB_TOKEN: ${{ secrets.SKETCHFAB_TOKEN }}
-        run: python3 tools/asset_fetch.py "${{ inputs.uids }}" "/tmp/m/${{ inputs.name }}"
+          SECRET_TOKEN: ${{ secrets.SKETCHFAB_TOKEN }}
+          INPUT_TOKEN: ${{ inputs.token }}
+        run: |
+          TOK="${SECRET_TOKEN:-$INPUT_TOKEN}"
+          [ -n "$TOK" ] && echo "::add-mask::$TOK"
+          SKETCHFAB_TOKEN="$TOK" python3 tools/asset_fetch.py "${{ inputs.uids }}" "/tmp/m/${{ inputs.name }}"
       - name: В ветку renders
         if: always()
         run: |
