@@ -1,57 +1,285 @@
 {
  "beds": [
-  ["wind", 0, "run+2.4", 0.42, {"fade": 1.0}],
-  ["wind_in", "run+2.4", "shed", 0.35],
-  ["wind", "shed", "notback2", 0.45],
-  ["wind_in", "notback2", "end", 0.3],
-  ["night", 0, "padlock", 0.22, {"fade": 1.5}],
-  ["hush", 0, "end", 0.06],
-  ["drone_low", 0, "end", 0.2, {"fade": 1.5}],
-  ["drone", "smoke", "dial", 0.22, {"fade": 0.4}],
-  ["heart", "nobro", "end", 0.5, {"fade": 1.2}],
-  ["drone", "you", "run", 0.25, {"fade": 0.3}],
-  ["breath", "run", "end", 0.32, {"fade": 0.4}]
+  [
+   "wind",
+   0,
+   "run+2.4",
+   0.42,
+   {
+    "fade": 1.0
+   }
+  ],
+  [
+   "wind_in",
+   "run+2.4",
+   "shed",
+   0.35
+  ],
+  [
+   "wind",
+   "shed",
+   "notback2",
+   0.45
+  ],
+  [
+   "wind_in",
+   "notback2",
+   "end",
+   0.3
+  ],
+  [
+   "night",
+   0,
+   "padlock",
+   0.22,
+   {
+    "fade": 1.5
+   }
+  ],
+  [
+   "hush",
+   0,
+   "end",
+   0.06
+  ],
+  [
+   "drone_low",
+   0,
+   "end",
+   0.2,
+   {
+    "fade": 1.5
+   }
+  ],
+  [
+   "drone",
+   "smoke",
+   "dial",
+   0.22,
+   {
+    "fade": 0.4
+   }
+  ],
+  [
+   "heart",
+   "nobro",
+   "end",
+   0.5,
+   {
+    "fade": 1.2
+   }
+  ],
+  [
+   "drone",
+   "you",
+   "run",
+   0.25,
+   {
+    "fade": 0.3
+   }
+  ],
+  [
+   "breath",
+   "run",
+   "end",
+   0.32,
+   {
+    "fade": 0.4
+   }
+  ]
  ],
  "events": [
-  ["crunch_walk", 0.1, "notback", 0.8],
-  ["whoosh", "notback"],
-  ["sting", "notback+1.25", 1.0],
-  ["whoosh", "jan"],
-  ["door_close", "leave+0.3", 0.7],
-  ["whoosh", "nobody"],
-  ["gate", "empty+0.4", 0.6, 1.0],
-  ["whoosh", "flat"],
-  ["whoosh", "forest+1.5"],
-  ["whoosh", "fresh", 0.6],
-  ["whoosh", "nothing"],
-  ["sting", "nothing+0.35", 0.55],
-  ["crunch_walk", "padlock", "padlock+1.7", 0.7],
-  ["clank", "padlock+1.9", 0.5],
-  ["exhale", "exhale+0.1", 1.0],
-  ["riser", "up", "smoke+0.5"],
-  ["sting", "smoke+0.6", 0.7],
-  ["ringback", "dial+0.3", "said-0.25", 1.0],
-  ["pickup", "said-0.2"],
-  ["sting", "nobro+0.05", 0.85],
-  ["tick", "torch", 0.6],
-  ["whoosh", "torch"],
-  ["riser", "plates", "you"],
-  ["sting", "you", 1.0],
-  ["whoosh", "closer"],
-  ["clank", "closer+0.3", 0.6],
-  ["sting", "cut+0.3", 0.6],
-  ["tick", "back+0.3", 1.0],
-  ["tick", "back+0.62", 0.7],
-  ["crunch_run", "run", "run+2.35", 1.0],
-  ["door_close", "run+2.45", 1.0],
-  ["car_lock", "run+2.8", 1.0],
-  ["whoosh", "mirror"],
-  ["riser", "newtr", "shed+0.1"],
-  ["sting", "shed+0.1", 0.55],
-  ["sting", "notback2+1.55", 1.0]
+  [
+   "crunch_walk",
+   0.1,
+   "notback",
+   0.8
+  ],
+  [
+   "whoosh",
+   "notback"
+  ],
+  [
+   "sting",
+   "notback+1.25",
+   1.0
+  ],
+  [
+   "whoosh",
+   "jan"
+  ],
+  [
+   "door_close",
+   "leave+0.3",
+   0.7
+  ],
+  [
+   "whoosh",
+   "nobody"
+  ],
+  [
+   "gate",
+   "empty+0.4",
+   0.6,
+   1.0
+  ],
+  [
+   "whoosh",
+   "flat"
+  ],
+  [
+   "whoosh",
+   "forest+1.5"
+  ],
+  [
+   "whoosh",
+   "fresh",
+   0.6
+  ],
+  [
+   "whoosh",
+   "nothing"
+  ],
+  [
+   "sting",
+   "nothing+0.35",
+   0.55
+  ],
+  [
+   "crunch_walk",
+   "padlock",
+   "padlock+1.7",
+   0.7
+  ],
+  [
+   "clank",
+   "padlock+1.9",
+   0.5
+  ],
+  [
+   "exhale",
+   "exhale+0.1",
+   1.0
+  ],
+  [
+   "riser",
+   "up",
+   "smoke+0.5"
+  ],
+  [
+   "sting",
+   "smoke+0.6",
+   0.7
+  ],
+  [
+   "ringback",
+   "dial+0.3",
+   "said-0.25",
+   1.0
+  ],
+  [
+   "pickup",
+   "said-0.2"
+  ],
+  [
+   "sting",
+   "nobro+0.05",
+   0.85
+  ],
+  [
+   "tick",
+   "torch",
+   0.6
+  ],
+  [
+   "whoosh",
+   "torch"
+  ],
+  [
+   "riser",
+   "plates",
+   "you"
+  ],
+  [
+   "sting",
+   "you",
+   1.0
+  ],
+  [
+   "whoosh",
+   "closer"
+  ],
+  [
+   "clank",
+   "closer+0.3",
+   0.6
+  ],
+  [
+   "sting",
+   "cut+0.3",
+   0.6
+  ],
+  [
+   "tick",
+   "back+0.3",
+   1.0
+  ],
+  [
+   "tick",
+   "back+0.62",
+   0.7
+  ],
+  [
+   "crunch_run",
+   "run",
+   "run+2.35",
+   1.0
+  ],
+  [
+   "door_close",
+   "run+2.45",
+   1.0
+  ],
+  [
+   "car_lock",
+   "run+2.8",
+   1.0
+  ],
+  [
+   "whoosh",
+   "mirror"
+  ],
+  [
+   "riser",
+   "newtr",
+   "shed+0.1"
+  ],
+  [
+   "sting",
+   "shed+0.1",
+   0.55
+  ],
+  [
+   "sting",
+   "notback2+1.55",
+   1.0
+  ]
  ],
  "duck": [
-  ["notback2+0.2", "notback2+1.5", 0.25]
+  [
+   "notback2+0.2",
+   "notback2+1.5",
+   0.25
+  ]
  ],
- "phone_voice": []
+ "phone_voice": [
+  [
+   "said-0.06",
+   "said+1.1"
+  ],
+  [
+   "brother-0.06",
+   "brother+1.45"
+  ]
+ ]
 }
