@@ -20,7 +20,6 @@
     #cover h1 span { color: #ff2e3e; }
   </style>
   <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
-    <div class="tstamp" id="ts"><span>● 23:40 · СНТ «РАССВЕТ»</span></div>
     <div class="pos" id="c1"><span class="chip yellow">СЛЕДЫ К ДОМУ</span></div>
     <div class="pos2" id="c2"><span class="chip red">ОБРАТНО — НЕТ</span></div>
     <div class="big" id="b1" style="top:430px"><span>Не заходите</span></div>
@@ -34,7 +33,6 @@
       const tl = gsap.timeline({ paused: true });
       const show = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
       const pop = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.in" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
-      show("#ts", 0.05, at("notback") + 1.2);
       show("#c1", 0.35, at("notback") + 1.2);
       show("#c2", at("notback") + 0.2, at("notback") + 1.2);
       pop("#b1", at("notback") + 1.25);

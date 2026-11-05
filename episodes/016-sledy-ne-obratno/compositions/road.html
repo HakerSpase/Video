@@ -20,7 +20,6 @@
     #cover h1 span { color: #ff2e3e; }
   </style>
   <div id="root" data-composition-id="road" data-width="1080" data-height="1920">
-    <div class="tstamp" id="ts"><span>● ЯНВАРЬ · −23°</span></div>
     <div class="pos" id="c1"><span class="chip">МАШИНА НЕ ЗАПЕРТА</span></div>
     <div class="big w" id="b1" style="top:430px"><span>Ни одного огня</span></div>
   </div>
@@ -33,7 +32,6 @@
       const tl = gsap.timeline({ paused: true });
       const show = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
       const pop = (sel, a, b) => { tl.fromTo(q(sel), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.in" }, a); if (b != null) tl.to(q(sel), { opacity: 0, duration: 0.15 }, b); };
-      show("#ts", 0.1, at("leave"));
       show("#c1", at("leave") + 0.4, at("nobody") + 0.3);
       pop("#b1", at("empty") + 0.9);
       window.__timelines[ID] = tl;

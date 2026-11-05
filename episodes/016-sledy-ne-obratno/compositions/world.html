@@ -46,7 +46,7 @@
       const F = pr(fi);
 
       // ===== HOOK: следы к дому, но не обратно =====
-      Object.assign(s, { exposure: 1.0, snow: 0.8, wind: 0.35, tail: 0.5, torch: 0, hand: 0.6, fov: 44 });
+      Object.assign(s, { exposure: 1.2, snow: 0.8, wind: 0.35, tail: 0.5, torch: 0, hand: 0.6, fov: 44 });
       shot(0, [-7.5, 0.32, 1.1], [-1.5, 0.05, -2.2], { fov: 46, roll: 0.03 });
       move(0, [-2.6, 0.3, -0.5], [0.2, 0.2, -6], at("notback") - 0.05, "sine.in");
       // «но не обратно»: камера у калитки смотрит назад — одна цепочка, обратной нет
@@ -105,9 +105,9 @@
       shake(at("nobro"), 1.0, 0.5);
 
       // ===== WINDOW: фонарик в окно; две тарелки; пар; гость — вы =====
-      shot(at("torch"), [3.3, 1.45, -10.7], WIN, { fov: 36, torch: 0.35, torchAim: 1, torchX: WIN[0], torchY: WIN[1] - 0.2, torchZ: WIN[2] - 1.0, steam: 1, hand: 0.4 });
+      shot(at("torch"), [3.3, 1.45, -10.7], WIN, { fov: 36, torch: 0.24, torchAim: 1, torchX: WIN[0], torchY: WIN[1] - 0.2, torchZ: WIN[2] - 1.0, steam: 1, hand: 0.4 });
       move(at("torch"), [3.0, 1.4, -11.6], WIN, span("torch", "plates"), "power1.in", { fov: 34 });
-      shot(at("plates"), [3.35, 1.7, -11.45], [2.7, 0.9, -13.5], { fov: 50, torch: 0.25, torchAim: 1, torchX: T0.x, torchY: T0.y, torchZ: T0.z });
+      shot(at("plates"), [3.35, 1.7, -11.45], [2.7, 0.9, -13.5], { fov: 50, torch: 0.16, torchAim: 1, torchX: T0.x, torchY: T0.y, torchZ: T0.z });
       move(at("plates"), [3.25, 1.66, -11.7], [2.7, 0.9, -13.5], span("plates", "steam"), "sine.inOut", { fov: 46 });
       shot(at("steam"), [2.45, 1.55, -12.3], PL1, { fov: 24, torch: 0.07, torchAim: 1, torchX: PL1[0], torchY: PL1[1], torchZ: PL1[2] });
       move(at("steam"), [2.45, 1.5, -12.36], [PL1[0], PL1[1] + 0.12, PL1[2]], span("steam", "guest"));
