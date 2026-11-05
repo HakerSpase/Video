@@ -1,0 +1,162 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #w-3d { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #w-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+    #w-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+    #w-red { position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 45%, rgba(255,0,0,0) 40%, rgba(150,0,0,0.6) 100%); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="world" data-width="1080" data-height="1920">
+    <canvas id="w-3d" width="1080" height="1920"></canvas>
+    <div class="fx-grunge" style="opacity:0.08"></div>
+    <div id="w-red"></div>
+    <div id="w-flash"></div>
+    <div id="w-black"></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, at = (k) => C[k], D = C._duration;
+      const W = SNOW3D.create(document.getElementById("w-3d"), { seed: 11 });
+      const s = W.state, P = W.P;
+      const R = Array.from(document.querySelectorAll('[data-composition-id="world"]')).pop();
+      const q = (sel) => R.querySelector(sel);
+      const tl = gsap.timeline({ paused: true });
+
+      const set = (t, p) => tl.set(s, p, t);
+      const go = (t, p, d, e) => tl.to(s, Object.assign({}, p, { duration: Math.max(0.05, d), ease: e || "sine.inOut" }), t);
+      const flash = (t, c, o) => { tl.set(q("#w-flash"), { background: c || "#fff" }, t); tl.fromTo(q("#w-flash"), { opacity: o || 0.6 }, { opacity: 0, duration: 0.3, immediateRender: false }, t); };
+      const shake = (t, amp, d) => { tl.set(s, { shake: amp }, t); tl.to(s, { shake: 0, duration: d || 0.5, ease: "power2.out" }, t + 0.02); };
+      const red = (a, b) => { tl.to(q("#w-red"), { opacity: 1, duration: 0.25 }, a); tl.to(q("#w-red"), { opacity: 0, duration: 0.3 }, b); };
+      const shot = (t, cam, tgt, extra) => set(t, Object.assign({ camX: cam[0], camY: cam[1], camZ: cam[2], tgtX: tgt[0], tgtY: tgt[1], tgtZ: tgt[2] }, extra || {}));
+      const move = (t, cam, tgt, d, e, extra) => go(t, Object.assign({ camX: cam[0], camY: cam[1], camZ: cam[2], tgtX: tgt[0], tgtY: tgt[1], tgtZ: tgt[2] }, extra || {}), d, e);
+      const span = (a, b) => at(b) - at(a);
+
+      // ключевые точки
+      const LOCK = [P.LOCK.x, P.LOCK.y, P.LOCK.z];
+      const CH = [P.CHIM.x, P.CHIM.y + 0.4, P.CHIM.z];
+      const WIN = [P.WIN.x, P.WIN.y, P.WIN.z];
+      const T0 = P.TABLE();
+      const PL1 = [T0.x - 0.4, T0.y + 0.03, T0.z + 0.12], PL2 = [T0.x + 0.4, T0.y + 0.03, T0.z - 0.12];
+      const EYE = W.local(0.12, 1.15, -0.37);
+      const MIR = W.local(0.452, 1.302, -0.01);
+      const pr = (i) => P.printsA[i];
+      const ST = P.STOOL();
+      // след у калитки и «свежий» след посреди улицы
+      const fi = P.printsA.findIndex((p) => p.x > -7);
+      const F = pr(fi);
+
+      // ===== HOOK: следы к дому, но не обратно =====
+      Object.assign(s, { exposure: 1.0, snow: 0.8, wind: 0.35, tail: 0.5, torch: 0, hand: 0.6, fov: 44 });
+      shot(0, [-7.5, 0.32, 1.1], [-1.5, 0.05, -2.2], { fov: 46, roll: 0.03 });
+      move(0, [-2.6, 0.3, -0.5], [0.2, 0.2, -6], at("notback") - 0.05, "sine.in");
+      // «но не обратно»: камера у калитки смотрит назад — одна цепочка, обратной нет
+      shot(at("notback"), [-0.9, 1.15, -1.9], [-26, 0.1, 0.5], { fov: 50, roll: 0 });
+      move(at("notback"), [-1.1, 1.25, -1.6], [-26, 0.3, 0.5], 1.2, "power2.out", { fov: 40 });
+      flash(at("notback"), "#fff", 0.45);
+      shake(at("notback") + 1.25, 1.4, 0.6);
+      red(at("notback") + 1.25, at("jan"));
+
+      // ===== ROAD: январь, машина у калитки, пустое СНТ =====
+      shot(at("jan"), [-22, 13, 21], [1, 0.5, -7], { fov: 40, hand: 0.2, roll: 0 });
+      move(at("jan"), [-14, 9, 15], [1.5, 0.8, -7], span("jan", "leave"), "sine.inOut");
+      shot(at("leave"), [9.5, 1.5, 5.5], [3.2, 0.9, 0.8], { fov: 36, hand: 0.4 });
+      move(at("leave"), [8, 1.4, 4.2], [3.0, 0.9, 0.6], span("leave", "nobody"));
+      shot(at("nobody"), [7.5, 1.5, 1.2], [45, 2.2, 0.2], { fov: 44 });
+      move(at("nobody"), [9.5, 1.5, 1.0], [45, 2.4, 0.2], span("nobody", "empty"));
+      shot(at("empty"), [12, 5, 12], [0, 0.5, -10], { fov: 46, hand: 0.15 });
+      move(at("empty"), [10, 22, 16], [0, 0, -9], span("empty", "flat"), "power1.inOut");
+
+      // ===== TRACKS: ровно; одна цепочка; из леса; свежие; обратно — ничего =====
+      shot(at("flat"), [-24, 0.22, 2.6], [-14, 0.05, 2.0], { fov: 40, hand: 0.3 });
+      move(at("flat"), [-21, 0.22, 2.5], [-11, 0.05, 1.9], span("flat", "chain"), "none");
+      // поворот — цепочка следов
+      move(at("chain"), [-19.5, 0.5, 2.2], [-16, 0, -0.1], 0.9, "power2.inOut");
+      // из леса: взгляд вдоль следов на стену леса, потом — к калитке
+      shot(at("forest"), [-14, 1.3, 1.2], [-60, 3, 0.4], { fov: 38 });
+      move(at("forest"), [-15, 1.25, 1.1], [-60, 3.5, 0.4], 1.4, "sine.out", { fov: 34 });
+      shot(at("forest") + 1.5, [-9, 1.2, 1.3], [0, 0.6, -3.5], { fov: 40 });
+      move(at("forest") + 1.5, [-7.5, 1.1, 1.1], [0, 0.6, -3.5], span("forest", "fresh") - 1.5);
+      // свежий след крупно, телефон-фонарик
+      shot(at("fresh"), [F.x + 0.5, 0.5, F.z + 0.6], [F.x, -0.06, F.z], { fov: 40, torch: 0, hand: 0.25, torchAim: 1, torchX: F.x, torchY: -0.05, torchZ: F.z });
+      move(at("fresh"), [F.x + 0.36, 0.38, F.z + 0.45], [F.x, -0.06, F.z], span("fresh", "nothing"), "sine.out");
+      // вид сверху: одна цепочка в калитку
+      shot(at("nothing"), [-4, 13, 0.0], [-4, 0, -0.06], { fov: 40, torch: 0, torchAim: 0, roll: Math.PI / 2, hand: 0.1 });
+      move(at("nothing"), [-4, 17, 0.0], [-4, 0, -0.06], span("nothing", "padlock"), "sine.out");
+
+      // ===== LOCK: замок под снегом; выдох; голову вверх; дым =====
+      shot(at("padlock"), [1.0, 1.25, -10.2], LOCK, { fov: 34, roll: 0, torch: 0.3, hand: 0.5, torchAim: 1, torchX: LOCK[0], torchY: LOCK[1], torchZ: LOCK[2] });
+      move(at("padlock"), [0.6, 0.95, -11.75], LOCK, span("padlock", "exhale"), "power1.out", { fov: 30, torch: 0.08 });
+      set(at("exhale"), { breath: at("exhale") + 0.1 });
+      move(at("exhale"), [0.56, 0.93, -11.85], LOCK, span("exhale", "up"));
+      // поднимаете голову: камера отъезжает, взгляд вверх по стене к трубе
+      move(at("up"), [1.4, 1.35, -10.0], CH, span("up", "smoke"), "power2.inOut", { fov: 44, torch: 0 });
+      shot(at("smoke"), [7.0, 1.2, -3.5], CH, { fov: 34, hand: 0.35, torchAim: 0, torch: 0 });
+      move(at("smoke"), [6.4, 1.2, -4.6], CH, span("smoke", "dial"), "sine.in", { fov: 27 });
+      flash(at("smoke") + 0.6, "#300", 0.3);
+
+      // ===== CALL: сторож; «брат»; у вас нет брата =====
+      shot(at("dial"), [-1.2, 1.6, -6.0], [1.8, 1.8, -15], { fov: 46, hand: 0.6 });
+      move(at("dial"), [-0.4, 1.6, -6.8], [1.8, 1.9, -15], span("dial", "brother"));
+      shot(at("brother"), [1.0, 1.45, -8.6], WIN, { fov: 40 });
+      move(at("brother"), [1.6, 1.35, -9.6], WIN, span("brother", "nobro"));
+      shot(at("nobro"), [2.1, 1.3, -10.6], WIN, { fov: 30, hand: 0.3 });
+      move(at("nobro"), [2.4, 1.25, -11.1], WIN, span("nobro", "torch"), "power2.in", { fov: 24 });
+      flash(at("nobro"), "#f00", 0.35);
+      shake(at("nobro"), 1.0, 0.5);
+
+      // ===== WINDOW: фонарик в окно; две тарелки; пар; гость — вы =====
+      shot(at("torch"), [3.3, 1.45, -10.7], WIN, { fov: 36, torch: 0.35, torchAim: 1, torchX: WIN[0], torchY: WIN[1] - 0.2, torchZ: WIN[2] - 1.0, steam: 1, hand: 0.4 });
+      move(at("torch"), [3.0, 1.4, -11.6], WIN, span("torch", "plates"), "power1.in", { fov: 34 });
+      shot(at("plates"), [3.35, 1.7, -11.45], [2.7, 0.9, -13.5], { fov: 50, torch: 0.25, torchAim: 1, torchX: T0.x, torchY: T0.y, torchZ: T0.z });
+      move(at("plates"), [3.25, 1.66, -11.7], [2.7, 0.9, -13.5], span("plates", "steam"), "sine.inOut", { fov: 46 });
+      shot(at("steam"), [2.45, 1.55, -12.3], PL1, { fov: 24, torch: 0.07, torchAim: 1, torchX: PL1[0], torchY: PL1[1], torchZ: PL1[2] });
+      move(at("steam"), [2.45, 1.5, -12.36], [PL1[0], PL1[1] + 0.12, PL1[2]], span("steam", "guest"));
+      // второй прибор и отодвинутый табурет
+      shot(at("guest"), [3.2, 1.6, -11.9], PL2, { fov: 34, torch: 0.12, torchAim: 1, torchX: PL2[0], torchY: PL2[1], torchZ: PL2[2] });
+      move(at("guest"), [3.15, 1.5, -12.3], PL2, span("guest", "you"), "sine.inOut", { fov: 28 });
+      move(at("you"), [3.12, 1.45, -12.4], PL2, 0.35, "power3.in", { fov: 16 });
+      flash(at("you"), "#f00", 0.4); shake(at("you"), 1.2, 0.5);
+      red(at("you"), at("closer"));
+
+      // ===== SHACKLE: замок ближе; дужка перепилена; вставлена обратно =====
+      shot(at("closer"), [0.52, 0.9, -12.18], LOCK, { fov: 30, torch: 0.06, torchAim: 1, torchX: LOCK[0], torchY: LOCK[1], torchZ: LOCK[2], steam: 0, hand: 0.25 });
+      move(at("closer"), [0.47, 0.87, -12.26], LOCK, span("closer", "cut"), "power1.in", { fov: 26 });
+      const CUT = [LOCK[0] - 0.026, LOCK[1] + 0.03, LOCK[2]];
+      shot(at("cut"), [CUT[0] - 0.16, CUT[1] + 0.04, CUT[2] + 0.17], CUT, { fov: 26, torch: 0.025, torchAim: 1, torchX: CUT[0], torchY: CUT[1], torchZ: CUT[2] });
+      move(at("cut"), [CUT[0] - 0.12, CUT[1] + 0.03, CUT[2] + 0.13], CUT, span("cut", "back"), "sine.out", { fov: 22 });
+      go(at("back") + 0.3, { lockShift: 1 }, 0.25, "power2.out");
+      go(at("back") + 0.6, { lockShift: 0.4 }, 0.3, "sine.inOut");
+      shake(at("back") + 0.3, 0.4, 0.3);
+
+      // ===== CAR: бегом к машине; руки трясутся; зеркало; следы от сарая; не обратно =====
+      shot(at("run"), [0.2, 1.5, -11.2], [0.5, 1.0, -2], { fov: 56, torch: 0.3, torchAim: 0, shake: 2.2, hand: 1.2 });
+      move(at("run"), [0.2, 1.4, -4.6], [2.5, 0.9, 2.5], 1.4, "none");
+      move(at("run") + 1.4, [2.6, 1.35, 0.3], [3.6, 0.9, 2.6], 1.0, "none");
+      shot(at("run") + 2.4, [EYE.x, EYE.y, EYE.z], [EYE.x + 0.1, 0.95, EYE.z + 3], { fov: 62, torch: 0, shake: 1.2, cabin: 0.05, dash: 0.6 });
+      shake(at("run") + 2.4, 2.0, 0.5);
+      move(at("hands"), [EYE.x, EYE.y - 0.03, EYE.z], [EYE.x - 0.1, 0.8, EYE.z + 2], span("hands", "mirror"), "sine.inOut", { shake: 0.8 });
+      // зеркало: дом, дым
+      shot(at("mirror"), [EYE.x, EYE.y, EYE.z], [MIR.x, MIR.y - 0.03, MIR.z], { fov: 36, mirror: 1, shake: 0.25, hand: 0.25, mirTX: 1.6, mirTY: 3.0, mirTZ: -15 });
+      move(at("mirror"), [EYE.x, EYE.y, EYE.z], [MIR.x, MIR.y - 0.03, MIR.z], span("mirror", "newtr"), "sine.inOut", { fov: 26 });
+      // новые следы: зеркало «опускается» к снегу у сарая
+      set(at("newtr"), { showB: 1 });
+      go(at("newtr"), { mirTX: 6.5, mirTY: 1.2, mirTZ: -9.5 }, span("newtr", "shed"), "sine.inOut");
+      // от сарая — к машине: снаружи, низко, следы подходят к задней двери
+      shot(at("shed"), [5.7, 1.75, -5.0], [4.6, 0.0, 0.6], { fov: 46, mirror: 0, shake: 0, hand: 0.3, tail: 0.6 });
+      move(at("shed"), [5.5, 1.65, -4.4], [4.6, 0.1, 0.9], span("shed", "notback2"), "power1.in", { fov: 40 });
+      // «И не обратно»: снова зеркало — на заднем сиденье поднимается фигура
+      shot(at("notback2"), [EYE.x, EYE.y, EYE.z], [MIR.x, MIR.y - 0.03, MIR.z], { fov: 24, mirror: 1, figure: 1, figUp: 0, mirTX: 3.6, mirTY: 1.2, mirTZ: -4, hand: 0.15, shake: 0, cabin: 0 });
+      go(at("notback2") + 0.25, { figUp: 1 }, 1.3, "power1.inOut");
+      go(at("notback2") + 0.25, { fov: 15 }, 1.5, "power2.in");
+      flash(at("notback2") + 1.55, "#f00", 0.5); shake(at("notback2") + 1.55, 1.6, 0.4);
+      tl.to(q("#w-black"), { opacity: 0.55, duration: 0.4 }, at("notback2") + 1.7);
+
+      tl.to({}, { duration: D }, 0);
+      tl.eventCallback("onUpdate", () => W.render(tl.time()));
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady.snow3d = W.ready.then(() => W.render(0));
+      window.__timelines["world"] = tl;
+    })();
+  </script>
+</template>

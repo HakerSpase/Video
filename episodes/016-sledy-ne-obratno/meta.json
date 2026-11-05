@@ -1,0 +1,9 @@
+{
+  "id": "016-sledy-ne-obratno",
+  "name": "016 · Следы не обратно",
+  "scripts": [
+    "three-loaders.min.js",
+    "snow3d.js",
+    "phoneui.js"
+  ]
+}

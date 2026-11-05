@@ -257,6 +257,56 @@ def chime():
 
 # ---------------- сборка ----------------
 
+# ---------- зима (016): снег, ветер, металл ----------
+def crunch(rng, hard=1.0):
+    """шаг по свежему снегу: плотный хруст из сотен микрощелчков + глухой удар"""
+    n = int(0.32 * SR)
+    x = np.zeros(n)
+    k = int(180 * hard)
+    pos = (np.sort(rng.random(k)) ** 0.7 * 0.22 * SR).astype(int)
+    for i in pos:
+        L = int(rng.integers(20, 90))
+        if i + L < n:
+            x[i:i + L] += rng.standard_normal(L) * np.exp(-np.arange(L) / (L / 3)) * (0.4 + rng.random())
+    x = bp(x, 700, 6500)
+    u = np.arange(n) / SR
+    body = lp(rng.standard_normal(n), 300) * np.exp(-u / 0.06) * 1.5
+    return norm(x * env(n, 0.005, 0.12) + body)
+
+
+def wind_syn(rng, sec):
+    n = int(sec * SR)
+    u = np.arange(n) / SR
+    g = 0.6 + 0.4 * np.sin(2 * np.pi * u / 7.3) * np.sin(2 * np.pi * u / 3.1 + 1)
+    x = lp(rng.standard_normal(n), 500) * g + bp(rng.standard_normal(n), 900, 2600) * 0.15 * g ** 3
+    return norm(x)
+
+
+def clank(rng, f0=1900, dur=1.2):
+    n = int(dur * SR)
+    u = np.arange(n) / SR
+    x = sum(np.sin(2 * np.pi * f0 * r * u + rng.random() * 6) * np.exp(-u / (dur * d)) * a
+            for r, d, a in [(1, 0.35, 1), (1.73, 0.22, 0.6), (2.61, 0.15, 0.5), (3.9, 0.08, 0.35), (0.52, 0.5, 0.4)])
+    x += bp(rng.standard_normal(n), 2000, 8000) * np.exp(-u / 0.01) * 0.8
+    return norm(x)
+
+
+def ringback(sec):
+    """длинные гудки: 425 Гц, 0.8 с звук / 3.2 с тишина"""
+    n = int(sec * SR)
+    u = np.arange(n) / SR
+    on = ((u % 4.0) < 0.8).astype(float)
+    on = smooth(on, 0.01)
+    return np.sin(2 * np.pi * 425 * u) * on
+
+
+def exhale(rng, dur=1.3):
+    n = int(dur * SR)
+    u = np.linspace(0, 1, n)
+    e = np.sin(np.pi * u ** 0.6) ** 2
+    return norm(bp(rng.standard_normal(n), 250, 2200) * e)
+
+
 def main():
     ep = Path(sys.argv[1])
     spec = json.loads((ep / "carsound.json").read_text(encoding="utf-8"))
@@ -316,6 +366,11 @@ def main():
         "buzz": lambda s: norm(np.sin(2 * np.pi * 100 * np.arange(int(s * SR)) / SR) + 0.5 * np.sin(2 * np.pi * 200 * np.arange(int(s * SR)) / SR)),
         "heart": lambda s: sample("heartbeat", heartbeat_syn(rng, s, 96)),
         "breath": lambda s: sample("breathing", lp(rng.standard_normal(int(s * SR)), 1500) * 0.3),
+        "wind": lambda s: sample("wind", wind_syn(rng, s)),
+        "wind_syn": lambda s: wind_syn(rng, s),
+        "wind_in": lambda s: lp(sample("wind", wind_syn(rng, s)), 350),
+        "night": lambda s: sample("night", lp(rng.standard_normal(int(s * SR)), 200) * 0.2),
+        "hush": lambda s: norm(lp(rng.standard_normal(int(s * SR)), 250)),
     }
     for b in spec.get("beds", []):
         kind, a, z, g = b[0], T(b[1]), T(b[2]), b[3]
@@ -392,6 +447,36 @@ def main():
                 put(footstep_wet(np.random.default_rng(100 + k)), tt, 0.7 * g, 0.15 if k % 2 else -0.15, 0.2)
                 tt += 0.29 + 0.03 * np.sin(k)
                 k += 1
+        elif kind in ("crunch_walk", "crunch_run"):
+            t1 = T(ev[2])
+            gg = ev[3] if len(ev) > 3 else 1.0
+            step = 0.56 if kind == "crunch_walk" else 0.31
+            k = 0
+            tt = t
+            while tt < t1:
+                put(crunch(np.random.default_rng(300 + k), 1.0 if kind == "crunch_walk" else 1.4), tt, (0.55 if kind == "crunch_walk" else 0.75) * gg, 0.12 if k % 2 else -0.12, 0.1)
+                tt += step + 0.025 * np.sin(k * 1.7)
+                k += 1
+        elif kind == "crunch":
+            put(crunch(np.random.default_rng(int(t * 100)), 1.2), t, 0.7 * g, 0, 0.1)
+        elif kind == "gate":
+            x = sample("gate", creak(rng, 1.4))
+            i0 = int((ev[3] if len(ev) > 3 else 0) * SR)
+            seg = x[i0:i0 + int(1.6 * SR)]
+            put(seg * fades(len(seg), 0.02, 0.3), t, 0.5 * g, -0.2, 0.3)
+        elif kind == "clank":
+            put(clank(rng, 1900), t, 0.45 * g, 0.1, 0.25)
+        elif kind == "tick":
+            put(clank(rng, 3100, 0.35), t, 0.3 * g, 0.1, 0.2)
+        elif kind == "car_lock":
+            put(thump(rng, 140, 0.1, 0.8), t, 0.7 * g, 0, 0.1)
+            put(click(rng, 2200, 0.02), t + 0.03, 0.5 * g)
+            put(thump(rng, 140, 0.1, 0.8), t + 0.09, 0.5 * g, 0.3, 0.1)
+        elif kind == "exhale":
+            put(exhale(rng, 1.3), t, 0.35 * g, 0, 0.1)
+        elif kind == "ringback":
+            t1 = T(ev[2])
+            put(ringback(t1 - t), t, 0.12 * g, 0, 0.05)
         elif kind == "chime":
             put(chime(), t, 0.4 * g, 0, 0.3)
         elif kind == "sting":
