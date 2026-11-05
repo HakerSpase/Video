@@ -1,0 +1,10 @@
+{
+ "per_query": 10,
+ "sketchfab": [
+  "wooden dacha house", "old wooden house russia", "small wooden cabin realistic", "wooden shed",
+  "padlock", "old padlock rusty", "pine tree realistic", "spruce tree snow",
+  "wooden fence gate", "picket fence", "soup bowl plate", "rustic wooden table",
+  "rear view mirror", "snow footprints", "brick chimney", "kerosene lamp"
+ ],
+ "polyhaven": ["fence", "pine", "lamp", "plate", "bowl", "table", "shed", "lock"]
+}
