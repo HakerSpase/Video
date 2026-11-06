@@ -1,0 +1,69 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #2a2118; }
+    #bg { position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); object-fit: cover; opacity: 0; }
+    #vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, rgba(255,214,150,0.18) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.75) 100%); }
+    #rays { position: absolute; left: 50%; top: 980px; width: 2200px; height: 2200px; margin: -1100px 0 0 -1100px; opacity: 0;
+      background: repeating-conic-gradient(from 0deg, rgba(255,226,160,0.10) 0deg 8deg, rgba(255,226,160,0) 8deg 20deg); border-radius: 50%; }
+    #pack { position: absolute; left: 210px; top: 350px; width: 660px; height: auto; transform-origin: 50% 100%;
+      filter: drop-shadow(0 40px 50px rgba(0,0,0,0.6)); }
+    #dot { position: absolute; left: 750px; top: 793px; width: 48px; height: 48px; border-radius: 50%; opacity: 0;
+      box-shadow: 0 0 0 0 rgba(90,255,120,0.9), 0 0 40px 14px rgba(90,255,120,0.55); }
+    #clover { position: absolute; left: 40px; top: 1180px; width: 300px; height: 346px; overflow: visible; }
+    #clover .st { transform-box: fill-box; transform-origin: 50% 100%; } #clover .l1, #clover .l2, #clover .l3 { transform-origin: 0px 0px; }
+    .tag { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; }
+    .tag span { display: inline-block; font-family: "Pixelify Sans", monospace; font-weight: 700; color: #fff; font-size: 54px; padding: 10px 26px;
+      background: #1f7a35; border: 4px solid #0b0b0b; box-shadow: 6px 6px 0 #0b0b0b; }
+    .tag.k span { background: #f2e6cf; color: #1e5c2a; }
+    #t1 { top: 140px; } #t2 { top: 240px; }
+    .side { position: absolute; opacity: 0; font-family: "Pixelify Sans", monospace; font-weight: 700; font-size: 44px; color: #fff;
+      padding: 8px 18px; background: rgba(10,10,10,0.82); border: 3px solid #fff; }
+    #s1 { right: 40px; top: 1250px; } #s2 { right: 40px; top: 1345px; }
+  </style>
+  <div id="root" data-composition-id="fin" data-width="1080" data-height="1920">
+    <img id="bg" src="assets/fin_bg.jpg" alt="">
+    <div id="rays"></div>
+    <div id="vig"></div>
+    <img id="pack" src="assets/pack_front.png" alt="">
+    <div id="dot"></div>
+    <svg id="clover" viewBox="0 0 260 300">
+      <path class="lf st" d="M130 300 C 126 250, 120 200, 130 140" stroke="#3f8f3a" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <g transform="translate(130 140)">
+        <g class="lf l1"><path transform="rotate(0)" d="M0 0 C -6 -14, -40 -22, -40 -52 C -40 -72, -16 -78, 0 -60 C 16 -78, 40 -72, 40 -52 C 40 -22, 6 -14, 0 0 Z" fill="#4caf50" stroke="#1b5e20" stroke-width="5"/></g>
+        <g class="lf l2"><path transform="rotate(120)" d="M0 0 C -6 -14, -40 -22, -40 -52 C -40 -72, -16 -78, 0 -60 C 16 -78, 40 -72, 40 -52 C 40 -22, 6 -14, 0 0 Z" fill="#43a047" stroke="#1b5e20" stroke-width="5"/></g>
+        <g class="lf l3"><path transform="rotate(240)" d="M0 0 C -6 -14, -40 -22, -40 -52 C -40 -72, -16 -78, 0 -60 C 16 -78, 40 -72, 40 -52 C 40 -22, 6 -14, 0 0 Z" fill="#66bb6a" stroke="#1b5e20" stroke-width="5"/></g>
+      </g>
+    </svg>
+    <div class="tag" id="t1"><span>ЗАПЕЧЕНО, НЕ ЖАРЕНО</span></div>
+    <div class="tag k" id="t2"><span>24 г белка · без пластика</span></div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, ID = "fin";
+      const S = C[ID], at = (k) => C[k] - S, D = C._duration - S;
+      const R = Array.from(document.querySelectorAll('[data-composition-id="' + ID + '"]')).pop();
+      const q = (s) => Array.from(R.querySelectorAll(s));
+      const tl = gsap.timeline({ paused: true });
+      tl.to(q("#bg"), { opacity: 1, duration: 0.25 }, 0);
+      tl.fromTo(q("#bg"), { scale: 1.12 }, { scale: 1.0, duration: D, ease: "none" }, 0);
+      tl.to(q("#rays"), { opacity: 1, duration: 0.4 }, 0.2);
+      tl.fromTo(q("#rays"), { rotation: 0 }, { rotation: 40, duration: D, ease: "none" }, 0);
+      // пачка падает сверху и пружинит
+      tl.fromTo(q("#pack"), { y: -1500, rotation: -14 }, { y: 0, rotation: 0, duration: 0.5, ease: "power3.in" }, 0);
+      tl.to(q("#pack"), { scaleY: 0.86, scaleX: 1.08, duration: 0.08, ease: "power2.out" }, 0.5);
+      tl.to(q("#pack"), { scaleY: 1, scaleX: 1, duration: 0.5, ease: "elastic.out(1.2, 0.35)" }, 0.58);
+      tl.to(q("#pack"), { y: -12, duration: 1.4, yoyo: true, repeat: Math.max(1, Math.floor(D / 1.4)), ease: "sine.inOut" }, 1.1);
+      // датчик свежести мигает зелёным
+      tl.to(q("#dot"), { opacity: 1, duration: 0.12 }, 0.75);
+      tl.fromTo(q("#dot"), { scale: 0.6 }, { scale: 1.5, opacity: 0, duration: 0.7, repeat: Math.max(1, Math.floor(D / 0.9)), repeatDelay: 0.2, ease: "power2.out" }, 0.8);
+      // клевер растёт
+      tl.fromTo(q("#clover .st"), { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: "back.out(2)" }, at("baked") + 0.1);
+      q("#clover .l1, #clover .l2, #clover .l3").forEach((el, i) => tl.fromTo(el, { scale: 0, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "back.out(3)" }, at("baked") + 0.35 + i * 0.12));
+      tl.to(q("#clover"), { rotation: 3, duration: 0.8, yoyo: true, repeat: 4, ease: "sine.inOut", transformOrigin: "50% 100%" }, at("baked") + 0.8);
+      // плашки
+      tl.fromTo(q("#t1"), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.14, ease: "power4.in" }, at("baked"));
+      tl.fromTo(q("#t2"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }, at("baked") + 0.5);
+      window.__timelines[ID] = tl;
+    })();
+  </script>
+</template>

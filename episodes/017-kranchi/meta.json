@@ -1,5 +1,7 @@
 {
   "id": "017-kranchi",
   "name": "017 · КРАНЧИ — бык-пекарь",
-  "scripts": []
+  "scripts": [],
+  "cut_flash": false,
+  "captions": "pixel-word"
 }

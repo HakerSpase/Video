@@ -231,7 +231,13 @@ def align_to_audio(words, audio):
 
 # ---------------------------------------------------------------- captions
 
-def caption_groups(words):
+def caption_groups(words, per_word=False):
+    if per_word:  # по одному слову (стиль «абсурдной документалки»): слово держится до следующего
+        out = []
+        for i, w in enumerate(words):
+            nxt = words[i + 1]["start"] - 0.02 if i + 1 < len(words) else w["end"] + 0.6
+            out.append({"words": [w], "start": w["start"], "end": max(min(nxt, w["end"] + 0.9), w["start"] + 0.1)})
+        return out
     groups, cur = [], []
     for w in words:
         if cur:
@@ -286,6 +292,43 @@ def write_captions(ep, groups, duration):
       text-shadow: 0 4px 0 rgba(0,0,0,0.55), 0 0 26px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.9); }}
     .w.hl-y {{ text-shadow: 0 4px 0 rgba(0,0,0,0.55), 0 0 26px rgba(0,0,0,0.9), 0 0 34px rgba(255,210,63,0.35); }}
     .w.hl-r {{ text-shadow: 0 4px 0 rgba(0,0,0,0.55), 0 0 26px rgba(0,0,0,0.9), 0 0 34px rgba(255,46,62,0.45); }}
+  </style>
+  <div id="root" data-composition-id="captions" data-width="{W}" data-height="{H}">
+{chr(10).join(rows)}
+  </div>
+  <script>
+    const tl = gsap.timeline({{ paused: true }});
+{chr(10).join(js)}
+    window.__timelines["captions"] = tl;
+  </script>
+</template>
+"""
+    (ep / "compositions" / "captions.html").write_text(html, encoding="utf-8")
+
+
+def write_captions_pixel(ep, groups):
+    """Одно слово по центру, строчными, пиксельным шрифтом (Pixelify Sans, OFL) — как в мем-документалках."""
+    rows, js = [], []
+    for gi, g in enumerate(groups):
+        w = g["words"][0]
+        txt = esc(w["display"].strip("«»\"()").rstrip(".,!?…:;—– ").lower())
+        cls = " hl-" + w["hl"] if w["hl"] else ""
+        rows.append(f'    <div id="c{gi}" class="clip cap" data-start="{g["start"]:.3f}" '
+                    f'data-duration="{g["end"] - g["start"]:.3f}" data-track-index="0">'
+                    f'<div id="c{gi}i" class="cap-in{cls}">{txt}</div></div>')
+        js.append(f'    tl.fromTo("#c{gi}i", {{ scale: 0.9 }}, {{ scale: 1, duration: 0.08, ease: "power2.out" }}, {g["start"]:.3f});')
+    html = f"""<template>
+  <style>
+    @font-face {{ font-family: "Pixelify Sans"; font-weight: 700; src: url("assets/lib/fonts/pixelify-sans-cyrillic-700-normal.woff2") format("woff2");
+      unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }}
+    @font-face {{ font-family: "Pixelify Sans"; font-weight: 700; src: url("assets/lib/fonts/pixelify-sans-latin-700-normal.woff2") format("woff2"); }}
+    #root {{ position: absolute; inset: 0; pointer-events: none; }}
+    .cap {{ position: absolute; left: 0; width: 100%; top: 1440px; height: 120px; z-index: 50; }}
+    .cap-in {{ width: 100%; text-align: center; font-family: "Pixelify Sans", monospace; font-weight: 700; font-size: 74px;
+      line-height: 1; color: #fff; letter-spacing: 0.02em;
+      text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 4px 4px 0 #000, -4px 4px 0 #000, 4px -4px 0 #000, -4px -4px 0 #000, 0 8px 0 rgba(0,0,0,0.5); }}
+    .cap-in.hl-y {{ color: #ffd23f; }}
+    .cap-in.hl-r {{ color: #ff3b3b; }}
   </style>
   <div id="root" data-composition-id="captions" data-width="{W}" data-height="{H}">
 {chr(10).join(rows)}
@@ -476,7 +519,7 @@ def main():
     for f in ["human3d.js", "night3d.js"] + [x for x in meta_scripts if "/" not in x]:
         if (ROOT / "lib" / f).exists():
             shutil.copyfile(ROOT / "lib" / f, ep / "assets" / "lib" / f)
-    for d in ("humans", "tex"):
+    for d in ("humans", "tex", "fonts"):
         if (ROOT / "lib" / d).exists():
             shutil.copytree(ROOT / "lib" / d, ep / "assets" / "lib" / d, dirs_exist_ok=True)
 
@@ -500,8 +543,13 @@ def main():
         voice_len = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
                                           "-of", "csv=p=0", str(voice)], capture_output=True, text=True).stdout)
     duration = round(max(words[-1]["end"] + TAIL, voice_len + 0.5), 2)
-    groups = caption_groups(words)
-    write_captions(ep, groups, duration)
+    meta = json.loads((ep / "meta.json").read_text(encoding="utf-8")) if (ep / "meta.json").exists() else {}
+    pixel = meta.get("captions") == "pixel-word"
+    groups = caption_groups(words, per_word=pixel)
+    if pixel:
+        write_captions_pixel(ep, groups)
+    else:
+        write_captions(ep, groups, duration)
     cues = write_index(ep, scenes, words, beats, duration, voice)
     (ep / "assets" / "words.json").write_text(json.dumps(
         [{"id": f"w{w['i']}", "text": w["display"], "start": round(w["start"], 3), "end": round(w["end"], 3)}

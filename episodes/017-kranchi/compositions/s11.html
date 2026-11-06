@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #card { position: absolute; inset: 0; opacity: 0; }
+    #bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    #vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(255,214,150,0.16) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.7) 100%); }
+    #pk { position: absolute; left: 150px; top: 250px; width: 780px; transform-origin: 75% 40%; filter: drop-shadow(0 40px 50px rgba(0,0,0,0.6)); }
+    #pk img { width: 100%; display: block; }
+    /* датчик свежести на пачке: (523, 434) из 613×919 → в пачке шириной 780 */
+    #ind { position: absolute; left: 638px; top: 526px; width: 56px; height: 56px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #8dff9a, #1fae3c 60%, #0d6b22); box-shadow: 0 0 30px 10px rgba(80,255,120,0.55); }
+    #indr { position: absolute; left: 638px; top: 526px; width: 56px; height: 56px; border-radius: 50%; opacity: 0;
+      background: radial-gradient(circle at 35% 35%, #ff9a9a, #e01b1b 60%, #7a0a0a); box-shadow: 0 0 36px 14px rgba(255,40,40,0.65); }
+  </style>
+  <div id="root" data-composition-id="s11" data-width="1080" data-height="1920">
+    <div id="card">
+      <img id="bg" src="assets/s11_bg.jpg" alt="">
+      <div id="vig"></div>
+      <div id="pk"><img src="assets/pack_front.png" alt=""><div id="ind"></div><div id="indr"></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.CUES, ID = "s11";
+      const S = C[ID], at = (k) => C[k] - S;
+      const R = Array.from(document.querySelectorAll('[data-composition-id="' + ID + '"]')).pop();
+      const q = (s) => Array.from(R.querySelectorAll(s));
+      const tl = gsap.timeline({ paused: true });
+      const red = C._red != null ? C._red - S : at("sensor") + 1.42;  // слово «красный»
+      tl.set(q("#card"), { opacity: 1 }, 0);
+      tl.fromTo(q("#pk"), { scale: 1 }, { scale: 1.18, duration: at("opened"), ease: "power1.inOut" }, 0);
+      tl.fromTo(q("#ind"), { scale: 1 }, { scale: 1.25, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.1);
+      tl.to(q("#indr"), { opacity: 1, duration: 0.08 }, red);
+      tl.fromTo(q("#indr"), { scale: 1.6 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, red);
+      tl.to(q("#pk"), { x: 8, duration: 0.04, yoyo: true, repeat: 5, ease: "none" }, red);
+      tl.set(q("#card"), { opacity: 0 }, at("opened") - 0.02);
+      window.__timelines[ID] = tl;
+    })();
+  </script>
+</template>

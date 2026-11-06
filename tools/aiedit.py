@@ -67,6 +67,7 @@ def main():
     grade = ("eq=contrast=1.06:saturation=0.86:gamma=0.97,"
              "colorbalance=rs=-0.03:bs=0.04:rh=0.02:bh=-0.02,"
              "vignette=angle=PI/5,fade=in:st=0:d=0.4")
+    grade = cfg.get("grade", grade)  # свой грейд эпизода (например, тёплый — без холодного сдвига)
     run(["-f", "concat", "-safe", "0", "-i", str(lst), "-vf", grade, "-r", str(fps), "-c:v", "libx264", "-crf", "17",
          "-preset", "medium", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(ep / "assets" / "ai.mp4")])
     print("→", ep / "assets" / "ai.mp4")
