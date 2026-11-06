@@ -19,6 +19,15 @@
     .side { position: absolute; opacity: 0; font-family: "Pixelify Sans", monospace; font-weight: 700; font-size: 44px; color: #fff;
       padding: 8px 18px; background: rgba(10,10,10,0.82); border: 3px solid #fff; }
     #s1 { right: 40px; top: 1250px; } #s2 { right: 40px; top: 1345px; }
+    #cover { position: absolute; inset: 0; opacity: 0; z-index: 60; background: #1b150f; }
+    #cbull { position: absolute; left: 0; top: 560px; width: 1080px; height: auto; }
+    #cgrad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 45%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.75) 100%); }
+    #ck { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-family: "Pixelify Sans", monospace; font-weight: 700; font-size: 50px; color: #ffd23f;
+      text-shadow: 4px 4px 0 #000; }
+    #ch { position: absolute; left: 0; right: 0; top: 225px; margin: 0; text-align: center; font-family: "Pixelify Sans", monospace; font-weight: 700;
+      font-size: 150px; line-height: 0.95; color: #fff; text-shadow: 7px 0 0 #000, -7px 0 0 #000, 0 7px 0 #000, 0 -7px 0 #000, 10px 12px 0 rgba(0,0,0,0.6); }
+    #ch span { color: #4fd36a; }
+    #cpack { position: absolute; right: 40px; bottom: 70px; width: 380px; transform: rotate(8deg); filter: drop-shadow(0 30px 40px rgba(0,0,0,0.7)); }
   </style>
   <div id="root" data-composition-id="fin" data-width="1080" data-height="1920">
     <img id="bg" src="assets/fin_bg.jpg" alt="">
@@ -36,6 +45,14 @@
     </svg>
     <div class="tag" id="t1"><span>ЗАПЕЧЕНО, НЕ ЖАРЕНО</span></div>
     <div class="tag k" id="t2"><span>24 г белка · без пластика</span></div>
+    <!-- обложка: последние доли секунды (её выбирают обложкой в TikTok) -->
+    <div id="cover">
+      <img id="cbull" src="assets/cover_bull.jpg" alt="">
+      <div id="cgrad"></div>
+      <div id="ck">ЖАРИТЬ ЕМУ ЗАПРЕТИЛИ</div>
+      <h1 id="ch">БЫК<br>ПЕЧЁТ<br><span>ЧИПСЫ</span></h1>
+      <img id="cpack" src="assets/pack_front.png" alt="">
+    </div>
   </div>
   <script>
     (function () {
@@ -63,6 +80,7 @@
       // плашки
       tl.fromTo(q("#t1"), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.14, ease: "power4.in" }, at("baked"));
       tl.fromTo(q("#t2"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }, at("baked") + 0.5);
+      tl.set(q("#cover"), { opacity: 1 }, D - 0.15);
       window.__timelines[ID] = tl;
     })();
   </script>

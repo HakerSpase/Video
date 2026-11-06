@@ -142,5 +142,5 @@
    "out": 8.0
   }
  ],
- "grade": "eq=contrast=1.04:saturation=0.96,vignette=angle=PI/6,fade=in:st=0:d=0.15"
+ "grade": "eq=contrast=1.04:saturation=0.98:gamma=1.07:brightness=0.02,vignette=angle=PI/7"
 }
