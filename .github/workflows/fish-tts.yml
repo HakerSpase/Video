@@ -14,6 +14,10 @@ on:
       voice:
         description: "search: слово для поиска голоса; tts: id голоса"
         default: "диктор"
+      key:
+        description: "Ключ Fish Audio, если нет секрета FISH_API_KEY (скрывается в логах; после запуска ключ удалить)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -26,8 +30,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Озвучка
         env:
-          FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
+          SECRET_KEY: ${{ secrets.FISH_API_KEY }}
         run: |
+          IN_KEY=$(jq -r '.inputs.key // ""' "$GITHUB_EVENT_PATH")
+          if [ -n "$IN_KEY" ]; then echo "::add-mask::$IN_KEY"; export FISH_API_KEY="$IN_KEY"; else export FISH_API_KEY="$SECRET_KEY"; fi
           EP="${{ inputs.episode }}"
           mkdir -p /tmp/fish
           if [ "${{ inputs.mode }}" = "tts" ]; then
