@@ -1,0 +1,168 @@
+[
+ {
+  "id": "64bc6c41718c41328790b00fb8e4ed4d",
+  "title": "Володарский",
+  "description": "И восстали машины из пепла ядерного огня и пошла война на уничтожение человечества. И метнулись работники студии искать пропажу Петровича. И искали её до прихода дикторши, погоду читавшей. Арнольд Шва",
+  "tags": [
+   "male",
+   "old",
+   "advertisement",
+   "deep",
+   "cinematic",
+   "dramatic",
+   "announcer",
+   "serious",
+   "Russian"
+  ],
+  "uses": 15437,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "74c6d46c3b7a48588f6a96e40803ae0e",
+  "title": "диктор из макс пейн 2 ",
+  "description": "A deep and resonant male voice with a calm, measured delivery, perfect for philosophical narration or cinematic storytelling. The tone is smooth and professional, conveying a sense of authority and de",
+  "tags": [
+   "male",
+   "old",
+   "narration",
+   "cinematic",
+   "deep",
+   "smooth",
+   "calm",
+   "measured",
+   "professional"
+  ],
+  "uses": 14402,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "69d1b6aa02114394bbe4b727706da414",
+  "title": "Русский Диктор Объявлений",
+  "description": "Чистый и профессиональный женский голос, идеально подходящий для объявлений, навигации и информационных сообщений.",
+  "tags": [
+   "female",
+   "middle-aged",
+   "narration",
+   "educational",
+   "clear",
+   "crisp",
+   "professional",
+   "calm",
+   "measured",
+   "neutral-tone",
+   "authoritative",
+   "storytelling"
+  ],
+  "uses": 12806,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "383a4b35c14e40929092588aecfe5a73",
+  "title": "Алексей Россошанский",
+  "description": "Голсо Московского диктора",
+  "tags": [
+   "male",
+   "middle-aged",
+   "conversational",
+   "deep",
+   "low",
+   "soft",
+   "warm",
+   "gentle",
+   "announcer",
+   "confident",
+   "energetic",
+   "professional",
+   "cheerful",
+   "narration",
+   "authoritative",
+   "measured",
+   "Russian"
+  ],
+  "uses": 11829,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "9ffdb8280c8c4c139223563b4ba4c1f8",
+  "title": "Полянски",
+  "description": "\r\nЭтот бот умеет озвучивать и стилизовать любой текст в стиле популярной в 90-е серии документальных фильмов \"Криминальная Россия\". Сообщения генерируются с помощью нейросетей и озвучиваются голосом л",
+  "tags": [
+   "male",
+   "old",
+   "narration",
+   "deep",
+   "professional",
+   "serious",
+   "authoritative",
+   "Russian",
+   "measured"
+  ],
+  "uses": 9481,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "63e3591ab87f4fe98516b152680f18c4",
+  "title": "Диктор битвы экстрасенсов",
+  "description": "A middle-aged male voice with a serious and professional tone, speaking with a distinct Russian accent. The voice is smooth and measured, making it ideal for narrative or documentary content.",
+  "tags": [
+   "male",
+   "old",
+   "narration",
+   "deep",
+   "medium",
+   "documentary",
+   "professional",
+   "serious",
+   "smooth",
+   "measured",
+   "Russian Accent"
+  ],
+  "uses": 7990,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "d4e8d103073144e881c52731af18fafc",
+  "title": "Диктор",
+  "description": "A professional and serious middle-aged male voice with a clear, measured Russian delivery. It features an authoritative and steady tone well-suited for news reporting, narration, or formal broadcastin",
+  "tags": [
+   "male",
+   "young",
+   "narration",
+   "professional",
+   "serious",
+   "measured",
+   "clear",
+   "announcer",
+   "Russian"
+  ],
+  "uses": 7330,
+  "error": "HTTP Error 402: Payment Required"
+ },
+ {
+  "id": "a8c4213986e041ca92026419d81badf1",
+  "title": "Опытный Диктор",
+  "description": "Глубокий мужской голос среднего возраста, идеально подходящий для повествования и исторических документальных фильмов.",
+  "tags": [
+   "male",
+   "middle-aged",
+   "narration",
+   "educational",
+   "deep",
+   "low",
+   "calm",
+   "measured",
+   "authoritative",
+   "professional",
+   "serious",
+   "clear",
+   "storytelling",
+   "narrative",
+   "documentary",
+   "old",
+   "confident",
+   "crisp"
+  ],
+  "uses": 6369,
+  "error": "HTTP Error 402: Payment Required"
+ }
+]
