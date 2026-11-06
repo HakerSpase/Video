@@ -1,0 +1,5 @@
+{
+ "bpm": 80,
+ "stops": [["boss", 0.95], ["unaware", 1.05], ["opened", 0.6]],
+ "end_hit": "brand"
+}
