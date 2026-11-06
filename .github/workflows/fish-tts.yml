@@ -1,0 +1,49 @@
+name: Озвучка Fish Audio в ветку renders
+
+# Ключ: Settings → Secrets and variables → Actions → New repository secret → FISH_API_KEY.
+# search — примеры голосов из библиотеки Fish Audio; tts — весь текст эпизода выбранным голосом.
+on:
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: "Папка эпизода, например episodes/017-kranchi"
+        required: true
+      mode:
+        description: "search или tts"
+        default: "search"
+      voice:
+        description: "search: слово для поиска голоса; tts: id голоса"
+        default: "диктор"
+
+permissions:
+  contents: write
+
+jobs:
+  fish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Озвучка
+        env:
+          FISH_API_KEY: ${{ secrets.FISH_API_KEY }}
+        run: |
+          EP="${{ inputs.episode }}"
+          mkdir -p /tmp/fish
+          if [ "${{ inputs.mode }}" = "tts" ]; then
+            python3 tools/fish_tts.py tts "${{ inputs.voice }}" "$EP/voice_text.txt" /tmp/fish/voice.wav
+          else
+            head -c 400 "$EP/voice_text.txt" | sed -n '1,3p' > /tmp/sample.txt
+            python3 tools/fish_tts.py search "${{ inputs.voice }}" /tmp/sample.txt /tmp/fish
+          fi
+      - name: В ветку renders
+        run: |
+          NAME=$(basename "${{ inputs.episode }}")
+          git config user.name "render-bot"
+          git config user.email "render-bot@users.noreply.github.com"
+          if git fetch -q --depth 1 origin renders; then git checkout -q -B renders FETCH_HEAD; else git checkout -q --orphan renders && git rm -rq --cached . && git clean -fdq; fi
+          D="fish/$NAME/${{ inputs.mode }}"
+          rm -rf "$D" && mkdir -p "$D" && cp /tmp/fish/* "$D/"
+          git add -f fish
+          git commit -qm "fish: $NAME ${{ inputs.mode }}"
+          git push -q origin HEAD:refs/heads/renders
