@@ -6,32 +6,25 @@
     <title>AVERON · PS1 collection — трейлер</title>
     <script src="assets/lib/gsap.min.js"></script>
     <style>
-      /* Manrope (Google Fonts, OFL) — подмножества как у fontsource */
-      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-cyrillic-300-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-latin-ext-300-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
-      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-latin-300-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
-      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-cyrillic-500-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-latin-ext-500-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
-      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
-      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-cyrillic-700-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
-      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-latin-ext-700-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
-      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+      /* Press Start 2P (Google Fonts, OFL) — 8-битный шрифт, читаемая кириллица */
+      @font-face { font-family: "P"; src: url(assets/fonts/press-start-2p-cyrillic-400-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "P"; src: url(assets/fonts/press-start-2p-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
-      #root { width: 100%; height: 100%; position: relative; background: #000; overflow: hidden; font-family: "M", sans-serif; }
+      #root { width: 100%; height: 100%; position: relative; background: #000; overflow: hidden; font-family: "P", monospace; -webkit-font-smoothing: none; }
       #edit { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .layer { position: absolute; inset: 0; pointer-events: none; }
 
       /* текст: одна строка, по центру, слова выезжают из-под маски */
       .t { position: absolute; left: 0; right: 0; text-align: center; color: #f4f4f2; opacity: 0; white-space: nowrap;
            text-shadow: 0 2px 30px rgba(0,0,0,.6); }
-      .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .12em; margin: 0 -.02em; }
+      .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: .1em .04em; margin: -.1em -.25em; }
       .w > i { display: inline-block; font-style: normal; will-change: transform, filter, opacity; }
-      .name { font-size: 62px; font-weight: 500; letter-spacing: -0.01em; }
-      .small { font-size: 34px; font-weight: 300; letter-spacing: .02em; color: #d9d9d6; }
-      .logo { font-size: 40px; font-weight: 300; letter-spacing: .6em; padding-left: .6em; }
-      .price { font-size: 112px; font-weight: 500; letter-spacing: -0.02em; }
+      .name { font-size: 40px; font-weight: 400; letter-spacing: 0; line-height: 1.5; }
+      .small { font-size: 24px; font-weight: 400; letter-spacing: 0; line-height: 1.6; color: #d9d9d6; }
+      .logo { font-size: 38px; font-weight: 400; letter-spacing: .4em; padding-left: .4em; }
+      .price { font-size: 84px; font-weight: 400; letter-spacing: 0; line-height: 1.4; }
 
       /* мокап: футболка + бегущий блик по ткани (маска = сам png) */
       .shirt { position: absolute; left: 70px; top: 380px; width: 940px; height: 980px; opacity: 0; }
@@ -60,7 +53,7 @@
 
       <div id="titles" class="layer clip" data-start="0" data-duration="34.6" data-track-index="1" data-layout-ignore>
         <div id="logo" class="t logo" style="top: 920px">Аверон</div>
-        <div id="coll" class="t name" style="top: 905px; font-size: 76px">PS1 collection</div>
+        <div id="coll" class="t name" style="top: 915px; font-size: 52px">PS1 collection</div>
 
         <div class="halo" id="halo"></div>
         <div class="shirt" id="sh1"><img src="assets/img/1-serafim.png"><div class="sheen" style="-webkit-mask-image:url(assets/img/1-serafim.png);mask-image:url(assets/img/1-serafim.png)"></div></div>
@@ -78,10 +71,10 @@
           <img src="assets/img/3-sirena.png" style="left: 0; top: 510px">
           <img src="assets/img/4-padshiy.png" style="left: 490px; top: 510px">
         </div>
-        <div id="price" class="t price" style="top: 1365px">1299 ₽</div>
+        <div id="price" class="t price" style="top: 1365px">1299 руб.</div>
 
-        <div id="site" class="t name" style="top: 850px; font-size: 80px">averonshop.ru</div>
-        <div id="ship" class="t small" style="top: 975px">доставка по России 2–7 дней</div>
+        <div id="site" class="t name" style="top: 860px; font-size: 56px">averonshop.ru</div>
+        <div id="ship" class="t small" style="top: 980px">доставка по России 2–7 дней</div>
         <div id="ozon" class="t small" style="top: 1035px; color: #a9a9a6">скоро на Ozon</div>
       </div>
 
@@ -122,7 +115,7 @@
       }
 
       // интро
-      tl.fromTo("#logo", { opacity: 0, letterSpacing: "1.1em" }, { opacity: 1, letterSpacing: "0.6em", duration: 1.6, ease: "power2.out" }, 0.5);
+      tl.fromTo("#logo", { opacity: 0, letterSpacing: "0.9em" }, { opacity: 1, letterSpacing: "0.4em", duration: 1.6, ease: "power2.out" }, 0.5);
       tl.to("#logo", { opacity: 0, filter: "blur(8px)", duration: 0.5 }, 1.9);
       flash(2.4, 0.3, 0.6);
       show("#coll", 7.0, 8.4, { st: 0.12, d: 1.0 });
