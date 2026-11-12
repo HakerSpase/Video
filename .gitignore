@@ -22,3 +22,7 @@ episodes/*/out/ai_shots/
 episodes/*/assets/foley_raw.wav
 episodes/*/assets/score*.wav
 episodes/*/assets/voice_orig.wav
+# трейлер PS1: промежуточные файлы
+promo/ps1-collection/trailer/out/
+promo/ps1-collection/trailer/assets/edit.mp4
+promo/ps1-collection/trailer/assets/sfx.wav
