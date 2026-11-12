@@ -50,9 +50,18 @@ def shot_vf(s, n, dur):
                f"crop={W}:{LH}:(iw-{W})*{fx}:(ih-{LH})*{fy}",
                f"pad={W}:{H}:0:(oh-ih)/2:black"]
     else:
-        z = f"({z0}+({z1}-{z0})*t/{dur:.3f})"
-        vf += [f"scale=w='trunc({W}*{z}/2)*2':h='trunc({H}*{z}/2)*2':eval=frame:flags=lanczos",
-               f"crop={W}:{H}:(iw-{W})*{fx}:(ih-{H})*{fy}"]
+        # зум через zoompan: размер кадра постоянный, точка фокуса считается от реального зума
+        # (scale с eval=frame + crop давал сдвиг фокуса — crop берёт размер первого кадра)
+        tt = f"(on/{FPS})"
+        p = f"(1-pow(1-min({tt}/{dur:.3f}\\,1)\\,3))" if s.get("ease") else f"min({tt}/{dur:.3f}\\,1)"
+        z = f"({z0}+({z1}-{z0})*{p})"
+        if "px" in s:
+            x = f"max(0\\,min(iw-iw/zoom\\,{s['px']}*iw-iw/zoom/2))"
+            y = f"max(0\\,min(ih-ih/zoom\\,{s['py']}*ih-ih/zoom/2))"
+        else:
+            x, y = f"(iw-iw/zoom)*{fx}", f"(ih-ih/zoom)*{fy}"
+        vf += [f"scale={W * 2}:{H * 2}:flags=lanczos",
+               f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}"]
     if s.get("fx_dim"):
         vf += ["gblur=sigma=28", "eq=brightness=-0.18:saturation=0.6"]
     vf += ["setsar=1", "format=yuv420p"]

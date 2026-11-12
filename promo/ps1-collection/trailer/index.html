@@ -6,173 +6,162 @@
     <title>AVERON · PS1 collection — трейлер</title>
     <script src="assets/lib/gsap.min.js"></script>
     <style>
-      @font-face { font-family: "Cormorant"; font-weight: 600; src: url(assets/fonts/cormorant-garamond-cyrillic-600-normal.woff2) format("woff2"); unicode-range: U+0400-04FF; }
-      @font-face { font-family: "Cormorant"; font-weight: 600; src: url(assets/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+00B7; }
-      @font-face { font-family: "Cormorant"; font-weight: 500; src: url(assets/fonts/cormorant-garamond-cyrillic-500-normal.woff2) format("woff2"); unicode-range: U+0400-04FF; }
-      @font-face { font-family: "Cormorant"; font-weight: 500; src: url(assets/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+00B7; }
-      @font-face { font-family: "Mono"; src: url(assets/fonts/jetbrains-mono-cyrillic-400-normal.woff2) format("woff2"); unicode-range: U+0400-04FF; }
-      @font-face { font-family: "Mono"; src: url(assets/fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+00B7; }
-      @font-face { font-family: "Pixel"; src: url(assets/fonts/pixelify-sans-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF; }
-      @font-face { font-family: "Pixel"; src: url(assets/fonts/pixelify-sans-cyrillic-700-normal.woff2) format("woff2"); unicode-range: U+0400-04FF; }
+      /* Manrope (Google Fonts, OFL) — подмножества как у fontsource */
+      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-cyrillic-300-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-latin-ext-300-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
+      @font-face { font-family: "M"; font-weight: 300; src: url(assets/fonts/manrope-latin-300-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-cyrillic-500-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-latin-ext-500-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
+      @font-face { font-family: "M"; font-weight: 500; src: url(assets/fonts/manrope-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-cyrillic-700-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-latin-ext-700-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
+      @font-face { font-family: "M"; font-weight: 700; src: url(assets/fonts/manrope-latin-700-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
-      #root { width: 100%; height: 100%; position: relative; background: #000; overflow: hidden; }
-      #edit { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 100%; }
-
+      #root { width: 100%; height: 100%; position: relative; background: #000; overflow: hidden; font-family: "M", sans-serif; }
+      #edit { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .layer { position: absolute; inset: 0; pointer-events: none; }
-      .t { position: absolute; left: 0; right: 0; text-align: center; color: #f2f0ea; opacity: 0;
-           text-shadow: 0 0 24px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.9); }
-      .cine { font-family: "Cormorant", serif; font-weight: 600; text-transform: uppercase;
-              font-size: 74px; line-height: 1.12; letter-spacing: .16em; }
-      .cine.big { font-size: 112px; letter-spacing: .1em; line-height: 1.0; }
-      .cine.mid { font-size: 88px; }
-      .tag { font-family: "Mono", monospace; font-size: 30px; letter-spacing: .32em; color: #c9ccd2;
-             text-transform: uppercase; }
-      .ch { display: inline-block; white-space: pre; will-change: transform, filter, opacity; }
-      .pix { font-family: "Pixel", monospace; font-size: 138px; letter-spacing: .04em; line-height: 1;
-             color: #eef3ff; text-shadow: 0 0 30px rgba(150,190,255,.55), 0 0 4px rgba(150,190,255,.9); }
-      .line { display: block; }
+
+      /* текст: одна строка, по центру, слова выезжают из-под маски */
+      .t { position: absolute; left: 0; right: 0; text-align: center; color: #f4f4f2; opacity: 0; white-space: nowrap;
+           text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+      .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .12em; margin: 0 -.02em; }
+      .w > i { display: inline-block; font-style: normal; will-change: transform, filter, opacity; }
+      .name { font-size: 62px; font-weight: 500; letter-spacing: -0.01em; }
+      .small { font-size: 34px; font-weight: 300; letter-spacing: .02em; color: #d9d9d6; }
+      .logo { font-size: 40px; font-weight: 300; letter-spacing: .6em; text-transform: lowercase; padding-left: .6em; }
+      .price { font-size: 112px; font-weight: 500; letter-spacing: -0.02em; }
+
+      /* мокап: футболка + бегущий блик по ткани (маска = сам png) */
+      .shirt { position: absolute; left: 70px; top: 380px; width: 940px; height: 980px; opacity: 0; }
+      .shirt img, .shirt .sheen { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+      .shirt .sheen { -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+        -webkit-mask-position: center; mask-position: center;
+        background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.16) 50%, transparent 65%);
+        background-size: 300% 100%; background-position: 120% 0; mix-blend-mode: screen; }
+      .halo { position: absolute; left: 90px; top: 520px; width: 900px; height: 900px; opacity: 0;
+              background: radial-gradient(circle, rgba(170,180,200,.16), transparent 62%); }
+      #grid { position: absolute; left: 60px; top: 330px; width: 960px; height: 1000px; }
+      #grid img { position: absolute; width: 470px; height: 490px; object-fit: contain; opacity: 0; }
 
       #flash { position: absolute; inset: 0; background: #fff; opacity: 0; mix-blend-mode: screen; }
-      .bar { position: absolute; left: 0; right: 0; height: 132px; background: #000; }
-      #barT { top: 0; } #barB { bottom: 0; }
-      #grain { position: absolute; inset: -260px; background: url(assets/lib/grain.png); opacity: .16;
-               mix-blend-mode: overlay; }
-      #scan { position: absolute; inset: 0; opacity: .1;
-              background: repeating-linear-gradient(0deg, rgba(0,0,0,.9) 0 2px, transparent 2px 5px); }
-      #glow { position: absolute; left: 50%; top: 50%; width: 900px; height: 420px; margin: -210px 0 0 -450px;
-              background: radial-gradient(ellipse, rgba(120,160,255,.28), transparent 70%); opacity: 0; }
+      .bar { position: absolute; left: 0; right: 0; height: 110px; background: #000; }
+      #barT { top: 0; transform-origin: top; } #barB { bottom: 0; transform-origin: bottom; }
+      #grain { position: absolute; inset: -260px; background: url(assets/lib/grain.png); opacity: .14; mix-blend-mode: overlay; }
+      #fade { position: absolute; inset: 0; background: #000; opacity: 0; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="34.6" data-width="1080" data-height="1920">
       <video id="edit" class="clip" src="assets/edit.mp4" muted playsinline data-start="0" data-duration="34.6" data-track-index="0"></video>
-
       <audio id="sfx" class="clip" src="assets/sfx.wav" data-start="0" data-duration="34.6" data-track-index="9" data-volume="1"></audio>
+
       <div id="titles" class="layer clip" data-start="0" data-duration="34.6" data-track-index="1" data-layout-ignore>
-        <div id="glow"></div>
-        <!-- акт 1 -->
-        <div id="t1" class="t cine" style="top: 860px"><span class="line">Помнишь игры,</span><span class="line">которые снились</span><span class="line">по ночам?</span></div>
-        <div id="t2a" class="t tag" style="top: 215px">Averon</div>
-        <div id="t2b" class="t cine" style="top: 262px; font-size: 56px">представляет</div>
-        <div id="t3" class="t cine mid" style="top: 900px">Мы их вернули.</div>
-        <!-- акт 2: принты -->
-        <div id="n1t" class="t tag" style="top: 205px">01 / 04 — PS1 collection</div>
-        <div id="n1" class="t cine big" style="top: 252px"><span class="line">Серафим</span><span class="line" style="font-size:70px">в бинтах</span></div>
-        <div id="n2t" class="t tag" style="top: 205px">02 / 04 — PS1 collection</div>
-        <div id="n2" class="t cine big" style="top: 252px"><span class="line">Готика</span><span class="line" style="font-size:70px">ракурс сверху</span></div>
-        <div id="n3t" class="t tag" style="top: 205px">03 / 04 — PS1 collection</div>
-        <div id="n3" class="t cine big" style="top: 252px"><span class="line">Кибер-сирена</span><span class="line" style="font-size:70px">в очках</span></div>
-        <div id="n4t" class="t tag" style="top: 205px">04 / 04 — PS1 collection</div>
-        <div id="n4" class="t cine big" style="top: 252px"><span class="line">Падший</span><span class="line" style="font-size:70px">ангел</span></div>
-        <!-- акт 3: разгон -->
-        <div id="f1" class="t cine mid" style="top: 230px">Своё производство</div>
-        <div id="f2" class="t cine mid" style="top: 230px">Санкт-Петербург</div>
-        <div id="f3" class="t cine mid" style="top: 230px"><span class="line">4 принта</span><span class="line">один дроп</span></div>
-        <!-- финал -->
-        <div id="ps1" class="t pix" style="top: 820px"><span class="line">PS1</span><span class="line">COLLECTION</span></div>
-        <div id="ps1t" class="t tag" style="top: 1150px">новая коллекция averon</div>
-        <div id="site" class="t cine big" style="top: 860px; text-transform: none; letter-spacing: .04em">averonshop.ru</div>
-        <div id="ship" class="t tag" style="top: 1010px; letter-spacing: .18em">доставка по России 2–7 дней</div>
-        <div id="post" class="t tag" style="top: 1700px; font-size: 26px">Averon</div>
+        <div id="logo" class="t logo" style="top: 920px">averon</div>
+        <div id="coll" class="t name" style="top: 905px; font-size: 76px">PS1 collection</div>
+
+        <div class="halo" id="halo"></div>
+        <div class="shirt" id="sh1"><img src="assets/img/1-serafim.png"><div class="sheen" style="-webkit-mask-image:url(assets/img/1-serafim.png);mask-image:url(assets/img/1-serafim.png)"></div></div>
+        <div class="shirt" id="sh2"><img src="assets/img/2-gotika.png"><div class="sheen" style="-webkit-mask-image:url(assets/img/2-gotika.png);mask-image:url(assets/img/2-gotika.png)"></div></div>
+        <div class="shirt" id="sh3"><img src="assets/img/3-sirena.png"><div class="sheen" style="-webkit-mask-image:url(assets/img/3-sirena.png);mask-image:url(assets/img/3-sirena.png)"></div></div>
+        <div class="shirt" id="sh4"><img src="assets/img/4-padshiy.png"><div class="sheen" style="-webkit-mask-image:url(assets/img/4-padshiy.png);mask-image:url(assets/img/4-padshiy.png)"></div></div>
+        <div id="n1" class="t name" style="top: 1400px">Серафим в бинтах</div>
+        <div id="n2" class="t name" style="top: 1400px">Готика ракурс сверху</div>
+        <div id="n3" class="t name" style="top: 1400px">Кибер-сирена в очках</div>
+        <div id="n4" class="t name" style="top: 1400px">Падший ангел</div>
+
+        <div id="grid">
+          <img src="assets/img/1-serafim.png" style="left: 0; top: 0">
+          <img src="assets/img/2-gotika.png" style="left: 490px; top: 0">
+          <img src="assets/img/3-sirena.png" style="left: 0; top: 510px">
+          <img src="assets/img/4-padshiy.png" style="left: 490px; top: 510px">
+        </div>
+        <div id="price" class="t price" style="top: 1365px">1299 ₽</div>
+
+        <div id="site" class="t name" style="top: 850px; font-size: 80px">averonshop.ru</div>
+        <div id="ship" class="t small" style="top: 975px">доставка по России 2–7 дней</div>
+        <div id="ozon" class="t small" style="top: 1035px; color: #a9a9a6">скоро на Ozon</div>
       </div>
 
       <div id="fx" class="layer clip" data-start="0" data-duration="34.6" data-track-index="2" data-layout-ignore>
         <div id="flash"></div>
-        <div id="scan"></div>
         <div id="grain"></div>
-        <div id="fade" style="position:absolute;inset:0;background:#000;opacity:0"></div>
+        <div id="fade"></div>
         <div id="barT" class="bar"></div><div id="barB" class="bar"></div>
       </div>
     </div>
 
     <script>
-      // буквы → span, чтобы анимировать каждую
-      function split(sel) {
-        const root = document.querySelector(sel);
-        const lines = root.querySelectorAll(".line");
-        (lines.length ? lines : [root]).forEach((el) => {
-          const txt = el.textContent; el.textContent = "";
-          for (const c of txt) { const s = document.createElement("span"); s.className = "ch"; s.textContent = c; el.appendChild(s); }
-        });
-        return root.querySelectorAll(".ch");
-      }
       const tl = gsap.timeline({ paused: true });
-      const rnd = (i) => ((Math.sin(i * 12.9898) * 43758.5453) % 1 + 1) % 1; // детерминированный «рандом»
 
-      // кинематографичное появление: буквы по одной из размытия, строка медленно «раскрывается»
-      function cine(sel, t0, t1, opt = {}) {
-        const chs = split(sel);
-        const st = opt.stagger ?? 0.045;
+      // слова → маска + внутренний элемент, который выезжает снизу
+      function words(sel) {
+        const el = document.querySelector(sel);
+        const parts = el.textContent.split(" ");
+        el.innerHTML = parts.map((p) => `<span class="w"><i>${p}</i></span>`).join(" ");
+        return el.querySelectorAll(".w > i");
+      }
+      // кинематографичное появление: слова поднимаются из-под маски, лёгкий расфокус уходит, строка медленно дышит
+      function show(sel, t0, t1, opt = {}) {
+        const ws = words(sel);
         tl.set(sel, { opacity: 1 }, t0);
-        tl.fromTo(chs, { opacity: 0, filter: "blur(14px)", y: 14, scale: 1.08 },
-          { opacity: 1, filter: "blur(0px)", y: 0, scale: 1, duration: opt.inDur ?? 0.7, ease: "power2.out", stagger: st }, t0);
-        tl.fromTo(sel, { letterSpacing: opt.ls0 ?? "0.24em" }, { letterSpacing: opt.ls1 ?? "0.16em", duration: t1 - t0, ease: "none" }, t0);
-        // уход: буквы рассыпаются в зерно в случайном порядке
-        tl.to(chs, { opacity: 0, filter: "blur(10px)", y: -8, duration: 0.35, ease: "power1.in",
-          stagger: { each: 0.012, from: "random" } }, t1 - 0.4);
-        tl.set(sel, { opacity: 0 }, t1);
+        tl.fromTo(ws, { yPercent: 110, filter: "blur(6px)", opacity: 0 },
+          { yPercent: 0, filter: "blur(0px)", opacity: 1, duration: opt.d ?? 0.9, ease: "expo.out", stagger: opt.st ?? 0.08 }, t0);
+        tl.fromTo(sel, { scale: 1 }, { scale: opt.grow ?? 1.03, duration: t1 - t0, ease: "none" }, t0);
+        tl.to(sel, { opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power1.in" }, t1 - 0.4);
       }
-      function tag(sel, t0, t1) {
-        tl.fromTo(sel, { opacity: 0, letterSpacing: "0.6em" }, { opacity: 1, letterSpacing: "0.32em", duration: 0.6, ease: "power3.out" }, t0);
-        tl.to(sel, { opacity: 0, duration: 0.3 }, t1 - 0.3);
-      }
-      // резкий титр в разгоне: без побуквенности, удар и уход
-      function punch(sel, t0, t1) {
-        tl.fromTo(sel, { opacity: 0, scale: 1.18, filter: "blur(8px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.18, ease: "power3.out" }, t0);
-        tl.to(sel, { opacity: 0, duration: 0.1 }, t1 - 0.1);
+      function fade(sel, t0, t1, d = 0.8) {
+        tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: d, ease: "power2.out" }, t0);
+        tl.to(sel, { opacity: 0, duration: 0.4 }, t1 - 0.4);
       }
       function flash(t, peak = 0.9, dur = 0.45) {
         tl.fromTo("#flash", { opacity: 0 }, { opacity: peak, duration: 0.04, ease: "none" }, t - 0.04);
         tl.to("#flash", { opacity: 0, duration: dur, ease: "power2.out" }, t);
       }
 
-      // АКТ 1 — медленно
-      cine("#t1", 0.5, 2.75, { stagger: 0.05 });
-      flash(2.8, 0.35, 0.6);
-      tag("#t2a", 5.15, 7.1);
-      cine("#t2b", 5.35, 7.1, { stagger: 0.06 });
-      cine("#t3", 7.55, 9.15, { stagger: 0.07 });
+      // интро
+      tl.fromTo("#logo", { opacity: 0, letterSpacing: "1.1em" }, { opacity: 1, letterSpacing: "0.6em", duration: 1.6, ease: "power2.out" }, 0.5);
+      tl.to("#logo", { opacity: 0, filter: "blur(8px)", duration: 0.5 }, 1.9);
+      flash(2.4, 0.3, 0.6);
+      show("#coll", 7.0, 8.4, { st: 0.12, d: 1.0 });
 
-      // АКТ 2 — вспышка-затвор на стоп-кадре, имя принта
-      [["#n1", 10.7, 12.4], ["#n2", 13.9, 15.6], ["#n3", 17.1, 18.8], ["#n4", 20.3, 22.0]].forEach(([id, t0, t1]) => {
-        flash(t0, 1.0, 0.5);
-        // кадр отъезжает вниз, как фотография: имя сверху, принт целиком и чистый
-        tl.to("#edit", { scale: 0.8, duration: 0.55, ease: "power3.out" }, t0);
-        tl.to("#edit", { scale: 1, duration: 0.25, ease: "power2.in" }, t1 - 0.25);
-        tag(id + "t", t0 + 0.1, t1);
-        cine(id, t0 + 0.15, t1, { stagger: 0.035, inDur: 0.55, ls0: "0.16em", ls1: "0.1em" });
+      // блоки: модель → вспышка → наезд в принт → чистый мокап с названием
+      [1, 2, 3, 4].forEach((k) => {
+        const s = 8.4 + 3.6 * (k - 1);
+        flash(s + 1.2, 1.0, 0.5);
+        const m0 = s + 2.2, m1 = s + 3.6;
+        const sh = "#sh" + k;
+        tl.fromTo(sh, { opacity: 0, scale: 1.12, filter: "blur(14px)" },
+          { opacity: 1, scale: 1.0, filter: "blur(0px)", duration: 0.7, ease: "expo.out" }, m0);
+        tl.to(sh, { scale: 0.97, duration: m1 - m0 - 0.7, ease: "none" }, m0 + 0.7);
+        tl.fromTo(sh + " .sheen", { backgroundPosition: "120% 0" }, { backgroundPosition: "-20% 0", duration: 1.1, ease: "power1.inOut" }, m0 + 0.2);
+        tl.to(sh, { opacity: 0, duration: 0.25, ease: "power1.in" }, m1 - 0.25);
+        tl.fromTo("#halo", { opacity: 0 }, { opacity: 1, duration: 0.6 }, m0);
+        tl.to("#halo", { opacity: 0, duration: 0.25 }, m1 - 0.25);
+        show("#n" + k, m0 + 0.25, m1, { st: 0.07, grow: 1.02 });
       });
-      flash(9.2, 0.25, 0.3);
 
-      // АКТ 3 — разгон: микровспышки на каждой склейке
-      for (let t = 22.0; t < 25.95; t += 0.4) flash(+t.toFixed(2), 0.22 + 0.2 * rnd(t), 0.16);
-      punch("#f1", 22.0, 23.2); punch("#f2", 23.2, 24.4); punch("#f3", 24.4, 26.0);
+      // разгон: короткие вспышки на склейках
+      for (let i = 0; i < 8; i++) flash(+(22.8 + i * 0.35).toFixed(2), 0.18 + 0.12 * (i % 3), 0.15);
 
-      // ФИНАЛ — PS1 COLLECTION собирается из пикселей (буквы зажигаются ступеньками)
-      flash(26.0, 1.0, 0.9);
-      const pch = split("#ps1");
-      tl.set("#ps1", { opacity: 1 }, 26.3);
-      pch.forEach((c, i) => {
-        const t = 26.35 + rnd(i + 3) * 0.9;
-        tl.fromTo(c, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25, ease: "steps(4)" }, t);
-      });
-      tl.fromTo("#glow", { opacity: 0 }, { opacity: 1, duration: 1.2 }, 26.5);
-      tl.fromTo("#ps1", { scale: 0.96 }, { scale: 1.02, duration: 2.7, ease: "none" }, 26.3);
-      tag("#ps1t", 27.4, 28.95);
-      tl.to(["#ps1", "#glow"], { opacity: 0, filter: "blur(10px)", duration: 0.35 }, 28.6);
+      // финал: четыре футболки + цена
+      flash(25.6, 1.0, 0.8);
+      tl.fromTo("#grid img", { opacity: 0, y: 30, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "expo.out", stagger: 0.14 }, 25.85);
+      tl.fromTo("#grid", { scale: 1.0 }, { scale: 0.97, duration: 3.0, ease: "none" }, 25.6);
+      tl.to("#grid img", { opacity: 0, duration: 0.35 }, 28.25);
+      show("#price", 26.75, 28.6, { st: 0.1, d: 1.0 });
 
-      cine("#site", 29.15, 31.9, { stagger: 0.05, ls0: "0.1em", ls1: "0.04em" });
-      tag("#ship", 29.9, 31.9);
-      flash(32.4, 0.6, 0.5);
-      tag("#post", 33.0, 34.4);
+      show("#site", 28.85, 31.95, { st: 0.1, grow: 1.02 });
+      fade("#ship", 29.5, 31.95);
+      fade("#ozon", 30.1, 31.95);
+      flash(32.4, 0.5, 0.5);
 
-      // кинорамка въезжает в начале; зерно и сканлайны — весь ролик
-      tl.fromTo([".bar"], { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, 0);
-      tl.set("#barT", { transformOrigin: "top" }, 0); tl.set("#barB", { transformOrigin: "bottom" }, 0);
+      // рамка, зерно, затемнение в конце
+      tl.fromTo(".bar", { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: "power2.inOut" }, 0);
       tl.fromTo("#grain", { x: 0, y: 0 }, { x: -173, y: -251, duration: 34.6, ease: "steps(415)" }, 0);
-      tl.fromTo("#fade", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 34.3);
+      tl.fromTo("#fade", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 34.25);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

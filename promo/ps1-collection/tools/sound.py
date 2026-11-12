@@ -86,51 +86,49 @@ def bleep(freq, dur=0.07):
 t = np.arange(N) / SR
 drone = (np.sin(2 * np.pi * 41 * t) + 0.5 * np.sin(2 * np.pi * 61.5 * t + 1) + 0.25 * np.sin(2 * np.pi * 82 * t))
 air = lowpass(rng.standard_normal(N) * 0.6, 0.02)
-d_env = np.interp(t, [0, 2, 7.2, 7.4, 9.2, 21.5, 25.9, 26.0, 34.6], [0, .5, .8, .15, .45, .7, 1, 0, 0])
+d_env = np.interp(t, [0, 2, 6.8, 7.0, 8.4, 22.6, 25.5, 25.6, 34.6], [0, .5, .8, .15, .45, .7, 1, 0, 0])
 d_env *= 1 + 0.25 * np.sin(2 * np.pi * 0.17 * t)
 mix += np.stack([drone + air, drone * 0.97 + np.roll(air, 900)], 1) * (d_env * 0.16)[:, None]
 
-# --- АКТ 1 ---
+# --- интро ---
 put(load("whoosh-cinematic.mp3"), 0.25, 0.45)
-put(shutter(), 2.78, 0.5)
-for tt in (3.9, 5.0, 6.1):
-    put(load("whoosh-short.mp3"), tt - 0.12, 0.25, pan=0.3 if tt == 5.0 else -0.2)
-put(load("riser.mp3")[: int(5.2 * SR)] * np.linspace(0, 1, int(5.2 * SR))[:, None] ** 2, 2.0, 0.35)
-put(boom(44, 2.6), 7.2, 0.9)
-put(load("impact-bass-2.mp3"), 7.2, 0.5)
+put(shutter(), 2.38, 0.5)
+for tt in (3.5, 4.6, 5.7):
+    put(load("whoosh-short.mp3"), tt - 0.12, 0.25, pan=0.3 if tt == 4.6 else -0.2)
+put(load("riser.mp3")[: int(5.2 * SR)] * np.linspace(0, 1, int(5.2 * SR))[:, None] ** 2, 1.6, 0.35)
+put(boom(44, 2.6), 6.8, 0.9)
+put(load("impact-bass-2.mp3"), 6.8, 0.5)
 
-# --- АКТ 2: пульс-сердцебиение + затвор на стоп-кадрах ---
-beat = 9.2
-while beat < 21.9:
-    put(kick(), beat, 0.55); put(kick(), beat + 0.22, 0.3)
-    beat += 0.8
-for tt in (10.7, 13.9, 17.1, 20.3):
-    put(load("whoosh.mp3"), tt - 0.45, 0.35)
-    put(shutter(), tt - 0.02, 0.9)
-    put(boom(60, 1.0), tt, 0.35)
-put(load("glitch-1.mp3")[: int(0.4 * SR)], 12.38, 0.2)
-put(load("glitch-2.mp3")[: int(0.35 * SR)], 18.78, 0.2)
+# --- блоки: сердцебиение; вспышка-затвор на наезде в принт; мягкий «блик» на мокапе ---
+beat = 8.4
+while beat < 22.7:
+    put(kick(), beat, 0.5); put(kick(), beat + 0.22, 0.28)
+    beat += 0.9
+for k in range(4):
+    s0 = 8.4 + 3.6 * k
+    put(load("whoosh.mp3"), s0 + 0.75, 0.3)
+    put(shutter(), s0 + 1.18, 0.9)
+    put(boom(60, 1.0), s0 + 1.2, 0.35)
+    put(load("whoosh-short.mp3"), s0 + 2.1, 0.25)
+    put(load("sparkle.mp3"), s0 + 2.35, 0.12)
 
-# --- АКТ 3: разгон — удар на каждой склейке, сверху райзер ---
-for k, tt in enumerate(np.arange(22.0, 25.95, 0.4)):
+# --- разгон: удар на каждой склейке, сверху райзер ---
+for k, tt in enumerate(np.arange(22.8, 25.55, 0.35)):
     put(kick(0.3), tt, 0.8)
     put(lowpass(rng.standard_normal(int(0.08 * SR)), 0.5) * env(int(0.08 * SR), 0.001, 0.02), tt, 0.25)
     if k % 3 == 2:
-        put(load("glitch-3.mp3")[: int(0.18 * SR)], tt, 0.18)
-put(load("riser.mp3")[int(5.0 * SR): int(9.0 * SR)], 22.0, 0.45)
-put(shutter(), 22.0, 0.6)
+        put(load("glitch-3.mp3")[: int(0.18 * SR)], tt, 0.15)
+put(load("riser.mp3")[int(5.2 * SR): int(8.0 * SR)], 22.8, 0.45)
 
-# --- ФИНАЛ: удар, тишина, 8-бит на сборке титра ---
-put(boom(38, 3.4), 26.0, 1.0)
-put(load("impact-bass-1.mp3"), 26.0, 0.7)
-notes = [523, 659, 784, 1047, 784, 1047, 1319, 1568]
-for k, f in enumerate(notes):
-    put(bleep(f), 26.4 + k * 0.11, 0.12, pan=(-0.3 if k % 2 else 0.3))
-put(load("chime.mp3"), 27.35, 0.35)
-put(load("whoosh-short.mp3"), 29.05, 0.3)
-put(load("sparkle.mp3"), 29.9, 0.18)
+# --- финал: удар, футболки, цена, сайт ---
+put(boom(38, 3.4), 25.6, 1.0)
+put(load("impact-bass-1.mp3"), 25.6, 0.7)
+for k in range(4):
+    put(load("click-soft.mp3"), 25.85 + 0.14 * k, 0.25)
+put(load("ping.mp3"), 26.75, 0.22)
+put(load("whoosh-short.mp3"), 28.75, 0.3)
+put(load("sparkle.mp3"), 29.5, 0.15)
 put(shutter(), 32.38, 0.7)
-put(load("click-soft.mp3"), 33.0, 0.3)
 
 # мастер: мягкий лимитер, −1 дБ потолок
 peak = np.max(np.abs(mix))
