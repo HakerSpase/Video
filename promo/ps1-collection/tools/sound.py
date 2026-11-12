@@ -84,7 +84,7 @@ def bleep(freq, dur=0.07):
 
 # --- гул: низкий дрон с медленным нарастанием, держится до финального удара ---
 t = np.arange(N) / SR
-drone = (np.sin(2 * np.pi * 41 * t) + 0.5 * np.sin(2 * np.pi * 61.5 * t + 1) + 0.25 * np.sin(2 * np.pi * 82 * t))
+drone = (np.sin(2 * np.pi * 36.71 * t) + 0.5 * np.sin(2 * np.pi * 55.0 * t + 1) + 0.25 * np.sin(2 * np.pi * 73.42 * t))  # ре — в тон музыке
 air = lowpass(rng.standard_normal(N) * 0.6, 0.02)
 d_env = np.interp(t, [0, 2, 6.8, 7.0, 8.4, 22.6, 25.5, 25.6, 34.6], [0, .5, .8, .15, .45, .7, 1, 0, 0])
 d_env *= 1 + 0.25 * np.sin(2 * np.pi * 0.17 * t)
@@ -102,7 +102,7 @@ put(load("impact-bass-2.mp3"), 6.8, 0.5)
 # --- блоки: сердцебиение; вспышка-затвор на наезде в принт; мягкий «блик» на мокапе ---
 beat = 8.4
 while beat < 22.7:
-    put(kick(), beat, 0.5); put(kick(), beat + 0.22, 0.28)
+    put(kick(), beat, 0.3); put(kick(), beat + 0.22, 0.16)
     beat += 0.9
 for k in range(4):
     s0 = 8.4 + 3.6 * k

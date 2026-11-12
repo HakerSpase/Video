@@ -5,6 +5,7 @@ set -euo pipefail
 P="$(cd "$(dirname "$0")/.." && pwd)"
 python3 "$P/tools/edit.py"     # видеоряд по edit.json
 python3 "$P/tools/sound.py"    # звуковой дизайн
+python3 "$P/tools/music.py"    # музыка
 cd "$P/trailer" && mkdir -p out
 npx -y hyperframes@0.8.185 render -o out/raw.mp4
 mkdir -p "$P/out"
