@@ -1,0 +1,17 @@
+[
+ {"q": "baltic sea waves shore", "n": 4, "length": "long"},
+ {"q": "wind in pine trees", "n": 4, "length": "long"},
+ {"q": "seagulls beach", "n": 3, "length": "medium"},
+ {"q": "metal sheet banging wind", "n": 3, "length": "medium"},
+ {"q": "rusty metal creak", "n": 4, "length": "short"},
+ {"q": "footsteps sand", "n": 3, "length": "medium"},
+ {"q": "footsteps concrete abandoned", "n": 3, "length": "medium"},
+ {"q": "campfire embers crackle", "n": 2, "length": "medium"},
+ {"q": "barbed wire fence climb", "n": 2, "length": "short"},
+ {"q": "bus door closing driving away", "n": 2, "length": "medium"},
+ {"q": "camera shutter flash phone", "n": 2, "length": "short"},
+ {"q": "dark ambient drone", "n": 3, "length": "long"},
+ {"q": "heartbeat", "n": 2, "length": "medium"},
+ {"q": "water dripping cave", "n": 2, "length": "medium"},
+ {"q": "distant thunder storm", "n": 2, "length": "long"}
+]
