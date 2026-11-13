@@ -27,3 +27,8 @@ promo/ps1-collection/trailer/out/
 promo/ps1-collection/trailer/assets/edit.mp4
 promo/ps1-collection/trailer/assets/sfx.wav
 promo/ps1-collection/trailer/assets/music.wav
+# промо приложения: промежуточные файлы
+promo/app/video/out/
+promo/app/video/assets/screen.mp4
+promo/app/video/assets/music.wav
+promo/app/video/assets/sfx.wav

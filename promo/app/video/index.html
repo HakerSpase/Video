@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Аверон — приложение</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "P"; src: url(assets/fonts/press-start-2p-cyrillic-400-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "P"; src: url(assets/fonts/press-start-2p-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+      @font-face { font-family: "M"; font-weight: 400; src: url(assets/fonts/manrope-cyrillic-400-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "M"; font-weight: 400; src: url(assets/fonts/manrope-latin-ext-400-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
+      @font-face { font-family: "M"; font-weight: 400; src: url(assets/fonts/manrope-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+      @font-face { font-family: "M"; font-weight: 600; src: url(assets/fonts/manrope-cyrillic-600-normal.woff2) format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+      @font-face { font-family: "M"; font-weight: 600; src: url(assets/fonts/manrope-latin-ext-600-normal.woff2) format("woff2"); unicode-range: U+0100-02BA,U+20A0-20AB,U+20AD-20C0; }
+      @font-face { font-family: "M"; font-weight: 600; src: url(assets/fonts/manrope-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF,U+2000-206F,U+2212; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0a0a0c; }
+      #root { width: 100%; height: 100%; position: relative; overflow: hidden; background: #0a0a0c; }
+      .layer { position: absolute; inset: 0; pointer-events: none; }
+
+      /* фон: мягкие пятна света + бегущая лента как на сайте */
+      .blob { position: absolute; width: 1100px; height: 1100px; border-radius: 50%; filter: blur(40px); }
+      #b1 { left: -380px; top: 300px; background: radial-gradient(circle, rgba(140,160,200,.22), transparent 65%); }
+      #b2 { right: -420px; top: 900px; background: radial-gradient(circle, rgba(200,170,150,.14), transparent 65%); }
+      .tape { position: absolute; left: -200px; width: 1500px; height: 74px; background: #000; color: #fff;
+              font: 600 26px/74px "M", sans-serif; letter-spacing: .32em; white-space: nowrap; overflow: hidden;
+              border-top: 1px solid #222; border-bottom: 1px solid #222; }
+      .tape span { display: inline-block; }
+      #tape1 { top: 1010px; transform: rotate(-8deg); }
+      #tape2 { top: 1180px; transform: rotate(6deg); background: #f4f4f2; color: #111; opacity: .9; }
+
+      /* телефон */
+      #stage { position: absolute; inset: 0; perspective: 2200px; }
+      #phone { position: absolute; left: 222px; top: 420px; width: 636px; height: 1276px; border-radius: 74px;
+               background: linear-gradient(145deg, #2a2a2e, #0c0c0e 40%, #1b1b1f); padding: 18px;
+               box-shadow: 0 60px 140px rgba(0,0,0,.75), 0 0 0 2px #333 inset, 0 0 0 1px #000;
+               transform-style: preserve-3d; will-change: transform; }
+      #screen { position: relative; width: 600px; height: 1240px; border-radius: 56px; overflow: hidden; background: #fff; }
+      #screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #glare { position: absolute; inset: 0; border-radius: 56px;
+               background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.16) 50%, transparent 60%);
+               background-size: 300% 100%; background-position: 130% 0; mix-blend-mode: screen; }
+      .tap { position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%;
+             background: rgba(140,140,140,.35); border: 3px solid rgba(160,160,160,.9); opacity: 0; }
+
+      /* подписи */
+      .cap { position: absolute; left: 0; right: 0; text-align: center; opacity: 0; white-space: nowrap; }
+      .h { font-family: "P", monospace; font-size: 40px; line-height: 1.5; color: #f4f4f2; }
+      .s { font-family: "M", sans-serif; font-size: 32px; font-weight: 400; color: #b9b9b6; letter-spacing: .01em; }
+      .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: .12em .02em; margin: -.12em 0; }
+      .w > i { display: inline-block; font-style: normal; }
+      #logo { font-size: 64px; }
+
+      #grain { position: absolute; inset: -260px; background: url(assets/lib/grain.png); opacity: .08; mix-blend-mode: overlay; }
+      #fade { position: absolute; inset: 0; background: #0a0a0c; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="37.5" data-width="1080" data-height="1920">
+      <audio id="music" class="clip" src="assets/music.wav" data-start="0" data-duration="37.5" data-track-index="10" data-volume="0.8"></audio>
+      <audio id="sfx" class="clip" src="assets/sfx.wav" data-start="0" data-duration="37.5" data-track-index="9" data-volume="0.9"></audio>
+
+      <div id="bg" class="layer clip" data-start="0" data-duration="37.5" data-track-index="1" data-layout-ignore>
+        <div class="blob" id="b1"></div><div class="blob" id="b2"></div>
+        <div class="tape" id="tape1"><span>НОВАЯ КОЛЛЕКЦИЯ † СТИЛЬ PS1 † 4 ПРИНТА † ДОСТАВКА ПО РОССИИ † НОВАЯ КОЛЛЕКЦИЯ † СТИЛЬ PS1 † 4 ПРИНТА † ДОСТАВКА ПО РОССИИ † </span></div>
+        <div class="tape" id="tape2"><span>АВЕРОН † ЛИЧНЫЙ СТИЛЬ † АВЕРОН † ЛИЧНЫЙ СТИЛЬ † АВЕРОН † ЛИЧНЫЙ СТИЛЬ † АВЕРОН † ЛИЧНЫЙ СТИЛЬ † АВЕРОН † </span></div>
+      </div>
+
+      <div id="stage" class="layer clip" data-start="0" data-duration="37.5" data-track-index="2" data-layout-ignore>
+        <div id="phone">
+          <div id="screen">
+            <video id="scr" class="clip" src="assets/screen.mp4" muted playsinline data-start="0" data-duration="37.5" data-track-index="3"></video>
+            <div class="tap" id="tap1" style="left: 76px; top: 136px"></div>
+            <div class="tap" id="tap2" style="left: 300px; top: 939px"></div>
+            <div id="glare"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="caps" class="layer clip" data-start="0" data-duration="37.5" data-track-index="4" data-layout-ignore>
+        <div id="logo" class="cap h" style="top: 170px">Аверон</div>
+        <div id="c0" class="cap s" style="top: 300px">новая коллекция — в приложении</div>
+        <div id="c1" class="cap h" style="top: 210px">Сторис с новинками</div>
+        <div id="c1s" class="cap s" style="top: 300px">все дропы — прямо на главной</div>
+        <div id="c2" class="cap h" style="top: 210px">Коллекция PS1</div>
+        <div id="c2s" class="cap s" style="top: 300px">4 принта в стиле кат-сцен 90-х</div>
+        <div id="c3" class="cap h" style="top: 210px">Каталог и фильтры</div>
+        <div id="c3s" class="cap s" style="top: 300px">категория, пол, цена, размер</div>
+        <div id="c4" class="cap h" style="top: 210px">Размер по меркам</div>
+        <div id="c4s" class="cap s" style="top: 300px">3D-манекен и желаемая посадка</div>
+        <div id="c5" class="cap h" style="top: 210px">Избранное</div>
+        <div id="c5s" class="cap s" style="top: 300px">делись подборкой с друзьями</div>
+        <div id="c6" class="cap h" style="top: 210px">Заказ в пару касаний</div>
+        <div id="c6s" class="cap s" style="top: 300px">оплата онлайн · доставка по России</div>
+        <div id="e1" class="cap s" style="top: 300px; color: #e8e8e5">PS1 collection — 1299 ₽</div>
+        <div id="e2" class="cap h" style="top: 365px; font-size: 30px; color: #b9b9b6">averonshop.ru</div>
+      </div>
+
+      <div id="fx" class="layer clip" data-start="0" data-duration="37.5" data-track-index="5" data-layout-ignore>
+        <div id="grain"></div><div id="fade"></div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      function words(sel) {
+        const el = document.querySelector(sel);
+        el.innerHTML = el.textContent.split(" ").map((p) => `<span class="w"><i>${p}</i></span>`).join(" ");
+        return el.querySelectorAll(".w > i");
+      }
+      function show(sel, t0, t1, st = 0.06) {
+        const ws = words(sel);
+        tl.set(sel, { opacity: 1 }, t0);
+        tl.fromTo(ws, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: st }, t0);
+        if (t1) tl.to(sel, { opacity: 0, y: -16, filter: "blur(6px)", duration: 0.3, ease: "power1.in" }, t1 - 0.3);
+      }
+      // телефон: положение камеры (поворот, масштаб, точка приближения)
+      const P = "#phone";
+      tl.set(P, { transformOrigin: "50% 0%" }, 0);
+      function cam(t, v, d = 0.9, ease = "power3.inOut") { tl.to(P, { ...v, duration: d, ease }, t); }
+      function tap(sel, t) {
+        tl.fromTo(sel, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.12 }, t);
+        tl.to(sel, { opacity: 0, scale: 1.6, duration: 0.45, ease: "power2.out" }, t + 0.14);
+      }
+      function glare(t) { tl.fromTo("#glare", { backgroundPosition: "130% 0" }, { backgroundPosition: "-30% 0", duration: 1.1, ease: "power1.inOut" }, t); }
+
+      // 1. сразу приложение: телефон влетает снизу
+      tl.fromTo(P, { y: 520, rotateX: 28, rotateY: -18, scale: 0.86 }, { y: 0, rotateX: 6, rotateY: -8, scale: 1, duration: 1.0, ease: "expo.out" }, 0);
+      glare(0.5);
+      tl.fromTo("#logo", { opacity: 0, letterSpacing: "0.5em" }, { opacity: 1, letterSpacing: "0.12em", duration: 0.9, ease: "expo.out" }, 0.15);
+      tl.to("#logo", { opacity: 0, filter: "blur(6px)", duration: 0.3 }, 2.5);
+      show("#c0", 0.45, 2.8);
+      tap("#tap1", 2.05);
+
+      // 2. сторис
+      cam(2.6, { rotateY: 7, rotateX: 4, scale: 1.04 });
+      show("#c1", 2.9, 7.0); show("#c1s", 3.1, 7.0);
+
+      // 3. коллекция
+      cam(6.8, { rotateY: -5, rotateX: 5, scale: 1.0 });
+      glare(7.1);
+      show("#c2", 7.1, 11.0); show("#c2s", 7.3, 11.0);
+
+      // 4. каталог → фильтры (приближение к размерам)
+      cam(10.8, { rotateY: 6, rotateX: 3, scale: 1.0 });
+      show("#c3", 11.1, 16.5); show("#c3s", 11.3, 16.5);
+      cam(14.1, { scale: 1.22, rotateY: 0, rotateX: 0 }, 1.2);
+
+      // 5. мерки: приближение к манекену, потом к выбору посадки
+      cam(16.3, { scale: 1.0, rotateY: -7, rotateX: 4 }, 0.8);
+      show("#c4", 16.6, 24.0); show("#c4s", 16.8, 24.0);
+      cam(17.6, { scale: 1.18, rotateY: -3, rotateX: 2 }, 1.6);
+      cam(21.0, { scale: 1.16, rotateY: 3 }, 1.4);
+
+      // 6. избранное и экспорт
+      cam(23.8, { scale: 1.0, rotateY: 7, rotateX: 4 }, 0.8);
+      show("#c5", 24.1, 28.8); show("#c5s", 24.3, 28.8);
+      cam(26.5, { scale: 1.16, rotateY: 2, rotateX: 1 }, 1.0);
+
+      // 7. корзина → «Оформить заказ»
+      cam(28.6, { scale: 1.0, rotateY: -6, rotateX: 4 }, 0.8);
+      show("#c6", 28.9, 32.4); show("#c6s", 29.1, 32.4);
+      cam(30.9, { scale: 1.14, rotateY: 0, rotateX: 0 }, 0.9);
+      tap("#tap2", 31.7);
+
+      // 8. финал
+      cam(32.3, { scale: 0.86, y: 110, rotateX: 10, rotateY: -6 }, 1.2, "expo.inOut");
+      glare(33.0);
+      tl.fromTo("#logo", { opacity: 0, letterSpacing: "0.5em", filter: "blur(0px)" }, { opacity: 1, letterSpacing: "0.12em", duration: 1.0, ease: "expo.out" }, 32.7);
+      show("#e1", 33.3, null, 0.08);
+      tl.fromTo("#e2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 33.9);
+      tl.to(P, { rotateY: 4, duration: 3.5, ease: "none" }, 33.5);
+
+      // фон
+      tl.fromTo("#tape1 span", { x: 0 }, { x: -700, duration: 37.5, ease: "none" }, 0);
+      tl.fromTo("#tape2 span", { x: -700 }, { x: 0, duration: 37.5, ease: "none" }, 0);
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: 180, y: -160, duration: 37.5, ease: "sine.inOut" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: -160, y: 140, duration: 37.5, ease: "sine.inOut" }, 0);
+      tl.fromTo("#grain", { x: 0, y: 0 }, { x: -173, y: -251, duration: 37.5, ease: "steps(450)" }, 0);
+      tl.fromTo("#fade", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 37.1);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
