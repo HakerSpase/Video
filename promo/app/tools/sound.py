@@ -35,8 +35,8 @@ for t in (2.05, 31.7):                                                # каса
     put(load("click.mp3"), t, 0.45)
 for t in (0.45, 2.9, 7.1, 11.1, 16.6, 24.1, 28.9):                    # подписи
     put(load("pop.mp3"), t, 0.08)
-put(load("whoosh-cinematic.mp3")[: int(2.0 * SR)], 32.3, 0.3)        # финал
-put(load("chime.mp3"), 32.75, 0.22)
+put(load("whoosh-cinematic.mp3")[: int(2.0 * SR)], 33.1, 0.3)        # финал
+put(load("chime.mp3"), 33.55, 0.22)
 
 peak = np.max(np.abs(mix))
 mix = mix / max(peak, 1e-9) * 0.85
